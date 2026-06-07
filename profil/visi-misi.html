@@ -6,7 +6,12 @@
 <title>Visi &amp; Misi — SMAN 1 Yogyakarta</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
-.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+.vm-grid { 
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 32px; 
+  margin-bottom: 48px; 
+}
 .vm-card {
   background: var(--white);
   border-radius: var(--radius);
@@ -16,13 +21,13 @@
   position: relative;
   overflow: hidden;
 }
-.vm-card::before {
-  content: attr(data-label);
-  position: absolute; top: -18px; right: 20px;
-  font-family: 'Playfair Display', serif;
-  font-size: 90px; font-weight: 700;
-  color: rgba(13,27,62,.04); line-height: 1;
-  pointer-events: none;
+.vm-card.center-align {
+  text-align: center;
+}
+.vm-card.center-align p {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 .vm-card .label {
   font-size: 11px; font-weight: 600; letter-spacing: 2px;
@@ -35,12 +40,12 @@
   margin-bottom: 20px;
 }
 .vm-card p { font-size: 15px; line-height: 1.85; color: #374151; }
-.misi-list { list-style: none; margin-top: 8px; }
+.misi-list { list-style: none; margin-top: 8px; padding: 0; }
 .misi-list li {
   display: flex; gap: 16px;
   padding: 16px 0;
   border-bottom: 1px solid #f3f4f6;
-  font-size: 14px; line-height: 1.7; color: #374151;
+  font-size: 15px; line-height: 1.7; color: #374151;
 }
 .misi-list li:last-child { border-bottom: none; }
 .misi-num {
@@ -53,29 +58,12 @@
   font-size: 14px; font-weight: 700;
   margin-top: 2px;
 }
-.nilai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.nilai-card {
-  background: var(--white); border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: 24px 20px;
-  border-left: 4px solid var(--gold); text-align: left;
-}
-.nilai-card .icon { font-size: 28px; margin-bottom: 10px; }
-.nilai-card h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-.nilai-card p { font-size: 13px; color: var(--gray); line-height: 1.6; }
 @media (max-width: 768px) {
   .vm-grid { grid-template-columns: 1fr; }
-  .nilai-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <div class="inner">
-    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
-    <span>📞 (0274) 512096</span>
-  </div>
-</div>
 
 <nav>
   <div class="nav-inner">
@@ -118,13 +106,6 @@
 </nav>
 
 <div class="page-hero">
-  <div class="breadcrumb">
-    <a href="index.html">Beranda</a>
-    <span>›</span>
-    <a href="profil-sekolah.html">Profil Sekolah</a>
-    <span>›</span>
-    <span style="color:rgba(255,255,255,.80)">Visi &amp; Misi</span>
-  </div>
   <h1>Visi &amp; Misi</h1>
   <p>Arah dan tujuan yang memandu perjalanan SMA Negeri 1 Yogyakarta</p>
 </div>
@@ -132,8 +113,7 @@
 <div class="page-body">
 
   <div class="vm-grid">
-    <!-- VISI -->
-    <div class="vm-card" data-label="VISI">
+    <div class="vm-card center-align">
       <div class="label">Visi Sekolah</div>
       <h2>Terwujudnya Sekolah Teladan</h2>
       <p>
@@ -141,8 +121,7 @@
       </p>
     </div>
 
-    <!-- MISI -->
-    <div class="vm-card" data-label="MISI">
+    <div class="vm-card">
       <div class="label">Misi Sekolah</div>
       <h2>Langkah Menuju Visi</h2>
       <ol class="misi-list">
@@ -163,44 +142,6 @@
           <div>Menanamkan nilai keteladanan dan budi pekerti luhur melalui pengembangan kultur sekolah yang sesuai dengan norma keagamaan, sosial kemasyarakatan, kebangsaan serta berwawasan lingkungan.</div>
         </li>
       </ol>
-    </div>
-  </div>
-
-  <!-- NILAI-NILAI -->
-  <div style="margin-bottom:48px;">
-    <div class="section-title">Nilai-Nilai Utama</div>
-    <p class="section-sub">Nilai yang tertanam dalam setiap insan SMAN 1 Yogyakarta</p>
-    <div class="nilai-grid">
-      <div class="nilai-card">
-        <div class="icon">🎯</div>
-        <h4>Keunggulan Akademik</h4>
-        <p>Standar akademik internasional yang diterapkan secara konsisten dalam setiap proses pembelajaran.</p>
-      </div>
-      <div class="nilai-card">
-        <div class="icon">🌿</div>
-        <h4>Berakar Budaya Bangsa</h4>
-        <p>Mempertahankan jati diri sebagai pelajar Indonesia yang mencintai budaya dan tradisi leluhur.</p>
-      </div>
-      <div class="nilai-card">
-        <div class="icon">🌐</div>
-        <h4>Bercakrawala Global</h4>
-        <p>Membuka wawasan seluas mungkin, siap bersaing dan berkolaborasi di tingkat internasional.</p>
-      </div>
-      <div class="nilai-card">
-        <div class="icon">🤝</div>
-        <h4>Kedisiplinan &amp; Kepemimpinan</h4>
-        <p>Membentuk karakter pemimpin yang disiplin, bertanggung jawab, dan berintegritas tinggi.</p>
-      </div>
-      <div class="nilai-card">
-        <div class="icon">🏆</div>
-        <h4>Semangat Berkompetisi</h4>
-        <p>Mendorong sikap kompetitif yang sehat dan positif demi kemajuan diri dan bangsa.</p>
-      </div>
-      <div class="nilai-card">
-        <div class="icon">🙏</div>
-        <h4>Akhlak &amp; Ketakwaan</h4>
-        <p>Mengedepankan nilai-nilai keagamaan dan budi pekerti luhur dalam setiap aspek kehidupan.</p>
-      </div>
     </div>
   </div>
 

@@ -69,18 +69,6 @@
   display: inline-block; padding: 3px 10px; border-radius: 99px;
 }
 
-.mapel-tag {
-  display: inline-block; padding: 2px 10px; border-radius: 99px;
-  font-size: 11px; font-weight: 600; margin-right: 4px;
-}
-.tag-ipa { background: #e3f2fd; color: #1565C0; }
-.tag-ips { background: #f3e5f5; color: #6A1B9A; }
-.tag-bhs { background: #e8f5e9; color: #2E7D32; }
-.tag-agama { background: #fffde7; color: #F57F17; }
-.tag-seni { background: #fce4ec; color: #880E4F; }
-.tag-orkes { background: #fff3e0; color: #E65100; }
-.tag-adm { background: #f3f4f6; color: #374151; }
-
 .table-wrap { overflow-x: auto; }
 .filter-label { font-size: 13px; color: var(--gray); font-weight: 500; margin-right: 4px; }
 @media (max-width: 1024px) { .guru-grid { grid-template-columns: repeat(3,1fr); } }
@@ -88,13 +76,6 @@
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <div class="inner">
-    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
-    <span>📞 (0274) 512096</span>
-  </div>
-</div>
 
 <nav>
   <div class="nav-inner">
@@ -137,20 +118,12 @@
 </nav>
 
 <div class="page-hero">
-  <div class="breadcrumb">
-    <a href="index.html">Beranda</a>
-    <span>›</span>
-    <a href="profil-sekolah.html">Profil Sekolah</a>
-    <span>›</span>
-    <span style="color:rgba(255,255,255,.80)">Staff &amp; Guru</span>
-  </div>
   <h1>Tenaga Pendidik</h1>
   <p>Guru-guru berpengalaman dan berdedikasi tinggi SMAN 1 Yogyakarta</p>
 </div>
 
 <div class="page-body">
 
-  <!-- FILTER -->
   <div class="filter-bar">
     <span class="filter-label">Filter:</span>
     <button class="filter-btn active" onclick="filterGuru('semua',this)">Semua</button>
@@ -163,38 +136,29 @@
     <input type="text" class="search-input" placeholder="🔍  Cari nama guru..." id="searchGuru" oninput="searchGuruFn()">
   </div>
 
-  <!-- GURU GRID -->
   <div class="guru-grid" id="guruGrid">
-    <!-- Agama -->
     <div class="guru-card mapel-agama"><div class="guru-avatar">MA</div><div class="guru-name">Muhammad Anas, S.Pd.I</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
     <div class="guru-card mapel-agama"><div class="guru-avatar">NY</div><div class="guru-name">Nurul Yaqin, S.Ag., M.Si</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
     <div class="guru-card mapel-agama"><div class="guru-avatar">SL</div><div class="guru-name">Stefanus Lawe Payong, S.Fil</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
     <div class="guru-card mapel-agama"><div class="guru-avatar">WS</div><div class="guru-name">Winanti Untung Sumaryono, S.Th</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
     <div class="guru-card mapel-agama"><div class="guru-avatar">YN</div><div class="guru-name">Yekti Nugroho, M.Pd</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
-    <!-- PPKn -->
     <div class="guru-card mapel-ips"><div class="guru-avatar">DW</div><div class="guru-name">Didit Waluyono, S.Pd., M.Pd</div><div class="guru-mapel">Pend. Pancasila &amp; Kewarganegaraan</div></div>
     <div class="guru-card mapel-ips"><div class="guru-avatar">TW</div><div class="guru-name">Dr. Trisna Widyana, S.Pd., M.Pd</div><div class="guru-mapel">Pend. Pancasila &amp; Kewarganegaraan</div></div>
-    <!-- Bahasa Indonesia -->
     <div class="guru-card mapel-bhs"><div class="guru-avatar">AS</div><div class="guru-name">Arda Sedyoko, S.Pd., M.Pd.Gr</div><div class="guru-mapel">Bahasa Indonesia</div></div>
     <div class="guru-card mapel-bhs"><div class="guru-avatar">PU</div><div class="guru-name">Puji Utami, S.Pd</div><div class="guru-mapel">Bahasa Indonesia</div></div>
     <div class="guru-card mapel-bhs"><div class="guru-avatar">SP</div><div class="guru-name">Siti Purnaningsih, S.S., M.Pd</div><div class="guru-mapel">Bahasa Indonesia</div></div>
     <div class="guru-card mapel-bhs"><div class="guru-avatar">YL</div><div class="guru-name">Yulianawati, S.Pd., Gr</div><div class="guru-mapel">Bahasa Indonesia</div></div>
-    <!-- Matematika -->
     <div class="guru-card mapel-ipa"><div class="guru-avatar">HR</div><div class="guru-name">Haryani, S.Pd., M.Pd</div><div class="guru-mapel">Matematika</div></div>
     <div class="guru-card mapel-ipa"><div class="guru-avatar">ME</div><div class="guru-name">Maria Ernawati Millatana, S.Pd</div><div class="guru-mapel">Matematika</div></div>
     <div class="guru-card mapel-ipa"><div class="guru-avatar">RY</div><div class="guru-name">Ridho Yuwono, S.Si., M.T</div><div class="guru-mapel">Matematika</div></div>
     <div class="guru-card mapel-ipa"><div class="guru-avatar">SW</div><div class="guru-name">Sunarwanta, S.Pd</div><div class="guru-mapel">Matematika</div></div>
-    <!-- Bahasa Inggris -->
     <div class="guru-card mapel-bhs"><div class="guru-avatar">ES</div><div class="guru-name">Erwin Syahril Mubarok, M.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
     <div class="guru-card mapel-bhs"><div class="guru-avatar">SM</div><div class="guru-name">Slamet Marmono, S.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
     <div class="guru-card mapel-bhs"><div class="guru-avatar">US</div><div class="guru-name">Utami Soifah, S.Pd., M.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
-    <!-- Sejarah -->
     <div class="guru-card mapel-ips"><div class="guru-avatar">DM</div><div class="guru-name">Drs. Marmayadi</div><div class="guru-mapel">Sejarah Indonesia</div></div>
-    <!-- Seni Budaya -->
     <div class="guru-card mapel-seni"><div class="guru-avatar">PP</div><div class="guru-name">Prawhita Adi Putri, S.Pd</div><div class="guru-mapel">Seni Budaya</div></div>
   </div>
 
-  <!-- TABLE VIEW -->
   <div class="card">
     <div class="section-title">Daftar Lengkap Tenaga Pendidik</div>
     <p class="section-sub">Data lengkap guru dan mata pelajaran yang diampu</p>
@@ -204,26 +168,26 @@
           <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Bidang</th></tr>
         </thead>
         <tbody>
-          <tr><td>1</td><td>Muhammad Anas, S.Pd.I</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
-          <tr><td>2</td><td>Nurul Yaqin, S.Ag., M.Si</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
-          <tr><td>3</td><td>Stefanus Lawe Payong, S.Fil</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
-          <tr><td>4</td><td>Winanti Untung Sumaryono, S.Th</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
-          <tr><td>5</td><td>Yekti Nugroho, M.Pd</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
-          <tr><td>6</td><td>Didit Waluyono, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
-          <tr><td>7</td><td>Dr. Trisna Widyana, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
-          <tr><td>8</td><td>Arda Sedyoko, S.Pd., M.Pd.Gr</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>9</td><td>Puji Utami, S.Pd</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>10</td><td>Siti Purnaningsih, S.S., M.Pd</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>11</td><td>Yulianawati, S.Pd., Gr</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>12</td><td>Haryani, S.Pd., M.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
-          <tr><td>13</td><td>Maria Ernawati Millatana, S.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
-          <tr><td>14</td><td>Ridho Yuwono, S.Si., M.T</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
-          <tr><td>15</td><td>Sunarwanta, S.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
-          <tr><td>16</td><td>Erwin Syahril Mubarok, M.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>17</td><td>Slamet Marmono, S.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>18</td><td>Utami Soifah, S.Pd., M.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
-          <tr><td>19</td><td>Drs. Marmayadi</td><td>Sejarah Indonesia</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
-          <tr><td>20</td><td>Prawhita Adi Putri, S.Pd</td><td>Seni Budaya</td><td><span class="mapel-tag tag-seni">Seni</span></td></tr>
+          <tr><td>1</td><td>Muhammad Anas, S.Pd.I</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td>Agama</td></tr>
+          <tr><td>2</td><td>Nurul Yaqin, S.Ag., M.Si</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td>Agama</td></tr>
+          <tr><td>3</td><td>Stefanus Lawe Payong, S.Fil</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td>Agama</td></tr>
+          <tr><td>4</td><td>Winanti Untung Sumaryono, S.Th</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td>Agama</td></tr>
+          <tr><td>5</td><td>Yekti Nugroho, M.Pd</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td>Agama</td></tr>
+          <tr><td>6</td><td>Didit Waluyono, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td>IPS</td></tr>
+          <tr><td>7</td><td>Dr. Trisna Widyana, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td>IPS</td></tr>
+          <tr><td>8</td><td>Arda Sedyoko, S.Pd., M.Pd.Gr</td><td>Bahasa Indonesia</td><td>Bahasa</td></tr>
+          <tr><td>9</td><td>Puji Utami, S.Pd</td><td>Bahasa Indonesia</td><td>Bahasa</td></tr>
+          <tr><td>10</td><td>Siti Purnaningsih, S.S., M.Pd</td><td>Bahasa Indonesia</td><td>Bahasa</td></tr>
+          <tr><td>11</td><td>Yulianawati, S.Pd., Gr</td><td>Bahasa Indonesia</td><td>Bahasa</td></tr>
+          <tr><td>12</td><td>Haryani, S.Pd., M.Pd</td><td>Matematika</td><td>IPA/MIPA</td></tr>
+          <tr><td>13</td><td>Maria Ernawati Millatana, S.Pd</td><td>Matematika</td><td>IPA/MIPA</td></tr>
+          <tr><td>14</td><td>Ridho Yuwono, S.Si., M.T</td><td>Matematika</td><td>IPA/MIPA</td></tr>
+          <tr><td>15</td><td>Sunarwanta, S.Pd</td><td>Matematika</td><td>IPA/MIPA</td></tr>
+          <tr><td>16</td><td>Erwin Syahril Mubarok, M.Pd</td><td>Bahasa Inggris</td><td>Bahasa</td></tr>
+          <tr><td>17</td><td>Slamet Marmono, S.Pd</td><td>Bahasa Inggris</td><td>Bahasa</td></tr>
+          <tr><td>18</td><td>Utami Soifah, S.Pd., M.Pd</td><td>Bahasa Inggris</td><td>Bahasa</td></tr>
+          <tr><td>19</td><td>Drs. Marmayadi</td><td>Sejarah Indonesia</td><td>IPS</td></tr>
+          <tr><td>20</td><td>Prawhita Adi Putri, S.Pd</td><td>Seni Budaya</td><td>Seni</td></tr>
         </tbody>
       </table>
     </div>

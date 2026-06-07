@@ -88,26 +88,9 @@
   align-items: center;
   justify-content: center;
 }
-
-.table-wrap { overflow-x: auto; }
-.data-table .jabatan { font-weight: 600; color: var(--navy); }
-.level-badge {
-  display: inline-block; padding: 3px 10px; border-radius: 99px;
-  font-size: 11px; font-weight: 600;
-}
-.l-top { background: var(--navy); color: var(--gold); }
-.l-waka { background: #e8eaf6; color: #3949ab; }
-.l-staf { background: #e8f4e8; color: #1a6b1a; }
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <div class="inner">
-    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
-    <span>📞 (0274) 512096</span>
-  </div>
-</div>
 
 <nav>
   <div class="nav-inner">
@@ -150,13 +133,6 @@
 </nav>
 
 <div class="page-hero">
-  <div class="breadcrumb">
-    <a href="index.html">Beranda</a>
-    <span>›</span>
-    <a href="profil-sekolah.html">Profil Sekolah</a>
-    <span>›</span>
-    <span style="color:rgba(255,255,255,.80)">Struktur Organisasi</span>
-  </div>
   <h1>Struktur Organisasi</h1>
   <p>Bagan organisasi dan tata kelola SMA Negeri 1 Yogyakarta</p>
 </div>
@@ -166,11 +142,9 @@
   <div class="section-title">Bagan Struktur Organisasi</div>
   <p class="section-sub">Periode Tahun Ajaran 2024/2025</p>
 
-  <!-- BAGAN ORG CHART -->
   <div class="card" style="overflow-x:auto; padding: 40px 24px; margin-bottom:48px;">
     <div style="min-width:700px;">
 
-      <!-- ROW 1: Komite + Kepala Sekolah -->
       <div style="display:flex; justify-content:center; gap:48px; margin-bottom:0;">
         <div class="org-box komite">
           <div class="org-avatar" style="background:#f0e8f8;border-color:#7B2D8B;color:#7B2D8B;">KS</div>
@@ -184,10 +158,8 @@
         </div>
       </div>
 
-      <!-- V line to KTU -->
       <div class="v-line" style="margin-left:calc(50% + 24px + 100px + 8px);"></div>
 
-      <!-- ROW 2: Kepala TU -->
       <div style="display:flex; justify-content:center; margin-bottom:0; margin-left:calc(24px + 200px + 24px);">
         <div class="org-box" style="border-top-color:#2196F3; min-width:180px;">
           <div class="org-avatar" style="background:#e3f2fd;border-color:#2196F3;color:#1565C0;">FT</div>
@@ -196,10 +168,8 @@
         </div>
       </div>
 
-      <!-- V line from kepala sekolah downward for waka -->
       <div class="v-line" style="margin-left:50%;"></div>
 
-      <!-- Horizontal bar for waka -->
       <div style="position:relative; height:2px; background:var(--gold); width:calc(100% - 80px); margin: 0 auto 0;"></div>
       <div style="display:flex; justify-content:space-between; padding:0 0px; margin-bottom:0;">
         <div class="v-line" style="margin:0;"></div>
@@ -208,7 +178,6 @@
         <div class="v-line" style="margin:0;"></div>
       </div>
 
-      <!-- ROW 3: 4 Waka -->
       <div style="display:flex; justify-content:space-between; gap:12px; margin-bottom:0;">
         <div class="org-box" style="flex:1; min-width:120px; max-width:200px;">
           <div class="org-avatar" style="font-size:14px;width:44px;height:44px;">SL</div>
@@ -232,7 +201,6 @@
         </div>
       </div>
 
-      <!-- Lines down from kesiswaan (middle-ish) to bawah -->
       <div style="display:flex; justify-content:space-around; padding: 0 12.5%;">
         <div class="v-line"></div>
         <div class="v-line"></div>
@@ -245,7 +213,6 @@
         <div class="v-line" style="margin:0;"></div>
       </div>
 
-      <!-- ROW 4: Staf -->
       <div style="display:flex; justify-content:space-between; width:75%; margin:0 auto; gap:12px;">
         <div class="org-box" style="flex:1; min-width:0; max-width:none; border-top-color:#4CAF50;">
           <div class="org-avatar" style="background:#e8f5e9;border-color:#4CAF50;color:#2E7D32;font-size:14px;width:40px;height:40px;">HB</div>
@@ -264,36 +231,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- DATA TABLE -->
-  <div class="card">
-    <div class="section-title">Daftar Pejabat Struktural</div>
-    <p class="section-sub">Susunan pengurus dan pejabat sekolah tahun ajaran 2024/2025</p>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th style="width:50px;">No</th>
-            <th>Jabatan</th>
-            <th>Nama</th>
-            <th>Level</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td class="jabatan">Komite Sekolah</td><td>Ir. Rony Primantoro Hari, M.T</td><td><span class="level-badge l-top">Pimpinan</span></td></tr>
-          <tr><td>2</td><td class="jabatan">Kepala Sekolah</td><td>Ngadiya, S.Pd., M.M</td><td><span class="level-badge l-top">Pimpinan</span></td></tr>
-          <tr><td>3</td><td class="jabatan">Kepala Tata Usaha</td><td>Fitri Trisnawati, S.Pd., M.I.Kom</td><td><span class="level-badge l-waka">Manajemen</span></td></tr>
-          <tr><td>4</td><td class="jabatan">Wakil Kepala — Kurikulum</td><td>Sri Lestari, S.Pd., M.Pd.Si</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
-          <tr><td>5</td><td class="jabatan">Wakil Kepala — Kesiswaan</td><td>Sunarwanta, S.Pd</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
-          <tr><td>6</td><td class="jabatan">Wakil Kepala — Sarana &amp; Prasarana</td><td>Sopan Setiawan, S.Kom</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
-          <tr><td>7</td><td class="jabatan">Wakil Kepala — Humas</td><td>Dra. Enik Sri Agustini</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
-          <tr><td>8</td><td class="jabatan">Kepala Perpustakaan</td><td>Hernanda Restu Buwono, S.IP</td><td><span class="level-badge l-staf">Staf</span></td></tr>
-          <tr><td>9</td><td class="jabatan">Kepala Laboratorium</td><td>Menik Ramen Lestari, S.Pd</td><td><span class="level-badge l-staf">Staf</span></td></tr>
-          <tr><td>10</td><td class="jabatan">Koordinator BK</td><td>Prashanti Ashtriyani, S.Pd</td><td><span class="level-badge l-staf">Staf</span></td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
