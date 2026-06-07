@@ -49,37 +49,13 @@
 .stat-item { text-align: center; }
 .stat-item .num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
 .stat-item .lbl { font-size: 11px; color: var(--gray); }
-.ptujuan-section { margin-bottom: 48px; }
-.ptujuan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.pt-card {
-  background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 20px 16px; text-align: center;
-  border-bottom: 3px solid var(--gold);
-}
-.pt-card .pt-icon { font-size: 24px; margin-bottom: 10px; }
-.pt-card h5 { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.4; }
-.note-box {
-  background: #fffbe6;
-  border: 1px solid #f5d65a;
-  border-left: 4px solid #c9963a;
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  font-size: 14px; color: #5a4a0a; line-height: 1.7;
-}
+
 @media (max-width: 768px) {
   .jurusan-grid { grid-template-columns: 1fr; }
-  .ptujuan-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
 <body>
-
-<div class="topbar">
-  <div class="inner">
-    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
-    <span>📞 (0274) 512096</span>
-  </div>
-</div>
 
 <nav>
   <div class="nav-inner">
@@ -122,13 +98,6 @@
 </nav>
 
 <div class="page-hero">
-  <div class="breadcrumb">
-    <a href="index.html">Beranda</a>
-    <span>›</span>
-    <a href="profil-sekolah.html">Profil Sekolah</a>
-    <span>›</span>
-    <span style="color:rgba(255,255,255,.80)">Jurusan</span>
-  </div>
   <h1>Program Studi / Jurusan</h1>
   <p>Dua program peminatan unggulan untuk mewujudkan potensi terbaik siswa</p>
 </div>
@@ -140,7 +109,6 @@
 
   <div class="jurusan-grid">
 
-    <!-- IPA -->
     <div class="jurusan-card">
       <div class="jurusan-header ipa">
         <div class="jenis">Program Peminatan</div>
@@ -170,7 +138,6 @@
       </div>
     </div>
 
-    <!-- IPS -->
     <div class="jurusan-card">
       <div class="jurusan-header ips">
         <div class="jenis">Program Peminatan</div>
@@ -200,27 +167,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- CATATAN KURIKULUM -->
-  <div class="note-box" style="margin-bottom:48px;">
-    ⚠️ <strong>Catatan Kurikulum Merdeka:</strong> Mulai Tahun Ajaran 2022/2023, SMAN 1 Yogyakarta menerapkan Kurikulum Merdeka secara bertahap. Program peminatan tetap tersedia, namun siswa kelas X memiliki lebih banyak fleksibilitas dalam memilih mata pelajaran pilihan sesuai minat dan bakat.
-  </div>
-
-  <!-- PTN TUJUAN -->
-  <div class="ptujuan-section">
-    <div class="section-title">Perguruan Tinggi Tujuan Alumni</div>
-    <p class="section-sub">Alumni SMAN 1 Yogyakarta telah tersebar di berbagai perguruan tinggi terkemuka</p>
-    <div class="ptujuan-grid">
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Gadjah Mada</h5></div>
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Indonesia</h5></div>
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Institut Teknologi Bandung</h5></div>
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Negeri Yogyakarta</h5></div>
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Institut Pertanian Bogor</h5></div>
-      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Brawijaya</h5></div>
-      <div class="pt-card"><div class="pt-icon">🌏</div><h5>Perguruan Tinggi Luar Negeri</h5></div>
-      <div class="pt-card"><div class="pt-icon">🎓</div><h5>Dan berbagai PTN/PTS Lainnya</h5></div>
-    </div>
   </div>
 
 </div>
