@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Transparansi Dana APBD — SMKN 1 Cikampek. Laporan rekapitulasi penggunaan dana Bantuan Operasional Sekolah.">
+  <title>Transparansi Dana APBD — SMKN 1 Cikampek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+
+/* ════════════════════════════════════════════
+   SMKN 1 CIKAMPEK — Transparansi Dana APBD
+   Color Palette: Navy · Kuning · Putih
+   Font: Plus Jakarta Sans + Playfair Display
+════════════════════════════════════════════ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --kuning:       #F5C518;
+  --kuning-tua:   #D4A800;
+  --kuning-muda:  #FFF8D6;
+  --kuning-pale:  #FFFBEC;
+  --navy:         #1B2A4A;
+  --navy-light:   #243558;
+  --navy-pale:    #EEF1F8;
+  --putih:        #FFFFFF;
+  --abu-terang:   #F7F8FC;
+  --abu:          #E8ECF4;
+  --teks:         #1A1F36;
+  --teks-muted:   #6B7280;
+  --teks-light:   #9CA3AF;
+  --hijau:        #16A34A;
+  --hijau-muda:   #DCFCE7;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:    0 8px 32px rgba(0,0,0,0.12);
+  --radius-sm:    6px;
+  --radius-md:    10px;
+  --radius-lg:    16px;
+  --radius-xl:    24px;
+  --transition:   all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--putih); color: var(--teks); line-height: 1.65; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ── FADE-UP ─────────────────────────────────── */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── TOP BAR ─────────────────────────────────── */
+.topbar { background: var(--navy); padding: 9px 0; border-bottom: 1px solid rgba(245,197,24,0.15); }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.topbar-left { display: flex; align-items: center; gap: 24px; }
+.topbar-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: rgba(255,255,255,0.6); }
+.topbar-item svg { flex-shrink: 0; opacity: 0.65; }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+.jam-digital { font-size: 13.5px; font-weight: 600; color: var(--kuning); letter-spacing: 1.5px; font-variant-numeric: tabular-nums; }
+.topbar-social { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; transition: var(--transition); color: rgba(255,255,255,0.55); }
+.topbar-social:hover { border-color: var(--kuning); color: var(--kuning); background: rgba(245,197,24,0.08); }
+.topbar-social svg { width: 14px; height: 14px; }
+
+/* ── HEADER ──────────────────────────────────── */
+.header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--abu); transition: box-shadow 0.3s; }
+.header.scrolled { box-shadow: var(--shadow-md); }
+.header-main { display: flex; align-items: center; gap: 20px; height: 72px; }
+.logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.logo-placeholder { width: 44px; height: 44px; background: var(--kuning); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+.logo-text h1 { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; white-space: nowrap; }
+.logo-text p { font-size: 11px; color: var(--teks-muted); }
+.navbar { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.nav-item { position: relative; }
+.nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 500; color: var(--teks); background: none; border: none; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; }
+.nav-link:hover { color: var(--navy); background: var(--kuning-muda); }
+.nav-link.active { color: var(--kuning-tua); background: var(--kuning-muda); font-weight: 600; }
+.caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
+.nav-item:hover .caret { transform: rotate(180deg); }
+.dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--putih); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 1px solid var(--abu); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+.dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); font-size: 13.5px; color: var(--teks); transition: background 0.2s, color 0.2s; }
+.dropdown a:hover { background: var(--kuning-pale); color: var(--navy); }
+.dropdown a.current { background: var(--kuning-muda); color: var(--kuning-tua); font-weight: 600; }
+.dd-icon { width: 30px; height: 30px; background: var(--abu-terang); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.btn-ppdb { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--kuning); color: var(--navy); font-size: 13px; font-weight: 700; border-radius: var(--radius-sm); transition: var(--transition); white-space: nowrap; flex-shrink: 0; }
+.btn-ppdb:hover { background: var(--kuning-tua); }
+.btn-ppdb svg { width: 15px; height: 15px; }
+
+/* ── HAMBURGER + MOBILE ─────────────────────── */
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; margin-left: 4px; }
+.hamburger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: var(--transition); display: block; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; overflow: hidden; max-height: 0; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); background: var(--putih); border-top: 1px solid var(--abu); }
+.mobile-menu.open { max-height: 600px; }
+.mobile-nav-item { border-bottom: 1px solid var(--abu); }
+.mobile-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; font-size: 14px; font-weight: 500; color: var(--teks); cursor: pointer; transition: background 0.2s; }
+.mobile-nav-link:hover { background: var(--kuning-pale); color: var(--navy); }
+.mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; background: var(--abu-terang); }
+.mobile-dropdown.open { max-height: 300px; }
+.mobile-dropdown a { display: block; padding: 10px 24px 10px 36px; font-size: 13.5px; color: var(--teks-muted); border-bottom: 1px solid var(--abu); transition: background 0.2s, color 0.2s; }
+.mobile-dropdown a:last-child { border-bottom: none; }
+.mobile-dropdown a:hover { background: var(--kuning-muda); color: var(--navy); }
+.mobile-dropdown a.current { color: var(--kuning-tua); font-weight: 600; background: var(--kuning-pale); }
+
+/* ── PAGE HERO ───────────────────────────────── */
+.page-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: 56px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 40px;
+  background: var(--putih);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.page-hero-inner { position: relative; z-index: 1; text-align: center; }
+.page-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(245,197,24,0.15);
+  border: 1px solid rgba(245,197,24,0.3);
+  color: var(--kuning);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.page-hero-badge svg { width: 13px; height: 13px; }
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--putih);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.page-hero h1 span { color: var(--kuning); }
+.page-hero p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 28px; }
+.breadcrumb-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.breadcrumb-row a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.breadcrumb-row a:hover { color: var(--kuning); }
+.breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
+.breadcrumb-row .current { font-size: 13px; color: var(--kuning); font-weight: 600; }
+
+/* ── MAIN LAYOUT ─────────────────────────────── */
+.page-body { padding: 52px 0 72px; }
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 36px;
+  align-items: start;
+}
+
+/* ── SEARCH + FILTER BAR ─────────────────────── */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.search-wrap {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+.search-wrap input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  border: 1.5px solid var(--abu);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--teks);
+  background: var(--putih);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.search-wrap input:focus { border-color: var(--kuning); box-shadow: 0 0 0 3px rgba(245,197,24,0.12); }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--teks-muted); pointer-events: none; }
+.search-btn {
+  padding: 10px 20px;
+  background: var(--navy);
+  color: var(--putih);
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  white-space: nowrap;
+}
+.search-btn:hover { background: var(--kuning); color: var(--navy); }
+
+/* ── LAPORAN LIST ─────────────────────────────── */
+.laporan-list { display: flex; flex-direction: column; gap: 24px; }
+
+.laporan-card {
+  background: var(--putih);
+  border: 1px solid var(--abu);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  gap: 0;
+}
+.laporan-card:hover {
+  border-color: var(--kuning);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.laporan-thumb {
+  width: 200px;
+  flex-shrink: 0;
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.laporan-thumb-inner {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+.laporan-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+}
+.laporan-thumb-decor {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(245,197,24,0.1);
+}
+.laporan-thumb-decor2 {
+  position: absolute;
+  bottom: -15px; left: -15px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: rgba(245,197,24,0.06);
+}
+.laporan-thumb-date {
+  background: var(--kuning);
+  color: var(--navy);
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.laporan-thumb-icon {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto;
+}
+.laporan-thumb-icon svg { width: 24px; height: 24px; color: rgba(255,255,255,0.8); }
+
+.laporan-body { padding: 24px 28px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.laporan-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.laporan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--hijau-muda);
+  color: var(--hijau);
+}
+.laporan-badge svg { width: 10px; height: 10px; }
+.laporan-badge.badge-navy { background: var(--navy-pale); color: var(--navy); }
+.laporan-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.laporan-card:hover .laporan-title { color: var(--kuning-tua); }
+.laporan-desc { font-size: 13.5px; color: var(--teks-muted); line-height: 1.6; margin-bottom: 18px; }
+.laporan-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.laporan-admin { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--teks-muted); }
+.laporan-admin-dot { width: 26px; height: 26px; background: var(--navy); color: var(--kuning); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.btn-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--navy);
+  color: var(--putih);
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-read:hover { background: var(--kuning); color: var(--navy); }
+.btn-read svg { width: 13px; height: 13px; }
+
+/* ── SIDEBAR ─────────────────────────────────── */
+.sidebar-box {
+  background: var(--putih);
+  border: 1px solid var(--abu);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.sidebar-head {
+  background: var(--navy);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-head-icon {
+  width: 30px; height: 30px;
+  background: var(--kuning);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.sidebar-head h3 { font-size: 13.5px; font-weight: 700; color: var(--putih); }
+
+.cat-list { padding: 8px; }
+.cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  color: var(--teks);
+  transition: var(--transition);
+  cursor: pointer;
+  border-bottom: 1px solid var(--abu);
+}
+.cat-item:last-child { border-bottom: none; }
+.cat-item:hover { background: var(--kuning-pale); color: var(--navy); }
+.cat-item.active { background: var(--kuning-muda); color: var(--kuning-tua); font-weight: 600; }
+.cat-count {
+  background: var(--navy-pale);
+  color: var(--navy);
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.cat-item.active .cat-count { background: var(--kuning); color: var(--navy); }
+
+.recent-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--abu);
+  transition: var(--transition);
+}
+.recent-item:last-child { border-bottom: none; }
+.recent-item:hover { background: var(--kuning-pale); }
+.recent-thumb {
+  width: 56px; height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--navy-pale);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.recent-thumb-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--navy-light), var(--navy));
+  display: flex; align-items: center; justify-content: center;
+}
+.recent-thumb-inner svg { width: 20px; height: 20px; color: rgba(255,255,255,0.6); }
+.recent-text p:first-child { font-size: 12.5px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.recent-text p:last-child { font-size: 11.5px; color: var(--teks-muted); margin-top: 4px; }
+.sidebar-more { padding: 10px 16px; background: var(--abu-terang); text-align: center; border-top: 1px solid var(--abu); }
+.sidebar-more a { font-size: 13px; font-weight: 600; color: var(--navy); transition: color 0.2s; }
+.sidebar-more a:hover { color: var(--kuning-tua); }
+
+/* Info box */
+.info-box {
+  background: var(--kuning-pale);
+  border: 1px solid rgba(245,197,24,0.3);
+  border-left: 4px solid var(--kuning);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+.info-box p { font-size: 12.5px; color: var(--navy); line-height: 1.6; }
+.info-box p strong { font-weight: 700; }
+
+/* ── FOOTER ──────────────────────────────────── */
+.footer { background: var(--navy); color: rgba(255,255,255,0.65); }
+.footer-top { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-main-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding: 52px 0; }
+.footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-logo-box { width: 40px; height: 40px; background: var(--kuning); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--putih); line-height: 1.2; }
+.footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.35); }
+.footer-brand-desc { font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: var(--transition); }
+.footer-social a:hover { border-color: var(--kuning); color: var(--kuning); background: rgba(245,197,24,0.08); }
+.footer-social a svg { width: 14px; height: 14px; }
+.footer-col-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--putih); margin-bottom: 18px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.footer-links a::before { content: '›'; color: var(--kuning); font-size: 16px; line-height: 1; }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
+.footer-map-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 0 0; }
+.footer-map-title, .footer-contact-title { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+.footer-map-frame { border-radius: var(--radius-md); overflow: hidden; height: 180px; border: 1px solid rgba(255,255,255,0.08); }
+.footer-map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(30%); }
+.footer-contact-list { display: flex; flex-direction: column; gap: 14px; }
+.footer-contact-item { display: flex; gap: 12px; align-items: flex-start; }
+.fci-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.06); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fci-icon svg { width: 14px; height: 14px; color: var(--kuning); }
+.fci-label { font-size: 11px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.fci-value { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.45; }
+.footer-bottom { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.3); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12.5px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.65); }
+
+/* ── BACK TO TOP ─────────────────────────────── */
+.back-to-top { position: fixed; bottom: 28px; right: 28px; width: 42px; height: 42px; background: var(--navy); color: var(--putih); border: none; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(8px); transition: var(--transition); z-index: 400; }
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: var(--kuning); color: var(--navy); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .page-grid { grid-template-columns: 1fr; }
+  .sidebar-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .sidebar-row > :last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 768px) {
+  .navbar, .btn-ppdb { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+  .topbar-left .topbar-item:not(:first-child) { display: none; }
+  .page-hero h1 { font-size: 26px; }
+  .footer-main-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-map-contact { grid-template-columns: 1fr; }
+  .laporan-card { flex-direction: column; }
+  .laporan-thumb { width: 100%; min-height: 120px; flex-direction: row; padding: 16px; gap: 16px; }
+  .laporan-thumb-inner { display: flex; align-items: center; gap: 16px; text-align: left; }
+  .laporan-thumb-date { margin-bottom: 0; }
+  .sidebar-row { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; align-items: stretch; }
+  .search-btn { width: 100%; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .footer-main-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ══ TOP BAR ══ -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left">
+      <span class="topbar-item">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+        Jl. Ahmad Yani No.1, Cikampek, Karawang
+      </span>
+      <span class="topbar-item">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.7l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
+        (0264) 316xxx
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="jam-digital" id="jam-digital">00:00:00</span>
+      <a href="#" class="topbar-social" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" class="topbar-social" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+      <a href="#" class="topbar-social" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header class="header">
+  <div class="container header-main">
+    <a href="../index.html" class="logo-area">
+      <img src="../assets/images/logo/logo.png" alt="Logo SMKN 1 Cikampek"
+        style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-placeholder" style="display:none">S</div>
+      <div class="logo-text">
+        <h1>SMKN 1 Cikampek</h1>
+        <p>Karawang, Jawa Barat</p>
+      </div>
+    </a>
+
+    <nav class="navbar">
+      <div class="nav-item"><a href="../index.html" class="nav-link">Beranda</a></div>
+      <div class="nav-item">
+        <button class="nav-link">Profil Sekolah <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span> Visi &amp; Misi</a>
+          <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span> Fasilitas</a>
+          <a href="../profil/jurusan.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span> Jurusan</a>
+          <a href="../profil/struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span> Struktur Organisasi</a>
+          <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span> Staff &amp; Guru</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link active">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/><path d="M10 10a2 2 0 100-4 2 2 0 000 4z"/></svg></span> Dana APBD</a>
+          <a href="apbd.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span> APBD</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../informasi/berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span> Berita Sekolah</a>
+          <a href="../informasi/prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span> Prestasi</a>
+          <a href="../informasi/ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span> Ekstrakurikuler</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
+      <div class="nav-item"><a href="../alumni.html" class="nav-link">Profil Alumni</a></div>
+      <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
+    </nav>
+
+    <a href="../index.html#ppdb" class="btn-ppdb">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
+      Daftar PPDB
+    </a>
+
+    <button class="hamburger" aria-label="Buka Menu"><span></span><span></span><span></span></button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu">
+    <div class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Beranda</a></div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-profil">Profil Sekolah <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown" id="mob-profil">
+        <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+        <a href="../profil/fasilitas.html">Fasilitas</a>
+        <a href="../profil/jurusan.html">Jurusan</a>
+        <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
+        <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-keuangan">Keuangan <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown open" id="mob-keuangan">
+        <a href="bos.html">Dana APBD</a>
+        <a href="apbd.html" class="current">APBD</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-informasi">Informasi <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown" id="mob-informasi">
+        <a href="../informasi/berita.html">Berita</a>
+        <a href="../informasi/prestasi.html">Prestasi</a>
+        <a href="../informasi/ekskul.html">Ekstrakurikuler</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item"><a href="../alumni.html" class="mobile-nav-link">Profil Alumni</a></div>
+    <div class="mobile-nav-item"><a href="../index.html#contact" class="mobile-nav-link">Kontak</a></div>
+    <div style="padding:16px 24px;">
+      <a href="../index.html#ppdb" style="display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;background:var(--kuning);color:var(--navy);font-weight:700;font-size:13px;border-radius:var(--radius-sm);">Daftar PPDB</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-hero-badge">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg>
+      Transparansi Keuangan
+    </div>
+    <h1>Transparansi <span>Dana APBD</span></h1>
+    <p>Laporan rekapitulasi penggunaan Dana Anggaran Pendapatan dan Belanja Daerah (APBD) SMKN 1 Cikampek.</p>
+    <div class="breadcrumb-row">
+      <a href="../index.html">Home</a>
+      <span>›</span>
+      <span class="current">APBD</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PAGE BODY ══ -->
+<main class="page-body">
+  <div class="container">
+    <div class="page-grid">
+
+      <!-- ── MAIN CONTENT ── -->
+      <div>
+        <!-- Filter bar -->
+        <div class="filter-bar fade-up">
+          <div class="search-wrap">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
+            <input type="text" id="search-input" placeholder="Cari laporan APBD...">
+          </div>
+          <button class="search-btn" onclick="doSearch()">
+            <svg style="width:14px;height:14px;display:inline;margin-right:5px;vertical-align:middle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
+            Search
+          </button>
+        </div>
+
+        <!-- Laporan List -->
+        <div class="laporan-list" id="laporan-list">
+
+          <!-- Card 1 -->
+          <div class="laporan-card fade-up">
+            <div class="laporan-thumb">
+              <div class="laporan-thumb-decor"></div>
+              <div class="laporan-thumb-decor2"></div>
+              <div class="laporan-thumb-inner">
+                <div class="laporan-thumb-date">07 Nov, 2025</div>
+                <div class="laporan-thumb-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="laporan-body">
+              <div>
+                <div class="laporan-meta">
+                  <span class="laporan-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>
+                    BOS
+                  </span>
+                  <span class="laporan-badge badge-navy">Triwulan I–II 2025</span>
+                </div>
+                <h2 class="laporan-title">Rekapitulasi Penggunaan Dana APBD Tahun 2025 Periode Januari s/d Oktober</h2>
+                <p class="laporan-desc">Berikut kami sampaikan laporan Rekapitulasi Penggunaan Dana APBD Tahun 2025, Periode Januari s/d Oktober 2025 SMKN 1 Cikampek. Unduh File Laporan.</p>
+              </div>
+              <div class="laporan-footer-row">
+                <div class="laporan-admin">
+                  <div class="laporan-admin-dot">A</div>
+                  <span>Admin</span>
+                </div>
+                <a href="#" class="btn-read">
+                  Read More
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="laporan-card fade-up">
+            <div class="laporan-thumb">
+              <div class="laporan-thumb-decor"></div>
+              <div class="laporan-thumb-decor2"></div>
+              <div class="laporan-thumb-inner">
+                <div class="laporan-thumb-date">26 Okt, 2023</div>
+                <div class="laporan-thumb-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="laporan-body">
+              <div>
+                <div class="laporan-meta">
+                  <span class="laporan-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>
+                    BOS
+                  </span>
+                  <span class="laporan-badge badge-navy">Triwulan I–III 2023</span>
+                </div>
+                <h2 class="laporan-title">Rekapitulasi Penggunaan Dana APBD Tahun 2023 (Triwulan I, II, dan III)</h2>
+                <p class="laporan-desc">Berikut kami sampaikan laporan Rekapitulasi Penggunaan Dana APBD Tahun 2023 Triwulan I, II, dan III SMA Negeri 1 Yogyakarta. Unduh File Laporan.</p>
+              </div>
+              <div class="laporan-footer-row">
+                <div class="laporan-admin">
+                  <div class="laporan-admin-dot">A</div>
+                  <span>Admin</span>
+                </div>
+                <a href="#" class="btn-read">
+                  Read More
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="laporan-card fade-up">
+            <div class="laporan-thumb">
+              <div class="laporan-thumb-decor"></div>
+              <div class="laporan-thumb-decor2"></div>
+              <div class="laporan-thumb-inner">
+                <div class="laporan-thumb-date">28 Agu, 2023</div>
+                <div class="laporan-thumb-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="laporan-body">
+              <div>
+                <div class="laporan-meta">
+                  <span class="laporan-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>
+                    BOS
+                  </span>
+                  <span class="laporan-badge badge-navy">Semester I 2023</span>
+                </div>
+                <h2 class="laporan-title">Rekapitulasi Penggunaan Dana APBD Tahun 2023 (Januari s/d Juni)</h2>
+                <p class="laporan-desc">Berikut kami sampaikan laporan Rekapitulasi Penggunaan Dana APBD Tahun 2023 Bulan Januari s/d Juni SMA Negeri 1 Yogyakarta. Unduh File Laporan.</p>
+              </div>
+              <div class="laporan-footer-row">
+                <div class="laporan-admin">
+                  <div class="laporan-admin-dot">A</div>
+                  <span>Admin</span>
+                </div>
+                <a href="#" class="btn-read">
+                  Read More
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="laporan-card fade-up">
+            <div class="laporan-thumb">
+              <div class="laporan-thumb-decor"></div>
+              <div class="laporan-thumb-decor2"></div>
+              <div class="laporan-thumb-inner">
+                <div class="laporan-thumb-date">11 Jun, 2023</div>
+                <div class="laporan-thumb-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="laporan-body">
+              <div>
+                <div class="laporan-meta">
+                  <span class="laporan-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>
+                    BOS
+                  </span>
+                  <span class="laporan-badge badge-navy">Okt–Des 2022</span>
+                </div>
+                <h2 class="laporan-title">Rekapitulasi Penggunaan Dana APBD Tahun 2022 (Oktober – Desember)</h2>
+                <p class="laporan-desc">Berikut kami sampaikan laporan Rekapitulasi Penggunaan Dana APBD Tahun 2022 Bulan Oktober s/d Desember SMA Negeri 1 Yogyakarta. Unduh File Laporan.</p>
+              </div>
+              <div class="laporan-footer-row">
+                <div class="laporan-admin">
+                  <div class="laporan-admin-dot">A</div>
+                  <span>Admin</span>
+                </div>
+                <a href="#" class="btn-read">
+                  Read More
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="laporan-card fade-up">
+            <div class="laporan-thumb">
+              <div class="laporan-thumb-decor"></div>
+              <div class="laporan-thumb-decor2"></div>
+              <div class="laporan-thumb-inner">
+                <div class="laporan-thumb-date">14 Okt, 2022</div>
+                <div class="laporan-thumb-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="laporan-body">
+              <div>
+                <div class="laporan-meta">
+                  <span class="laporan-badge">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>
+                    BOS
+                  </span>
+                  <span class="laporan-badge badge-navy">Jan–Sep 2022</span>
+                </div>
+                <h2 class="laporan-title">Rekapitulasi Penggunaan Dana APBD Tahun 2022 (Januari – September)</h2>
+                <p class="laporan-desc">Berikut kami sampaikan laporan Rekapitulasi Penggunaan Dana APBD Tahun 2022 Bulan Januari s/d September SMKN 1 Cikampek. Unduh Dokumen Laporan.</p>
+              </div>
+              <div class="laporan-footer-row">
+                <div class="laporan-admin">
+                  <div class="laporan-admin-dot">A</div>
+                  <span>Admin</span>
+                </div>
+                <a href="#" class="btn-read">
+                  Read More
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /laporan-list -->
+      </div>
+
+      <!-- ── SIDEBAR ── -->
+      <div class="sidebar-row">
+
+        <!-- Search -->
+        <div class="sidebar-box fade-up">
+          <div class="sidebar-head">
+            <div class="sidebar-head-icon">🔍</div>
+            <h3>Pencarian</h3>
+          </div>
+          <div style="padding:14px 16px;display:flex;gap:8px;">
+            <input type="text" id="sidebar-search" placeholder="Cari..." style="flex:1;padding:8px 12px;border:1.5px solid var(--abu);border-radius:var(--radius-sm);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--kuning)'" onblur="this.style.borderColor='var(--abu)'">
+            <button onclick="doSearch()" style="padding:8px 14px;background:var(--navy);color:var(--putih);border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.background='var(--kuning)';this.style.color='var(--navy)'" onmouseout="this.style.background='var(--navy)';this.style.color='var(--putih)'">Search</button>
+          </div>
+        </div>
+
+        <!-- Kategori -->
+        <div class="sidebar-box fade-up">
+          <div class="sidebar-head">
+            <div class="sidebar-head-icon">📂</div>
+            <h3>Category</h3>
+          </div>
+          <div class="cat-list">
+            <div class="cat-item" onclick="filterCat('BOS')">
+              BOS
+              <span class="cat-count">5</span>
+            </div>
+            <div class="cat-item active" onclick="filterCat('APBD')">
+              APBD
+              <span class="cat-count">5</span>
+            </div>
+            <div class="cat-item" onclick="filterCat('Komite')">
+              Komite
+              <span class="cat-count">2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Laporan Terkini -->
+        <div class="sidebar-box fade-up">
+          <div class="sidebar-head">
+            <div class="sidebar-head-icon">📄</div>
+            <h3>Laporan Terkini</h3>
+          </div>
+          <div>
+            <div class="recent-item">
+              <div class="recent-thumb"><div class="recent-thumb-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div></div>
+              <div class="recent-text">
+                <p>APBD 2025 (Jan–Okt)</p>
+                <p>07 Nov, 2025</p>
+              </div>
+            </div>
+            <div class="recent-item">
+              <div class="recent-thumb"><div class="recent-thumb-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div></div>
+              <div class="recent-text">
+                <p>APBD 2023 (Triwulan I–III)</p>
+                <p>26 Okt, 2023</p>
+              </div>
+            </div>
+            <div class="recent-item">
+              <div class="recent-thumb"><div class="recent-thumb-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div></div>
+              <div class="recent-text">
+                <p>APBD 2022 (Okt–Des)</p>
+                <p>11 Jun, 2023</p>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-more">
+            <a href="#">Lihat Semua Laporan →</a>
+          </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box fade-up">
+          <p><strong>Dana APBD (Bantuan Operasional Sekolah)</strong> adalah program pemerintah untuk membiayai operasional sekolah guna meningkatkan mutu pendidikan. Laporan ini dipublikasikan sebagai bentuk transparansi kepada masyarakat.</p>
+        </div>
+
+      </div><!-- /sidebar-row -->
+
+    </div><!-- /page-grid -->
+  </div>
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer" id="contact">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="fade-up">
+          <div class="footer-brand-logo">
+            <div class="footer-logo-box">S</div>
+            <div>
+              <p class="footer-brand-name">SMKN 1 Cikampek</p>
+              <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <p class="footer-brand-desc">SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sebagai kota industri sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>.</p>
+          <div class="footer-social">
+            <a href="#" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+            <a href="#" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          </div>
+        </div>
+        <div class="fade-up">
+          <h4 class="footer-col-title">Navigasi Cepat</h4>
+          <div class="footer-links">
+            <a href="../index.html">Beranda</a>
+            <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+            <a href="../profil/jurusan.html">Program Keahlian</a>
+            <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+            <a href="bos.html">Dana APBD</a>
+            <a href="apbd.html" class="current">APBD</a>
+            <a href="../informasi/berita.html">Berita Terbaru</a>
+            <a href="../informasi/prestasi.html">Prestasi</a>
+          </div>
+        </div>
+        <div class="fade-up">
+          <h4 class="footer-col-title">Info Terbaru</h4>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a></p>
+              <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">26 Mei, 2026</p>
+            </div>
+            <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII</a></p>
+              <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">04 Mei, 2026</p>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a></p>
+              <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">18 Apr, 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="footer-map-contact">
+      <div>
+        <p class="footer-map-title">Denah Lokasi</p>
+        <div class="footer-map-frame">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.026!2d107.461!3d-6.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjQnNTcuNiJTIDEwN8KwMjcnMzkuNiJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi SMKN 1 Cikampek"></iframe>
+        </div>
+      </div>
+      <div>
+        <p class="footer-contact-title">Informasi Kontak</p>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg></div>
+            <div><p class="fci-label">Alamat</p><p class="fci-value">Jl. Ahmad Yani No.1, Cikampek, Karawang, Jawa Barat</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.7l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg></div>
+            <div><p class="fci-label">Telepon</p><p class="fci-value">(0264) 316xxx</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 6 8-6"/></svg></div>
+            <div><p class="fci-label">Email</p><p class="fci-value">info@smkn1cikampek.sch.id</p></div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></div>
+            <div><p class="fci-label">Jam Operasional</p><p class="fci-value">Senin – Sabtu, 07.00 – 16.00 WIB</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat Penggunaan</a>
+        <a href="#">Dukungan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // JAM DIGITAL
+  function updateJam() {
+    const el = document.getElementById('jam-digital');
+    if (!el) return;
+    const now = new Date();
+    el.textContent = [now.getHours(), now.getMinutes(), now.getSeconds()]
+      .map(n => String(n).padStart(2,'0')).join(':');
+  }
+  updateJam();
+  setInterval(updateJam, 1000);
+
+  // HEADER SCROLL
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+  // MOBILE MENU
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu?.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.getAttribute('data-toggle'));
+      target?.classList.toggle('open');
+      const caret = btn.querySelector('.mob-caret');
+      if (caret) caret.style.transform = target?.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+    });
+  });
+
+  // FADE UP
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // BACK TO TOP
+  const backBtn = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ACTIVE NAV
+  document.querySelectorAll('.nav-link[href]').forEach(link => {
+    const href = link.getAttribute('href').split('/').pop();
+    if (href === 'apbd.html') link.classList.add('active');
+  });
+
+});
+
+function doSearch() {
+  const q = (document.getElementById('search-input')?.value || document.getElementById('sidebar-search')?.value || '').toLowerCase().trim();
+  document.querySelectorAll('.laporan-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+}
+
+function filterCat(cat) {
+  document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+document.getElementById('search-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+document.getElementById('sidebar-search')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+</script>
+</body>
+</html>
