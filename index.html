@@ -911,6 +911,41 @@ ul { list-style: none; }
   .alumni-card { flex-direction: column; }
   .alumni-photo { width: 100%; height: 160px; }
 }
+/* ===== LAYOUT PRESTASI KIRI-KANAN ===== */
+.prestasi-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.prestasi-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px;
+  align-items: stretch;
+}
+.prestasi-row .psp-thumb {
+  flex: 0 0 280px !important;
+  border-radius: var(--r-md);
+  margin: 0;
+}
+.prestasi-row .prestasi-card {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .prestasi-row {
+    flex-direction: column !important;
+  }
+  .prestasi-row .psp-thumb {
+    flex: none !important;
+    width: 100%;
+    height: 180px;
+  }
+}
   </style>
 </head>
 <body>
@@ -1088,10 +1123,7 @@ ul { list-style: none; }
 
   <div class="hero-content">
     <div class="hero-inner">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Terakreditasi A — BAN-SM 2024
-      </div>
+    
       <h2 class="hero-title">SMKN 1 Cikampek</h2>
       <p class="hero-subtitle">Unggul, Berkarakter, Berdaya Saing. Mencetak generasi profesional siap industri sejak 1970.</p>
       <div class="hero-actions">
@@ -1116,41 +1148,6 @@ ul { list-style: none; }
 </section>
 
 <!-- ══════════════ STATS BAR ══════════════ -->
-<div class="stats-bar">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item fade-up">
-        <div class="stat-icon-svg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <strong data-counter data-target="1450" data-suffix="+">0</strong>
-        <span>Siswa Aktif</span>
-      </div>
-      <div class="stat-item fade-up">
-        <div class="stat-icon-svg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.5a19.79 19.79 0 01-3.07-8.63A2 2 0 011.92 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <strong data-counter data-target="95" data-suffix="">0</strong>
-        <span>Guru &amp; Staff</span>
-      </div>
-      <div class="stat-item fade-up">
-        <div class="stat-icon-svg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <strong data-counter data-target="240" data-suffix="+">0</strong>
-        <span>Prestasi Diraih</span>
-      </div>
-      <div class="stat-item fade-up">
-        <div class="stat-icon-svg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <strong data-counter data-target="200" data-suffix="+">0</strong>
-        <span>Mitra Industri</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ══════════════ 3-KOLOM: Profil + Pengumuman + Sambutan ══════════════ -->
 <section class="section">
   <div class="container">
@@ -1342,44 +1339,15 @@ ul { list-style: none; }
       <div class="divider-gold"></div>
     </div>
 
-    <div class="prestasi-layout">
-      <!-- Kiri: foto grid -->
-      <div class="prestasi-photos">
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
+    <div class="prestasi-list-container">
+      
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
           <div class="psp-thumb-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
           </div>
         </div>
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#16A34A,#15803d)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
-          </div>
-        </div>
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-        </div>
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#374151,#1f2937)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          </div>
-        </div>
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#0891B2,#0e7490)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-        </div>
-        <div class="psp-thumb fade-up" style="background:linear-gradient(135deg,#D97706,#b45309)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kanan: detail -->
-      <div class="prestasi-cards">
-        <div class="prestasi-card fade-up">
+        <div class="prestasi-card">
           <h4>JUARA 1 LKS TKJ PROVINSI JAWA BARAT</h4>
           <div class="psc-meta">
             <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 08 Apr, 2024</span>
@@ -1388,7 +1356,15 @@ ul { list-style: none; }
           <div class="psc-scale">Skala Provinsi</div>
           <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Ahmad Fauzi XII TKJ</div>
         </div>
-        <div class="prestasi-card fade-up">
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
           <h4>JUARA 2 PANAHAN COMPOUND OLYMPIC ROUND TEAM</h4>
           <div class="psc-meta">
             <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
@@ -1397,7 +1373,15 @@ ul { list-style: none; }
           <div class="psc-scale">Skala Provinsi</div>
           <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Reza Ananda XII TP</div>
         </div>
-        <div class="prestasi-card fade-up">
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
           <h4>JUARA 3 PENCAK SILAT PUTRA</h4>
           <div class="psc-meta">
             <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
@@ -1406,7 +1390,15 @@ ul { list-style: none; }
           <div class="psc-scale">Skala Provinsi</div>
           <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Budi Santoso X E8</div>
         </div>
-        <div class="prestasi-card fade-up">
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#374151,#1f2937)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
           <h4>JUARA 1 LKS DESAIN KOMUNIKASI VISUAL</h4>
           <div class="psc-meta">
             <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
@@ -1416,6 +1408,91 @@ ul { list-style: none; }
           <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Siti Rahayu XII DKV</div>
         </div>
       </div>
+
+    </div>
+
+    <div class="btn-center">
+      <a href="informasi/prestasi.html" class="btn-outline-navy">Tampilkan Semua Prestasi</a>
+    </div>
+  </div>
+</section><section class="section" id="prestasi">
+  <div class="container">
+    <div class="section-head-center fade-up" style="margin-bottom:52px">
+      <span class="section-label-tag">Kebanggaan Kami</span>
+      <h2 class="section-title-h2">Prestasi Terbaru</h2>
+      <div class="divider-gold"></div>
+    </div>
+
+    <div class="prestasi-list-container">
+      
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
+          <h4>JUARA 1 LKS TKJ PROVINSI JAWA BARAT</h4>
+          <div class="psc-meta">
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 08 Apr, 2024</span>
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
+          </div>
+          <div class="psc-scale">Skala Provinsi</div>
+          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Ahmad Fauzi XII TKJ</div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
+          <h4>JUARA 2 PANAHAN COMPOUND OLYMPIC ROUND TEAM</h4>
+          <div class="psc-meta">
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
+          </div>
+          <div class="psc-scale">Skala Provinsi</div>
+          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Reza Ananda XII TP</div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
+          <h4>JUARA 3 PENCAK SILAT PUTRA</h4>
+          <div class="psc-meta">
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
+          </div>
+          <div class="psc-scale">Skala Provinsi</div>
+          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Budi Santoso X E8</div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#374151,#1f2937)">
+          <div class="psp-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+        </div>
+        <div class="prestasi-card">
+          <h4>JUARA 1 LKS DESAIN KOMUNIKASI VISUAL</h4>
+          <div class="psc-meta">
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
+            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
+          </div>
+          <div class="psc-scale">Skala Kota</div>
+          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Siti Rahayu XII DKV</div>
+        </div>
+      </div>
+
     </div>
 
     <div class="btn-center">
