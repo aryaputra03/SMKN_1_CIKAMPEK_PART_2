@@ -81,9 +81,19 @@ ul { list-style: none; }
 .nav-link:hover { color: var(--navy); background: var(--kuning-muda); }
 .nav-link.active { color: var(--kuning-tua); background: var(--kuning-muda); font-weight: 600; }
 .caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
-.nav-item:hover .caret { transform: rotate(180deg); }
+.nav-item.open .caret { transform: rotate(180deg); }
 .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--putih); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 1px solid var(--abu); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
-.nav-item:hover .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+.nav-item.open .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+/* Bridge: tutup celah agar mouse tidak keluar saat geser ke dropdown */
+.nav-item.has-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
+}
 .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); font-size: 13.5px; color: var(--teks); transition: background 0.2s, color 0.2s; }
 .dropdown a:hover { background: var(--kuning-pale); color: var(--navy); }
 .dropdown a.current { background: var(--kuning-muda); color: var(--kuning-tua); font-weight: 600; }
@@ -521,7 +531,7 @@ ul { list-style: none; }
 
     <nav class="navbar">
       <div class="nav-item"><a href="../index.html" class="nav-link">Beranda</a></div>
-      <div class="nav-item">
+      <div class="nav-item has-dropdown">
         <button class="nav-link">Profil Sekolah <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span> Visi &amp; Misi</a>
@@ -531,14 +541,14 @@ ul { list-style: none; }
           <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span> Staff &amp; Guru</a>
         </div>
       </div>
-      <div class="nav-item">
+      <div class="nav-item has-dropdown">
         <button class="nav-link active">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/><path d="M10 10a2 2 0 100-4 2 2 0 000 4z"/></svg></span> Dana APBD</a>
           <a href="apbd.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span> APBD</a>
         </div>
       </div>
-      <div class="nav-item">
+      <div class="nav-item has-dropdown">
         <button class="nav-link">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="../informasi/berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span> Berita Sekolah</a>
@@ -999,6 +1009,36 @@ function filterCat(cat) {
 
 document.getElementById('search-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 document.getElementById('sidebar-search')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+  // ── DROPDOWN NAVBAR ──
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(function(item) {
+    var closeTimer;
+    function openDropdown() {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) {
+        if (o !== item) o.classList.remove('open');
+      });
+      item.classList.add('open');
+    }
+    function closeDropdown() {
+      closeTimer = setTimeout(function() { item.classList.remove('open'); }, 150);
+    }
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+    var btn = item.querySelector('button.nav-link');
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) { o.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    }
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(function(i) { i.classList.remove('open'); });
+  });
+
 </script>
 </body>
 </html>
