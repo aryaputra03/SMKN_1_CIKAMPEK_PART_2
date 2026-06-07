@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Organisasi & Ekstrakurikuler SMKN 1 Cikampek — Wadah pengembangan minat, bakat, dan karakter siswa.">
+  <title>Organisasi &amp; Ekstrakurikuler — SMKN 1 Cikampek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0F1E38; --navy-mid: #1B2E4A; --navy-light: #243558;
+      --gold: #C9A84C; --gold-light: #E8C96B; --gold-pale: #FAF3DC;
+      --white: #FFFFFF; --off-white: #F8F7F4; --gray-soft: #EDF0F5;
+      --text: #1A1F2E; --text-muted: #64748B; --text-light: #94A3B8;
+      --shadow-sm: 0 2px 8px rgba(15,30,56,0.08);
+      --shadow-md: 0 6px 24px rgba(15,30,56,0.12);
+      --shadow-lg: 0 16px 48px rgba(15,30,56,0.15);
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── FADE UP ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── HEADER ── */
+    .header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-soft); transition: box-shadow 0.3s; }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-main { display: flex; align-items: center; gap: 20px; height: 72px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-placeholder { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .logo-text h1 { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; white-space: nowrap; }
+    .logo-text p { font-size: 11px; color: var(--text-muted); }
+    .navbar { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .nav-item { position: relative; }
+    .nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; color: var(--text); background: none; border: none; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+    .nav-link:hover, .nav-link.active { color: var(--navy); background: var(--gray-soft); }
+    .nav-link.active { font-weight: 600; }
+    .caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
+    .nav-item.open .caret { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
+    .nav-item.has-dropdown::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px; background: transparent; }
+    .nav-item.open .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+    .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--r-sm); font-size: 13.5px; color: var(--text); transition: background 0.2s, color 0.2s; }
+    .dropdown a:hover { background: var(--gold-pale); color: var(--navy); }
+    .dropdown a.current { background: var(--gold-pale); color: var(--navy); font-weight: 600; }
+    .dd-icon { width: 30px; height: 30px; background: var(--gray-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dd-icon svg { width: 15px; height: 15px; color: var(--navy-mid); }
+    .btn-ppdb { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 700; border-radius: var(--r-md); transition: background 0.2s, transform 0.2s; white-space: nowrap; flex-shrink: 0; margin-left: 12px; }
+    .btn-ppdb:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; margin-left: auto; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-soft); box-shadow: var(--shadow-lg); padding: 8px 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease); }
+    .mobile-menu.open { max-height: 600px; }
+    .mobile-nav-item { border-bottom: 1px solid var(--gray-soft); }
+    .mobile-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 13px 24px; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; }
+    .mobile-dropdown { display: none; background: var(--off-white); }
+    .mobile-dropdown.open { display: block; }
+    .mobile-dropdown a { display: block; padding: 10px 24px 10px 40px; font-size: 13.5px; color: var(--text-muted); border-bottom: 1px solid var(--gray-soft); }
+    .mobile-dropdown a:hover { color: var(--navy); }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 60px 0 50px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--white); clip-path: ellipse(55% 100% at 50% 100%); }
+    .page-hero-inner { position: relative; z-index: 1; text-align: center; }
+    .page-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold); font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 46px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; }
+    .breadcrumb-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb-row a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .breadcrumb-row a:hover { color: var(--gold); }
+    .breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .breadcrumb-row .current { font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* ── STATS ── */
+    .stats-strip { background: var(--navy); }
+    .stats-strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .strip-stat { padding: 28px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+    .strip-stat:last-child { border-right: none; }
+    .strip-stat strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: var(--gold); line-height: 1; }
+    .strip-stat span { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-top: 6px; display: block; }
+
+    /* ── PAGE BODY ── */
+    .page-body { padding: 64px 0 88px; }
+
+    /* ── SECTION LABELS ── */
+    .section-label-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 3px; margin-bottom: 14px; }
+    .section-title-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 10px; }
+    .section-sub { font-size: 15px; color: var(--text-muted); max-width: 580px; line-height: 1.7; }
+    .section-head-center { text-align: center; margin-bottom: 48px; }
+    .section-head-center .section-sub { margin: 0 auto; }
+    .divider-gold { width: 48px; height: 2px; background: var(--gold); margin: 14px auto 0; }
+
+    /* ── FILTER TABS ── */
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter-tab { padding: 9px 20px; border-radius: 100px; font-size: 13px; font-weight: 600; border: 1.5px solid var(--gray-soft); background: var(--white); color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .filter-tab:hover { border-color: var(--gold); color: var(--navy); }
+    .filter-tab.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+    /* ── OSIS HIGHLIGHT CARD ── */
+    .osis-card {
+      background: var(--navy);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-lg);
+    }
+    .osis-visual {
+      background: linear-gradient(135deg, #0a1525, var(--navy-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+    }
+    .osis-visual::before {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.08);
+      top: -40px; right: -40px;
+    }
+    .osis-visual::after {
+      content: '';
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.05);
+      bottom: -30px; left: -20px;
+    }
+    .osis-icon-wrap {
+      width: 88px; height: 88px;
+      background: rgba(201,168,76,0.15);
+      border: 2px solid rgba(201,168,76,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .osis-icon-wrap svg { width: 40px; height: 40px; color: var(--gold); }
+    .osis-body { padding: 36px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .osis-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; width: fit-content; }
+    .osis-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.25; }
+    .osis-body p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 20px; }
+    .osis-features { display: flex; gap: 20px; flex-wrap: wrap; }
+    .osis-feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.7); }
+    .osis-feat svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+    /* ── EKSKUL GRID ── */
+    .ekskul-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+    .ekskul-card {
+      background: var(--white);
+      border: 1px solid var(--gray-soft);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .ekskul-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+
+    .ekskul-card-header {
+      padding: 28px 24px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ekskul-card-header::after {
+      content: '';
+      position: absolute;
+      bottom: -24px; right: -24px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+    .ekskul-type-badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .badge-wajib { background: rgba(255,255,255,0.2); color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+    .badge-pilihan { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
+    .ekskul-card-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.18);
+      border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .ekskul-card-icon svg { width: 26px; height: 26px; color: var(--white); }
+    .ekskul-card-header h3 { font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.2; }
+    .ekskul-card-header p { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+
+    .ekskul-card-body { padding: 18px 24px 22px; flex: 1; display: flex; flex-direction: column; }
+    .ekskul-card-body p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .ekskul-meta { display: flex; gap: 14px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--gray-soft); }
+    .ekskul-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-light); }
+    .ekskul-meta-item svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* ── SECTION: DAFTAR LENGKAP ── */
+    .daftar-section { background: var(--off-white); padding: 64px 0; }
+    .daftar-table-wrap { overflow-x: auto; }
+    .daftar-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .daftar-table th { background: var(--navy); color: var(--white); padding: 14px 18px; text-align: left; font-size: 12.5px; font-weight: 600; letter-spacing: 0.3px; }
+    .daftar-table td { padding: 13px 18px; font-size: 13.5px; border-bottom: 1px solid var(--gray-soft); vertical-align: middle; }
+    .daftar-table tr:last-child td { border-bottom: none; }
+    .daftar-table tr:hover td { background: var(--gold-pale); }
+    .jenis-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+    .jenis-wajib { background: #DBEAFE; color: #1E40AF; }
+    .jenis-pilihan { background: #DCFCE7; color: #166534; }
+    .jenis-seni { background: #FDF4FF; color: #7C3AED; }
+    .hari-text { font-size: 12.5px; color: var(--text-muted); }
+
+    /* ── DAFTAR BTN ── */
+    .daftar-cta { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); padding: 56px 0; }
+    .daftar-cta-inner { text-align: center; }
+    .daftar-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+    .daftar-cta p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+    .btn-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--gold); color: var(--navy); font-size: 14px; font-weight: 700; border-radius: var(--r-md); transition: background 0.2s, transform 0.2s; }
+    .btn-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.65); }
+    .footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 64px 0 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-logo-box { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-brand-name { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
+    .footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: all 0.2s; }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+    .footer-social a svg { width: 14px; height: 14px; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.55); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); }
+    .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); }
+    .footer-bottom p strong { color: var(--gold); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 11.5px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(201,168,76,0.4); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .ekskul-grid { grid-template-columns: repeat(2, 1fr); }
+      .osis-card { grid-template-columns: 1fr; }
+      .osis-visual { min-height: 160px; }
+      .stats-strip-grid { grid-template-columns: repeat(2, 1fr); }
+      .strip-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .strip-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+      .footer-main-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .navbar, .btn-ppdb { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .ekskul-grid { grid-template-columns: 1fr; }
+      .footer-main-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .osis-body { padding: 24px; }
+    }
+    @media (max-width: 480px) {
+      .stats-strip-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="header">
+  <div class="container header-main">
+    <a href="../index.html" class="logo-area">
+      <img src="../assets/images/logo/logo.png" alt="Logo SMKN 1 Cikampek"
+        style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-placeholder" style="display:none">S</div>
+      <div class="logo-text"><h1>SMKN 1 Cikampek</h1><p>Karawang, Jawa Barat</p></div>
+    </a>
+
+    <nav class="navbar">
+      <div class="nav-item"><a href="../index.html" class="nav-link">Beranda</a></div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">Profil Sekolah <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
+          <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
+          <a href="../profil/jurusan.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
+          <a href="../profil/struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span>Struktur Organisasi</a>
+          <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../keuangan/bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg></span>Dana BOS</a>
+          <a href="../keuangan/apbd.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span>APBD</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link active">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
+          <a href="prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Prestasi</a>
+          <a href="ekskul.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
+    </nav>
+
+    <a href="../index.html#ppdb" class="btn-ppdb">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
+      Daftar PPDB
+    </a>
+    <button class="hamburger" aria-label="Buka Menu"><span></span><span></span><span></span></button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu">
+    <div class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Beranda</a></div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-profil">Profil Sekolah <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown" id="mob-profil">
+        <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+        <a href="../profil/fasilitas.html">Fasilitas</a>
+        <a href="../profil/jurusan.html">Jurusan</a>
+        <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
+        <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-informasi">Informasi <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown open" id="mob-informasi">
+        <a href="berita.html">Berita Sekolah</a>
+        <a href="prestasi.html">Prestasi</a>
+        <a href="ekskul.html" style="color:var(--gold);font-weight:600">Org &amp; Ekstrakurikuler</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item"><a href="../index.html#contact" class="mobile-nav-link">Kontak</a></div>
+    <div style="padding:16px 24px;">
+      <a href="../index.html#ppdb" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:var(--r-md);">Daftar PPDB</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>
+      Pengembangan Diri
+    </div>
+    <h1>Organisasi &amp; Ekstrakurikuler</h1>
+    <p>Wadah bagi siswa untuk mengembangkan minat, bakat, karakter, dan jiwa kepemimpinan di luar jam akademik.</p>
+    <div class="breadcrumb-row">
+      <a href="../index.html">Home</a><span>›</span>
+      <span>Informasi</span><span>›</span>
+      <span class="current">Org &amp; Ekstrakurikuler</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-strip-grid">
+      <div class="strip-stat fade-up">
+        <strong data-counter data-target="18" data-suffix="">0</strong>
+        <span>Total Kegiatan</span>
+      </div>
+      <div class="strip-stat fade-up">
+        <strong data-counter data-target="1200" data-suffix="+">0</strong>
+        <span>Siswa Aktif</span>
+      </div>
+      <div class="strip-stat fade-up">
+        <strong data-counter data-target="45" data-suffix="+">0</strong>
+        <span>Pembina &amp; Pelatih</span>
+      </div>
+      <div class="strip-stat fade-up">
+        <strong data-counter data-target="30" data-suffix="+">0</strong>
+        <span>Prestasi Ekskul 2024</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE BODY ══ -->
+<main class="page-body">
+  <div class="container">
+
+    <!-- OSIS HIGHLIGHT -->
+    <div class="osis-card fade-up">
+      <div class="osis-visual">
+        <div class="osis-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+      </div>
+      <div class="osis-body">
+        <div class="osis-tag">
+          <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg>
+          Organisasi Utama
+        </div>
+        <h3>OSIS &amp; MPK — Pusat Kepemimpinan Siswa</h3>
+        <p>Organisasi Siswa Intra Sekolah (OSIS) dan Majelis Perwakilan Kelas (MPK) merupakan wadah utama pengembangan kepemimpinan dan demokrasi di lingkungan SMKN 1 Cikampek. Dipandu oleh pembina yang berpengalaman, OSIS menjalankan berbagai program unggulan sepanjang tahun.</p>
+        <div class="osis-features">
+          <div class="osis-feat">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            40+ Pengurus Aktif
+          </div>
+          <div class="osis-feat">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+            Program Setiap Semester
+          </div>
+          <div class="osis-feat">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg>
+            Pengelola 18 Ekskul
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs fade-up">
+      <button class="filter-tab active" onclick="filterEkskul('semua', this)">Semua</button>
+      <button class="filter-tab" onclick="filterEkskul('wajib', this)">Wajib</button>
+      <button class="filter-tab" onclick="filterEkskul('olahraga', this)">Olahraga</button>
+      <button class="filter-tab" onclick="filterEkskul('seni', this)">Seni &amp; Budaya</button>
+      <button class="filter-tab" onclick="filterEkskul('akademik', this)">Akademik</button>
+      <button class="filter-tab" onclick="filterEkskul('sosial', this)">Sosial &amp; Karakter</button>
+    </div>
+
+    <!-- EKSKUL GRID -->
+    <div class="ekskul-grid" id="ekskul-grid">
+
+      <!-- Pramuka -->
+      <div class="ekskul-card fade-up" data-kat="wajib">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#1B2E4A,#0F1E38)">
+          <span class="ekskul-type-badge badge-wajib">Wajib</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l8 18H4l8-18z"/><path d="M12 22v-6"/></svg>
+          </div>
+          <h3>Pramuka Inti</h3>
+          <p>Gugus Depan SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Membentuk karakter disiplin, mandiri, tangguh, dan cinta tanah air melalui berbagai kegiatan kepramukaan dan pengabdian masyarakat.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Jumat, 14.00 – 17.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              200+ Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paskibra -->
+      <div class="ekskul-card fade-up" data-kat="wajib">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
+          <span class="ekskul-type-badge badge-wajib">Wajib</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+          </div>
+          <h3>Paskibraka</h3>
+          <p>Pasukan Pengibar Bendera Pusaka</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Melatih ketangkasan fisik, mental kebangsaan, dan rasa cinta tanah air melalui latihan baris-berbaris dan pengibaran bendera.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Sabtu, 07.00 – 10.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              60 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PMR -->
+      <div class="ekskul-card fade-up" data-kat="sosial">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#DC2626,#991b1b)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3>Palang Merah Remaja</h3>
+          <p>Unit PMR SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Melatih kesiapsiagaan, kepedulian sosial, dan pertolongan pertama pada kecelakaan (P3K) untuk mencetak generasi siap tanggap bencana.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Kamis, 14.00 – 16.30
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              80 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Futsal -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3>Futsal</h3>
+          <p>Tim Futsal SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Mengembangkan bakat sepak bola dalam ruangan dengan latihan taktik, teknik dasar, dan mental bertanding di level kompetitif.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Senin &amp; Rabu, 15.30 – 17.30
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              40 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bola Voli -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18"/></svg>
+          </div>
+          <h3>Bola Voli</h3>
+          <p>Tim Bola Voli Putra &amp; Putri</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Membina atlet voli berprestasi melalui program latihan terstruktur untuk mengikuti kejuaraan tingkat kabupaten hingga provinsi.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Selasa &amp; Kamis, 15.30 – 17.30
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              50 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pencak Silat -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#D97706,#b45309)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3>Pencak Silat</h3>
+          <p>Perguruan Silat SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Melestarikan seni bela diri tradisional Indonesia sekaligus melatih fisik, mental, dan disiplin untuk kompetisi regional dan nasional.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Rabu &amp; Jumat, 14.00 – 16.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              45 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panahan -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#0891b2,#0e7490)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M12 5l7 7-7 7M3 12l2-2 2 2-2 2-2-2z"/></svg>
+          </div>
+          <h3>Panahan</h3>
+          <p>Klub Panahan SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Olahraga panahan yang melatih konsentrasi, ketenangan, dan presisi. Telah menghasilkan atlet juara di tingkat provinsi Jawa Barat.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Sabtu, 08.00 – 11.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              35 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paduan Suara -->
+      <div class="ekskul-card fade-up" data-kat="seni">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#9333EA,#7e22ce)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Paduan Suara</h3>
+          <p>Choir SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Mengembangkan kemampuan vokal dan musik secara kolektif untuk tampil di berbagai acara resmi sekolah dan festival paduan suara.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Senin, 14.00 – 16.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              50 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tari Tradisional -->
+      <div class="ekskul-card fade-up" data-kat="seni">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#E11D48,#be123c)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+          </div>
+          <h3>Tari Tradisional</h3>
+          <p>Sanggar Tari SMKN 1 Cikampek</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Melestarikan seni tari tradisional nusantara dari berbagai daerah sebagai wujud kecintaan terhadap budaya bangsa Indonesia.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Rabu, 14.00 – 16.30
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              40 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robotika -->
+      <div class="ekskul-card fade-up" data-kat="akademik">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#374151,#1f2937)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 11V3M8 3h8M7 21v1M17 21v1"/><circle cx="8" cy="16" r="1" fill="currentColor"/><circle cx="16" cy="16" r="1" fill="currentColor"/></svg>
+          </div>
+          <h3>Robotika</h3>
+          <p>Klub Robotika &amp; Otomasi</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Merancang, merakit, dan memprogram robot untuk mengikuti kompetisi nasional. Didukung lab khusus dengan peralatan modern dan pembina berpengalaman.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Selasa &amp; Kamis, 14.00 – 17.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              30 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- English Club -->
+      <div class="ekskul-card fade-up" data-kat="akademik">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#0369a1,#075985)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3>English Club</h3>
+          <p>Komunitas Bahasa Inggris</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Meningkatkan kemampuan berbahasa Inggris aktif melalui debat, public speaking, dan simulasi percakapan bisnis untuk persiapan dunia kerja global.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Senin &amp; Rabu, 14.00 – 16.00
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              55 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jurnalistik -->
+      <div class="ekskul-card fade-up" data-kat="akademik">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#4B5563,#374151)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Jurnalistik &amp; Fotografi</h3>
+          <p>Majalah Dinding &amp; Media Sekolah</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Mengasah kemampuan menulis, meliput berita, dan fotografi untuk media sekolah. Menghasilkan konten untuk website, majalah dinding, dan media sosial resmi sekolah.</p>
+          <div class="ekskul-meta">
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              Jumat, 14.00 – 16.30
+            </div>
+            <div class="ekskul-meta-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              35 Anggota
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ekskul-grid -->
+  </div>
+</main>
+
+<!-- ══ DAFTAR LENGKAP ══ -->
+<section class="daftar-section">
+  <div class="container">
+    <div class="section-head-center fade-up">
+      <span class="section-label-tag">Direktori Lengkap</span>
+      <h2 class="section-title-h2">Seluruh Kegiatan Ekstrakurikuler</h2>
+      <div class="divider-gold"></div>
+      <p class="section-sub" style="margin-top:14px">Daftar lengkap 18 kegiatan ekstrakurikuler yang tersedia di SMKN 1 Cikampek Tahun Ajaran 2024/2025.</p>
+    </div>
+
+    <div class="daftar-table-wrap fade-up">
+      <table class="daftar-table">
+        <thead>
+          <tr>
+            <th style="width:50px">No</th>
+            <th>Nama Ekstrakurikuler</th>
+            <th>Bidang</th>
+            <th>Jenis</th>
+            <th>Jadwal Latihan</th>
+            <th>Pembina</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Pramuka Inti</strong></td>
+            <td>Kepanduan</td>
+            <td><span class="jenis-badge jenis-wajib">Wajib</span></td>
+            <td class="hari-text">Jumat, 14.00–17.00</td>
+            <td>Hendra Gunawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Paskibraka</strong></td>
+            <td>Kebangsaan</td>
+            <td><span class="jenis-badge jenis-wajib">Wajib</span></td>
+            <td class="hari-text">Sabtu, 07.00–10.00</td>
+            <td>Ahmad Rizki, S.T</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Palang Merah Remaja (PMR)</strong></td>
+            <td>Sosial &amp; Kesehatan</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Kamis, 14.00–16.30</td>
+            <td>Wulandari, S.Psi</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Futsal</strong></td>
+            <td>Olahraga</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Senin &amp; Rabu, 15.30–17.30</td>
+            <td>Dedi Hermawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Bola Voli Putra &amp; Putri</strong></td>
+            <td>Olahraga</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Selasa &amp; Kamis, 15.30–17.30</td>
+            <td>Hendra Gunawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Pencak Silat</strong></td>
+            <td>Olahraga &amp; Bela Diri</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Rabu &amp; Jumat, 14.00–16.00</td>
+            <td>Bambang Supriyadi, S.T</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Panahan</strong></td>
+            <td>Olahraga</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Sabtu, 08.00–11.00</td>
+            <td>Ridwan Prasetyo, S.T</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Bulu Tangkis</strong></td>
+            <td>Olahraga</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Selasa, 14.00–16.30</td>
+            <td>Hendra Gunawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Paduan Suara (Choir)</strong></td>
+            <td>Seni Musik</td>
+            <td><span class="jenis-badge jenis-seni">Seni</span></td>
+            <td class="hari-text">Senin, 14.00–16.00</td>
+            <td>Dedi Hermawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Tari Tradisional</strong></td>
+            <td>Seni Budaya</td>
+            <td><span class="jenis-badge jenis-seni">Seni</span></td>
+            <td class="hari-text">Rabu, 14.00–16.30</td>
+            <td>Rina Safitri, S.Ds</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Band Sekolah</strong></td>
+            <td>Seni Musik</td>
+            <td><span class="jenis-badge jenis-seni">Seni</span></td>
+            <td class="hari-text">Kamis, 14.00–17.00</td>
+            <td>Dedi Hermawan, S.Pd</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Robotika &amp; Otomasi</strong></td>
+            <td>Teknologi &amp; Sains</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Selasa &amp; Kamis, 14.00–17.00</td>
+            <td>Agus Setiawan, S.T</td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>English Club</strong></td>
+            <td>Bahasa &amp; Akademik</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Senin &amp; Rabu, 14.00–16.00</td>
+            <td>Yanti Kusumawati, S.Pd</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><strong>Jurnalistik &amp; Fotografi</strong></td>
+            <td>Literasi &amp; Media</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Jumat, 14.00–16.30</td>
+            <td>Nurul Hidayah, S.Pd</td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>Karya Ilmiah Remaja (KIR)</strong></td>
+            <td>Akademik &amp; Riset</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Rabu, 14.00–16.00</td>
+            <td>Sri Wahyuni, S.Pd, M.Pd</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><strong>Desain Grafis &amp; Digital Art</strong></td>
+            <td>Kreatif &amp; Desain</td>
+            <td><span class="jenis-badge jenis-seni">Seni</span></td>
+            <td class="hari-text">Jumat, 13.00–16.00</td>
+            <td>Rina Safitri, S.Ds</td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><strong>Kerohanian Islam (ROHIS)</strong></td>
+            <td>Keagamaan</td>
+            <td><span class="jenis-badge jenis-pilihan">Pilihan</span></td>
+            <td class="hari-text">Jumat, 12.00–13.30</td>
+            <td>Muhammad Fauzi, S.Ag</td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><strong>Perkusi &amp; Drumband</strong></td>
+            <td>Seni Musik</td>
+            <td><span class="jenis-badge jenis-seni">Seni</span></td>
+            <td class="hari-text">Sabtu, 07.00–10.00</td>
+            <td>Dedi Hermawan, S.Pd</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="daftar-cta">
+  <div class="container daftar-cta-inner fade-up">
+    <h2>Tertarik Bergabung?</h2>
+    <p>Pendaftaran anggota ekstrakurikuler baru dibuka setiap awal semester. Hubungi Waka Kesiswaan untuk informasi lebih lanjut.</p>
+    <a href="../index.html#contact" class="btn-cta">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 6 8-6"/></svg>
+      Hubungi Kami
+    </a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-main-grid">
+      <div class="fade-up">
+        <div class="footer-brand-logo">
+          <div class="footer-logo-box">S</div>
+          <div><p class="footer-brand-name">SMKN 1 Cikampek</p><p class="footer-brand-loc">Karawang, Jawa Barat</p></div>
+        </div>
+        <p class="footer-brand-desc">SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+          <a href="#" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="fade-up">
+        <h4 class="footer-col-title">Navigasi Cepat</h4>
+        <div class="footer-links">
+          <a href="../index.html">Beranda</a>
+          <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+          <a href="../profil/jurusan.html">Program Keahlian</a>
+          <a href="../keuangan/bos.html">Dana BOS</a>
+          <a href="berita.html">Berita</a>
+          <a href="prestasi.html">Prestasi</a>
+          <a href="ekskul.html">Ekstrakurikuler</a>
+        </div>
+      </div>
+      <div class="fade-up">
+        <h4 class="footer-col-title">Kontak</h4>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.85">
+          <p>Jl. Ahmad Yani No.1, Cikampek,</p>
+          <p>Karawang, Jawa Barat</p>
+          <p style="margin-top:8px">(0264) 316xxx</p>
+          <p>info@smkn1cikampek.sch.id</p>
+          <p style="margin-top:8px;color:rgba(255,255,255,0.4)">Senin–Sabtu, 07.00–16.00 WIB</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links"><a href="#">Kebijakan Privasi</a><a href="#">Syarat Penggunaan</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ── HEADER SCROLL ──
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+  // ── DROPDOWN NAVBAR ──
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let closeTimer;
+    function openDropdown() {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.add('open');
+    }
+    function closeDropdown() {
+      closeTimer = setTimeout(() => item.classList.remove('open'), 150);
+    }
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+    const btn = item.querySelector('button.nav-link');
+    if (btn) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    }
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open'));
+  });
+
+  // ── MOBILE MENU ──
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu?.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.getAttribute('data-toggle'));
+      target?.classList.toggle('open');
+    });
+  });
+
+  // ── FADE UP ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // ── COUNTER ANIMASI ──
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-target') || '0');
+        const suffix = el.getAttribute('data-suffix') || '';
+        let current = 0;
+        const inc = target / (1600 / 16);
+        const timer = setInterval(() => {
+          current += inc;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = Math.floor(current).toLocaleString('id-ID') + suffix;
+        }, 16);
+        counterObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
+
+  // ── BACK TO TOP ──
+  const backBtn = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+});
+
+// ── FILTER EKSKUL ──
+function filterEkskul(kat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ekskul-card').forEach(card => {
+    if (kat === 'semua' || card.dataset.kat === kat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
