@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Struktur Organisasi — SMAN 1 Yogyakarta</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.org-chart { display: flex; flex-direction: column; align-items: center; gap: 0; margin-bottom: 48px; }
+.org-row { display: flex; justify-content: center; gap: 24px; position: relative; width: 100%; }
+.org-row + .org-row { margin-top: 0; }
+
+/* connector lines via SVG drawn between rows */
+.connector-v {
+  width: 2px; height: 32px; background: var(--gold);
+  margin: 0 auto;
+}
+.connector-h-wrap {
+  position: relative; display: flex; justify-content: center; align-items: flex-start;
+  width: 100%;
+}
+.connector-h-line {
+  position: absolute; top: 0; height: 2px; background: var(--gold);
+}
+
+.org-box {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 3px 16px rgba(13,27,62,.10);
+  border-top: 4px solid var(--gold);
+  padding: 16px 20px;
+  min-width: 170px; max-width: 200px;
+  text-align: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.org-box.primary {
+  background: var(--navy);
+  border-top-color: var(--gold);
+}
+.org-box.primary .role { color: var(--gold); }
+.org-box.primary .name { color: var(--white); }
+
+.org-box.komite {
+  background: var(--white);
+  border-top-color: #7B2D8B;
+}
+
+.org-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--gold-lt);
+  border: 3px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 0 auto 10px;
+}
+.org-box.primary .org-avatar {
+  background: rgba(201,150,58,.20);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.role {
+  font-size: 11px; font-weight: 600; letter-spacing: .5px;
+  text-transform: uppercase; color: var(--gray);
+  margin-bottom: 4px;
+}
+.name {
+  font-size: 13px; font-weight: 600; color: var(--navy);
+  line-height: 1.35;
+}
+
+/* Layout */
+.level-top { display: flex; gap: 40px; justify-content: center; align-items: flex-start; margin-bottom: 0; }
+.level-mid { display: flex; gap: 0; justify-content: center; }
+.level-waka { display: flex; gap: 24px; }
+.level-bawah { display: flex; gap: 24px; }
+
+.v-line { width: 2px; height: 32px; background: var(--gold); margin: 0 auto; }
+.h-group { position: relative; }
+
+/* Horizontal connector above waka row */
+.h-bridge {
+  position: relative;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-wrap { overflow-x: auto; }
+.data-table .jabatan { font-weight: 600; color: var(--navy); }
+.level-badge {
+  display: inline-block; padding: 3px 10px; border-radius: 99px;
+  font-size: 11px; font-weight: 600;
+}
+.l-top { background: var(--navy); color: var(--gold); }
+.l-waka { background: #e8eaf6; color: #3949ab; }
+.l-staf { background: #e8f4e8; color: #1a6b1a; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
+    <span>📞 (0274) 512096</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">S1</div>
+      <div class="brand-text">
+        <strong>SMA Negeri 1 Yogyakarta</strong>
+        <span>Teladan Jayamahe</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#" class="active">Profil Sekolah</a>
+        <ul class="dropdown-menu">
+          <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+          <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+          <li><a href="struktur-organisasi.html" class="active">Struktur Organisasi</a></li>
+          <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+          <li><a href="fasilitas.html">Fasilitas</a></li>
+          <li><a href="jurusan.html">Jurusan</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Keuangan</a>
+        <ul class="dropdown-menu">
+          <li><a href="bos.html">Dana BOS</a></li>
+          <li><a href="apbd.html">APBD</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Informasi</a>
+        <ul class="dropdown-menu">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="ekskul.html">Organisasi &amp; Ekskul</a></li>
+          <li><a href="prestasi.html">Prestasi</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a>
+    <span>›</span>
+    <a href="profil-sekolah.html">Profil Sekolah</a>
+    <span>›</span>
+    <span style="color:rgba(255,255,255,.80)">Struktur Organisasi</span>
+  </div>
+  <h1>Struktur Organisasi</h1>
+  <p>Bagan organisasi dan tata kelola SMA Negeri 1 Yogyakarta</p>
+</div>
+
+<div class="page-body">
+
+  <div class="section-title">Bagan Struktur Organisasi</div>
+  <p class="section-sub">Periode Tahun Ajaran 2024/2025</p>
+
+  <!-- BAGAN ORG CHART -->
+  <div class="card" style="overflow-x:auto; padding: 40px 24px; margin-bottom:48px;">
+    <div style="min-width:700px;">
+
+      <!-- ROW 1: Komite + Kepala Sekolah -->
+      <div style="display:flex; justify-content:center; gap:48px; margin-bottom:0;">
+        <div class="org-box komite">
+          <div class="org-avatar" style="background:#f0e8f8;border-color:#7B2D8B;color:#7B2D8B;">KS</div>
+          <div class="role">Komite Sekolah</div>
+          <div class="name">Ir. Rony Primantoro Hari, M.T</div>
+        </div>
+        <div class="org-box primary">
+          <div class="org-avatar">NS</div>
+          <div class="role">Kepala Sekolah</div>
+          <div class="name">Ngadiya, S.Pd., M.M</div>
+        </div>
+      </div>
+
+      <!-- V line to KTU -->
+      <div class="v-line" style="margin-left:calc(50% + 24px + 100px + 8px);"></div>
+
+      <!-- ROW 2: Kepala TU -->
+      <div style="display:flex; justify-content:center; margin-bottom:0; margin-left:calc(24px + 200px + 24px);">
+        <div class="org-box" style="border-top-color:#2196F3; min-width:180px;">
+          <div class="org-avatar" style="background:#e3f2fd;border-color:#2196F3;color:#1565C0;">FT</div>
+          <div class="role">Kepala Tata Usaha</div>
+          <div class="name">Fitri Trisnawati, S.Pd., M.I.Kom</div>
+        </div>
+      </div>
+
+      <!-- V line from kepala sekolah downward for waka -->
+      <div class="v-line" style="margin-left:50%;"></div>
+
+      <!-- Horizontal bar for waka -->
+      <div style="position:relative; height:2px; background:var(--gold); width:calc(100% - 80px); margin: 0 auto 0;"></div>
+      <div style="display:flex; justify-content:space-between; padding:0 0px; margin-bottom:0;">
+        <div class="v-line" style="margin:0;"></div>
+        <div class="v-line" style="margin:0;"></div>
+        <div class="v-line" style="margin:0;"></div>
+        <div class="v-line" style="margin:0;"></div>
+      </div>
+
+      <!-- ROW 3: 4 Waka -->
+      <div style="display:flex; justify-content:space-between; gap:12px; margin-bottom:0;">
+        <div class="org-box" style="flex:1; min-width:120px; max-width:200px;">
+          <div class="org-avatar" style="font-size:14px;width:44px;height:44px;">SL</div>
+          <div class="role">Waka Kurikulum</div>
+          <div class="name">Sri Lestari, S.Pd., M.Pd.Si</div>
+        </div>
+        <div class="org-box" style="flex:1; min-width:120px; max-width:200px;">
+          <div class="org-avatar" style="font-size:14px;width:44px;height:44px;">SW</div>
+          <div class="role">Waka Kesiswaan</div>
+          <div class="name">Sunarwanta, S.Pd</div>
+        </div>
+        <div class="org-box" style="flex:1; min-width:120px; max-width:200px;">
+          <div class="org-avatar" style="font-size:14px;width:44px;height:44px;">SS</div>
+          <div class="role">Waka Sarpras</div>
+          <div class="name">Sopan Setiawan, S.Kom</div>
+        </div>
+        <div class="org-box" style="flex:1; min-width:120px; max-width:200px;">
+          <div class="org-avatar" style="font-size:14px;width:44px;height:44px;">ES</div>
+          <div class="role">Waka Humas</div>
+          <div class="name">Dra. Enik Sri Agustini</div>
+        </div>
+      </div>
+
+      <!-- Lines down from kesiswaan (middle-ish) to bawah -->
+      <div style="display:flex; justify-content:space-around; padding: 0 12.5%;">
+        <div class="v-line"></div>
+        <div class="v-line"></div>
+        <div class="v-line"></div>
+      </div>
+      <div style="position:relative; height:2px; background:var(--gold); width:75%; margin: 0 auto;"></div>
+      <div style="display:flex; justify-content:space-between; width:75%; margin:0 auto;">
+        <div class="v-line" style="margin:0;"></div>
+        <div class="v-line" style="margin:0;"></div>
+        <div class="v-line" style="margin:0;"></div>
+      </div>
+
+      <!-- ROW 4: Staf -->
+      <div style="display:flex; justify-content:space-between; width:75%; margin:0 auto; gap:12px;">
+        <div class="org-box" style="flex:1; min-width:0; max-width:none; border-top-color:#4CAF50;">
+          <div class="org-avatar" style="background:#e8f5e9;border-color:#4CAF50;color:#2E7D32;font-size:14px;width:40px;height:40px;">HB</div>
+          <div class="role">Ka. Perpustakaan</div>
+          <div class="name">Hernanda Restu Buwono, S.IP</div>
+        </div>
+        <div class="org-box" style="flex:1; min-width:0; max-width:none; border-top-color:#4CAF50;">
+          <div class="org-avatar" style="background:#e8f5e9;border-color:#4CAF50;color:#2E7D32;font-size:14px;width:40px;height:40px;">ML</div>
+          <div class="role">Ka. Laboratorium</div>
+          <div class="name">Menik Ramen Lestari, S.Pd</div>
+        </div>
+        <div class="org-box" style="flex:1; min-width:0; max-width:none; border-top-color:#4CAF50;">
+          <div class="org-avatar" style="background:#e8f5e9;border-color:#4CAF50;color:#2E7D32;font-size:14px;width:40px;height:40px;">PA</div>
+          <div class="role">Koordinator BK</div>
+          <div class="name">Prashanti Ashtriyani, S.Pd</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DATA TABLE -->
+  <div class="card">
+    <div class="section-title">Daftar Pejabat Struktural</div>
+    <p class="section-sub">Susunan pengurus dan pejabat sekolah tahun ajaran 2024/2025</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:50px;">No</th>
+            <th>Jabatan</th>
+            <th>Nama</th>
+            <th>Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td class="jabatan">Komite Sekolah</td><td>Ir. Rony Primantoro Hari, M.T</td><td><span class="level-badge l-top">Pimpinan</span></td></tr>
+          <tr><td>2</td><td class="jabatan">Kepala Sekolah</td><td>Ngadiya, S.Pd., M.M</td><td><span class="level-badge l-top">Pimpinan</span></td></tr>
+          <tr><td>3</td><td class="jabatan">Kepala Tata Usaha</td><td>Fitri Trisnawati, S.Pd., M.I.Kom</td><td><span class="level-badge l-waka">Manajemen</span></td></tr>
+          <tr><td>4</td><td class="jabatan">Wakil Kepala — Kurikulum</td><td>Sri Lestari, S.Pd., M.Pd.Si</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
+          <tr><td>5</td><td class="jabatan">Wakil Kepala — Kesiswaan</td><td>Sunarwanta, S.Pd</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
+          <tr><td>6</td><td class="jabatan">Wakil Kepala — Sarana &amp; Prasarana</td><td>Sopan Setiawan, S.Kom</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
+          <tr><td>7</td><td class="jabatan">Wakil Kepala — Humas</td><td>Dra. Enik Sri Agustini</td><td><span class="level-badge l-waka">Wakasek</span></td></tr>
+          <tr><td>8</td><td class="jabatan">Kepala Perpustakaan</td><td>Hernanda Restu Buwono, S.IP</td><td><span class="level-badge l-staf">Staf</span></td></tr>
+          <tr><td>9</td><td class="jabatan">Kepala Laboratorium</td><td>Menik Ramen Lestari, S.Pd</td><td><span class="level-badge l-staf">Staf</span></td></tr>
+          <tr><td>10</td><td class="jabatan">Koordinator BK</td><td>Prashanti Ashtriyani, S.Pd</td><td><span class="level-badge l-staf">Staf</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>SMA Negeri 1 Yogyakarta</h4>
+      <p>Jl. Hos Cokroaminoto 10, Pakuncen, Wirobrajan, Kota Yogyakarta 55253</p>
+      <p style="margin-top:8px;">Telp: (0274) 512096<br>Email: sman1yogyakarta@gmail.com</p>
+    </div>
+    <div>
+      <h4>Tautan Cepat</h4>
+      <ul>
+        <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+        <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+        <li><a href="fasilitas.html">Fasilitas</a></li>
+        <li><a href="jurusan.html">Jurusan</a></li>
+        <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="berita.html">Berita Sekolah</a></li>
+        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
+        <li><a href="prestasi.html">Prestasi</a></li>
+        <li><a href="bos.html">Dana BOS</a></li>
+        <li><a href="apbd.html">APBD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SMA Negeri 1 Yogyakarta. All Rights Reserved.</span>
+    <a href="#">ICT Teladan</a>
+  </div>
+</footer>
+
+</body>
+</html>

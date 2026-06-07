@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurusan — SMAN 1 Yogyakarta</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.jurusan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+.jurusan-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.jurusan-header {
+  padding: 32px 32px 24px;
+  position: relative;
+}
+.jurusan-header.ipa { background: linear-gradient(135deg, #0D1B3E 0%, #1a3a6e 100%); }
+.jurusan-header.ips { background: linear-gradient(135deg, #7B2D8B 0%, #9b4dab 100%); }
+.jurusan-header .jenis {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.60); margin-bottom: 8px;
+}
+.jurusan-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 6px;
+}
+.jurusan-header p { font-size: 14px; color: rgba(255,255,255,.70); }
+.jurusan-header .icon-big {
+  position: absolute; right: 28px; top: 20px;
+  font-size: 56px; opacity: .25;
+}
+.jurusan-body { padding: 28px 32px; }
+.jurusan-body h4 { font-size: 13px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.mapel-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.mapel-list li {
+  background: var(--cream);
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  color: var(--navy);
+  font-weight: 500;
+}
+.mapel-list li.khusus { background: #e8eaf6; border-color: #c5cae9; color: #3949ab; }
+.stat-row { display: flex; gap: 24px; padding-top: 16px; border-top: 1px solid #f3f4f6; }
+.stat-item { text-align: center; }
+.stat-item .num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+.stat-item .lbl { font-size: 11px; color: var(--gray); }
+.ptujuan-section { margin-bottom: 48px; }
+.ptujuan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.pt-card {
+  background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px 16px; text-align: center;
+  border-bottom: 3px solid var(--gold);
+}
+.pt-card .pt-icon { font-size: 24px; margin-bottom: 10px; }
+.pt-card h5 { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.note-box {
+  background: #fffbe6;
+  border: 1px solid #f5d65a;
+  border-left: 4px solid #c9963a;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 14px; color: #5a4a0a; line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .jurusan-grid { grid-template-columns: 1fr; }
+  .ptujuan-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
+    <span>📞 (0274) 512096</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">S1</div>
+      <div class="brand-text">
+        <strong>SMA Negeri 1 Yogyakarta</strong>
+        <span>Teladan Jayamahe</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#" class="active">Profil Sekolah</a>
+        <ul class="dropdown-menu">
+          <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+          <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+          <li><a href="struktur-organisasi.html">Struktur Organisasi</a></li>
+          <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+          <li><a href="fasilitas.html">Fasilitas</a></li>
+          <li><a href="jurusan.html" class="active">Jurusan</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Keuangan</a>
+        <ul class="dropdown-menu">
+          <li><a href="bos.html">Dana BOS</a></li>
+          <li><a href="apbd.html">APBD</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Informasi</a>
+        <ul class="dropdown-menu">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="ekskul.html">Organisasi &amp; Ekskul</a></li>
+          <li><a href="prestasi.html">Prestasi</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a>
+    <span>›</span>
+    <a href="profil-sekolah.html">Profil Sekolah</a>
+    <span>›</span>
+    <span style="color:rgba(255,255,255,.80)">Jurusan</span>
+  </div>
+  <h1>Program Studi / Jurusan</h1>
+  <p>Dua program peminatan unggulan untuk mewujudkan potensi terbaik siswa</p>
+</div>
+
+<div class="page-body">
+
+  <div class="section-title">Program Peminatan</div>
+  <p class="section-sub">SMAN 1 Yogyakarta menyelenggarakan dua program peminatan untuk kelas X, XI, dan XII</p>
+
+  <div class="jurusan-grid">
+
+    <!-- IPA -->
+    <div class="jurusan-card">
+      <div class="jurusan-header ipa">
+        <div class="jenis">Program Peminatan</div>
+        <h2>MIPA</h2>
+        <p>Matematika dan Ilmu Pengetahuan Alam</p>
+        <div class="icon-big">⚗️</div>
+      </div>
+      <div class="jurusan-body">
+        <h4>Mata Pelajaran Wajib</h4>
+        <ul class="mapel-list">
+          <li>B. Indonesia</li><li>B. Inggris</li><li>Matematika</li>
+          <li>Sejarah Indonesia</li><li>PPKn</li><li>PJOK</li>
+          <li>Prakarya</li><li>Seni Budaya</li>
+        </ul>
+        <h4>Mata Pelajaran Peminatan</h4>
+        <ul class="mapel-list">
+          <li class="khusus">Matematika Peminatan</li>
+          <li class="khusus">Fisika</li>
+          <li class="khusus">Kimia</li>
+          <li class="khusus">Biologi</li>
+        </ul>
+        <div class="stat-row">
+          <div class="stat-item"><div class="num">9</div><div class="lbl">Rombel</div></div>
+          <div class="stat-item"><div class="num">~324</div><div class="lbl">Siswa</div></div>
+          <div class="stat-item"><div class="num">36</div><div class="lbl">Jam Pelajaran</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IPS -->
+    <div class="jurusan-card">
+      <div class="jurusan-header ips">
+        <div class="jenis">Program Peminatan</div>
+        <h2>IPS</h2>
+        <p>Ilmu Pengetahuan Sosial</p>
+        <div class="icon-big">📊</div>
+      </div>
+      <div class="jurusan-body">
+        <h4>Mata Pelajaran Wajib</h4>
+        <ul class="mapel-list">
+          <li>B. Indonesia</li><li>B. Inggris</li><li>Matematika</li>
+          <li>Sejarah Indonesia</li><li>PPKn</li><li>PJOK</li>
+          <li>Prakarya</li><li>Seni Budaya</li>
+        </ul>
+        <h4>Mata Pelajaran Peminatan</h4>
+        <ul class="mapel-list">
+          <li class="khusus">Geografi</li>
+          <li class="khusus">Sejarah Peminatan</li>
+          <li class="khusus">Sosiologi</li>
+          <li class="khusus">Ekonomi</li>
+        </ul>
+        <div class="stat-row">
+          <div class="stat-item"><div class="num">3</div><div class="lbl">Rombel</div></div>
+          <div class="stat-item"><div class="num">~108</div><div class="lbl">Siswa</div></div>
+          <div class="stat-item"><div class="num">36</div><div class="lbl">Jam Pelajaran</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CATATAN KURIKULUM -->
+  <div class="note-box" style="margin-bottom:48px;">
+    ⚠️ <strong>Catatan Kurikulum Merdeka:</strong> Mulai Tahun Ajaran 2022/2023, SMAN 1 Yogyakarta menerapkan Kurikulum Merdeka secara bertahap. Program peminatan tetap tersedia, namun siswa kelas X memiliki lebih banyak fleksibilitas dalam memilih mata pelajaran pilihan sesuai minat dan bakat.
+  </div>
+
+  <!-- PTN TUJUAN -->
+  <div class="ptujuan-section">
+    <div class="section-title">Perguruan Tinggi Tujuan Alumni</div>
+    <p class="section-sub">Alumni SMAN 1 Yogyakarta telah tersebar di berbagai perguruan tinggi terkemuka</p>
+    <div class="ptujuan-grid">
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Gadjah Mada</h5></div>
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Indonesia</h5></div>
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Institut Teknologi Bandung</h5></div>
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Negeri Yogyakarta</h5></div>
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Institut Pertanian Bogor</h5></div>
+      <div class="pt-card"><div class="pt-icon">🏛️</div><h5>Universitas Brawijaya</h5></div>
+      <div class="pt-card"><div class="pt-icon">🌏</div><h5>Perguruan Tinggi Luar Negeri</h5></div>
+      <div class="pt-card"><div class="pt-icon">🎓</div><h5>Dan berbagai PTN/PTS Lainnya</h5></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>SMA Negeri 1 Yogyakarta</h4>
+      <p>Jl. Hos Cokroaminoto 10, Pakuncen, Wirobrajan, Kota Yogyakarta 55253</p>
+      <p style="margin-top:8px;">Telp: (0274) 512096<br>Email: sman1yogyakarta@gmail.com</p>
+    </div>
+    <div>
+      <h4>Tautan Cepat</h4>
+      <ul>
+        <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+        <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+        <li><a href="fasilitas.html">Fasilitas</a></li>
+        <li><a href="jurusan.html">Jurusan</a></li>
+        <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="berita.html">Berita Sekolah</a></li>
+        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
+        <li><a href="prestasi.html">Prestasi</a></li>
+        <li><a href="bos.html">Dana BOS</a></li>
+        <li><a href="apbd.html">APBD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SMA Negeri 1 Yogyakarta. All Rights Reserved.</span>
+    <a href="#">ICT Teladan</a>
+  </div>
+</footer>
+
+</body>
+</html>

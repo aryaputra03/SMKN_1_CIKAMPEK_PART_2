@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fasilitas — SMAN 1 Yogyakarta</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.fasilitas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.fas-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  border-top: 4px solid transparent;
+  transition: transform .2s, box-shadow .2s;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.fas-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(13,27,62,.14); }
+.fas-card.gold { border-top-color: var(--gold); }
+.fas-card.navy { border-top-color: var(--navy); }
+.fas-card.red { border-top-color: #7B2D8B; }
+.fas-icon {
+  font-size: 32px; line-height: 1;
+  margin-bottom: 4px;
+}
+.fas-title { font-size: 15px; font-weight: 600; color: var(--navy); }
+.fas-count {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700;
+  padding: 4px 14px; border-radius: 6px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+.fas-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.table-wrap { overflow-x: auto; }
+.data-table th:last-child, .data-table td:last-child { text-align: center; }
+@media (max-width: 768px) { .fasilitas-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
+    <span>📞 (0274) 512096</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">S1</div>
+      <div class="brand-text">
+        <strong>SMA Negeri 1 Yogyakarta</strong>
+        <span>Teladan Jayamahe</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#" class="active">Profil Sekolah</a>
+        <ul class="dropdown-menu">
+          <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+          <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+          <li><a href="struktur-organisasi.html">Struktur Organisasi</a></li>
+          <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+          <li><a href="fasilitas.html" class="active">Fasilitas</a></li>
+          <li><a href="jurusan.html">Jurusan</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Keuangan</a>
+        <ul class="dropdown-menu">
+          <li><a href="bos.html">Dana BOS</a></li>
+          <li><a href="apbd.html">APBD</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Informasi</a>
+        <ul class="dropdown-menu">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="ekskul.html">Organisasi &amp; Ekskul</a></li>
+          <li><a href="prestasi.html">Prestasi</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a>
+    <span>›</span>
+    <a href="profil-sekolah.html">Profil Sekolah</a>
+    <span>›</span>
+    <span style="color:rgba(255,255,255,.80)">Fasilitas</span>
+  </div>
+  <h1>Fasilitas Sekolah</h1>
+  <p>Sarana dan prasarana lengkap untuk mendukung kegiatan belajar mengajar yang optimal</p>
+</div>
+
+<div class="page-body">
+
+  <!-- HIGHLIGHT CARDS -->
+  <div class="section-title">Fasilitas Unggulan</div>
+  <p class="section-sub">Fasilitas utama yang tersedia di SMAN 1 Yogyakarta</p>
+  <div class="fasilitas-grid">
+    <div class="fas-card gold">
+      <div class="fas-icon">🏫</div>
+      <div class="fas-title">Ruang Kelas</div>
+      <div class="fas-desc">Dilengkapi proyektor, AC, dan papan tulis interaktif di setiap kelas untuk kenyamanan belajar.</div>
+      <div class="fas-count">27 Ruang</div>
+    </div>
+    <div class="fas-card navy">
+      <div class="fas-icon">🔬</div>
+      <div class="fas-title">Lab Sains</div>
+      <div class="fas-desc">Laboratorium Fisika, Kimia, dan Biologi yang modern dengan peralatan lengkap dan standar tinggi.</div>
+      <div class="fas-count">3 Lab</div>
+    </div>
+    <div class="fas-card red">
+      <div class="fas-icon">💻</div>
+      <div class="fas-title">Lab Komputer</div>
+      <div class="fas-desc">Komputer terbaru dengan koneksi internet cepat untuk mendukung pembelajaran digital.</div>
+      <div class="fas-count">2 Lab</div>
+    </div>
+    <div class="fas-card navy">
+      <div class="fas-icon">📚</div>
+      <div class="fas-title">Perpustakaan</div>
+      <div class="fas-desc">Koleksi buku yang lengkap dengan suasana nyaman dan ruang baca yang kondusif.</div>
+      <div class="fas-count">1 Gedung</div>
+    </div>
+    <div class="fas-card gold">
+      <div class="fas-icon">🕌</div>
+      <div class="fas-title">Masjid Sekolah</div>
+      <div class="fas-desc">Masjid yang luas dan representatif untuk mendukung kegiatan ibadah dan keagamaan.</div>
+      <div class="fas-count">1 Masjid</div>
+    </div>
+    <div class="fas-card red">
+      <div class="fas-icon">🏟️</div>
+      <div class="fas-title">Aula &amp; Lapangan</div>
+      <div class="fas-desc">Aula serbaguna dan lapangan olahraga yang memadai untuk berbagai kegiatan sekolah.</div>
+      <div class="fas-count">2 Area</div>
+    </div>
+  </div>
+
+  <!-- DATA TABLE -->
+  <div class="card">
+    <div class="section-title">Data Lengkap Sarana &amp; Prasarana</div>
+    <p class="section-sub">Daftar seluruh prasarana yang tersedia di SMAN 1 Yogyakarta</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:50px;">No</th>
+            <th>Prasarana</th>
+            <th>Kategori</th>
+            <th style="width:80px;">Jumlah</th>
+            <th>Kondisi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Ruang Kelas</td><td><span class="badge badge-navy">Akademik</span></td><td>27</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>2</td><td>Laboratorium Fisika</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>3</td><td>Laboratorium Kimia</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>4</td><td>Laboratorium Biologi</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>5</td><td>Laboratorium Komputer</td><td><span class="badge badge-navy">Akademik</span></td><td>2</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>6</td><td>Laboratorium Sejarah</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>7</td><td>Perpustakaan</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>8</td><td>Ruang Multimedia / AVA</td><td><span class="badge badge-navy">Akademik</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>9</td><td>Masjid</td><td><span class="badge" style="background:#e8f4e8;color:#1a6b1a;">Ibadah</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>10</td><td>Ruang Agama Islam</td><td><span class="badge" style="background:#e8f4e8;color:#1a6b1a;">Ibadah</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>11</td><td>Ruang Agama Katholik</td><td><span class="badge" style="background:#e8f4e8;color:#1a6b1a;">Ibadah</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>12</td><td>Ruang Agama Kristen</td><td><span class="badge" style="background:#e8f4e8;color:#1a6b1a;">Ibadah</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>13</td><td>Aula</td><td><span class="badge badge-red">Umum</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>14</td><td>Lapangan Olahraga</td><td><span class="badge badge-red">Umum</span></td><td>2</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>15</td><td>Ruang UKS</td><td><span class="badge badge-red">Umum</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>16</td><td>Koperasi Siswa</td><td><span class="badge badge-red">Umum</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>17</td><td>Ruang Kepala Sekolah</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>18</td><td>Ruang Wakil Kepala Sekolah</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>19</td><td>Ruang Guru</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>20</td><td>Ruang Tata Usaha</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>21</td><td>Ruang BK</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>22</td><td>Ruang OSIS</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>23</td><td>Ruang Arsip</td><td><span class="badge" style="background:#f0e8f8;color:#4a1a70;">Administrasi</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>24</td><td>Kamar Mandi / WC</td><td><span class="badge badge-red">Umum</span></td><td>20+</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>25</td><td>Kantin Sekolah</td><td><span class="badge badge-red">Umum</span></td><td>1</td><td><span class="badge">Baik</span></td></tr>
+          <tr><td>26</td><td>Area Parkir</td><td><span class="badge badge-red">Umum</span></td><td>2</td><td><span class="badge">Baik</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>SMA Negeri 1 Yogyakarta</h4>
+      <p>Jl. Hos Cokroaminoto 10, Pakuncen, Wirobrajan, Kota Yogyakarta 55253</p>
+      <p style="margin-top:8px;">Telp: (0274) 512096<br>Email: sman1yogyakarta@gmail.com</p>
+    </div>
+    <div>
+      <h4>Tautan Cepat</h4>
+      <ul>
+        <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+        <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+        <li><a href="fasilitas.html">Fasilitas</a></li>
+        <li><a href="jurusan.html">Jurusan</a></li>
+        <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="berita.html">Berita Sekolah</a></li>
+        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
+        <li><a href="prestasi.html">Prestasi</a></li>
+        <li><a href="bos.html">Dana BOS</a></li>
+        <li><a href="apbd.html">APBD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SMA Negeri 1 Yogyakarta. All Rights Reserved.</span>
+    <a href="#">ICT Teladan</a>
+  </div>
+</footer>
+
+</body>
+</html>

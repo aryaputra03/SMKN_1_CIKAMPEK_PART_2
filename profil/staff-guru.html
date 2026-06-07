@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff &amp; Guru — SMAN 1 Yogyakarta</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+.filter-bar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 28px; align-items: center;
+}
+.filter-btn {
+  padding: 7px 16px; border-radius: 99px;
+  border: 1.5px solid #e5e7eb;
+  background: var(--white); color: var(--navy);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .15s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--navy); color: var(--gold-lt);
+  border-color: var(--navy);
+}
+.search-input {
+  flex: 1; min-width: 200px; max-width: 320px;
+  padding: 8px 16px; border-radius: 99px;
+  border: 1.5px solid #e5e7eb;
+  font-size: 13px; outline: none;
+}
+.search-input:focus { border-color: var(--navy); }
+
+.guru-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.guru-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(13,27,62,.08);
+  padding: 20px 16px;
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  transition: transform .15s, box-shadow .15s;
+}
+.guru-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(13,27,62,.12); }
+.guru-card.mapel-ipa { border-bottom-color: #1565C0; }
+.guru-card.mapel-ips { border-bottom-color: #7B2D8B; }
+.guru-card.mapel-bhs { border-bottom-color: #1a6b1a; }
+.guru-card.mapel-agama { border-bottom-color: var(--gold); }
+.guru-card.mapel-seni { border-bottom-color: #C0392B; }
+.guru-card.mapel-orkes { border-bottom-color: #E67E22; }
+.guru-card.mapel-adm { border-bottom-color: var(--gray); }
+
+.guru-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700;
+  margin: 0 auto 12px;
+  border: 2.5px solid var(--gold);
+  background: var(--gold-lt); color: var(--navy);
+}
+.guru-name { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.35; margin-bottom: 6px; }
+.guru-mapel {
+  font-size: 11px; color: var(--gray);
+  background: var(--gray-lt);
+  display: inline-block; padding: 3px 10px; border-radius: 99px;
+}
+
+.mapel-tag {
+  display: inline-block; padding: 2px 10px; border-radius: 99px;
+  font-size: 11px; font-weight: 600; margin-right: 4px;
+}
+.tag-ipa { background: #e3f2fd; color: #1565C0; }
+.tag-ips { background: #f3e5f5; color: #6A1B9A; }
+.tag-bhs { background: #e8f5e9; color: #2E7D32; }
+.tag-agama { background: #fffde7; color: #F57F17; }
+.tag-seni { background: #fce4ec; color: #880E4F; }
+.tag-orkes { background: #fff3e0; color: #E65100; }
+.tag-adm { background: #f3f4f6; color: #374151; }
+
+.table-wrap { overflow-x: auto; }
+.filter-label { font-size: 13px; color: var(--gray); font-weight: 500; margin-right: 4px; }
+@media (max-width: 1024px) { .guru-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 768px) { .guru-grid { grid-template-columns: repeat(2,1fr); } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <span>📍 Jl. Hos Cokroaminoto 10, Yogyakarta &nbsp;|&nbsp; ✉ sman1yogyakarta@gmail.com</span>
+    <span>📞 (0274) 512096</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">S1</div>
+      <div class="brand-text">
+        <strong>SMA Negeri 1 Yogyakarta</strong>
+        <span>Teladan Jayamahe</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#" class="active">Profil Sekolah</a>
+        <ul class="dropdown-menu">
+          <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+          <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+          <li><a href="struktur-organisasi.html">Struktur Organisasi</a></li>
+          <li><a href="staff-guru.html" class="active">Staff &amp; Guru</a></li>
+          <li><a href="fasilitas.html">Fasilitas</a></li>
+          <li><a href="jurusan.html">Jurusan</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Keuangan</a>
+        <ul class="dropdown-menu">
+          <li><a href="bos.html">Dana BOS</a></li>
+          <li><a href="apbd.html">APBD</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Informasi</a>
+        <ul class="dropdown-menu">
+          <li><a href="berita.html">Berita</a></li>
+          <li><a href="ekskul.html">Organisasi &amp; Ekskul</a></li>
+          <li><a href="prestasi.html">Prestasi</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Beranda</a>
+    <span>›</span>
+    <a href="profil-sekolah.html">Profil Sekolah</a>
+    <span>›</span>
+    <span style="color:rgba(255,255,255,.80)">Staff &amp; Guru</span>
+  </div>
+  <h1>Tenaga Pendidik</h1>
+  <p>Guru-guru berpengalaman dan berdedikasi tinggi SMAN 1 Yogyakarta</p>
+</div>
+
+<div class="page-body">
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="filterGuru('semua',this)">Semua</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-agama',this)">Agama</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-ipa',this)">IPA / Sains</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-ips',this)">IPS</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-bhs',this)">Bahasa</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-seni',this)">Seni &amp; Budaya</button>
+    <button class="filter-btn" onclick="filterGuru('mapel-orkes',this)">PJOK</button>
+    <input type="text" class="search-input" placeholder="🔍  Cari nama guru..." id="searchGuru" oninput="searchGuruFn()">
+  </div>
+
+  <!-- GURU GRID -->
+  <div class="guru-grid" id="guruGrid">
+    <!-- Agama -->
+    <div class="guru-card mapel-agama"><div class="guru-avatar">MA</div><div class="guru-name">Muhammad Anas, S.Pd.I</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
+    <div class="guru-card mapel-agama"><div class="guru-avatar">NY</div><div class="guru-name">Nurul Yaqin, S.Ag., M.Si</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
+    <div class="guru-card mapel-agama"><div class="guru-avatar">SL</div><div class="guru-name">Stefanus Lawe Payong, S.Fil</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
+    <div class="guru-card mapel-agama"><div class="guru-avatar">WS</div><div class="guru-name">Winanti Untung Sumaryono, S.Th</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
+    <div class="guru-card mapel-agama"><div class="guru-avatar">YN</div><div class="guru-name">Yekti Nugroho, M.Pd</div><div class="guru-mapel">Pend. Agama &amp; Budi Pekerti</div></div>
+    <!-- PPKn -->
+    <div class="guru-card mapel-ips"><div class="guru-avatar">DW</div><div class="guru-name">Didit Waluyono, S.Pd., M.Pd</div><div class="guru-mapel">Pend. Pancasila &amp; Kewarganegaraan</div></div>
+    <div class="guru-card mapel-ips"><div class="guru-avatar">TW</div><div class="guru-name">Dr. Trisna Widyana, S.Pd., M.Pd</div><div class="guru-mapel">Pend. Pancasila &amp; Kewarganegaraan</div></div>
+    <!-- Bahasa Indonesia -->
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">AS</div><div class="guru-name">Arda Sedyoko, S.Pd., M.Pd.Gr</div><div class="guru-mapel">Bahasa Indonesia</div></div>
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">PU</div><div class="guru-name">Puji Utami, S.Pd</div><div class="guru-mapel">Bahasa Indonesia</div></div>
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">SP</div><div class="guru-name">Siti Purnaningsih, S.S., M.Pd</div><div class="guru-mapel">Bahasa Indonesia</div></div>
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">YL</div><div class="guru-name">Yulianawati, S.Pd., Gr</div><div class="guru-mapel">Bahasa Indonesia</div></div>
+    <!-- Matematika -->
+    <div class="guru-card mapel-ipa"><div class="guru-avatar">HR</div><div class="guru-name">Haryani, S.Pd., M.Pd</div><div class="guru-mapel">Matematika</div></div>
+    <div class="guru-card mapel-ipa"><div class="guru-avatar">ME</div><div class="guru-name">Maria Ernawati Millatana, S.Pd</div><div class="guru-mapel">Matematika</div></div>
+    <div class="guru-card mapel-ipa"><div class="guru-avatar">RY</div><div class="guru-name">Ridho Yuwono, S.Si., M.T</div><div class="guru-mapel">Matematika</div></div>
+    <div class="guru-card mapel-ipa"><div class="guru-avatar">SW</div><div class="guru-name">Sunarwanta, S.Pd</div><div class="guru-mapel">Matematika</div></div>
+    <!-- Bahasa Inggris -->
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">ES</div><div class="guru-name">Erwin Syahril Mubarok, M.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">SM</div><div class="guru-name">Slamet Marmono, S.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
+    <div class="guru-card mapel-bhs"><div class="guru-avatar">US</div><div class="guru-name">Utami Soifah, S.Pd., M.Pd</div><div class="guru-mapel">Bahasa Inggris</div></div>
+    <!-- Sejarah -->
+    <div class="guru-card mapel-ips"><div class="guru-avatar">DM</div><div class="guru-name">Drs. Marmayadi</div><div class="guru-mapel">Sejarah Indonesia</div></div>
+    <!-- Seni Budaya -->
+    <div class="guru-card mapel-seni"><div class="guru-avatar">PP</div><div class="guru-name">Prawhita Adi Putri, S.Pd</div><div class="guru-mapel">Seni Budaya</div></div>
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div class="card">
+    <div class="section-title">Daftar Lengkap Tenaga Pendidik</div>
+    <p class="section-sub">Data lengkap guru dan mata pelajaran yang diampu</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Bidang</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Muhammad Anas, S.Pd.I</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
+          <tr><td>2</td><td>Nurul Yaqin, S.Ag., M.Si</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
+          <tr><td>3</td><td>Stefanus Lawe Payong, S.Fil</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
+          <tr><td>4</td><td>Winanti Untung Sumaryono, S.Th</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
+          <tr><td>5</td><td>Yekti Nugroho, M.Pd</td><td>Pendidikan Agama &amp; Budi Pekerti</td><td><span class="mapel-tag tag-agama">Agama</span></td></tr>
+          <tr><td>6</td><td>Didit Waluyono, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
+          <tr><td>7</td><td>Dr. Trisna Widyana, S.Pd., M.Pd</td><td>Pend. Pancasila &amp; Kewarganegaraan</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
+          <tr><td>8</td><td>Arda Sedyoko, S.Pd., M.Pd.Gr</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>9</td><td>Puji Utami, S.Pd</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>10</td><td>Siti Purnaningsih, S.S., M.Pd</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>11</td><td>Yulianawati, S.Pd., Gr</td><td>Bahasa Indonesia</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>12</td><td>Haryani, S.Pd., M.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
+          <tr><td>13</td><td>Maria Ernawati Millatana, S.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
+          <tr><td>14</td><td>Ridho Yuwono, S.Si., M.T</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
+          <tr><td>15</td><td>Sunarwanta, S.Pd</td><td>Matematika</td><td><span class="mapel-tag tag-ipa">IPA/MIPA</span></td></tr>
+          <tr><td>16</td><td>Erwin Syahril Mubarok, M.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>17</td><td>Slamet Marmono, S.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>18</td><td>Utami Soifah, S.Pd., M.Pd</td><td>Bahasa Inggris</td><td><span class="mapel-tag tag-bhs">Bahasa</span></td></tr>
+          <tr><td>19</td><td>Drs. Marmayadi</td><td>Sejarah Indonesia</td><td><span class="mapel-tag tag-ips">IPS</span></td></tr>
+          <tr><td>20</td><td>Prawhita Adi Putri, S.Pd</td><td>Seni Budaya</td><td><span class="mapel-tag tag-seni">Seni</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--gray);">* Data ditampilkan sebagian. Total guru aktif 60+ orang.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>SMA Negeri 1 Yogyakarta</h4>
+      <p>Jl. Hos Cokroaminoto 10, Pakuncen, Wirobrajan, Kota Yogyakarta 55253</p>
+      <p style="margin-top:8px;">Telp: (0274) 512096<br>Email: sman1yogyakarta@gmail.com</p>
+    </div>
+    <div>
+      <h4>Tautan Cepat</h4>
+      <ul>
+        <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
+        <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
+        <li><a href="fasilitas.html">Fasilitas</a></li>
+        <li><a href="jurusan.html">Jurusan</a></li>
+        <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="berita.html">Berita Sekolah</a></li>
+        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
+        <li><a href="prestasi.html">Prestasi</a></li>
+        <li><a href="bos.html">Dana BOS</a></li>
+        <li><a href="apbd.html">APBD</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SMA Negeri 1 Yogyakarta. All Rights Reserved.</span>
+    <a href="#">ICT Teladan</a>
+  </div>
+</footer>
+
+<script>
+function filterGuru(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.guru-card').forEach(card => {
+    if (cat === 'semua' || card.classList.contains(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+function searchGuruFn() {
+  const q = document.getElementById('searchGuru').value.toLowerCase();
+  document.querySelectorAll('.guru-card').forEach(card => {
+    const nm = card.querySelector('.guru-name').textContent.toLowerCase();
+    const mp = card.querySelector('.guru-mapel').textContent.toLowerCase();
+    card.style.display = (nm.includes(q) || mp.includes(q)) ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
