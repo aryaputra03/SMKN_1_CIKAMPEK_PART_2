@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prestasi SMKN 1 Cikampek — Deretan pencapaian membanggakan siswa di tingkat kota, provinsi, dan nasional.">
+  <title>Prestasi — SMKN 1 Cikampek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0F1E38; --navy-mid: #1B2E4A; --navy-light: #243558;
+      --gold: #C9A84C; --gold-light: #E8C96B; --gold-pale: #FAF3DC;
+      --white: #FFFFFF; --off-white: #F8F7F4; --gray-soft: #EDF0F5;
+      --text: #1A1F2E; --text-muted: #64748B; --text-light: #94A3B8;
+      --shadow-sm: 0 2px 8px rgba(15,30,56,0.08);
+      --shadow-md: 0 6px 24px rgba(15,30,56,0.12);
+      --shadow-lg: 0 16px 48px rgba(15,30,56,0.15);
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; } ul { list-style: none; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* TOP BAR */
+    .topbar { background: var(--navy); padding: 9px 0; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar-left { display: flex; align-items: center; gap: 24px; }
+    .topbar-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: rgba(255,255,255,0.65); }
+    .topbar-right { display: flex; align-items: center; gap: 14px; }
+    .jam-digital { font-size: 13.5px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; }
+    .topbar-social { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; transition: all 0.22s; color: rgba(255,255,255,0.6); }
+    .topbar-social:hover { border-color: var(--gold); color: var(--gold); }
+    .topbar-social svg { width: 14px; height: 14px; }
+
+    /* HEADER */
+    .header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-soft); transition: box-shadow 0.3s; }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-main { display: flex; align-items: center; gap: 20px; height: 72px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-placeholder { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .logo-text h1 { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; white-space: nowrap; }
+    .logo-text p { font-size: 11px; color: var(--text-muted); }
+    .navbar { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .nav-item { position: relative; }
+    .nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; color: var(--text); background: none; border: none; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+    .nav-link:hover, .nav-link.active { color: var(--navy); background: var(--gray-soft); }
+    .caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
+    .nav-item:hover .caret { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+    .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--r-sm); font-size: 13.5px; color: var(--text); transition: background 0.2s; }
+    .dropdown a:hover, .dropdown a.current { background: var(--gold-pale); color: var(--navy); font-weight: 600; }
+    .dd-icon { width: 30px; height: 30px; background: var(--gray-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dd-icon svg { width: 15px; height: 15px; color: var(--navy-mid); }
+    .btn-ppdb { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 700; border-radius: var(--r-md); transition: background 0.2s; white-space: nowrap; flex-shrink: 0; margin-left: 12px; }
+    .btn-ppdb:hover { background: var(--gold-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; margin-left: auto; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-soft); box-shadow: var(--shadow-lg); padding: 8px 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease); }
+    .mobile-menu.open { max-height: 600px; }
+    .mobile-nav-item { border-bottom: 1px solid var(--gray-soft); }
+    .mobile-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 13px 24px; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; }
+    .mobile-dropdown { display: none; background: var(--off-white); }
+    .mobile-dropdown.open { display: block; }
+    .mobile-dropdown a { display: block; padding: 10px 24px 10px 40px; font-size: 13.5px; color: var(--text-muted); border-bottom: 1px solid var(--gray-soft); }
+
+    /* PAGE HERO */
+    .page-hero { background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 60px 0 50px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--off-white); clip-path: ellipse(55% 100% at 50% 100%); }
+    .page-hero-inner { position: relative; z-index: 1; text-align: center; }
+    .page-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold); font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 46px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; }
+    .breadcrumb-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .breadcrumb-row a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .breadcrumb-row a:hover { color: var(--gold); }
+    .breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .breadcrumb-row .current { font-size: 13px; color: var(--gold); font-weight: 600; }
+
+    /* STATS HIGHLIGHT */
+    .stats-highlight { background: var(--off-white); padding: 48px 0; border-bottom: 1px solid var(--gray-soft); }
+    .stats-hl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--white); border: 1px solid var(--gray-soft); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .stat-hl-item { padding: 28px 24px; text-align: center; border-right: 1px solid var(--gray-soft); }
+    .stat-hl-item:last-child { border-right: none; }
+    .stat-hl-emoji { font-size: 28px; display: block; margin-bottom: 10px; }
+    .stat-hl-item strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-hl-item span { font-size: 12.5px; color: var(--text-muted); margin-top: 5px; display: block; }
+
+    /* PAGE BODY */
+    .page-body { padding: 56px 0 80px; }
+
+    /* FILTER */
+    .filter-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; flex-wrap: wrap; }
+    .search-wrap { flex: 1; min-width: 200px; position: relative; }
+    .search-wrap input { width: 100%; padding: 11px 14px 11px 42px; border: 1.5px solid var(--gray-soft); border-radius: var(--r-md); font-size: 13.5px; font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .search-wrap input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .search-wrap svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-light); pointer-events: none; }
+    .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-tab { padding: 8px 16px; border-radius: 100px; font-size: 12.5px; font-weight: 600; border: 1.5px solid var(--gray-soft); background: var(--white); color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .filter-tab:hover { border-color: var(--gold); color: var(--navy); }
+    .filter-tab.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+    /* PRESTASI LIST */
+    .prestasi-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .prestasi-row {
+      display: flex; gap: 0; background: var(--white);
+      border: 1px solid var(--gray-soft); border-radius: var(--r-lg);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .prestasi-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+
+    .psp-thumb {
+      width: 180px; flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 24px 16px; gap: 12px;
+    }
+    .psp-thumb::before { content: ''; position: absolute; inset: 0; opacity: 0.12; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 1px, transparent 0, transparent 50%); background-size: 12px 12px; }
+    .psp-medal { font-size: 40px; position: relative; z-index: 1; }
+    .psp-rank { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 1px; text-transform: uppercase; position: relative; z-index: 1; text-align: center; }
+
+    .prestasi-body { flex: 1; padding: 22px 28px; display: flex; flex-direction: column; justify-content: center; }
+    .prestasi-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .level-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+    .level-nasional { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
+    .level-provinsi { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; }
+    .level-kota { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+    .prestasi-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 10px; }
+    .prestasi-detail-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .prestasi-detail-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); }
+    .prestasi-detail-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .prestasi-siswa { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--gray-soft); display: flex; align-items: center; gap: 8px; }
+    .siswa-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+    .prestasi-siswa span { font-size: 13px; font-weight: 600; color: var(--navy); }
+
+    /* PAGINATION */
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 44px; }
+    .page-btn { width: 38px; height: 38px; border-radius: var(--r-sm); border: 1.5px solid var(--gray-soft); background: var(--white); font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; }
+    .page-btn:hover { border-color: var(--gold); color: var(--navy); }
+    .page-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+    /* FOOTER */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.65); }
+    .footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 64px 0 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-logo-box { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-brand-name { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: all 0.2s; }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-social a svg { width: 14px; height: 14px; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.55); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); }
+    .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); }
+    .footer-bottom p strong { color: var(--gold); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 11.5px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(201,168,76,0.4); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
+
+    @media (max-width: 768px) {
+      .topbar { display: none; } .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; }
+      .stats-hl-grid { grid-template-columns: 1fr 1fr; }
+      .stat-hl-item { border-right: none; border-bottom: 1px solid var(--gray-soft); }
+      .stat-hl-item:nth-child(odd) { border-right: 1px solid var(--gray-soft); }
+      .prestasi-row { flex-direction: column; }
+      .psp-thumb { width: 100%; min-height: 100px; flex-direction: row; padding: 16px 24px; gap: 16px; }
+      .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left">
+      <span class="topbar-item">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+        Jl. Ahmad Yani No.1, Cikampek, Karawang
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="jam-digital" id="jam-digital">00:00:00</span>
+      <a href="#" class="topbar-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" class="topbar-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-main">
+    <a href="../index.html" class="logo-area">
+      <img src="../assets/images/logo/logo.png" alt="Logo" style="width:44px;height:44px;border-radius:10px;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-placeholder" style="display:none">S</div>
+      <div class="logo-text"><h1>SMKN 1 Cikampek</h1><p>Karawang, Jawa Barat</p></div>
+    </a>
+    <nav class="navbar">
+      <div class="nav-item"><a href="../index.html" class="nav-link">Beranda</a></div>
+      <div class="nav-item">
+        <button class="nav-link">Profil Sekolah <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
+          <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
+          <a href="../profil/jurusan.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
+          <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="../keuangan/bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg></span>Dana BOS</a>
+          <a href="../keuangan/apbd.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span>APBD</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link active">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
+        <div class="dropdown">
+          <a href="berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
+          <a href="prestasi.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Prestasi</a>
+          <a href="ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
+    </nav>
+    <a href="../index.html#ppdb" class="btn-ppdb">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
+      Daftar PPDB
+    </a>
+    <button class="hamburger" aria-label="Buka Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu">
+    <div class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Beranda</a></div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-info">Informasi <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
+      <div class="mobile-dropdown open" id="mob-info">
+        <a href="berita.html">Berita Sekolah</a>
+        <a href="prestasi.html" style="color:var(--gold);font-weight:600">Prestasi</a>
+        <a href="ekskul.html">Ekstrakurikuler</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item"><a href="../index.html#contact" class="mobile-nav-link">Kontak</a></div>
+    <div style="padding:16px 24px;"><a href="../index.html#ppdb" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:var(--r-md);">Daftar PPDB</a></div>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg>
+      Kebanggaan Kami
+    </div>
+    <h1>Prestasi Siswa</h1>
+    <p>Deretan pencapaian membanggakan siswa SMKN 1 Cikampek di berbagai ajang kompetisi.</p>
+    <div class="breadcrumb-row">
+      <a href="../index.html">Home</a><span>›</span>
+      <span>Informasi</span><span>›</span>
+      <span class="current">Prestasi</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS HIGHLIGHT -->
+<section class="stats-highlight">
+  <div class="container">
+    <div class="stats-hl-grid fade-up">
+      <div class="stat-hl-item">
+        <span class="stat-hl-emoji">🥇</span>
+        <strong data-counter data-target="24" data-suffix="">0</strong>
+        <span>Total Juara 1</span>
+      </div>
+      <div class="stat-hl-item">
+        <span class="stat-hl-emoji">🏆</span>
+        <strong data-counter data-target="68" data-suffix="+">0</strong>
+        <span>Total Prestasi 2024</span>
+      </div>
+      <div class="stat-hl-item">
+        <span class="stat-hl-emoji">🌍</span>
+        <strong data-counter data-target="3" data-suffix="">0</strong>
+        <span>Prestasi Nasional</span>
+      </div>
+      <div class="stat-hl-item">
+        <span class="stat-hl-emoji">⭐</span>
+        <strong data-counter data-target="15" data-suffix="">0</strong>
+        <span>Prestasi Provinsi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE BODY -->
+<main class="page-body">
+  <div class="container">
+
+    <!-- FILTER -->
+    <div class="filter-bar fade-up">
+      <div class="search-wrap">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
+        <input type="text" id="search-input" placeholder="Cari prestasi…">
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterPrestasi('semua',this)">Semua</button>
+        <button class="filter-tab" onclick="filterPrestasi('nasional',this)">Nasional</button>
+        <button class="filter-tab" onclick="filterPrestasi('provinsi',this)">Provinsi</button>
+        <button class="filter-tab" onclick="filterPrestasi('kota',this)">Kota/Kabupaten</button>
+      </div>
+    </div>
+
+    <!-- PRESTASI LIST -->
+    <div class="prestasi-list" id="prestasi-list">
+
+      <div class="prestasi-row fade-up" data-level="provinsi">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
+          <div class="psp-medal">🥇</div>
+          <div class="psp-rank">Juara 1</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
+          </div>
+          <h3>LKS Bidang Teknik Komputer &amp; Jaringan</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              08 April 2024
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Bandung, Jawa Barat
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">AF</div>
+            <span>Ahmad Fauzi — XII TKJ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up" data-level="provinsi">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+          <div class="psp-medal">🥈</div>
+          <div class="psp-rank">Juara 2</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
+          </div>
+          <h3>Panahan Compound Olympic Round Team</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              06 April 2024
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Purwakarta, Jawa Barat
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">RA</div>
+            <span>Reza Ananda — XII TP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up" data-level="provinsi">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
+          <div class="psp-medal">🥉</div>
+          <div class="psp-rank">Juara 3</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
+          </div>
+          <h3>Pencak Silat Putra Kelas B</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              06 April 2024
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Karawang, Jawa Barat
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">BS</div>
+            <span>Budi Santoso — X E8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up" data-level="kota">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#D97706,#b45309)">
+          <div class="psp-medal">🥇</div>
+          <div class="psp-rank">Juara 1</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-kota">Kabupaten Karawang</span>
+          </div>
+          <h3>LKS Bidang Desain Komunikasi Visual</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              20 Maret 2024
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Karawang, Jawa Barat
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">SR</div>
+            <span>Siti Rahayu — XII DKV</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up" data-level="nasional">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#C9A84C,#b5932f)">
+          <div class="psp-medal">🏆</div>
+          <div class="psp-rank">Finalis</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-nasional">Nasional</span>
+          </div>
+          <h3>Kompetisi Robotika Nasional — SMK Kategori Lanjutan</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              November 2023
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Jakarta
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">TM</div>
+            <span>Tim Robotika SMKN 1 Cikampek — XI TOI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prestasi-row fade-up" data-level="kota">
+        <div class="psp-thumb" style="background:linear-gradient(135deg,#0F1E38,#243558)">
+          <div class="psp-medal">🥇</div>
+          <div class="psp-rank">Juara 1</div>
+        </div>
+        <div class="prestasi-body">
+          <div class="prestasi-meta">
+            <span class="level-badge level-kota">Kabupaten Karawang</span>
+          </div>
+          <h3>Olimpiade Matematika Tingkat SMK</h3>
+          <div class="prestasi-detail-row">
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+              September 2023
+            </div>
+            <div class="prestasi-detail-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+              Karawang, Jawa Barat
+            </div>
+          </div>
+          <div class="prestasi-siswa">
+            <div class="siswa-dot">DP</div>
+            <span>Dewi Puspita — XI AKL</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /prestasi-list -->
+
+    <div class="pagination fade-up">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">›</button>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-main-grid">
+      <div class="fade-up">
+        <div class="footer-brand-logo">
+          <div class="footer-logo-box">S</div>
+          <div><p class="footer-brand-name">SMKN 1 Cikampek</p><p class="footer-brand-loc">Karawang, Jawa Barat</p></div>
+        </div>
+        <p class="footer-brand-desc">SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>.</p>
+        <div class="footer-social">
+          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div class="fade-up">
+        <h4 class="footer-col-title">Navigasi Cepat</h4>
+        <div class="footer-links">
+          <a href="../index.html">Beranda</a>
+          <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+          <a href="../profil/jurusan.html">Program Keahlian</a>
+          <a href="berita.html">Berita</a>
+          <a href="prestasi.html">Prestasi</a>
+          <a href="ekskul.html">Ekstrakurikuler</a>
+        </div>
+      </div>
+      <div class="fade-up">
+        <h4 class="footer-col-title">Kontak</h4>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.8">
+          <p>Jl. Ahmad Yani No.1, Cikampek,</p>
+          <p>Karawang, Jawa Barat</p>
+          <p style="margin-top:8px">(0264) 316xxx</p>
+          <p>info@smkn1cikampek.sch.id</p>
+          <p style="margin-top:8px;color:rgba(255,255,255,0.4)">Senin–Sabtu, 07.00–16.00 WIB</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links"><a href="#">Kebijakan Privasi</a><a href="#">Syarat Penggunaan</a></div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  function updateJam() {
+    const el = document.getElementById('jam-digital');
+    if (!el) return;
+    el.textContent = [new Date().getHours(),new Date().getMinutes(),new Date().getSeconds()].map(n=>String(n).padStart(2,'0')).join(':');
+  }
+  updateJam(); setInterval(updateJam, 1000);
+
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => { document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'); });
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Counter
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-target')||'0');
+        const suffix = el.getAttribute('data-suffix')||'';
+        let current = 0;
+        const inc = target / (1600/16);
+        const timer = setInterval(() => {
+          current += inc;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = Math.floor(current) + suffix;
+        }, 16);
+        counterObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
+
+  const backBtn = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  document.getElementById('search-input')?.addEventListener('input', () => {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    document.querySelectorAll('.prestasi-row').forEach(row => {
+      row.style.display = (!q || row.textContent.toLowerCase().includes(q)) ? '' : 'none';
+    });
+  });
+});
+
+function filterPrestasi(level, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prestasi-row').forEach(row => {
+    if (level === 'semua' || row.dataset.level === level) row.style.display = '';
+    else row.style.display = 'none';
+  });
+}
+</script>
+</body>
+</html>
