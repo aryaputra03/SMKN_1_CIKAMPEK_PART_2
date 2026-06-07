@@ -883,6 +883,7 @@ ul { list-style: none; }
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
   .jurusan-grid { grid-template-columns: repeat(2, 1fr); }
+  .ekskul-grid { grid-template-columns: repeat(2, 1fr); }
   .mid-three-grid { grid-template-columns: 1fr 1fr; }
   .mid-sambutan-col { display: none; }
   .alumni-grid { grid-template-columns: 1fr; }
@@ -900,6 +901,7 @@ ul { list-style: none; }
   .mid-three-grid { grid-template-columns: 1fr; }
   .berita-grid { grid-template-columns: 1fr; }
   .jurusan-grid { grid-template-columns: 1fr 1fr; }
+  .ekskul-grid { grid-template-columns: 1fr 1fr; }
   .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-map-contact { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
@@ -907,10 +909,42 @@ ul { list-style: none; }
 }
 @media (max-width: 480px) {
   .jurusan-grid { grid-template-columns: 1fr; }
+  .ekskul-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .alumni-card { flex-direction: column; }
   .alumni-photo { width: 100%; height: 160px; }
 }
+/* ── EKSKUL ──────────────────────────────────────── */
+.ekskul-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
+}
+.ekskul-card {
+  background: var(--white); border-radius: var(--r-lg);
+  border: 1px solid var(--gray-soft); padding: 28px 22px;
+  text-align: center; box-shadow: var(--shadow-sm);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+.ekskul-card:hover {
+  transform: translateY(-5px); border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
+.ekskul-icon {
+  width: 56px; height: 56px; margin: 0 auto 16px;
+  border-radius: var(--r-md); display: flex;
+  align-items: center; justify-content: center;
+}
+.ekskul-icon svg { width: 28px; height: 28px; }
+.ekskul-card h3 {
+  font-size: 14px; font-weight: 700; color: var(--navy);
+  margin-bottom: 6px; line-height: 1.35;
+}
+.ekskul-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+.ekskul-badge {
+  display: inline-block; font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.5px; padding: 3px 10px; border-radius: 100px;
+}
+
 /* ===== LAYOUT PRESTASI KIRI-KANAN ===== */
 .prestasi-list-container {
   display: flex;
@@ -1331,90 +1365,6 @@ ul { list-style: none; }
 </section>
 
 <!-- ══════════════ PRESTASI TERBARU ══════════════ -->
-<section class="section" id="prestasi">
-  <div class="container">
-    <div class="section-head-center fade-up" style="margin-bottom:52px">
-      <span class="section-label-tag">Kebanggaan Kami</span>
-      <h2 class="section-title-h2">Prestasi Terbaru</h2>
-      <div class="divider-gold"></div>
-    </div>
-
-    <div class="prestasi-list-container">
-      
-      <div class="prestasi-row fade-up">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </div>
-        </div>
-        <div class="prestasi-card">
-          <h4>JUARA 1 LKS TKJ PROVINSI JAWA BARAT</h4>
-          <div class="psc-meta">
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 08 Apr, 2024</span>
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
-          </div>
-          <div class="psc-scale">Skala Provinsi</div>
-          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Ahmad Fauzi XII TKJ</div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
-          </div>
-        </div>
-        <div class="prestasi-card">
-          <h4>JUARA 2 PANAHAN COMPOUND OLYMPIC ROUND TEAM</h4>
-          <div class="psc-meta">
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
-          </div>
-          <div class="psc-scale">Skala Provinsi</div>
-          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Reza Ananda XII TP</div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-        </div>
-        <div class="prestasi-card">
-          <h4>JUARA 3 PENCAK SILAT PUTRA</h4>
-          <div class="psc-meta">
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
-          </div>
-          <div class="psc-scale">Skala Provinsi</div>
-          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Budi Santoso X E8</div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#374151,#1f2937)">
-          <div class="psp-thumb-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          </div>
-        </div>
-        <div class="prestasi-card">
-          <h4>JUARA 1 LKS DESAIN KOMUNIKASI VISUAL</h4>
-          <div class="psc-meta">
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg> 06 Apr, 2024</span>
-            <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg> Prestasi</span>
-          </div>
-          <div class="psc-scale">Skala Kota</div>
-          <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg> Siti Rahayu XII DKV</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="btn-center">
-      <a href="informasi/prestasi.html" class="btn-outline-navy">Tampilkan Semua Prestasi</a>
-    </div>
-  </div>
 </section><section class="section" id="prestasi">
   <div class="container">
     <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -1566,48 +1516,83 @@ ul { list-style: none; }
   </div>
 </section>
 
-<!-- ══════════════ PROFIL ALUMNI ══════════════ -->
-<section class="section alumni-section" id="alumni">
+<!-- ══════════════ ORGANISASI & EKSKUL ══════════════ -->
+<section class="section" id="ekskul">
   <div class="container">
     <div class="section-head-center fade-up" style="margin-bottom:52px">
-      <span class="section-label-tag">Tokoh Inspiratif</span>
-      <h2 class="section-title-h2">Profil Alumni</h2>
+      <span class="section-label-tag">Pengembangan Diri</span>
+      <h2 class="section-title-h2">Organisasi & Ekstrakurikuler</h2>
       <div class="divider-gold"></div>
-      <p class="section-sub" style="margin-top:14px;color:rgba(255,255,255,0.5)">Alumni SMKN 1 Cikampek telah berkarya di berbagai bidang dan menorehkan prestasi di tingkat nasional maupun internasional.</p>
+      <p class="section-sub" style="margin-top:14px">Wadah bagi siswa untuk mengembangkan minat, bakat, karakter, dan jiwa kepemimpinan di luar jam pelajaran akademik.</p>
     </div>
-    <div class="alumni-grid">
-      <div class="alumni-card fade-up">
-        <div class="alumni-photo">
-          <img src="assets/images/alumni/alumni1.jpg" alt="Drs. H. Haryadi Suyuti"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="alumni-photo-placeholder" style="display:none">H</div>
+
+    <div class="ekskul-grid">
+      <!-- OSIS -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#EFF6FF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
-        <div class="alumni-info">
-          <h3 class="alumni-name">Drs. H. Haryadi Suyuti</h3>
-          <p class="alumni-role">Wali Kota Yogyakarta (2011–sekarang)</p>
-          <p class="alumni-desc">Alumni SMKN 1 Cikampek yang kemudian melanjutkan karier di dunia pemerintahan dan berhasil menjabat sebagai Wali Kota Yogyakarta sejak 20 Desember 2011.</p>
-        </div>
+        <h3>OSIS & MPK</h3>
+        <p>Organisasi Intra Sekolah dan Majelis Perwakilan Kelas sebagai pusat kepemimpinan siswa.</p>
+        <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">OSIS</span>
       </div>
-      <div class="alumni-card fade-up">
-        <div class="alumni-photo">
-          <img src="assets/images/alumni/alumni2.jpg" alt="Prof. Ir. Dwikorita Karnawati"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="alumni-photo-placeholder" style="display:none">D</div>
+
+      <!-- Pramuka -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#FFF7ED">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="1.5"><path d="M12 2l8 18H4l8-18z"/><path d="M12 22v-6"/></svg>
         </div>
-        <div class="alumni-info">
-          <h3 class="alumni-name">Prof. Ir. Dwikorita Karnawati, M.Sc. Ph.D</h3>
-          <p class="alumni-role">Kepala BMKG Indonesia</p>
-          <p class="alumni-desc">Akademisi dan teknokrat Indonesia yang menjabat sebagai Kepala Badan Meteorologi, Klimatologi, dan Geofisika (BMKG) sejak November 2017, membawa inovasi dalam sistem peringatan dini bencana.</p>
+        <h3>Pramuka Inti</h3>
+        <p>Membentuk karakter disiplin, mandiri, tangguh, dan cinta tanah air.</p>
+        <span class="ekskul-badge" style="background:#FFF7ED;color:#EA580C">Pramuka</span>
+      </div>
+
+      <!-- Paskibra -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#FDF4FF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
         </div>
+        <h3>Paskibraka</h3>
+        <p>Pasukan pengibar bendera yang melatih ketangkasan fisik dan mental kebangsaan.</p>
+        <span class="ekskul-badge" style="background:#FDF4FF;color:#9333EA">Paskibra</span>
+      </div>
+
+      <!-- PMR -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#FFF1F2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3>Palang Merah Remaja</h3>
+        <p>Melatih kesiapsiagaan, kepedulian sosial, dan pertolongan pertama pada kecelakaan (P3K).</p>
+        <span class="ekskul-badge" style="background:#FFF1F2;color:#E11D48">PMR</span>
+      </div>
+
+      <!-- Olahraga -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#F0FDF4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+        </div>
+        <h3>Klub Olahraga</h3>
+        <p>Wadah penyaluran bakat untuk cabang Futsal, Bola Voli, Basket, dan Bulu Tangkis.</p>
+        <span class="ekskul-badge" style="background:#F0FDF4;color:#16A34A">Olahraga</span>
+      </div>
+
+      <!-- Kesenian -->
+      <div class="ekskul-card fade-up">
+        <div class="ekskul-icon" style="background:#FFFBEB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <h3>Seni & Budaya</h3>
+        <p>Menyalurkan kreativitas siswa dalam bidang paduan suara, tari tradisional, dan musik.</p>
+        <span class="ekskul-badge" style="background:#FFFBEB;color:#D97706">Seni</span>
       </div>
     </div>
+
     <div class="btn-center">
-      <a href="alumni.html" class="btn-gold" style="color:var(--navy)">Lihat Semua Alumni</a>
+      <a href="informasi/ekskul.html" class="btn-outline-navy">Lihat Semua Ekstrakurikuler</a>
     </div>
   </div>
 </section>
-
-<!-- ══════════════ GURU CAROUSEL ══════════════ -->
 <section class="section" id="guru">
   <div class="container">
     <div class="section-head-center fade-up" style="margin-bottom:52px">
