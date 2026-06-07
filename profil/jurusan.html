@@ -3,11 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jurusan — SMAN 1 Yogyakarta</title>
-<link rel="stylesheet" href="../assets/css/style.css">
+<title>Jurusan — SMKN 1 Cikampek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #0F1E38; --navy-mid: #1B2E4A; --navy-light: #243558;
+  --gold: #C9A84C; --gold-light: #E8C96B; --gold-pale: #FAF3DC;
+  --white: #FFFFFF; --off-white: #F8F7F4; --gray-soft: #EDF0F5;
+  --text: #1A1F2E; --text-muted: #64748B; --text-light: #94A3B8;
+  --shadow-sm: 0 2px 8px rgba(15,30,56,0.08);
+  --shadow-md: 0 6px 24px rgba(15,30,56,0.12);
+  --shadow-lg: 0 16px 48px rgba(15,30,56,0.15);
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── HEADER ──────────────────────────────── */
+/* ── HEADER ──────────────────────────────── */
 .header { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-soft); transition: box-shadow 0.3s; position: sticky; top: 0; z-index: 500; }
 .header.scrolled { box-shadow: var(--shadow-md); }
 .header-main { display: flex; align-items: center; gap: 20px; height: 72px; }
@@ -43,54 +65,72 @@
 .mobile-dropdown.open { display: block; }
 .mobile-dropdown a { display: block; padding: 10px 24px 10px 40px; font-size: 13.5px; color: var(--text-muted); border-bottom: 1px solid var(--gray-soft); }
 .mobile-dropdown a:hover { color: var(--navy); }
+
+/* ── PAGE HERO ──────────────────────────── */
+.page-hero { background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 60px 0 50px; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--off-white); clip-path: ellipse(55% 100% at 50% 100%); }
+.page-hero-inner { position: relative; z-index: 1; text-align: center; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold); font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
+.page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+.page-hero p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; }
+.breadcrumb-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.breadcrumb-row a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.breadcrumb-row a:hover { color: var(--gold); }
+.breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
+.breadcrumb-row .current { font-size: 13px; color: var(--gold); font-weight: 600; }
+
+/* ── PAGE BODY ──────────────────────────── */
+.page-body { max-width: 1100px; margin: 0 auto; padding: 52px 28px 80px; }
+
+/* ── JURUSAN CONTENT ──────────────────────── */
 .jurusan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
-.jurusan-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-.jurusan-header {
-  padding: 32px 32px 24px;
-  position: relative;
-}
+.jurusan-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--gray-soft); }
+.jurusan-header { padding: 32px 32px 24px; position: relative; }
 .jurusan-header.ipa { background: linear-gradient(135deg, #0D1B3E 0%, #1a3a6e 100%); }
 .jurusan-header.ips { background: linear-gradient(135deg, #7B2D8B 0%, #9b4dab 100%); }
-.jurusan-header .jenis {
-  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,.60); margin-bottom: 8px;
-}
-.jurusan-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 6px;
-}
+.jurusan-header .jenis { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.60); margin-bottom: 8px; }
+.jurusan-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
 .jurusan-header p { font-size: 14px; color: rgba(255,255,255,.70); }
-.jurusan-header .icon-big {
-  position: absolute; right: 28px; top: 20px;
-  font-size: 56px; opacity: .25;
-}
+.jurusan-header .icon-big { position: absolute; right: 28px; top: 20px; font-size: 56px; opacity: .25; }
 .jurusan-body { padding: 28px 32px; }
-.jurusan-body h4 { font-size: 13px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.jurusan-body h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
 .mapel-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.mapel-list li {
-  background: var(--cream);
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  padding: 5px 12px;
-  font-size: 13px;
-  color: var(--navy);
-  font-weight: 500;
-}
+.mapel-list li { background: var(--off-white); border: 1px solid #e5e7eb; border-radius: 6px; padding: 5px 12px; font-size: 13px; color: var(--navy); font-weight: 500; }
 .mapel-list li.khusus { background: #e8eaf6; border-color: #c5cae9; color: #3949ab; }
 .stat-row { display: flex; gap: 24px; padding-top: 16px; border-top: 1px solid #f3f4f6; }
 .stat-item { text-align: center; }
-.stat-item .num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
-.stat-item .lbl { font-size: 11px; color: var(--gray); }
+.stat-item .num { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+.stat-item .lbl { font-size: 11px; color: var(--text-muted); }
 
-@media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .fasilitas-grid { grid-template-columns: repeat(2, 1fr); } .footer-main-grid { grid-template-columns: 1fr; gap: 28px; } .footer-bottom { flex-direction: column; text-align: center; } }
-@media (max-width: 768px) {
-  .jurusan-grid { grid-template-columns: 1fr; }
-}
+/* ── FOOTER ─────────────────────────────── */
+.footer { background: var(--navy); color: rgba(255,255,255,0.65); }
+.footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 56px 0 40px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-logo-box { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+.footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.4); }
+.footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 20px; max-width: 340px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: all 0.2s; }
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+.footer-social a svg { width: 14px; height: 14px; }
+.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.55); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+.footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); }
+.footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); }
+.footer-bottom p strong { color: var(--gold); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 11.5px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--gold); }
+.back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(201,168,76,0.4); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
+.back-to-top.show { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
+
+@media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 28px; } .footer-bottom { flex-direction: column; text-align: center; } .jurusan-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -111,8 +151,8 @@
         <button class="nav-link active">Profil Sekolah <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
-          <a href="fasilitas.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
-          <a href="jurusan.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
+          <a href="fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
+          <a href="jurusan.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
           <a href="struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span>Struktur Organisasi</a>
           <a href="staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
         </div>
@@ -145,8 +185,8 @@
       <div class="mobile-nav-link" data-toggle="mob-profil">Profil Sekolah <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
       <div class="mobile-dropdown open" id="mob-profil">
         <a href="visi-misi.html">Visi &amp; Misi</a>
-        <a href="fasilitas.html" style="color:var(--gold);font-weight:600">Fasilitas</a>
-        <a href="jurusan.html">Jurusan</a>
+        <a href="fasilitas.html">Fasilitas</a>
+        <a href="jurusan.html" style="color:var(--gold);font-weight:600">Jurusan</a>
         <a href="struktur-organisasi.html">Struktur Organisasi</a>
         <a href="staff-guru.html">Staff &amp; Guru</a>
       </div>
@@ -160,15 +200,25 @@
   </div>
 </header>
 
-<div class="page-hero">
-  <h1>Program Studi / Jurusan</h1>
-  <p>Dua program peminatan unggulan untuk mewujudkan potensi terbaik siswa</p>
-</div>
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
+      Profil Sekolah
+    </div>
+    <h1>Program Keahlian / Jurusan</h1>
+    <p>Dua program peminatan unggulan untuk mewujudkan potensi terbaik siswa</p>
+    <div class="breadcrumb-row">
+      <a href="../index.html">Home</a><span>›</span>
+      <span>Profil Sekolah</span><span>›</span>
+      <span class="current">Jurusan</span>
+    </div>
+  </div>
+</section>
 
-<div class="page-body">
-
-  <div class="section-title">Program Peminatan</div>
-  <p class="section-sub">SMAN 1 Yogyakarta menyelenggarakan dua program peminatan untuk kelas X, XI, dan XII</p>
+<!-- PAGE BODY -->
+<main class="page-body">
 
   <div class="jurusan-grid">
 
@@ -232,41 +282,89 @@
 
   </div>
 
-</div>
+</main>
 
-<footer>
-  <div class="footer-inner">
-    <div>
-      <h4>SMA Negeri 1 Yogyakarta</h4>
-      <p>Jl. Hos Cokroaminoto 10, Pakuncen, Wirobrajan, Kota Yogyakarta 55253</p>
-      <p style="margin-top:8px;">Telp: (0274) 512096<br>Email: sman1yogyakarta@gmail.com</p>
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-main-grid">
+      <div>
+        <div class="footer-brand-logo"><div class="footer-logo-box">S</div><div><p class="footer-brand-name">SMKN 1 Cikampek</p><p class="footer-brand-loc">Karawang, Jawa Barat</p></div></div>
+        <p class="footer-brand-desc">SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>.</p>
+        <div class="footer-social">
+          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Navigasi Cepat</span>
+        <div class="footer-links">
+          <a href="../index.html">Beranda</a>
+          <a href="visi-misi.html">Visi &amp; Misi</a>
+          <a href="fasilitas.html">Fasilitas</a>
+          <a href="jurusan.html">Program Keahlian</a>
+          <a href="struktur-organisasi.html">Struktur Organisasi</a>
+          <a href="staff-guru.html">Staff &amp; Guru</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Kontak</span>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.9">
+          <p>Jl. Ahmad Yani No.1, Cikampek,</p><p>Karawang, Jawa Barat</p>
+          <p style="margin-top:8px">(0264) 316xxx</p>
+          <p>info@smkn1cikampek.sch.id</p>
+          <p style="margin-top:8px;color:rgba(255,255,255,0.4)">Senin–Sabtu, 07.00–16.00 WIB</p>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>Tautan Cepat</h4>
-      <ul>
-        <li><a href="profil-sekolah.html">Profil Sekolah</a></li>
-        <li><a href="visi-misi.html">Visi &amp; Misi</a></li>
-        <li><a href="fasilitas.html">Fasilitas</a></li>
-        <li><a href="jurusan.html">Jurusan</a></li>
-        <li><a href="staff-guru.html">Staff &amp; Guru</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links"><a href="#">Kebijakan Privasi</a><a href="#">Syarat Penggunaan</a></div>
     </div>
-    <div>
-      <h4>Informasi</h4>
-      <ul>
-        <li><a href="berita.html">Berita Sekolah</a></li>
-        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
-        <li><a href="prestasi.html">Prestasi</a></li>
-        <li><a href="bos.html">Dana BOS</a></li>
-        <li><a href="apbd.html">APBD</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 SMA Negeri 1 Yogyakarta. All Rights Reserved.</span>
-    <a href="#">ICT Teladan</a>
   </div>
 </footer>
 
+<button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let timer;
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(timer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if(o!==item) o.classList.remove('open'); });
+      item.classList.add('open');
+    });
+    item.addEventListener('mouseleave', () => { timer = setTimeout(() => item.classList.remove('open'), 120); });
+    const btn = item.querySelector('button.nav-link');
+    if(btn) btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
+
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
+  });
+
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const backBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+});
+</script>
 </body>
 </html>

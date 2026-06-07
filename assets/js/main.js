@@ -204,8 +204,32 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // ── ACTIVE NAV LINK ─────────────────────────────
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  // ── DROPDOWN NAVBAR (hover + delay agar tidak hilang saat geser ke dropdown) ──
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let closeTimer;
+    function openDropdown() {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.add('open');
+    }
+    function closeDropdown() {
+      closeTimer = setTimeout(() => item.classList.remove('open'), 150);
+    }
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+    const btn = item.querySelector('button.nav-link');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    }
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open'));
+  });
   document.querySelectorAll('.nav-link[href]').forEach(link => {
     const href = link.getAttribute('href').split('/').pop();
     if (href === currentPath || (currentPath === '' && href === 'index.html')) {
