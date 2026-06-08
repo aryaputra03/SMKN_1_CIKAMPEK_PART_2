@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
+    </head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Lulusan</a></li>
+            <li><a href="banner.html">Banner</a></li>
+            <li><a href="bos.html">Laporan BOS</a></li>
+            <li><a href="apbd.html">Laporan APBD</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum.html">Kurikulum</a></li>
+            <li><button onclick="logout()">Logout</button></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase-client.js"></script>
+    
+    <script>
+        // Letakkan ini di awal <script> setiap halaman admin
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html'; // redirect ke login
+            }
+            return session;
+        }
+
+        // Panggil di setiap halaman admin
+        checkAuth();
+
+        // ---------------------------------------------------------
+        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
+        // ---------------------------------------------------------
+    </script>
+</body>
+</html>
