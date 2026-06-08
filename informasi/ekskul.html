@@ -93,14 +93,6 @@
     .breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
     .breadcrumb-row .current { font-size: 13px; color: var(--gold); font-weight: 600; }
 
-    /* ── STATS ── */
-    .stats-strip { background: var(--navy); }
-    .stats-strip-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-    .strip-stat { padding: 28px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
-    .strip-stat:last-child { border-right: none; }
-    .strip-stat strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: var(--gold); line-height: 1; }
-    .strip-stat span { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-top: 6px; display: block; }
-
     /* ── PAGE BODY ── */
     .page-body { padding: 64px 0 88px; }
 
@@ -294,9 +286,6 @@
       .ekskul-grid { grid-template-columns: repeat(2, 1fr); }
       .osis-card { grid-template-columns: 1fr; }
       .osis-visual { min-height: 160px; }
-      .stats-strip-grid { grid-template-columns: repeat(2, 1fr); }
-      .strip-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .strip-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
       .footer-main-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
     @media (max-width: 768px) {
@@ -310,7 +299,6 @@
       .osis-body { padding: 24px; }
     }
     @media (max-width: 480px) {
-      .stats-strip-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -340,13 +328,6 @@
         </div>
       </div>
       <div class="nav-item has-dropdown">
-        <button class="nav-link">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
-        <div class="dropdown">
-          <a href="../keuangan/bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg></span>Dana BOS</a>
-          <a href="../keuangan/apbd.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span>APBD</a>
-        </div>
-      </div>
-      <div class="nav-item has-dropdown">
         <button class="nav-link active">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
@@ -354,7 +335,7 @@
           <a href="ekskul.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
         </div>
       </div>
-      <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
+        <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
     </nav>
 
     <a href="../index.html#ppdb" class="btn-ppdb">
@@ -408,30 +389,6 @@
     </div>
   </div>
 </section>
-
-<!-- ══ STATS STRIP ══ -->
-<div class="stats-strip">
-  <div class="container">
-    <div class="stats-strip-grid">
-      <div class="strip-stat fade-up">
-        <strong data-counter data-target="18" data-suffix="">0</strong>
-        <span>Total Kegiatan</span>
-      </div>
-      <div class="strip-stat fade-up">
-        <strong data-counter data-target="1200" data-suffix="+">0</strong>
-        <span>Siswa Aktif</span>
-      </div>
-      <div class="strip-stat fade-up">
-        <strong data-counter data-target="45" data-suffix="+">0</strong>
-        <span>Pembina &amp; Pelatih</span>
-      </div>
-      <div class="strip-stat fade-up">
-        <strong data-counter data-target="30" data-suffix="+">0</strong>
-        <span>Prestasi Ekskul 2024</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ══ PAGE BODY ══ -->
 <main class="page-body">

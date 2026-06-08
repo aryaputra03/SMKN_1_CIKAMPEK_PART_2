@@ -108,15 +108,6 @@
     .breadcrumb-row span { font-size: 13px; color: rgba(255,255,255,0.3); }
     .breadcrumb-row .current { font-size: 13px; color: var(--gold); font-weight: 600; }
 
-    /* STATS HIGHLIGHT */
-    .stats-highlight { background: var(--off-white); padding: 48px 0; border-bottom: 1px solid var(--gray-soft); }
-    .stats-hl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--white); border: 1px solid var(--gray-soft); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
-    .stat-hl-item { padding: 28px 24px; text-align: center; border-right: 1px solid var(--gray-soft); }
-    .stat-hl-item:last-child { border-right: none; }
-    .stat-hl-emoji { font-size: 28px; display: block; margin-bottom: 10px; }
-    .stat-hl-item strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--navy); line-height: 1; }
-    .stat-hl-item span { font-size: 12.5px; color: var(--text-muted); margin-top: 5px; display: block; }
-
     /* PAGE BODY */
     .page-body { padding: 56px 0 80px; }
 
@@ -241,13 +232,6 @@
         </div>
       </div>
       <div class="nav-item has-dropdown">
-        <button class="nav-link">Keuangan <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
-        <div class="dropdown">
-          <a href="../keuangan/bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg></span>Dana BOS</a>
-          <a href="../keuangan/apbd.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span>APBD</a>
-        </div>
-      </div>
-      <div class="nav-item has-dropdown">
         <button class="nav-link active">Informasi <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg></button>
         <div class="dropdown">
           <a href="berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
@@ -255,7 +239,7 @@
           <a href="ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
         </div>
       </div>
-      <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
+      <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
     </nav>
     <a href="../index.html#ppdb" class="btn-ppdb">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
@@ -291,34 +275,6 @@
       <a href="../index.html">Home</a><span>›</span>
       <span>Informasi</span><span>›</span>
       <span class="current">Prestasi</span>
-    </div>
-  </div>
-</section>
-
-<!-- STATS HIGHLIGHT -->
-<section class="stats-highlight">
-  <div class="container">
-    <div class="stats-hl-grid fade-up">
-      <div class="stat-hl-item">
-        <span class="stat-hl-emoji">🥇</span>
-        <strong data-counter data-target="24" data-suffix="">0</strong>
-        <span>Total Juara 1</span>
-      </div>
-      <div class="stat-hl-item">
-        <span class="stat-hl-emoji">🏆</span>
-        <strong data-counter data-target="68" data-suffix="+">0</strong>
-        <span>Total Prestasi 2024</span>
-      </div>
-      <div class="stat-hl-item">
-        <span class="stat-hl-emoji">🌍</span>
-        <strong data-counter data-target="3" data-suffix="">0</strong>
-        <span>Prestasi Nasional</span>
-      </div>
-      <div class="stat-hl-item">
-        <span class="stat-hl-emoji">⭐</span>
-        <strong data-counter data-target="15" data-suffix="">0</strong>
-        <span>Prestasi Provinsi</span>
-      </div>
     </div>
   </div>
 </section>

@@ -3,41 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kurikulum SMKN 1 Cikampek — Dokumen dan panduan kurikulum sekolah kejuruan.">
-  <title>Kurikulum — SMKN 1 Cikampek</title>
+  <meta name="description" content="Portal Pembelajaran SMKN 1 Cikampek — Akses login e-learning, CBT ujian, dan perpus digital.">
+  <title>Portal Pembelajaran — SMKN 1 Cikampek</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   <style>
 /* ════════════════════════════════════════════
-   SMKN 1 CIKAMPEK — Halaman Kurikulum
-   Palette : Navy #1B2A4A · Kuning #F5C518 · Putih
-   Font    : Plus Jakarta Sans + Playfair Display
+   SMKN 1 CIKAMPEK — Portal Pembelajaran (Login)
+   Palette : Navy #1E293B · Kuning #FFE600 · Putih
 ════════════════════════════════════════════ */
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --kuning:       #F5C518;
-  --kuning-tua:   #D4A800;
-  --kuning-muda:  #FFF8D6;
-  --kuning-pale:  #FFFBEC;
-  --navy:         #1B2A4A;
-  --navy-light:   #243558;
+  --kuning:       #FFE600;
+  --kuning-tua:   #E6CF00;
+  --kuning-muda:  rgba(255, 230, 0, 0.15);
+  --kuning-pale:  rgba(255, 230, 0, 0.05);
+  --navy:         #1E293B;
+  --navy-light:   #334155;
   --navy-pale:    #EEF1F8;
   --putih:        #FFFFFF;
-  --abu-terang:   #F7F8FC;
-  --abu:          #E8ECF4;
-  --teks:         #1A1F36;
-  --teks-muted:   #6B7280;
-  --teks-light:   #9CA3AF;
+  --abu-terang:   #F8FAFC;
+  --abu:          #E2E8F0;
+  --teks:         #1E293B;
+  --teks-muted:   #64748B;
+  --teks-light:   #94A3B8;
   --hijau:        #16A34A;
   --hijau-muda:   #DCFCE7;
   --biru:         #2563EB;
   --biru-muda:    #DBEAFE;
-  --shadow-sm:    0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:    0 4px 16px rgba(0,0,0,0.10);
-  --shadow-lg:    0 8px 32px rgba(0,0,0,0.12);
+  --shadow-sm:    0 2px 8px rgba(30,41,59,0.05);
+  --shadow-md:    0 6px 24px rgba(30,41,59,0.08);
+  --shadow-lg:    0 16px 48px rgba(30,41,59,0.12);
   --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
   --ease: cubic-bezier(0.4,0,0.2,1);
 }
@@ -67,7 +66,7 @@ ul   { list-style:none; }
 .nav-item { position:relative; }
 .nav-link { display:flex; align-items:center; gap:5px; padding:8px 14px; border-radius:var(--r-sm); font-size:13.5px; font-weight:500; color:var(--teks); background:none; border:none; cursor:pointer; transition:color .2s,background .2s; white-space:nowrap; font-family:'Plus Jakarta Sans',sans-serif; }
 .nav-link:hover  { color:var(--navy); background:var(--kuning-muda); }
-.nav-link.active { color:var(--kuning-tua); background:var(--kuning-muda); font-weight:600; }
+.nav-link.active { color:var(--navy); background:var(--kuning-muda); font-weight:700; }
 .caret { width:13px; height:13px; flex-shrink:0; transition:transform .25s; }
 .nav-item.open .caret { transform:rotate(180deg); }
 
@@ -79,8 +78,8 @@ ul   { list-style:none; }
 .dd-icon { width:30px; height:30px; background:var(--abu-terang); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .dd-icon svg { width:15px; height:15px; color:var(--navy-light); }
 
-.btn-ppdb { display:inline-flex; align-items:center; gap:7px; padding:9px 18px; background:var(--kuning); color:var(--navy); font-size:13px; font-weight:700; border-radius:var(--r-sm); transition:var(--ease) .2s; white-space:nowrap; flex-shrink:0; }
-.btn-ppdb:hover { background:var(--kuning-tua); }
+.btn-ppdb { display:inline-flex; align-items:center; gap:7px; padding:9px 18px; background:var(--kuning); color:var(--navy); font-size:13px; font-weight:700; border-radius:var(--r-sm); transition:var(--ease) .2s; white-space:nowrap; flex-shrink:0; margin-left:8px; }
+.btn-ppdb:hover { background:var(--kuning-tua); transform:translateY(-1px); }
 .btn-ppdb svg { width:15px; height:15px; }
 
 /* HAMBURGER */
@@ -100,147 +99,132 @@ ul   { list-style:none; }
 .mobile-dropdown.open { max-height:300px; }
 .mobile-dropdown a { display:block; padding:10px 24px 10px 36px; font-size:13.5px; color:var(--teks-muted); border-bottom:1px solid var(--abu); transition:background .2s,color .2s; }
 .mobile-dropdown a:hover { background:var(--kuning-muda); color:var(--navy); }
-.mobile-dropdown a.current { color:var(--kuning-tua); font-weight:600; }
+.mobile-dropdown a.current { color:var(--navy); font-weight:700; }
 
 /* ── PAGE HERO ────────────────────────────── */
 .page-hero { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%); padding:56px 0 48px; position:relative; overflow:hidden; }
-.page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events:none; }
+.page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events:none; }
 .page-hero::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:40px; background:var(--putih); clip-path:ellipse(55% 100% at 50% 100%); }
 .page-hero-inner { position:relative; z-index:1; text-align:center; }
-.page-hero-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(245,197,24,.15); border:1px solid rgba(245,197,24,.3); color:var(--kuning); font-size:11.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:20px; }
+.page-hero-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(255,230,0,.15); border:1px solid rgba(255,230,0,.3); color:var(--kuning); font-size:11.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:20px; }
 .page-hero-badge svg { width:13px; height:13px; }
 .page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(26px,4vw,42px); font-weight:800; color:var(--putih); line-height:1.15; margin-bottom:12px; }
 .page-hero h1 span { color:var(--kuning); }
-.page-hero p { font-size:15px; color:rgba(255,255,255,.6); max-width:500px; margin:0 auto 28px; }
+.page-hero p { font-size:15px; color:rgba(255,255,255,.6); max-width:560px; margin:0 auto 28px; }
 .breadcrumb-row { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; }
 .breadcrumb-row a { font-size:13px; color:rgba(255,255,255,.5); transition:color .2s; }
 .breadcrumb-row a:hover { color:var(--kuning); }
 .breadcrumb-row span { font-size:13px; color:rgba(255,255,255,.3); }
 .breadcrumb-row .current { font-size:13px; color:var(--kuning); font-weight:600; }
 
-/* ── TAHUN AJARAN TABS ───────────────────── */
+/* ── MAIN PORTAL SECTION ───────────────────── */
 .ta-section { padding:48px 0 64px; }
 .ta-header { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:32px; flex-wrap:wrap; }
-.ta-header-left .lbl { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--kuning-tua); background:var(--kuning-muda); border:1px solid var(--kuning); padding:3px 12px; border-radius:100px; margin-bottom:10px; }
+.ta-header-left .lbl { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--navy); background:var(--kuning); padding:3px 12px; border-radius:100px; margin-bottom:10px; }
 .ta-header-left h2 { font-family:'Playfair Display',serif; font-size:clamp(22px,3vw,30px); font-weight:800; color:var(--navy); line-height:1.2; }
 .ta-header-left p  { font-size:14px; color:var(--teks-muted); margin-top:6px; }
-
-/* Tab Pills */
-.ta-tabs { display:flex; gap:8px; flex-wrap:wrap; }
-.ta-tab { padding:8px 18px; border-radius:100px; font-size:12.5px; font-weight:600; border:1.5px solid var(--abu); background:var(--putih); color:var(--teks-muted); cursor:pointer; transition:all .2s; font-family:'Plus Jakarta Sans',sans-serif; }
-.ta-tab:hover  { border-color:var(--kuning); color:var(--navy); }
-.ta-tab.active { background:var(--navy); border-color:var(--navy); color:var(--putih); }
-
-/* ── FILTER & SEARCH ─────────────────────── */
-.filter-bar { display:flex; align-items:center; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
-.search-wrap { flex:1; min-width:200px; position:relative; }
-.search-wrap input { width:100%; padding:10px 14px 10px 40px; border:1.5px solid var(--abu); border-radius:var(--r-md); font-size:13.5px; font-family:'Plus Jakarta Sans',sans-serif; color:var(--teks); background:var(--putih); outline:none; transition:border-color .2s,box-shadow .2s; }
-.search-wrap input:focus { border-color:var(--kuning); box-shadow:0 0 0 3px rgba(245,197,24,.12); }
-.search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--teks-muted); pointer-events:none; }
-.filter-tabs { display:flex; gap:6px; flex-wrap:wrap; }
-.filter-tab { padding:8px 16px; border-radius:100px; font-size:12.5px; font-weight:600; border:1.5px solid var(--abu); background:var(--putih); color:var(--teks-muted); cursor:pointer; transition:all .2s; font-family:'Plus Jakarta Sans',sans-serif; }
-.filter-tab:hover  { border-color:var(--kuning); color:var(--navy); }
-.filter-tab.active { background:var(--navy); border-color:var(--navy); color:var(--putih); }
-
-/* ── KURIKULUM LIST ───────────────────────── */
-.kurikulum-list { display:flex; flex-direction:column; gap:16px; }
-
-.kur-card { background:var(--putih); border:1px solid var(--abu); border-radius:var(--r-lg); overflow:hidden; transition:all .25s; display:flex; gap:0; }
-.kur-card:hover { border-color:var(--kuning); box-shadow:var(--shadow-md); transform:translateY(-2px); }
-
-.kur-thumb { width:180px; flex-shrink:0; background:var(--navy); position:relative; overflow:hidden; min-height:140px; display:flex; align-items:center; justify-content:center; }
-.kur-thumb::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--navy-light) 0%,var(--navy) 100%); }
-.kur-thumb-decor1 { position:absolute; top:-20px; right:-20px; width:70px; height:70px; border-radius:50%; background:rgba(245,197,24,.1); }
-.kur-thumb-decor2 { position:absolute; bottom:-15px; left:-15px; width:55px; height:55px; border-radius:50%; background:rgba(245,197,24,.06); }
-.kur-thumb-inner { text-align:center; padding:16px; position:relative; z-index:1; }
-.kur-thumb-badge { background:var(--kuning); color:var(--navy); display:inline-block; padding:5px 10px; border-radius:var(--r-sm); font-size:10.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; margin-bottom:10px; }
-.kur-thumb-icon { width:44px; height:44px; background:rgba(255,255,255,.1); border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; margin:0 auto; }
-.kur-thumb-icon svg { width:22px; height:22px; color:rgba(255,255,255,.8); }
-
-.kur-card.type-link .kur-thumb { background:linear-gradient(135deg,#1a3a6e,#0f2547); }
-.kur-card.type-doc  .kur-thumb { background:linear-gradient(135deg,#1B2A4A,#243558); }
-
-.kur-body { flex:1; padding:20px 24px; display:flex; flex-direction:column; justify-content:center; }
-.kur-meta { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
-.kur-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:100px; font-size:11px; font-weight:700; }
-.kur-badge.doc  { background:var(--hijau-muda); color:var(--hijau); }
-.kur-badge.link { background:var(--biru-muda); color:var(--biru); }
-.kur-badge.ta   { background:var(--navy-pale); color:var(--navy); }
-.kur-badge svg  { width:10px; height:10px; }
-
-.kur-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--navy); line-height:1.35; margin-bottom:6px; transition:color .2s; }
-.kur-card:hover .kur-title { color:var(--kuning-tua); }
-.kur-desc { font-size:13px; color:var(--teks-muted); line-height:1.6; margin-bottom:14px; }
-
-.kur-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding-top:12px; border-top:1px solid var(--abu); }
-.kur-info { display:flex; align-items:center; gap:16px; font-size:12px; color:var(--teks-muted); }
-.kur-info span { display:flex; align-items:center; gap:5px; }
-.kur-info span svg { width:12px; height:12px; }
-.btn-kur { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; font-size:12.5px; font-weight:700; border-radius:var(--r-sm); transition:all .2s; white-space:nowrap; cursor:pointer; border:none; font-family:'Plus Jakarta Sans',sans-serif; }
-.btn-kur.btn-download { background:var(--navy); color:var(--putih); }
-.btn-kur.btn-download:hover { background:var(--kuning); color:var(--navy); }
-.btn-kur.btn-link { background:var(--biru); color:var(--putih); }
-.btn-kur.btn-link:hover { background:#1d4ed8; }
-.btn-kur svg { width:13px; height:13px; }
-
-/* Empty state */
-.empty-state { text-align:center; padding:64px 24px; }
-.empty-state-icon { font-size:48px; margin-bottom:16px; }
-.empty-state h3 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:8px; }
-.empty-state p { font-size:14px; color:var(--teks-muted); }
-
-/* ── INFO BANNER ─────────────────────────── */
-.info-banner { background:var(--kuning-pale); border:1px solid rgba(245,197,24,.3); border-left:4px solid var(--kuning); border-radius:var(--r-md); padding:18px 22px; display:flex; align-items:flex-start; gap:14px; margin-bottom:32px; }
-.info-banner-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
-.info-banner p { font-size:13.5px; color:var(--navy); line-height:1.65; }
-.info-banner p strong { font-weight:700; }
 
 /* ── STATS ROW ───────────────────────────── */
 .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; background:var(--putih); border:1px solid var(--abu); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-sm); margin-bottom:36px; }
 .stat-cell { padding:22px 20px; text-align:center; border-right:1px solid var(--abu); }
 .stat-cell:last-child { border-right:none; }
 .stat-cell strong { display:block; font-family:'Playfair Display',serif; font-size:32px; font-weight:800; color:var(--navy); line-height:1; }
-.stat-cell span { font-size:12px; color:var(--teks-muted); margin-top:4px; display:block; }
+.stat-cell span { font-size:12px; font-weight:600; color:var(--teks-muted); margin-top:4px; display:block; }
+
+/* ── INFO BANNER ─────────────────────────── */
+.info-banner { background:var(--kuning-pale); border:1px solid rgba(255,230,0,.3); border-left:4px solid var(--kuning); border-radius:var(--r-md); padding:18px 22px; display:flex; align-items:flex-start; gap:14px; margin-bottom:32px; box-shadow:var(--shadow-sm); }
+.info-banner-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
+.info-banner p { font-size:13.5px; color:var(--navy); line-height:1.65; }
+.info-banner p strong { font-weight:700; }
+
+/* ── FILTER TABS ─────────────────────── */
+.filter-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+.filter-tab { padding:9px 20px; border-radius:100px; font-size:13px; font-weight:600; border:1.5px solid var(--abu); background:var(--putih); color:var(--teks-muted); cursor:pointer; transition:all .2s; font-family:'Plus Jakarta Sans',sans-serif; }
+.filter-tab:hover  { border-color:var(--kuning); color:var(--navy); }
+.filter-tab.active { background:var(--navy); border-color:var(--navy); color:var(--putih); }
+
+/* ── PORTAL LIST (LOGIN CARDS) ───────────────────────── */
+.portal-list { display:grid; grid-template-columns:repeat(2, 1fr); gap:24px; }
+
+.kur-card { background:var(--putih); border:1px solid var(--abu); border-radius:var(--r-lg); overflow:hidden; transition:all .25s; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); position: relative; }
+.kur-card:hover { border-color:var(--kuning); box-shadow:var(--shadow-md); transform:translateY(-4px); }
+
+.kur-thumb { height:140px; background:var(--navy); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.kur-thumb::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--navy-light) 0%,var(--navy) 100%); }
+.kur-thumb-decor1 { position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:rgba(255,230,0,.08); }
+.kur-thumb-decor2 { position:absolute; bottom:-15px; left:-15px; width:70px; height:70px; border-radius:50%; background:rgba(255,230,0,.05); }
+.kur-thumb-inner { text-align:center; position:relative; z-index:1; }
+.kur-thumb-icon { width:56px; height:56px; background:rgba(255,255,255,.1); border-radius:14px; display:flex; align-items:center; justify-content:center; margin:0 auto; box-shadow:0 4px 12px rgba(0,0,0,0.1); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.15); }
+.kur-thumb-icon svg { width:28px; height:28px; color:var(--kuning); }
+
+.type-lms .kur-thumb { background:linear-gradient(135deg,#1B2A4A,#243558); }
+.type-cbt .kur-thumb { background:linear-gradient(135deg,#7C3AED,#5B21B6); }
+.type-lib .kur-thumb { background:linear-gradient(135deg,#059669,#047857); }
+.type-pmm .kur-thumb { background:linear-gradient(135deg,#0284C7,#0369A1); }
+
+.kur-body { flex:1; padding:24px; display:flex; flex-direction:column; }
+.kur-badge { display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:100px; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; width:fit-content; }
+.kur-badge.lms  { background:var(--biru-muda); color:var(--biru); }
+.kur-badge.cbt  { background:#F3E8FF; color:#7C3AED; }
+.kur-badge.lib  { background:var(--hijau-muda); color:var(--hijau); }
+.kur-badge.pmm  { background:#E0F2FE; color:#0284C7; }
+
+.kur-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:800; color:var(--navy); line-height:1.3; margin-bottom:8px; }
+.kur-desc { font-size:13.5px; color:var(--teks-muted); line-height:1.6; flex:1; margin-bottom:20px; }
+
+.kur-footer { border-top:1px solid var(--abu); padding-top:20px; }
+.btn-login { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; font-size:14px; font-weight:700; border-radius:var(--r-md); transition:all .2s; cursor:pointer; border:none; font-family:'Plus Jakarta Sans',sans-serif; }
+.btn-login.primary { background:var(--kuning); color:var(--navy); }
+.btn-login.primary:hover { background:var(--kuning-tua); transform:translateY(-2px); }
+.btn-login.secondary { background:var(--navy); color:var(--putih); }
+.btn-login.secondary:hover { background:var(--navy-light); transform:translateY(-2px); }
+.btn-login svg { width:16px; height:16px; }
+
+/* Empty state */
+.empty-state { text-align:center; padding:64px 24px; grid-column:1 / -1; }
+.empty-state-icon { font-size:48px; margin-bottom:16px; }
+.empty-state h3 { font-size:18px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+.empty-state p { font-size:14px; color:var(--teks-muted); }
 
 /* ── FOOTER ───────────────────────────────── */
 .footer { background:var(--navy); color:rgba(255,255,255,.65); }
 .footer-top { border-bottom:1px solid rgba(255,255,255,.07); }
-.footer-main-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:48px; padding:52px 0; }
-.footer-brand-logo { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
-.footer-logo-box { width:40px; height:40px; background:var(--kuning); border-radius:9px; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--navy); flex-shrink:0; }
+.footer-main-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:48px; padding:64px 0; }
+.footer-brand-logo { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.footer-logo-box { width:44px; height:44px; background:var(--kuning); border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--navy); flex-shrink:0; }
 .footer-brand-name { font-size:15px; font-weight:700; color:var(--putih); line-height:1.2; }
-.footer-brand-loc  { font-size:11px; color:rgba(255,255,255,.35); }
-.footer-brand-desc { font-size:13px; line-height:1.7; margin-bottom:20px; }
+.footer-brand-loc  { font-size:11px; color:rgba(255,255,255,.5); }
+.footer-brand-desc { font-size:13.5px; line-height:1.8; margin-bottom:22px; max-width:340px; color:rgba(255,255,255,.7); }
 .footer-social { display:flex; gap:10px; }
-.footer-social a { width:34px; height:34px; border:1px solid rgba(255,255,255,.12); border-radius:7px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.5); transition:all .2s; }
-.footer-social a:hover { border-color:var(--kuning); color:var(--kuning); background:rgba(245,197,24,.08); }
+.footer-social a { width:34px; height:34px; border:1px solid rgba(255,255,255,.15); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--putih); transition:all .2s; }
+.footer-social a:hover { border-color:var(--kuning); color:var(--navy); background:var(--kuning); }
 .footer-social a svg { width:14px; height:14px; }
-.footer-col-title { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--putih); margin-bottom:18px; }
-.footer-links { display:flex; flex-direction:column; gap:10px; }
-.footer-links a { font-size:13px; color:rgba(255,255,255,.5); transition:color .2s; display:flex; align-items:center; gap:6px; }
-.footer-links a::before { content:'›'; color:var(--kuning); font-size:16px; line-height:1; }
-.footer-links a:hover { color:rgba(255,255,255,.85); }
+.footer-col-title { font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--kuning); margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid var(--kuning); display:inline-block; }
+.footer-links { display:flex; flex-direction:column; gap:12px; }
+.footer-links a { font-size:13.5px; color:rgba(255,255,255,.7); transition:color .2s; display:flex; align-items:center; gap:8px; }
+.footer-links a::before { content:''; width:5px; height:1px; background:var(--kuning); flex-shrink:0; }
+.footer-links a:hover { color:var(--kuning); font-weight:600; }
 .footer-map-contact { display:grid; grid-template-columns:1fr 1fr; gap:32px; padding:32px 0 0; }
-.footer-map-title, .footer-contact-title { font-size:13px; font-weight:700; color:rgba(255,255,255,.55); letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
-.footer-map-frame { border-radius:var(--r-md); overflow:hidden; height:180px; border:1px solid rgba(255,255,255,.08); }
-.footer-map-frame iframe { width:100%; height:100%; border:none; filter:grayscale(30%); }
+.footer-map-title, .footer-contact-title { font-size:13px; font-weight:800; color:var(--kuning); margin-bottom:14px; letter-spacing:0.5px; text-transform:uppercase; }
+.footer-map-frame { border-radius:var(--r-md); overflow:hidden; height:180px; border:1px solid rgba(255,255,255,.1); }
+.footer-map-frame iframe { width:100%; height:100%; border:none; filter:grayscale(20%); }
 .footer-contact-list { display:flex; flex-direction:column; gap:14px; }
 .footer-contact-item { display:flex; gap:12px; align-items:flex-start; }
-.fci-icon { width:32px; height:32px; background:rgba(255,255,255,.06); border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.fci-icon svg { width:14px; height:14px; color:var(--kuning); }
-.fci-label { font-size:11px; color:rgba(255,255,255,.35); text-transform:uppercase; letter-spacing:.5px; margin-bottom:2px; }
-.fci-value { font-size:13px; color:rgba(255,255,255,.65); line-height:1.45; }
-.footer-bottom { padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,.06); }
-.footer-bottom p { font-size:12.5px; color:rgba(255,255,255,.3); }
+.fci-icon { width:36px; height:36px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.fci-icon svg { width:15px; height:15px; color:var(--kuning); }
+.fci-label { font-size:10.5px; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.5px; margin-bottom:2px; font-weight:700; }
+.fci-value { font-size:13.5px; color:var(--putih); font-weight:600; }
+.footer-bottom { padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,.1); }
+.footer-bottom p { font-size:12.5px; color:rgba(255,255,255,.5); font-weight:500; }
 .footer-bottom p strong { color:var(--kuning); }
 .footer-bottom-links { display:flex; gap:20px; }
-.footer-bottom-links a { font-size:12.5px; color:rgba(255,255,255,.3); transition:color .2s; }
-.footer-bottom-links a:hover { color:rgba(255,255,255,.65); }
+.footer-bottom-links a { font-size:11.5px; color:rgba(255,255,255,.5); font-weight:700; letter-spacing:1px; text-transform:uppercase; transition:color .2s; }
+.footer-bottom-links a:hover { color:var(--kuning); }
 
 /* ── BACK TO TOP ──────────────────────────── */
-.back-to-top { position:fixed; bottom:28px; right:28px; width:42px; height:42px; background:var(--navy); color:var(--putih); border:none; border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-md); opacity:0; visibility:hidden; transform:translateY(8px); transition:all .3s; z-index:400; }
+.back-to-top { position:fixed; bottom:28px; right:28px; width:42px; height:42px; background:var(--kuning); color:var(--navy); border:none; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-lg); opacity:0; visibility:hidden; transform:translateY(8px); transition:all .3s; z-index:400; font-weight:900; }
 .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
-.back-to-top:hover { background:var(--kuning); color:var(--navy); }
+.back-to-top:hover { background:var(--kuning-tua); transform:translateY(-3px); }
 
 /* ── RESPONSIVE ───────────────────────────── */
 @media (max-width:1024px) {
@@ -252,25 +236,17 @@ ul   { list-style:none; }
   .navbar, .btn-ppdb { display:none; }
   .hamburger { display:flex; }
   .mobile-menu { display:block; }
-  .kur-card { flex-direction:column; }
-  .kur-thumb { width:100%; min-height:100px; flex-direction:row; padding:14px 18px; gap:14px; }
-  .kur-thumb-inner { display:flex; align-items:center; gap:14px; text-align:left; }
-  .kur-thumb-badge { margin-bottom:0; }
-  .footer-main-grid { grid-template-columns:1fr 1fr; gap:32px; }
+  .portal-list { grid-template-columns:1fr; }
+  .footer-main-grid { grid-template-columns:1fr; gap:32px; }
   .footer-map-contact { grid-template-columns:1fr; }
   .footer-bottom { flex-direction:column; text-align:center; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .ta-header { flex-direction:column; align-items:flex-start; }
-  .filter-bar { flex-direction:column; align-items:stretch; }
-}
-@media (max-width:480px) {
-  .footer-main-grid { grid-template-columns:1fr; }
 }
   </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
 <header class="header" id="site-header">
   <div class="container header-main">
     <a href="../index.html" class="logo-area">
@@ -292,21 +268,11 @@ ul   { list-style:none; }
           <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg>
         </button>
         <div class="dropdown">
-          <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
+          <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi & Misi</a>
           <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
           <a href="../profil/jurusan.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
           <a href="../profil/struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span>Struktur Organisasi</a>
-          <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
-        </div>
-      </div>
-
-      <div class="nav-item has-dropdown">
-        <button class="nav-link">Keuangan
-          <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg>
-        </button>
-        <div class="dropdown">
-          <a href="../keuangan/bos.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/><path d="M10 10a2 2 0 100-4 2 2 0 000 4z"/></svg></span>Dana BOS</a>
-          <a href="../keuangan/apbd.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h16M2 7h16M2 11h16M2 15h10"/></svg></span>APBD</a>
+          <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff & Guru</a>
         </div>
       </div>
 
@@ -317,11 +283,11 @@ ul   { list-style:none; }
         <div class="dropdown">
           <a href="../informasi/berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
           <a href="../informasi/prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Prestasi</a>
-          <a href="../informasi/ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
+          <a href="../informasi/ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org & Ekstrakurikuler</a>
         </div>
       </div>
 
-      <div class="nav-item"><a href="index.html" class="nav-link active">Kurikulum</a></div>
+      <div class="nav-item"><a href="index.html" class="nav-link active">kurikulum</a></div>
       <div class="nav-item"><a href="../index.html#contact" class="nav-link">Kontak</a></div>
     </nav>
 
@@ -332,7 +298,6 @@ ul   { list-style:none; }
     <button class="hamburger" id="hamburger-btn" aria-label="Buka Menu"><span></span><span></span><span></span></button>
   </div>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Beranda</a></div>
     <div class="mobile-nav-item">
@@ -340,22 +305,14 @@ ul   { list-style:none; }
         <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
       </div>
       <div class="mobile-dropdown" id="mob-profil">
-        <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+        <a href="../profil/visi-misi.html">Visi & Misi</a>
         <a href="../profil/fasilitas.html">Fasilitas</a>
         <a href="../profil/jurusan.html">Jurusan</a>
         <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
-        <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+        <a href="../profil/staff-guru.html">Staff & Guru</a>
       </div>
     </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-nav-link" data-toggle="mob-keuangan">Keuangan
-        <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
-      </div>
-      <div class="mobile-dropdown" id="mob-keuangan">
-        <a href="../keuangan/bos.html">Dana BOS</a>
-        <a href="../keuangan/apbd.html">APBD</a>
-      </div>
-    </div>
+    
     <div class="mobile-nav-item">
       <div class="mobile-nav-link" data-toggle="mob-informasi">Informasi
         <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
@@ -374,288 +331,166 @@ ul   { list-style:none; }
   </div>
 </header>
 
-<!-- ══ PAGE HERO ══ -->
 <section class="page-hero">
   <div class="container page-hero-inner">
     <div class="page-hero-badge">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
-      Dokumen Sekolah
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 0h6m-6 4h6m-6 4h6"/></svg>
+      Sistem Akademik Digital
     </div>
-    <h1>Kurikulum <span>SMKN 1 Cikampek</span></h1>
-    <p>Dokumen dan panduan kurikulum operasional sekolah untuk setiap tahun ajaran.</p>
+    <h1>Portal Pembelajaran <span>Siswa</span></h1>
+    <p>Akses terpusat (Satu Pintu) menuju platform E-Learning, Ujian CBT, dan Layanan Perpustakaan Digital SMKN 1 Cikampek.</p>
     <div class="breadcrumb-row">
       <a href="../index.html">Home</a><span>›</span>
-      <span class="current">Kurikulum</span>
+      <span class="current">Portal Pembelajaran</span>
     </div>
   </div>
 </section>
 
-<!-- ══ MAIN CONTENT ══ -->
 <main class="ta-section">
   <div class="container">
 
-    <!-- Stats -->
     <div class="stats-row fade-up" id="stats-row">
       <div class="stat-cell">
-        <strong id="stat-total">0</strong>
-        <span>Total Dokumen</span>
+        <strong id="stat-total">4</strong>
+        <span>Platform Tersedia</span>
       </div>
       <div class="stat-cell">
-        <strong id="stat-doc">0</strong>
-        <span>File PDF</span>
+        <strong id="stat-doc" data-target="1500" data-suffix="+">0</strong>
+        <span>Siswa Aktif</span>
       </div>
       <div class="stat-cell">
-        <strong id="stat-link">0</strong>
-        <span>Link Eksternal</span>
+        <strong id="stat-link">24</strong>
+        <span>Jam Akses</span>
       </div>
       <div class="stat-cell">
-        <strong id="stat-ta">0</strong>
-        <span>Tahun Ajaran</span>
+        <strong id="stat-ta" data-target="99" data-suffix="%">0</strong>
+        <span>Server Uptime</span>
       </div>
     </div>
 
-    <!-- Info Banner -->
     <div class="info-banner fade-up">
-      <div class="info-banner-icon">📋</div>
-      <p><strong>Kurikulum Operasional Sekolah (KOS)</strong> — Dokumen ini merupakan panduan resmi pelaksanaan kurikulum di SMKN 1 Cikampek. Untuk informasi lebih lanjut atau pengajuan dokumen, silakan hubungi Wakil Kepala Bidang Kurikulum.</p>
+      <div class="info-banner-icon">🔐</div>
+      <p><strong>Informasi Login Siswa:</strong> Gunakan kredensial resmi sekolah (Email NISN: <code>nisn@smkn1cikampek.sch.id</code>) untuk mengakses fasilitas E-Learning. Jika Anda mengalami kendala saat login atau lupa kata sandi, silakan hubungi Wali Kelas atau Admin IT Sekolah.</p>
     </div>
 
-    <!-- Header + Tabs -->
     <div class="ta-header fade-up">
       <div class="ta-header-left">
-        <span class="lbl">Arsip Kurikulum</span>
-        <h2>Dokumen &amp; Panduan Kurikulum</h2>
-        <p>Pilih tahun ajaran untuk melihat dokumen yang tersedia.</p>
-      </div>
-      <div class="ta-tabs" id="ta-tabs">
-        <button class="ta-tab active" data-ta="semua">Semua</button>
-        <button class="ta-tab" data-ta="2024/2025">2024/2025</button>
-        <button class="ta-tab" data-ta="2023/2024">2023/2024</button>
-        <button class="ta-tab" data-ta="2022/2023">2022/2023</button>
+        <span class="lbl">Akses Langsung</span>
+        <h2>Direktori Platform Belajar</h2>
+        <p>Pilih platform yang ingin Anda akses di bawah ini.</p>
       </div>
     </div>
 
-    <!-- Filter Bar -->
-    <div class="filter-bar fade-up">
-      <div class="search-wrap">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
-        <input type="text" id="search-input" placeholder="Cari dokumen kurikulum…">
-      </div>
-      <div class="filter-tabs">
-        <button class="filter-tab active" data-type="semua">Semua</button>
-        <button class="filter-tab" data-type="dokumen">PDF / Dokumen</button>
-        <button class="filter-tab" data-type="link_eksternal">Link Eksternal</button>
-      </div>
+    <div class="filter-tabs fade-up" style="margin-top:-10px;">
+      <button class="filter-tab active" data-type="semua">Semua Platform</button>
+      <button class="filter-tab" data-type="lms">LMS / E-Learning</button>
+      <button class="filter-tab" data-type="ujian">CBT / Ujian</button>
+      <button class="filter-tab" data-type="lainnya">Layanan Lainnya</button>
     </div>
 
-    <!-- Kurikulum List -->
-    <div class="kurikulum-list fade-up" id="kurikulum-list">
+    <div class="portal-list fade-up" id="portal-list">
 
-      <!-- Card 1 -->
-      <div class="kur-card type-doc fade-up" data-ta="2024/2025" data-type="dokumen">
+      <div class="kur-card type-lms fade-up" data-type="lms">
         <div class="kur-thumb">
           <div class="kur-thumb-decor1"></div>
           <div class="kur-thumb-decor2"></div>
           <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">PDF</div>
             <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             </div>
           </div>
         </div>
         <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge doc"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Dokumen PDF</span>
-            <span class="kur-badge ta">2024/2025</span>
-          </div>
-          <h3 class="kur-title">Kurikulum Operasional Satuan Pendidikan (KOSP) SMKN 1 Cikampek Tahun Ajaran 2024/2025</h3>
-          <p class="kur-desc">Dokumen lengkap Kurikulum Operasional Satuan Pendidikan (KOSP) yang memuat tujuan, struktur program, dan panduan pelaksanaan pembelajaran berbasis Kurikulum Merdeka TA 2024/2025.</p>
+          <span class="kur-badge lms">TUGAS & MATERI</span>
+          <h3 class="kur-title">E-Learning SMKN 1 Cikampek</h3>
+          <p class="kur-desc">Platform Learning Management System (LMS) resmi untuk mengakses materi pelajaran dari guru, mengunduh modul, dan mengumpulkan tugas harian.</p>
           <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>10 Juli 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg>Waka Kurikulum</span>
-            </div>
-            <a href="#" class="btn-kur btn-download">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v10M6 8l4 4 4-4M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2"/></svg>
-              Unduh PDF
-            </a>
+            <button class="btn-login primary" onclick="window.location.href='#'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+              Login E-Learning
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="kur-card type-link fade-up" data-ta="2024/2025" data-type="link_eksternal">
+      <div class="kur-card type-cbt fade-up" data-type="ujian">
         <div class="kur-thumb">
           <div class="kur-thumb-decor1"></div>
           <div class="kur-thumb-decor2"></div>
           <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">LINK</div>
             <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
             </div>
           </div>
         </div>
         <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge link"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Link Eksternal</span>
-            <span class="kur-badge ta">2024/2025</span>
-          </div>
-          <h3 class="kur-title">Platform Merdeka Mengajar — Modul Ajar &amp; Perangkat Pembelajaran TA 2024/2025</h3>
-          <p class="kur-desc">Akses langsung ke Platform Merdeka Mengajar (PMM) Kemdikbudristek untuk modul ajar, asesmen, dan perangkat pembelajaran Kurikulum Merdeka yang digunakan di SMKN 1 Cikampek.</p>
+          <span class="kur-badge cbt">UTS & UAS</span>
+          <h3 class="kur-title">Portal Ujian Online (CBT)</h3>
+          <p class="kur-desc">Computer Based Test (CBT) terpusat untuk pelaksanaan Ulangan Tengah Semester (UTS), Ulangan Akhir Semester (UAS), dan Simulasi Ujian.</p>
           <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>TA 2024/2025</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg>Kemdikbudristek</span>
-            </div>
-            <a href="https://guru.kemdikbud.go.id" target="_blank" rel="noopener" class="btn-kur btn-link">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-5M15 3h2v2M11 9l6-6"/></svg>
-              Buka Link
-            </a>
+            <button class="btn-login primary" onclick="window.location.href='#'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+              Masuk ke CBT
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="kur-card type-doc fade-up" data-ta="2024/2025" data-type="dokumen">
+      <div class="kur-card type-lib fade-up" data-type="lainnya">
         <div class="kur-thumb">
           <div class="kur-thumb-decor1"></div>
           <div class="kur-thumb-decor2"></div>
           <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">PDF</div>
             <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
             </div>
           </div>
         </div>
         <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge doc"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Dokumen PDF</span>
-            <span class="kur-badge ta">2024/2025</span>
-          </div>
-          <h3 class="kur-title">Kalender Akademik &amp; Jadwal Kegiatan Sekolah Tahun Ajaran 2024/2025</h3>
-          <p class="kur-desc">Kalender akademik resmi SMKN 1 Cikampek yang memuat jadwal kegiatan belajar-mengajar, hari libur nasional, kegiatan ujian, dan agenda sekolah sepanjang Tahun Ajaran 2024/2025.</p>
+          <span class="kur-badge lib">E-BOOK & JURNAL</span>
+          <h3 class="kur-title">Perpustakaan Digital</h3>
+          <p class="kur-desc">Akses ribuan buku digital (E-Book), jurnal akademik, dan modul literasi kejuruan secara gratis melalui sistem perpustakaan elektronik sekolah.</p>
           <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>10 Juli 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg>Waka Kurikulum</span>
-            </div>
-            <a href="#" class="btn-kur btn-download">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v10M6 8l4 4 4-4M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2"/></svg>
-              Unduh PDF
-            </a>
+            <button class="btn-login secondary" onclick="window.location.href='#'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Kunjungi E-Perpus
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 4 -->
-      <div class="kur-card type-doc fade-up" data-ta="2023/2024" data-type="dokumen">
+      <div class="kur-card type-pmm fade-up" data-type="lainnya">
         <div class="kur-thumb">
           <div class="kur-thumb-decor1"></div>
           <div class="kur-thumb-decor2"></div>
           <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">PDF</div>
             <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
           </div>
         </div>
         <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge doc"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Dokumen PDF</span>
-            <span class="kur-badge ta">2023/2024</span>
-          </div>
-          <h3 class="kur-title">Kurikulum Operasional Satuan Pendidikan (KOSP) SMKN 1 Cikampek Tahun Ajaran 2023/2024</h3>
-          <p class="kur-desc">Dokumen KOSP Tahun Ajaran 2023/2024 yang menjadi acuan penyelenggaraan pendidikan dan pelatihan kejuruan di SMKN 1 Cikampek sesuai implementasi Kurikulum Merdeka.</p>
+          <span class="kur-badge pmm">KEMDIKBUDRISTEK</span>
+          <h3 class="kur-title">Portal Akun Belajar.id</h3>
+          <p class="kur-desc">Gunakan akun belajar.id Anda untuk mengakses aplikasi Google Workspace for Education (Classroom, Meet, Drive) dan Platform Merdeka Mengajar (PMM).</p>
           <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>12 Juli 2023</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg>Waka Kurikulum</span>
-            </div>
-            <a href="#" class="btn-kur btn-download">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v10M6 8l4 4 4-4M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2"/></svg>
-              Unduh PDF
-            </a>
+            <button class="btn-login secondary" onclick="window.open('https://belajar.id', '_blank')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Login Belajar.id
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 5 -->
-      <div class="kur-card type-link fade-up" data-ta="2023/2024" data-type="link_eksternal">
-        <div class="kur-thumb">
-          <div class="kur-thumb-decor1"></div>
-          <div class="kur-thumb-decor2"></div>
-          <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">LINK</div>
-            <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge link"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Link Eksternal</span>
-            <span class="kur-badge ta">2023/2024</span>
-          </div>
-          <h3 class="kur-title">Silabus &amp; Perangkat Ajar Berbasis Kurikulum Merdeka — TA 2023/2024</h3>
-          <p class="kur-desc">Kumpulan silabus, ATP (Alur Tujuan Pembelajaran), dan modul ajar untuk seluruh mata pelajaran dan kompetensi keahlian di SMKN 1 Cikampek Tahun Ajaran 2023/2024.</p>
-          <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>TA 2023/2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg>Internal Sekolah</span>
-            </div>
-            <a href="#" class="btn-kur btn-link">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-5M15 3h2v2M11 9l6-6"/></svg>
-              Buka Link
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="kur-card type-doc fade-up" data-ta="2022/2023" data-type="dokumen">
-        <div class="kur-thumb">
-          <div class="kur-thumb-decor1"></div>
-          <div class="kur-thumb-decor2"></div>
-          <div class="kur-thumb-inner">
-            <div class="kur-thumb-badge">PDF</div>
-            <div class="kur-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="kur-body">
-          <div class="kur-meta">
-            <span class="kur-badge doc"><svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>Dokumen PDF</span>
-            <span class="kur-badge ta">2022/2023</span>
-          </div>
-          <h3 class="kur-title">Dokumen Kurikulum 2013 Revisi — SMKN 1 Cikampek Tahun Ajaran 2022/2023</h3>
-          <p class="kur-desc">Dokumen kurikulum berbasis K-13 Revisi yang menjadi acuan kegiatan belajar-mengajar pada masa transisi menuju implementasi Kurikulum Merdeka di SMKN 1 Cikampek.</p>
-          <div class="kur-footer">
-            <div class="kur-info">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>18 Juli 2022</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg>Waka Kurikulum</span>
-            </div>
-            <a href="#" class="btn-kur btn-download">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v10M6 8l4 4 4-4M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2"/></svg>
-              Unduh PDF
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /kurikulum-list -->
-
-    <!-- Empty state (hidden by default) -->
-    <div class="empty-state" id="empty-state" style="display:none;">
+    </div><div class="empty-state" id="empty-state" style="display:none;">
       <div class="empty-state-icon">🔍</div>
-      <h3>Dokumen tidak ditemukan</h3>
-      <p>Coba ubah kata kunci pencarian atau filter yang digunakan.</p>
+      <h3>Platform tidak ditemukan</h3>
+      <p>Coba gunakan filter lain untuk menemukan platform yang Anda cari.</p>
     </div>
 
   </div>
 </main>
 
-<!-- ══ FOOTER ══ -->
 <footer class="footer" id="contact">
   <div class="footer-top">
     <div class="container">
@@ -679,29 +514,27 @@ ul   { list-style:none; }
           <h4 class="footer-col-title">Navigasi Cepat</h4>
           <div class="footer-links">
             <a href="../index.html">Beranda</a>
-            <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+            <a href="../profil/visi-misi.html">Visi & Misi</a>
             <a href="../profil/jurusan.html">Program Keahlian</a>
-            <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
-            <a href="../keuangan/bos.html">Dana BOS</a>
-            <a href="../keuangan/apbd.html">APBD</a>
+            <a href="../profil/staff-guru.html">Staff & Guru</a>
             <a href="../informasi/berita.html">Berita Terbaru</a>
             <a href="../informasi/prestasi.html">Prestasi</a>
-            <a href="index.html">Kurikulum</a>
+            <a href="index.html">Portal Belajar</a>
           </div>
         </div>
         <div class="fade-up">
           <h4 class="footer-col-title">Info Terbaru</h4>
           <div style="display:flex;flex-direction:column;gap:16px">
             <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a></p>
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#FFE600'" onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a></p>
               <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">26 Mei, 2026</p>
             </div>
             <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII</a></p>
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#FFE600'" onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII</a></p>
               <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">04 Mei, 2026</p>
             </div>
             <div>
-              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#F5C518'" onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a></p>
+              <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4"><a href="#" style="color:inherit;transition:color .2s" onmouseover="this.style.color='#FFE600'" onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan</a></p>
               <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">18 Apr, 2026</p>
             </div>
           </div>
@@ -798,62 +631,41 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* ── STATS COUNTER ── */
-  const cards = document.querySelectorAll('.kur-card');
-  const docs  = [...cards].filter(c => c.dataset.type === 'dokumen').length;
-  const links = [...cards].filter(c => c.dataset.type === 'link_eksternal').length;
-  const taSet = new Set([...cards].map(c => c.dataset.ta));
-
-  function animCount(el, target) {
-    let cur = 0;
-    const step = target / (1000 / 16);
-    const t = setInterval(() => {
-      cur += step;
-      if (cur >= target) { cur = target; clearInterval(t); }
-      el.textContent = Math.floor(cur);
-    }, 16);
-  }
-
-  const statsObs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      animCount(document.getElementById('stat-total'), cards.length);
-      animCount(document.getElementById('stat-doc'),   docs);
-      animCount(document.getElementById('stat-link'),  links);
-      animCount(document.getElementById('stat-ta'),    taSet.size);
-      statsObs.disconnect();
-    }
+  /* ── STATS COUNTER ANIMATION ── */
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-target') || '0');
+        const suffix = el.getAttribute('data-suffix') || '';
+        let current = 0;
+        if(target > 0) {
+          const inc = target / (1600 / 16);
+          const timer = setInterval(() => {
+            current += inc;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = Math.floor(current).toLocaleString('id-ID') + suffix;
+          }, 16);
+        }
+        counterObs.unobserve(el);
+      }
+    });
   }, { threshold: 0.4 });
-  const sr = document.getElementById('stats-row');
-  if (sr) statsObs.observe(sr);
+  document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
 
   /* ── FILTER LOGIC ── */
-  let activeTA   = 'semua';
   let activeType = 'semua';
-  let searchQ    = '';
 
   function applyFilters() {
     const list  = document.querySelectorAll('.kur-card');
     let visible = 0;
     list.forEach(card => {
-      const matchTA   = activeTA   === 'semua' || card.dataset.ta   === activeTA;
       const matchType = activeType === 'semua' || card.dataset.type === activeType;
-      const matchQ    = !searchQ   || card.textContent.toLowerCase().includes(searchQ);
-      const show = matchTA && matchType && matchQ;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+      card.style.display = matchType ? '' : 'none';
+      if (matchType) visible++;
     });
     document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
   }
-
-  /* TA tabs */
-  document.querySelectorAll('.ta-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.ta-tab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      activeTA = btn.dataset.ta;
-      applyFilters();
-    });
-  });
 
   /* Type filter */
   document.querySelectorAll('.filter-tab').forEach(btn => {
@@ -863,12 +675,6 @@ document.addEventListener('DOMContentLoaded', () => {
       activeType = btn.dataset.type;
       applyFilters();
     });
-  });
-
-  /* Search */
-  document.getElementById('search-input')?.addEventListener('input', e => {
-    searchQ = e.target.value.toLowerCase().trim();
-    applyFilters();
   });
 
 });
