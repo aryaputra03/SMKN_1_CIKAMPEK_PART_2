@@ -58,24 +58,35 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --navy:        #0F1E38;
-  --navy-mid:    #1B2E4A;
-  --navy-light:  #243558;
-  --gold:        #C9A84C;
-  --gold-light:  #E8C96B;
-  --gold-pale:   #FAF3DC;
-  --white:       #FFFFFF;
-  --off-white:   #F8F7F4;
-  --gray-soft:   #EDF0F5;
-  --text:        #1A1F2E;
-  --text-muted:  #64748B;
-  --text-light:  #94A3B8;
-  --shadow-sm:   0 2px 8px rgba(15,30,56,0.08);
-  --shadow-md:   0 6px 24px rgba(15,30,56,0.12);
-  --shadow-lg:   0 16px 48px rgba(15,30,56,0.15);
-  --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
-  --ease: cubic-bezier(0.4,0,0.2,1);
+      /* Warna Formal Modern (Menggantikan Navy Lama) */
+      --navy: #1E293B; --navy-mid: #334155; --navy-light: #475569;
+      
+      /* Warna Kuning Cerah Presisi Logo (Tetap menggunakan nama variabel gold agar kode di bawahnya tidak error) */
+      --gold: #FFE600; --gold-light: #E6CF00; --gold-pale: rgba(255, 230, 0, 0.1);
+      
+      /* Warna Background Clean & Profesional */
+      --white: #FFFFFF; --off-white: #F8FAFC; --gray-soft: #E2E8F0;
+--text: #000000; 
+  --text-muted: #333333; 
+  --text-light: #555555;
+      
+      /* Bayangan Halus */
+      --shadow-sm: 0 2px 8px rgba(30,41,59,0.05);
+      --shadow-md: 0 6px 24px rgba(30,41,59,0.08);
+      --shadow-lg: 0 16px 48px rgba(30,41,59,0.12);
+      
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+      /* Pemaksa warna hitam untuk semua elemen teks */
+body, h1, h2, h3, h4, h5, h6, p, span, a, li, button {
+    color: #000000 !important;
 }
+
+/* Khusus untuk teks footer yang semula putih, kita kembalikan ke warna gelap */
+.footer, .footer-brand-desc, .footer-links a, .footer-contact-item p, .footer-bottom p {
+    color: #111111 !important;
+}
+    }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -819,8 +830,8 @@ ul { list-style: none; }
 .btn-center { text-align: center; margin-top: 40px; }
 
 /* ── FOOTER ──────────────────────────────────────── */
-.footer { background: var(--navy); color: rgba(255,255,255,0.65); }
-.footer-top { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer { background: var(--gold); color: var(--navy); }
+.footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
 
 .footer-main-grid {
   display: grid;
@@ -832,40 +843,40 @@ ul { list-style: none; }
   display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
 }
 .footer-logo-box {
-  width: 44px; height: 44px; background: var(--gold);
+  width: 44px; height: 44px; background: var(--navy);
   border-radius: 10px; display: flex; align-items: center;
   justify-content: center; font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0;
+  font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0;
 }
-.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
-.footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.3px; }
+.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+.footer-brand-loc { font-size: 11px; color: rgba(30,41,59,0.7); letter-spacing: 0.3px; font-weight: 600;}
 .footer-brand-desc {
-  font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px;
+  font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; color: rgba(30,41,59,0.85); font-weight: 500;
 }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a {
   width: 34px; height: 34px; border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(30,41,59,0.25);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.55); transition: all 0.2s;
+  color: var(--navy); transition: all 0.2s;
 }
-.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+.footer-social a:hover { border-color: var(--navy); color: var(--gold); background: var(--navy); }
 .footer-social a svg { width: 14px; height: 14px; }
 
 .footer-col-title {
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--white); margin-bottom: 20px;
-  padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--navy); margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--navy);
 }
 .footer-links { display: flex; flex-direction: column; gap: 10px; }
 .footer-links a {
-  font-size: 13.5px; color: rgba(255,255,255,0.55);
-  transition: color 0.2s; display: flex; align-items: center; gap: 8px;
+  font-size: 13.5px; color: rgba(30,41,59,0.8);
+  transition: color 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500;
 }
 .footer-links a::before {
-  content: '';  width: 5px; height: 1px; background: var(--gold); flex-shrink: 0;
+  content: '';  width: 5px; height: 1px; background: var(--navy); flex-shrink: 0;
 }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a:hover { color: var(--navy); font-weight: 700; }
 
 /* Footer Map + Contact */
 .footer-map-contact {
@@ -873,16 +884,16 @@ ul { list-style: none; }
   display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start;
 }
 .footer-map-title {
-  font-size: 13px; font-weight: 700; color: var(--white);
+  font-size: 13px; font-weight: 800; color: var(--navy);
   margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase;
 }
 .footer-map-frame {
   border-radius: var(--r-md); overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1); height: 240px;
+  border: 1px solid rgba(30,41,59,0.2); height: 240px;
 }
-.footer-map-frame iframe { width: 100%; height: 100%; border: none; }
+.footer-map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(15%); }
 .footer-contact-title {
-  font-size: 13px; font-weight: 700; color: var(--white);
+  font-size: 13px; font-weight: 800; color: var(--navy);
   margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase;
 }
 .footer-contact-list { display: flex; flex-direction: column; gap: 14px; }
@@ -891,27 +902,27 @@ ul { list-style: none; }
 }
 .fci-icon {
   width: 36px; height: 36px; border-radius: 8px;
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(30,41,59,0.06); border: 1px solid rgba(30,41,59,0.15);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.fci-icon svg { width: 15px; height: 15px; color: var(--gold); }
-.fci-label { font-size: 10.5px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-.fci-value { font-size: 13.5px; color: rgba(255,255,255,0.75); }
+.fci-icon svg { width: 15px; height: 15px; color: var(--navy); }
+.fci-label { font-size: 10.5px; color: rgba(30,41,59,0.7); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; font-weight: 700; }
+.fci-value { font-size: 13.5px; color: var(--navy); font-weight: 600; }
 
 /* Footer Bottom */
 .footer-bottom {
   padding: 20px 0; display: flex;
   align-items: center; justify-content: space-between; gap: 16px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(30,41,59,0.15);
 }
-.footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); }
-.footer-bottom p strong { color: var(--gold); font-weight: 700; }
+.footer-bottom p { font-size: 12.5px; color: rgba(30,41,59,0.8); font-weight: 500; }
+.footer-bottom p strong { color: var(--navy); font-weight: 800; }
 .footer-bottom-links { display: flex; gap: 20px; }
 .footer-bottom-links a {
-  font-size: 11.5px; color: rgba(255,255,255,0.3);
-  letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s;
+  font-size: 11.5px; color: rgba(30,41,59,0.7);
+  letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; font-weight: 700;
 }
-.footer-bottom-links a:hover { color: var(--gold); }
+.footer-bottom-links a:hover { color: var(--navy); }
 
 /* ── BACK TO TOP ─────────────────────────────────── */
 .back-to-top {

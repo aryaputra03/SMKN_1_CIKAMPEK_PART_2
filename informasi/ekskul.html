@@ -10,15 +10,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --navy: #0F1E38; --navy-mid: #1B2E4A; --navy-light: #243558;
-      --gold: #C9A84C; --gold-light: #E8C96B; --gold-pale: #FAF3DC;
-      --white: #FFFFFF; --off-white: #F8F7F4; --gray-soft: #EDF0F5;
-      --text: #1A1F2E; --text-muted: #64748B; --text-light: #94A3B8;
-      --shadow-sm: 0 2px 8px rgba(15,30,56,0.08);
-      --shadow-md: 0 6px 24px rgba(15,30,56,0.12);
-      --shadow-lg: 0 16px 48px rgba(15,30,56,0.15);
-      --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+:root {
+      /* Warna Formal Modern (Menggantikan Navy Lama) */
+      --navy: #1E293B; --navy-mid: #334155; --navy-light: #475569;
+      
+      /* Warna Kuning Cerah Presisi Logo (Tetap menggunakan nama variabel gold agar kode di bawahnya tidak error) */
+      --gold: #FFE600; --gold-light: #E6CF00; --gold-pale: rgba(255, 230, 0, 0.1);
+      
+      /* Warna Background Clean & Profesional */
+      --white: #FFFFFF; --off-white: #F8FAFC; --gray-soft: #E2E8F0;
+      --text: #1E293B; --text-muted: #64748B; --text-light: #94A3B8;
+      
+      /* Bayangan Halus */
+      --shadow-sm: 0 2px 8px rgba(30,41,59,0.05);
+      --shadow-md: 0 6px 24px rgba(30,41,59,0.08);
+      --shadow-lg: 0 16px 48px rgba(30,41,59,0.12);
+      
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
       --ease: cubic-bezier(0.4,0,0.2,1);
     }
     html { scroll-behavior: smooth; font-size: 16px; }
