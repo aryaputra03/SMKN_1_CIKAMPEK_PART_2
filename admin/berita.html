@@ -22,6 +22,26 @@
     </nav>
 
     <main id="content">
+        <h1>Kelola Berita</h1>
+<button id="btn-tambah-berita">Tambah Berita Baru</button>
+
+<form id="form-berita" style="display: none;">
+    <button type="submit">Simpan</button>
+    <button type="button" onclick="tutupForm()">Batal</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Judul</th>
+            <th>Kategori</th>
+            <th>Tanggal</th>
+            <th>Aksi (Edit/Hapus)</th>
+        </tr>
+    </thead>
+    <tbody id="tabel-berita">
+        </tbody>
+</table>
         </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

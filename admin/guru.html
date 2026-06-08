@@ -22,6 +22,28 @@
     </nav>
 
     <main id="content">
+        <h1>Kelola Guru & Lulusan Terbaik</h1>
+
+<div class="tabs">
+    <button id="tab-guru" onclick="showTab('guru')">Data Guru</button>
+    <button id="tab-lulusan" onclick="showTab('lulusan')">Lulusan Terbaik</button>
+</div>
+
+<section id="section-guru">
+    <h2>Daftar Guru</h2>
+    <button>Tambah Guru</button>
+    <table border="1">
+        <tbody id="tabel-guru"></tbody>
+    </table>
+</section>
+
+<section id="section-lulusan" style="display: none;">
+    <h2>Daftar Lulusan Terbaik</h2>
+    <button>Tambah Lulusan</button>
+    <table border="1">
+        <tbody id="tabel-lulusan"></tbody>
+    </table>
+</section>
         </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

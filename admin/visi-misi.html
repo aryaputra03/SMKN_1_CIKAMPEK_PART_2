@@ -22,6 +22,27 @@
     </nav>
 
     <main id="content">
+        <h1>Update Visi & Misi</h1>
+<p><em>Catatan: Pisahkan setiap poin misi dan tujuan dengan baris baru (Enter).</em></p>
+
+<form id="form-visi-misi">
+    <div>
+        <label>Visi Sekolah:</label><br>
+        <textarea id="input-visi" rows="3" style="width: 100%;"></textarea>
+    </div>
+    <br>
+    <div>
+        <label>Misi Sekolah (Per Baris):</label><br>
+        <textarea id="input-misi" rows="6" style="width: 100%;"></textarea>
+    </div>
+    <br>
+    <div>
+        <label>Tujuan Sekolah (Per Baris):</label><br>
+        <textarea id="input-tujuan" rows="6" style="width: 100%;"></textarea>
+    </div>
+    <br>
+    <button type="button" onclick="simpanVisiMisi()">Simpan Perubahan</button>
+</form>
         </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
