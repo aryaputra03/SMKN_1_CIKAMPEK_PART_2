@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
-    </head>
+    <title>Kelola Kurikulum - Admin SMKN 1 Cikampek</title>
+</head>
 <body>
     <nav>
         <ul>
@@ -22,40 +22,241 @@
     </nav>
 
     <main id="content">
-        </main>
+        <h1>Pengelolaan Data Kurikulum & Program Pendidikan</h1>
+        <button onclick="bukaFormTambah()">+ Tambah Dokumen / Struktur Kurikulum</button>
+        <br><br>
+
+        <div id="area-form" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 600px;">
+            <h3 id="judul-form">Tambah Data Kurikulum</h3>
+            <form id="form-kurikulum">
+                <input type="hidden" id="kurikulum-id">
+                
+                <div>
+                    <label>Judul / Nama Program Kurikulum:</label><br>
+                    <input type="text" id="input-judul" required style="width: 100%;" placeholder="Contoh: Kurikulum Merdeka Fase F Otomotif">
+                </div><br>
+                
+                <div>
+                    <label>Jenis Kurikulum:</label><br>
+                    <select id="input-jenis" required style="width: 100%; padding: 5px;">
+                        <option value="">-- Pilih Jenis --</option>
+                        <option value="Struktur Kurikulum">Struktur Kurikulum</option>
+                        <option value="Kompetensi Keahlian">Kompetensi Keahlian / Jurusan</option>
+                        <option value="Dokumen Regulasi">Dokumen Regulasi / SK</option>
+                        <option value="Kalender Akademik">Kalender Akademik</option>
+                    </select>
+                </div><br>
+
+                <div>
+                    <label>Tahun Ajaran:</label><br>
+                    <input type="text" id="input-tahun-ajaran" required placeholder="Contoh: 2025/2026" style="width: 150px;">
+                </div><br>
+                
+                <div>
+                    <label>URL Dokumen File (Hasil upload ke storage 'kurikulum-files'):</label><br>
+                    <input type="text" id="input-file-url" placeholder="Contoh: https://.../storage/v1/object/public/kurikulum-files/doc.pdf" style="width: 100%;">
+                </div><br>
+
+                <div>
+                    <label>Link Eksternal URL (Opsional / Pengalihan alternatif):</label><br>
+                    <input type="text" id="input-link-url" placeholder="Contoh: https://kemdikbud.go.id" style="width: 100%;">
+                </div><br>
+
+                <div>
+                    <label>Urutan Tampil (Angka):</label><br>
+                    <input type="number" id="input-urutan" value="1" required style="width: 80px;">
+                </div><br>
+                
+                <div>
+                    <label>
+                        <input type="checkbox" id="input-aktif" checked> Aktif (Tampilkan di halaman publik)
+                    </label>
+                </div><br>
+
+                <div>
+                    <label>Deskripsi Ringkas / Catatan Kurikulum:</label><br>
+                    <textarea id="input-deskripsi" rows="4" style="width: 100%; font-family: Arial, sans-serif;"></textarea>
+                </div><br>
+                
+                <button type="submit">Simpan Data</button>
+                <button type="button" onclick="tutupForm()">Batal</button>
+            </form>
+        </div>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="width: 60px;">Urutan</th>
+                    <th>Judul Kurikulum / Dokumen</th>
+                    <th>Jenis</th>
+                    <th>Tahun Ajaran</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-kurikulum">
+                </tbody>
+        </table>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
     <script>
-        // Letakkan ini di awal <script> setiap halaman admin
+        // =========================================================
+        // 1. GLOBAL SYSTEM (AUTH & LOGOUT)
+        // =========================================================
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // redirect ke login
+                window.location.href = 'index.html'; // Proteksi halaman, tendang ke login
             }
             return session;
         }
-
-        // Panggil di setiap halaman admin
         checkAuth();
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
-        
-        // ==========================================
-        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
-        // ==========================================
         async function logout() {
             await supabase.auth.signOut();
-            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+            window.location.href = 'index.html';
         }
-        // ==========================================
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
+        // =========================================================
+        // 2. LOGIKA CRUD SPESIFIK TABEL KURIKULUM (Pola Langkah 5)
+        // =========================================================
+        let modeForm = "tambah"; // Menandakan status form ("tambah" atau "edit")
+
+        // --- 5a. READ — Tampilkan daftar data kurikulum ---
+        async function loadKurikulum() {
+            const { data, error } = await supabase
+                .from('kurikulum')
+                .select('*')
+                .order('urutan', { ascending: true }); // Diurutkan agar tata letak struktur rapi sesuai angka urutan
+
+            if (error) { 
+                console.error("Gagal memuat kurikulum: ", error.message); 
+                return; 
+            }
+
+            const tbody = document.getElementById('tabel-kurikulum');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Belum ada data kurikulum yang disimpan.</td></tr>`;
+                return;
+            }
+
+            // Render baris tabel HTML secara dinamis
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td style="text-align:center;">${item.urutan}</td>
+                    <td>
+                        <b>${item.judul}</b><br>
+                        <small style="color:#666;">${item.deskripsi || 'Tidak ada deskripsi'}</small>
+                        ${item.file_url ? `<br><a href="${item.file_url}" target="_blank" style="font-size:12px; color:blue;">[Lihat Dokumen File]</a>` : ''}
+                    </td>
+                    <td>${item.jenis}</td>
+                    <td style="text-align:center;">${item.tahun_ajaran}</td>
+                    <td style="text-align:center;">${item.aktif ? '<span style="color:green; font-weight:bold;">Aktif</span>' : '<span style="color:red;">Non-Aktif</span>'}</td>
+                    <td style="text-align:center;">
+                        <button onclick="persiapkanEdit('${item.id}', \`${escapeJS(item.judul)}\`, \`${escapeJS(item.deskripsi || '')}\`, '${item.jenis}', '${item.file_url || ''}', '${item.link_url || ''}', '${item.tahun_ajaran}', ${item.urutan}, ${item.aktif})">Edit</button>
+                        <button onclick="hapusKurikulum('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // --- INTERCEPT SUBMIT FORM (Menggabungkan Logika Create & Update) ---
+        document.getElementById('form-kurikulum').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('kurikulum-id').value;
+            const formData = {
+                judul: document.getElementById('input-judul').value,
+                jenis: document.getElementById('input-jenis').value,
+                tahun_ajaran: document.getElementById('input-tahun-ajaran').value,
+                file_url: document.getElementById('input-file-url').value || null,
+                link_url: document.getElementById('input-link-url').value || null,
+                urutan: parseInt(document.getElementById('input-urutan').value),
+                aktif: document.getElementById('input-aktif').checked,
+                deskripsi: document.getElementById('input-deskripsi').value || null
+            };
+
+            if (modeForm === "tambah") {
+                // --- 5b. CREATE — Tambah data baru ---
+                const { error } = await supabase
+                    .from('kurikulum')
+                    .insert([formData]);
+                
+                if (error) alert("Gagal menambah data kurikulum: " + error.message);
+            } else {
+                // --- 5c. UPDATE — Edit data existing ---
+                const { error } = await supabase
+                    .from('kurikulum')
+                    .update(formData)
+                    .eq('id', id);
+                
+                if (error) alert("Gagal memperbarui data kurikulum: " + error.message);
+            }
+
+            tutupForm();
+            loadKurikulum(); // Refresh isi tabel secara dinamis tanpa reload halaman
+        });
+
+        // --- 5d. DELETE — Hapus data kurikulum ---
+        async function hapusKurikulum(id) {
+            if (!confirm('Yakin ingin menghapus data kurikulum ini secara permanen?')) return;
+            
+            const { error } = await supabase
+                .from('kurikulum')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menghapus data: " + error.message);
+            } else {
+                loadKurikulum(); // Refresh isi tabel setelah berhasil dihapus
+            }
+        }
+
+        // =========================================================
+        // 3. FUNGSI PEMBANTU INTERFACE (UI HELPER)
+        // =========================================================
+        function bukaFormTambah() {
+            modeForm = "tambah";
+            document.getElementById('judul-form').innerText = "Tambah Data Kurikulum Baru";
+            document.getElementById('form-kurikulum').reset();
+            document.getElementById('kurikulum-id').value = "";
+            document.getElementById('area-form').style.display = "block";
+        }
+
+        function persiapkanEdit(id, judul, deskripsi, jenis, file_url, link_url, tahun_ajaran, urutan, aktif) {
+            modeForm = "edit";
+            document.getElementById('judul-form').innerText = "Edit / Ubah Data Kurikulum";
+            document.getElementById('area-form').style.display = "block";
+            
+            // Pemetaan (Mapping) data lama dari database ke dalam field input form
+            document.getElementById('kurikulum-id').value = id;
+            document.getElementById('input-judul').value = judul;
+            document.getElementById('input-jenis').value = jenis;
+            document.getElementById('input-tahun-ajaran').value = tahun_ajaran;
+            document.getElementById('input-file-url').value = file_url;
+            document.getElementById('input-link-url').value = link_url;
+            document.getElementById('input-urutan').value = urutan;
+            document.getElementById('input-aktif').checked = aktif;
+            document.getElementById('input-deskripsi').value = deskripsi;
+        }
+
+        function tutupForm() {
+            document.getElementById('area-form').style.display = "none";
+            document.getElementById('form-kurikulum').reset();
+        }
+
+        // Fungsi Utility: Mengamankan string teks dari tanda kutip agar map literal template JS tidak rusak
+        function escapeJS(str) {
+            return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // Jalankan perintah load data saat halaman dibuka pertama kali oleh browser
+        loadKurikulum();
     </script>
 </body>
 </html>
