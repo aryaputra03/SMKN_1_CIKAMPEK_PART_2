@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
-    </head>
+    <title>Kelola Berita - Admin SMKN 1 Cikampek</title>
+</head>
 <body>
     <nav>
         <ul>
@@ -22,60 +22,221 @@
     </nav>
 
     <main id="content">
-        <h1>Kelola Berita</h1>
-<button id="btn-tambah-berita">Tambah Berita Baru</button>
+        <h1>Kelola Berita Sekolah</h1>
+        <button onclick="bukaFormTambah()">+ Tambah Berita Baru</button>
+        <br><br>
 
-<form id="form-berita" style="display: none;">
-    <button type="submit">Simpan</button>
-    <button type="button" onclick="tutupForm()">Batal</button>
-</form>
+        <div id="area-form" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 600px;">
+            <h3 id="judul-form">Tambah Berita</h3>
+            <form id="form-berita">
+                <input type="hidden" id="berita-id">
+                
+                <div>
+                    <label>Judul Berita:</label><br>
+                    <input type="text" id="input-judul" required style="width: 100%;">
+                </div><br>
+                
+                <div>
+                    <label>Kategori Berita:</label><br>
+                    <select id="input-kategori" required style="width: 100%; padding: 5px;">
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Pengumuman">Pengumuman</option>
+                        <option value="Kegiatan">Kegiatan Sekolah</option>
+                        <option value="Artikel">Artikel / Opini</option>
+                        <option value="Info Kelulusan">Info Kelulusan</option>
+                    </select>
+                </div><br>
+                
+                <div>
+                    <label>Tanggal Publikasi:</label><br>
+                    <input type="date" id="input-tanggal" required>
+                </div><br>
+                
+                <div>
+                    <label>URL Foto Sampul (Gambar):</label><br>
+                    <input type="text" id="input-foto" placeholder="Contoh: https://... /berita-images/gambar.jpg" style="width: 100%;">
+                </div><br>
+                
+                <div>
+                    <label>Isi Konten Berita:</label><br>
+                    <textarea id="input-isi" rows="8" required style="width: 100%; font-family: Arial, sans-serif;"></textarea>
+                </div><br>
+                
+                <button type="submit">Simpan Berita</button>
+                <button type="button" onclick="tutupForm()">Batal</button>
+            </form>
+        </div>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Judul</th>
-            <th>Kategori</th>
-            <th>Tanggal</th>
-            <th>Aksi (Edit/Hapus)</th>
-        </tr>
-    </thead>
-    <tbody id="tabel-berita">
-        </tbody>
-</table>
-        </main>
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Judul Berita</th>
+                    <th>Kategori</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-berita">
+                </tbody>
+        </table>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
     <script>
-        // Letakkan ini di awal <script> setiap halaman admin
+        // =========================================================
+        // 1. GLOBAL SYSTEM (AUTH & LOGOUT)
+        // =========================================================
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // redirect ke login
+                window.location.href = 'index.html'; // Tendang ke login jika belum auth
             }
             return session;
         }
-
-        // Panggil di setiap halaman admin
         checkAuth();
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
-        
-        // ==========================================
-        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
-        // ==========================================
         async function logout() {
             await supabase.auth.signOut();
-            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+            window.location.href = 'index.html';
         }
-        // ==========================================
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
+        // =========================================================
+        // 2. KODE CRUD SPESIFIK MODUL BERITA (Sesuai Pola Langkah 5)
+        // =========================================================
+        let modeForm = "tambah"; // Menandakan status form ("tambah" atau "edit")
+
+        // --- 5a. READ — Tampilkan daftar data berita ---
+        async function loadBerita() {
+            const { data, error } = await supabase
+                .from('berita')
+                .select('*')
+                .order('created_at', { ascending: false }); // Berita terbaru muncul paling atas
+
+            if (error) { 
+                console.error("Gagal memuat berita: ", error.message); 
+                return; 
+            }
+
+            const tbody = document.getElementById('tabel-berita');
+            
+            // Proteksi jika data di database masih kosong
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Belum ada berita yang diterbitkan.</td></tr>`;
+                return;
+            }
+
+            // Render baris tabel HTML dinamis
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td><b>${item.judul}</b><br><small style="color:#666;">Slug: ${item.slug}</small></td>
+                    <td style="text-align:center;">${item.kategori}</td>
+                    <td style="text-align:center;">${item.tanggal}</td>
+                    <td style="text-align:center;">
+                        <button onclick="persiapkanEdit('${item.id}', \`${escapeJS(item.judul)}\`, '${item.kategori}', '${item.tanggal}', '${item.foto_url || ''}', \`${escapeJS(item.isi)}\`)">Edit</button>
+                        <button onclick="hapusBerita('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // --- INTERCEPT SUBMIT FORM (Menggabungkan Logika Create & Update) ---
+        document.getElementById('form-berita').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('berita-id').value;
+            const judulInput = document.getElementById('input-judul').value;
+            
+            // 5b. Otomatis Generate Slug dari Judul Berita
+            const slugOtomatis = judulInput
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter spesial selain huruf, angka, dan spasi
+                .replace(/\s+/g, '-');        // Ubah spasi beruntun menjadi tanda pisah (-)
+
+            const formData = {
+                judul: judulInput,
+                slug: slugOtomatis,
+                isi: document.getElementById('input-isi').value,
+                kategori: document.getElementById('input-kategori').value,
+                tanggal: document.getElementById('input-tanggal').value,
+                foto_url: document.getElementById('input-foto').value || null
+            };
+
+            if (modeForm === "tambah") {
+                // --- 5b. CREATE — Tambah berita baru ---
+                const { error } = await supabase
+                    .from('berita')
+                    .insert([formData]);
+                
+                if (error) alert("Gagal menambah berita: " + error.message);
+            } else {
+                // --- 5c. UPDATE — Edit data berita ---
+                const { error } = await supabase
+                    .from('berita')
+                    .update(formData)
+                    .eq('id', id);
+                
+                if (error) alert("Gagal memperbarui berita: " + error.message);
+            }
+
+            tutupForm();
+            loadBerita(); // Refresh isi tabel secara dinamis tanpa reload halaman
+        });
+
+        // --- 5d. DELETE — Hapus data berita ---
+        async function hapusBerita(id) {
+            if (!confirm('Yakin ingin menghapus berita ini secara permanen?')) return;
+            
+            const { error } = await supabase
+                .from('berita')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menghapus berita: " + error.message);
+            } else {
+                loadBerita(); // Refresh isi tabel setelah berhasil dihapus
+            }
+        }
+
+        // =========================================================
+        // 3. FUNGSI PEMBANTU INTERFACE (UI APP HELPER)
+        // =========================================================
+        function bukaFormTambah() {
+            modeForm = "tambah";
+            document.getElementById('judul-form').innerText = "Tambah Berita Baru";
+            document.getElementById('form-berita').reset();
+            document.getElementById('berita-id').value = "";
+            document.getElementById('area-form').style.display = "block";
+        }
+
+        function persiapkanEdit(id, judul, kategori, tanggal, foto, isi) {
+            modeForm = "edit";
+            document.getElementById('judul-form').innerText = "Edit / Ubah Berita";
+            document.getElementById('area-form').style.display = "block";
+            
+            // Mapping data lama database ke dalam field input form
+            document.getElementById('berita-id').value = id;
+            document.getElementById('input-judul').value = judul;
+            document.getElementById('input-kategori').value = kategori;
+            document.getElementById('input-tanggal').value = tanggal;
+            document.getElementById('input-foto').value = foto;
+            document.getElementById('input-isi').value = isi;
+        }
+
+        function tutupForm() {
+            document.getElementById('area-form').style.display = "none";
+            document.getElementById('form-berita').reset();
+        }
+
+        // Mengamankan string teks dari tanda kutip agar map HTML javascript tidak pecah/error
+        function escapeJS(str) {
+            return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // Jalankan perintah load data saat halaman dibuka pertama kali oleh browser
+        loadBerita();
     </script>
 </body>
 </html>
