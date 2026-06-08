@@ -53,8 +53,14 @@
                 </div><br>
                 
                 <div>
-                    <label>URL Foto Sampul (Gambar):</label><br>
-                    <input type="text" id="input-foto" placeholder="Contoh: https://... /berita-images/gambar.jpg" style="width: 100%;">
+                    <label>Upload Foto Sampul Berita:</label><br>
+                    <input type="file" id="input-file-foto" accept="image/*" style="width: 100%;">
+                    
+                    <input type="hidden" id="input-foto">
+                    
+                    <br>
+                    <img id="preview-foto" style="max-width: 200px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                    <small id="status-upload" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                 </div><br>
                 
                 <div>
@@ -91,7 +97,7 @@
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // Tendang ke login jika belum auth
+                window.location.href = 'index.html';
             }
             return session;
         }
@@ -105,14 +111,14 @@
         // =========================================================
         // 2. KODE CRUD SPESIFIK MODUL BERITA (Sesuai Pola Langkah 5)
         // =========================================================
-        let modeForm = "tambah"; // Menandakan status form ("tambah" atau "edit")
+        let modeForm = "tambah";
 
         // --- 5a. READ — Tampilkan daftar data berita ---
         async function loadBerita() {
             const { data, error } = await supabase
                 .from('berita')
                 .select('*')
-                .order('created_at', { ascending: false }); // Berita terbaru muncul paling atas
+                .order('created_at', { ascending: false });
 
             if (error) { 
                 console.error("Gagal memuat berita: ", error.message); 
@@ -120,14 +126,11 @@
             }
 
             const tbody = document.getElementById('tabel-berita');
-            
-            // Proteksi jika data di database masih kosong
             if (data.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Belum ada berita yang diterbitkan.</td></tr>`;
                 return;
             }
 
-            // Render baris tabel HTML dinamis
             tbody.innerHTML = data.map(item => `
                 <tr>
                     <td><b>${item.judul}</b><br><small style="color:#666;">Slug: ${item.slug}</small></td>
@@ -148,11 +151,10 @@
             const id = document.getElementById('berita-id').value;
             const judulInput = document.getElementById('input-judul').value;
             
-            // 5b. Otomatis Generate Slug dari Judul Berita
             const slugOtomatis = judulInput
                 .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter spesial selain huruf, angka, dan spasi
-                .replace(/\s+/g, '-');        // Ubah spasi beruntun menjadi tanda pisah (-)
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-');
 
             const formData = {
                 judul: judulInput,
@@ -160,45 +162,86 @@
                 isi: document.getElementById('input-isi').value,
                 kategori: document.getElementById('input-kategori').value,
                 tanggal: document.getElementById('input-tanggal').value,
-                foto_url: document.getElementById('input-foto').value || null
+                foto_url: document.getElementById('input-foto').value || null // Mengambil value URL dari hidden input
             };
 
             if (modeForm === "tambah") {
-                // --- 5b. CREATE — Tambah berita baru ---
-                const { error } = await supabase
-                    .from('berita')
-                    .insert([formData]);
-                
+                const { error } = await supabase.from('berita').insert([formData]);
                 if (error) alert("Gagal menambah berita: " + error.message);
             } else {
-                // --- 5c. UPDATE — Edit data berita ---
-                const { error } = await supabase
-                    .from('berita')
-                    .update(formData)
-                    .eq('id', id);
-                
+                const { error } = await supabase.from('berita').update(formData).eq('id', id);
                 if (error) alert("Gagal memperbarui berita: " + error.message);
             }
 
             tutupForm();
-            loadBerita(); // Refresh isi tabel secara dinamis tanpa reload halaman
+            loadBerita();
         });
 
         // --- 5d. DELETE — Hapus data berita ---
         async function hapusBerita(id) {
             if (!confirm('Yakin ingin menghapus berita ini secara permanen?')) return;
             
-            const { error } = await supabase
-                .from('berita')
-                .delete()
-                .eq('id', id);
-
+            const { error } = await supabase.from('berita').delete().eq('id', id);
             if (error) {
                 alert("Gagal menghapus berita: " + error.message);
             } else {
-                loadBerita(); // Refresh isi tabel setelah berhasil dihapus
+                loadBerita();
             }
         }
+
+        // =========================================================
+        // IMPLEMENTASI LANGKAH 6: LOGIKA UPLOAD KE STORAGE SUPABASE
+        // =========================================================
+        async function uploadGambar(file, bucket) {
+            // Buat nama file unik menggunakan timestamp mili-detik untuk menghindari konflik nama yang sama
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(namaFile, file);
+
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert("Proses upload gagal: " + error.message);
+                return null;
+            }
+
+            // Ambil URL publik gambar dari bucket untuk disimpan di database
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+
+            return publicUrl;
+        }
+
+        // Event Listener Otomatis Terpicu saat Admin Memilih File Gambar
+        document.getElementById('input-file-foto').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const labelStatus = document.getElementById('status-upload');
+            labelStatus.style.display = "block";
+            labelStatus.style.color = "blue";
+            labelStatus.innerText = "Sedang mengunggah file ke storage...";
+
+            // Memanggil fungsi upload dengan parameter mapping bucket 'berita-images'
+            const url = await uploadGambar(file, 'berita-images');
+
+            if (url) {
+                // Simpan URL publik ke hidden input agar terbaca saat form disubmit
+                document.getElementById('input-foto').value = url;
+                
+                // Tampilkan preview gambar di bawah form
+                const previewImg = document.getElementById('preview-foto');
+                previewImg.src = url;
+                previewImg.style.display = "block";
+                
+                labelStatus.innerText = "Upload Berhasil!";
+                labelStatus.style.color = "green";
+            } else {
+                labelStatus.style.display = "none";
+            }
+        });
 
         // =========================================================
         // 3. FUNGSI PEMBANTU INTERFACE (UI APP HELPER)
@@ -208,6 +251,14 @@
             document.getElementById('judul-form').innerText = "Tambah Berita Baru";
             document.getElementById('form-berita').reset();
             document.getElementById('berita-id').value = "";
+            
+            // Bersihkan sisa-sisa elemen file & preview lama
+            document.getElementById('input-foto').value = "";
+            document.getElementById('input-file-foto').value = "";
+            document.getElementById('preview-foto').style.display = "none";
+            document.getElementById('preview-foto').src = "";
+            document.getElementById('status-upload').style.display = "none";
+
             document.getElementById('area-form').style.display = "block";
         }
 
@@ -216,26 +267,41 @@
             document.getElementById('judul-form').innerText = "Edit / Ubah Berita";
             document.getElementById('area-form').style.display = "block";
             
-            // Mapping data lama database ke dalam field input form
             document.getElementById('berita-id').value = id;
             document.getElementById('input-judul').value = judul;
             document.getElementById('input-kategori').value = kategori;
             document.getElementById('input-tanggal').value = tanggal;
+            
+            // Set data lama link URL foto ke hidden input
             document.getElementById('input-foto').value = foto;
+            document.getElementById('input-file-foto').value = ""; // Reset pilihan picker file baru
+            
+            // Rekonstruksi preview gambar jika data lama memiliki gambar sampul
+            const previewImg = document.getElementById('preview-foto');
+            if (foto && foto !== "null" && foto !== "") {
+                previewImg.src = foto;
+                previewImg.style.display = "block";
+            } else {
+                previewImg.style.display = "none";
+                previewImg.src = "";
+            }
+            document.getElementById('status-upload').style.display = "none";
+            
             document.getElementById('input-isi').value = isi;
         }
 
         function tutupForm() {
             document.getElementById('area-form').style.display = "none";
             document.getElementById('form-berita').reset();
+            document.getElementById('input-file-foto').value = "";
+            document.getElementById('preview-foto').style.display = "none";
+            document.getElementById('status-upload').style.display = "none";
         }
 
-        // Mengamankan string teks dari tanda kutip agar map HTML javascript tidak pecah/error
         function escapeJS(str) {
             return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
-        // Jalankan perintah load data saat halaman dibuka pertama kali oleh browser
         loadBerita();
     </script>
 </body>

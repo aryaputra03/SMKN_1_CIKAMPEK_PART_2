@@ -40,8 +40,14 @@
                     <input type="text" id="input-subjudul" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>URL Foto Banner:</label><br>
-                    <input type="text" id="input-foto" required style="width: 100%;">
+                    <label>Foto Banner:</label><br>
+                    <input type="file" id="input-file-foto" accept="image/*" style="margin-bottom: 5px;"><br>
+                    <small style="color: #666;">Atau gunakan URL Foto secara langsung:</small><br>
+                    <input type="text" id="input-foto" required style="width: 100%; margin-top: 5px;">
+                    <div id="area-preview" style="margin-top: 10px; display: none;">
+                        <small style="color: #666; display: block; margin-bottom: 5px;">Pratinjau Foto:</small>
+                        <img id="preview-foto" src="" style="max-width: 100%; max-height: 150px; border: 1px solid #ddd; padding: 3px; border-radius: 4px;">
+                    </div>
                 </div><br>
                 <div>
                     <label>Link Tujuan URL (Redirect):</label><br>
@@ -187,12 +193,61 @@
             }
         }
 
+        // ---------------------------------------------------------
+        // SCRIPT UPLOAD FILE KE STORAGE (Langkah 6)
+        // ---------------------------------------------------------
+        async function uploadGambar(file, bucket) {
+            // Buat nama file unik untuk menghindari konflik
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(namaFile, file);
+                
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert('Upload gagal: ' + error.message);
+                return null;
+            }
+            
+            // Ambil URL publik untuk disimpan ke tabel database
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+                
+            return publicUrl;
+        }
+
+        document.getElementById('input-file-foto').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Feedback loading
+            const btnSubmit = document.querySelector("#form-banner button[type='submit']");
+            const txtAsliBtn = btnSubmit.innerText;
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Mengunggah...";
+
+            const url = await uploadGambar(file, 'banner-images');
+
+            btnSubmit.disabled = false;
+            btnSubmit.innerText = txtAsliBtn;
+
+            if (url) {
+                document.getElementById('input-foto').value = url;
+                document.getElementById('preview-foto').src = url;
+                document.getElementById('area-preview').style.display = "block";
+                alert('Foto berhasil diunggah!');
+            }
+        });
+
         // --- FUNGSI BANTUAN INTERFAS FORM (UI HELPER) ---
         function bukaFormTambah() {
             modeForm = "tambah";
             document.getElementById('judul-form').innerText = "Tambah Banner Baru";
             document.getElementById('form-banner').reset();
             document.getElementById('banner-id').value = "";
+            document.getElementById('area-preview').style.display = "none";
+            document.getElementById('preview-foto').src = "";
             document.getElementById('area-form').style.display = "block";
         }
 
@@ -209,11 +264,21 @@
             document.getElementById('input-link').value = (link === 'null' || link === 'undefined') ? '' : link;
             document.getElementById('input-urutan').value = urutan;
             document.getElementById('input-aktif').checked = aktif;
+
+            if (foto && foto !== 'null' && foto !== 'undefined') {
+                document.getElementById('preview-foto').src = foto;
+                document.getElementById('area-preview').style.display = "block";
+            } else {
+                document.getElementById('area-preview').style.display = "none";
+                document.getElementById('preview-foto').src = "";
+            }
         }
 
         function tutupForm() {
             document.getElementById('area-form').style.display = "none";
             document.getElementById('form-banner').reset();
+            document.getElementById('area-preview').style.display = "none";
+            document.getElementById('preview-foto').src = "";
         }
 
         // Jalankan pemuatan data otomatis saat halaman selesai di-load browser

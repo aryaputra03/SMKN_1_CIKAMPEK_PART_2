@@ -59,8 +59,14 @@
                 </div><br>
                 
                 <div>
-                    <label>URL Foto Dokumentasi (Hasil upload ke storage 'prestasi-images'):</label><br>
-                    <input type="text" id="input-foto" placeholder="Contoh: https://.../storage/v1/object/public/prestasi-images/piala.jpg" style="width: 100%;">
+                    <label>Upload Foto Dokumentasi Prestasi:</label><br>
+                    <input type="file" id="input-file-foto" accept="image/*" style="width: 100%;">
+                    
+                    <input type="hidden" id="input-foto">
+                    
+                    <br>
+                    <img id="preview-foto" style="max-width: 200px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                    <small id="status-upload" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                 </div><br>
                 
                 <div>
@@ -97,7 +103,7 @@
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // Proteksi halaman admin
+                window.location.href = 'index.html'; 
             }
             return session;
         }
@@ -109,16 +115,15 @@
         }
 
         // =========================================================
-        // 2. LOGIKA CRUD SPESIFIK TABEL PRESTASI (Pola Langkah 5)
+        // 2. LOGIKA CRUD SPESIFIK TABEL PRESTASI 
         // =========================================================
-        let modeForm = "tambah"; // Menandakan status form ("tambah" atau "edit")
+        let modeForm = "tambah"; 
 
-        // --- 5a. READ — Tampilkan daftar data prestasi ---
         async function loadPrestasi() {
             const { data, error } = await supabase
                 .from('prestasi')
                 .select('*')
-                .order('tanggal', { ascending: false }); // Prestasi paling baru dicapai muncul paling atas
+                .order('tanggal', { ascending: false });
 
             if (error) { 
                 console.error("Gagal memuat data prestasi: ", error.message); 
@@ -132,7 +137,6 @@
                 return;
             }
 
-            // Render baris tabel HTML secara dinamis
             tbody.innerHTML = data.map(item => `
                 <tr>
                     <td>
@@ -150,18 +154,16 @@
             `).join('');
         }
 
-        // --- INTERCEPT SUBMIT FORM (Menggabungkan Logika Create & Update) ---
         document.getElementById('form-prestasi').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const id = document.getElementById('prestasi-id').value;
             const judulInput = document.getElementById('input-judul').value;
             
-            // Otomatis Generate Slug dari Judul Prestasi untuk URL ramah SEO
             const slugOtomatis = judulInput
                 .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter spesial selain huruf, angka, dan spasi
-                .replace(/\s+/g, '-');        // Ubah spasi menjadi tanda hubung (-)
+                .replace(/[^a-z0-9\s-]/g, '') 
+                .replace(/\s+/g, '-');        
 
             const formData = {
                 judul: judulInput,
@@ -169,46 +171,86 @@
                 pemenang: document.getElementById('input-pemenang').value,
                 kategori: document.getElementById('input-kategori').value,
                 tanggal: document.getElementById('input-tanggal').value,
-                foto_url: document.getElementById('input-foto').value || null,
+                foto_url: document.getElementById('input-foto').value || null, // Diambil dari hidden input hasil upload
                 deskripsi: document.getElementById('input-deskripsi').value
             };
 
             if (modeForm === "tambah") {
-                // --- 5b. CREATE — Tambah prestasi baru ---
-                const { error } = await supabase
-                    .from('prestasi')
-                    .insert([formData]);
-                
+                const { error } = await supabase.from('prestasi').insert([formData]);
                 if (error) alert("Gagal menambah data prestasi: " + error.message);
             } else {
-                // --- 5c. UPDATE — Edit data prestasi existing ---
-                const { error } = await supabase
-                    .from('prestasi')
-                    .update(formData)
-                    .eq('id', id);
-                
+                const { error } = await supabase.from('prestasi').update(formData).eq('id', id);
                 if (error) alert("Gagal memperbarui data prestasi: " + error.message);
             }
 
             tutupForm();
-            loadPrestasi(); // Refresh isi tabel secara dinamis tanpa reload halaman
+            loadPrestasi(); 
         });
 
-        // --- 5d. DELETE — Hapus data prestasi ---
         async function hapusPrestasi(id) {
             if (!confirm('Yakin ingin menghapus catatan prestasi ini secara permanen?')) return;
             
-            const { error } = await supabase
-                .from('prestasi')
-                .delete()
-                .eq('id', id);
-
+            const { error } = await supabase.from('prestasi').delete().eq('id', id);
             if (error) {
                 alert("Gagal menghapus prestasi: " + error.message);
             } else {
-                loadPrestasi(); // Refresh isi tabel setelah berhasil dihapus
+                loadPrestasi(); 
             }
         }
+
+        // =========================================================
+        // IMPLEMENTASI LANGKAH 6: LOGIKA UPLOAD KE STORAGE SUPABASE
+        // =========================================================
+        async function uploadGambar(file, bucket) {
+            // Buat nama file unik untuk menghindari konflik nama yang sama
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            
+            const { data, error } = await supabase.storage
+                .from(bucket) 
+                .upload(namaFile, file);
+
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert("Proses upload gagal: " + error.message);
+                return null;
+            }
+
+            // Ambil URL publik gambar untuk disimpan ke tabel database
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+
+            return publicUrl;
+        }
+
+        // Listener Otomatis saat Admin Memilih File Gambar dari Komputer
+        document.getElementById('input-file-foto').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const labelStatus = document.getElementById('status-upload');
+            labelStatus.style.display = "block";
+            labelStatus.style.color = "blue";
+            labelStatus.innerText = "Sedang mengunggah file ke storage...";
+
+            // Memanggil fungsi upload dengan parameter mapping bucket 'prestasi-images'
+            const url = await uploadGambar(file, 'prestasi-images');
+
+            if (url) {
+                // Simpan URL publik ke hidden input agar terbaca saat disubmit
+                document.getElementById('input-foto').value = url;
+                
+                // Tampilkan preview gambar di bawah form
+                const previewImg = document.getElementById('preview-foto');
+                previewImg.src = url;
+                previewImg.style.display = "block";
+                
+                labelStatus.innerText = "Upload Berhasil!";
+                labelStatus.style.color = "green";
+            } else {
+                labelStatus.style.display = "none";
+            }
+        });
 
         // =========================================================
         // 3. FUNGSI PEMBANTU INTERFACE (UI HELPER)
@@ -218,6 +260,14 @@
             document.getElementById('judul-form').innerText = "Tambah Prestasi Baru";
             document.getElementById('form-prestasi').reset();
             document.getElementById('prestasi-id').value = "";
+            
+            // Bersihkan sisa elemen file & preview lama
+            document.getElementById('input-foto').value = "";
+            document.getElementById('input-file-foto').value = "";
+            document.getElementById('preview-foto').style.display = "none";
+            document.getElementById('preview-foto').src = "";
+            document.getElementById('status-upload').style.display = "none";
+
             document.getElementById('area-form').style.display = "block";
         }
 
@@ -226,27 +276,41 @@
             document.getElementById('judul-form').innerText = "Edit / Ubah Data Prestasi";
             document.getElementById('area-form').style.display = "block";
             
-            // Memetakan (Mapping) data lama dari database ke dalam field input form
             document.getElementById('prestasi-id').value = id;
             document.getElementById('input-judul').value = judul;
             document.getElementById('input-pemenang').value = pemenang;
             document.getElementById('input-kategori').value = kategori;
             document.getElementById('input-tanggal').value = tanggal;
-            document.getElementById('input-foto').value = foto;
             document.getElementById('input-deskripsi').value = deskripsi;
+
+            // Set URL foto lama ke hidden input
+            document.getElementById('input-foto').value = foto;
+            document.getElementById('input-file-foto').value = ""; // Reset picker file
+            
+            // Rekonstruksi preview gambar jika data lama memiliki foto
+            const previewImg = document.getElementById('preview-foto');
+            if (foto && foto !== "null" && foto !== "") {
+                previewImg.src = foto;
+                previewImg.style.display = "block";
+            } else {
+                previewImg.style.display = "none";
+                previewImg.src = "";
+            }
+            document.getElementById('status-upload').style.display = "none";
         }
 
         function tutupForm() {
             document.getElementById('area-form').style.display = "none";
             document.getElementById('form-prestasi').reset();
+            document.getElementById('input-file-foto').value = "";
+            document.getElementById('preview-foto').style.display = "none";
+            document.getElementById('status-upload').style.display = "none";
         }
 
-        // Fungsi Utility: Mengamankan string teks dari tanda kutip agar map literal template JS tidak rusak
         function escapeJS(str) {
             return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
-        // Jalankan perintah load data saat halaman dibuka pertama kali oleh browser
         loadPrestasi();
     </script>
 </body>

@@ -77,10 +77,16 @@
                         <label>Jabatan / Mata Pelajaran:</label><br>
                         <input type="text" id="guru-jabatan" placeholder="Contoh: Guru Produktif Otomotif / Kepala Sekolah" required style="width: 100%;">
                     </div><br>
+                    
                     <div>
-                        <label>URL Foto:</label><br>
-                        <input type="text" id="guru-foto" placeholder="Format URL dari storage guru-images" style="width: 100%;">
+                        <label>Upload Foto Guru/Staff:</label><br>
+                        <input type="file" id="input-file-guru" accept="image/*" style="width: 100%;">
+                        <input type="hidden" id="guru-foto">
+                        <br>
+                        <img id="preview-guru" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                        <small id="status-upload-guru" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                     </div><br>
+
                     <div>
                         <label>Urutan Tampil (Angka):</label><br>
                         <input type="number" id="guru-urutan" value="1" required style="width: 80px;">
@@ -101,7 +107,7 @@
                     </tr>
                 </thead>
                 <tbody id="tabel-guru">
-                    </tbody>
+                </tbody>
             </table>
         </div>
 
@@ -126,10 +132,16 @@
                         <label>Keterangan Sukses (Kuliah / Kerja / Usaha):</label><br>
                         <input type="text" id="lulusan-keterangan" placeholder="Contoh: Bekerja di PT. Toyota Motor Manufacturing" required style="width: 100%;">
                     </div><br>
+                    
                     <div>
-                        <label>URL Foto Alumni:</label><br>
-                        <input type="text" id="lulusan-foto" style="width: 100%;">
+                        <label>Upload Foto Alumni:</label><br>
+                        <input type="file" id="input-file-lulusan" accept="image/*" style="width: 100%;">
+                        <input type="hidden" id="lulusan-foto">
+                        <br>
+                        <img id="preview-lulusan" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                        <small id="status-upload-lulusan" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                     </div><br>
+
                     <button type="submit">Simpan Data Alumni</button>
                     <button type="button" onclick="tutupFormLulusan()">Batal</button>
                 </form>
@@ -145,7 +157,7 @@
                     </tr>
                 </thead>
                 <tbody id="tabel-lulusan">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </main>
@@ -169,7 +181,6 @@
             window.location.href = 'index.html';
         }
 
-        // Fungsi Pengendali Perpindahan Tab UI
         function pindahTab(tabId, tombol) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
@@ -177,6 +188,81 @@
             document.getElementById(tabId).classList.add('active');
             tombol.classList.add('active');
         }
+
+        // =========================================================
+        // IMPLEMENTASI LANGKAH 6: UPLOAD KE STORAGE SUPABASE
+        // =========================================================
+        async function uploadGambar(file, bucket) {
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(namaFile, file);
+
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert("Proses upload gagal: " + error.message);
+                return null;
+            }
+
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+
+            return publicUrl;
+        }
+
+        // Event Listener untuk Upload Foto Guru
+        document.getElementById('input-file-guru').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const statusUpload = document.getElementById('status-upload-guru');
+            statusUpload.style.display = "block";
+            statusUpload.style.color = "blue";
+            statusUpload.innerText = "Sedang mengunggah file ke storage...";
+
+            // Memanggil fungsi upload dengan mapping bucket 'guru-images'
+            const url = await uploadGambar(file, 'guru-images');
+
+            if (url) {
+                document.getElementById('guru-foto').value = url;
+                const preview = document.getElementById('preview-guru');
+                preview.src = url;
+                preview.style.display = "block";
+                
+                statusUpload.innerText = "Upload Berhasil!";
+                statusUpload.style.color = "green";
+            } else {
+                statusUpload.style.display = "none";
+            }
+        });
+
+        // Event Listener untuk Upload Foto Lulusan Terbaik
+        document.getElementById('input-file-lulusan').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const statusUpload = document.getElementById('status-upload-lulusan');
+            statusUpload.style.display = "block";
+            statusUpload.style.color = "blue";
+            statusUpload.innerText = "Sedang mengunggah file ke storage...";
+
+            // Memanggil fungsi upload dengan mapping bucket 'guru-images' juga
+            const url = await uploadGambar(file, 'guru-images');
+
+            if (url) {
+                document.getElementById('lulusan-foto').value = url;
+                const preview = document.getElementById('preview-lulusan');
+                preview.src = url;
+                preview.style.display = "block";
+                
+                statusUpload.innerText = "Upload Berhasil!";
+                statusUpload.style.color = "green";
+            } else {
+                statusUpload.style.display = "none";
+            }
+        });
+
 
         // =========================================================
         // 2. MODUL CRUD: GURU & STAFF
@@ -243,6 +329,15 @@
             modeGuru = "tambah";
             document.getElementById('judul-form-guru').innerText = "Tambah Guru Baru";
             document.getElementById('form-guru').reset();
+            document.getElementById('guru-id').value = "";
+            
+            // Bersihkan sisa elemen file & preview lama
+            document.getElementById('guru-foto').value = "";
+            document.getElementById('input-file-guru').value = "";
+            document.getElementById('preview-guru').style.display = "none";
+            document.getElementById('preview-guru').src = "";
+            document.getElementById('status-upload-guru').style.display = "none";
+            
             document.getElementById('area-form-guru').style.display = "block";
         }
 
@@ -250,12 +345,27 @@
             modeGuru = "edit";
             document.getElementById('judul-form-guru').innerText = "Edit Data Guru";
             document.getElementById('area-form-guru').style.display = "block";
+            
             document.getElementById('guru-id').value = id;
             document.getElementById('guru-nama').value = nama;
             document.getElementById('guru-nip').value = nip;
             document.getElementById('guru-jabatan').value = jabatan;
-            document.getElementById('guru-foto').value = foto;
             document.getElementById('guru-urutan').value = urutan;
+            
+            // Set URL foto lama ke hidden input
+            document.getElementById('guru-foto').value = foto;
+            document.getElementById('input-file-guru').value = ""; // Reset picker file
+            
+            // Rekonstruksi preview gambar jika data lama memiliki foto
+            const preview = document.getElementById('preview-guru');
+            if (foto && foto !== "null" && foto !== "") {
+                preview.src = foto;
+                preview.style.display = "block";
+            } else {
+                preview.style.display = "none";
+                preview.src = "";
+            }
+            document.getElementById('status-upload-guru').style.display = "none";
         }
 
         function tutupFormGuru() {
@@ -272,7 +382,7 @@
             const { data, error } = await supabase
                 .from('lulusan_terbaik')
                 .select('*')
-                .order('tahun_lulus', { ascending: false }); // Urut dari tahun lulusan terbaru
+                .order('tahun_lulus', { ascending: false });
 
             if (error) { console.error(error.message); return; }
 
@@ -326,6 +436,15 @@
             modeLulusan = "tambah";
             document.getElementById('judul-form-lulusan').innerText = "Tambah Alumni Berprestasi";
             document.getElementById('form-lulusan').reset();
+            document.getElementById('lulusan-id').value = "";
+            
+            // Bersihkan sisa elemen file & preview lama
+            document.getElementById('lulusan-foto').value = "";
+            document.getElementById('input-file-lulusan').value = "";
+            document.getElementById('preview-lulusan').style.display = "none";
+            document.getElementById('preview-lulusan').src = "";
+            document.getElementById('status-upload-lulusan').style.display = "none";
+            
             document.getElementById('area-form-lulusan').style.display = "block";
         }
 
@@ -333,23 +452,36 @@
             modeLulusan = "edit";
             document.getElementById('judul-form-lulusan').innerText = "Edit Data Alumni";
             document.getElementById('area-form-lulusan').style.display = "block";
+            
             document.getElementById('lulusan-id').value = id;
             document.getElementById('lulusan-nama').value = nama;
             document.getElementById('lulusan-tahun').value = tahun;
             document.getElementById('lulusan-keterangan').value = keterangan;
+            
+            // Set URL foto lama ke hidden input
             document.getElementById('lulusan-foto').value = foto;
+            document.getElementById('input-file-lulusan').value = ""; // Reset picker file
+            
+            // Rekonstruksi preview gambar jika data lama memiliki foto
+            const preview = document.getElementById('preview-lulusan');
+            if (foto && foto !== "null" && foto !== "") {
+                preview.src = foto;
+                preview.style.display = "block";
+            } else {
+                preview.style.display = "none";
+                preview.src = "";
+            }
+            document.getElementById('status-upload-lulusan').style.display = "none";
         }
 
         function tutupFormLulusan() {
             document.getElementById('area-form-lulusan').style.display = "none";
         }
 
-        // Global Utility: Escape Tanda Petik JavaScript String Map
         function escapeJS(str) {
             return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
-        // Inisialisasi awal pemuatan data kedua tabel saat halaman dibuka
         loadGuru();
         loadLulusan();
     </script>
