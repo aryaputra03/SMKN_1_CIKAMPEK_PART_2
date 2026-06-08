@@ -43,6 +43,19 @@
         // ---------------------------------------------------------
         // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
         // ---------------------------------------------------------
+        
+        // ==========================================
+        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
+        // ==========================================
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+        }
+        // ==========================================
+
+        // ---------------------------------------------------------
+        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
+        // ---------------------------------------------------------
     </script>
 </body>
 </html>
