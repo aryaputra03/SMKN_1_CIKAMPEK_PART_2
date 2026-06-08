@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
-    </head>
+    <title>Kelola Prestasi - Admin SMKN 1 Cikampek</title>
+</head>
 <body>
     <nav>
         <ul>
@@ -22,40 +22,232 @@
     </nav>
 
     <main id="content">
-        </main>
+        <h1>Pengelolaan Data Prestasi Sekolah & Siswa</h1>
+        <button onclick="bukaFormTambah()">+ Tambah Prestasi Baru</button>
+        <br><br>
+
+        <div id="area-form" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 600px;">
+            <h3 id="judul-form">Tambah Prestasi</h3>
+            <form id="form-prestasi">
+                <input type="hidden" id="prestasi-id">
+                
+                <div>
+                    <label>Judul Prestasi / Nama Perlombaan:</label><br>
+                    <input type="text" id="input-judul" required style="width: 100%;" placeholder="Contoh: Juara 1 LKS Otomotif Tingkat Provinsi">
+                </div><br>
+
+                <div>
+                    <label>Nama Pemenang (Siswa/Tim/Guru):</label><br>
+                    <input type="text" id="input-pemenang" required style="width: 100%;" placeholder="Contoh: Ahmad Rifai (Kelas XII TKR 1)">
+                </div><br>
+                
+                <div>
+                    <label>Kategori Prestasi:</label><br>
+                    <select id="input-kategori" required style="width: 100%; padding: 5px;">
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="Akademik">Akademik</option>
+                        <option value="Non-Akademik">Non-Akademik</option>
+                        <option value="Sains & Teknologi">Sains & Teknologi</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Seni & Budaya">Seni & Budaya</option>
+                    </select>
+                </div><br>
+                
+                <div>
+                    <label>Tanggal Perolehan Penghargaan:</label><br>
+                    <input type="date" id="input-tanggal" required>
+                </div><br>
+                
+                <div>
+                    <label>URL Foto Dokumentasi (Hasil upload ke storage 'prestasi-images'):</label><br>
+                    <input type="text" id="input-foto" placeholder="Contoh: https://.../storage/v1/object/public/prestasi-images/piala.jpg" style="width: 100%;">
+                </div><br>
+                
+                <div>
+                    <label>Deskripsi Ringkas / Cerita Kemenangan:</label><br>
+                    <textarea id="input-deskripsi" rows="6" required style="width: 100%; font-family: Arial, sans-serif;"></textarea>
+                </div><br>
+                
+                <button type="submit">Simpan Data Prestasi</button>
+                <button type="button" onclick="tutupForm()">Batal</button>
+            </form>
+        </div>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Judul Prestasi & Pemenang</th>
+                    <th>Kategori</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-prestasi">
+                </tbody>
+        </table>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
     <script>
-        // Letakkan ini di awal <script> setiap halaman admin
+        // =========================================================
+        // 1. GLOBAL SYSTEM (AUTH & LOGOUT)
+        // =========================================================
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // redirect ke login
+                window.location.href = 'index.html'; // Proteksi halaman admin
             }
             return session;
         }
-
-        // Panggil di setiap halaman admin
         checkAuth();
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
-        
-        // ==========================================
-        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
-        // ==========================================
         async function logout() {
             await supabase.auth.signOut();
-            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+            window.location.href = 'index.html';
         }
-        // ==========================================
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
+        // =========================================================
+        // 2. LOGIKA CRUD SPESIFIK TABEL PRESTASI (Pola Langkah 5)
+        // =========================================================
+        let modeForm = "tambah"; // Menandakan status form ("tambah" atau "edit")
+
+        // --- 5a. READ — Tampilkan daftar data prestasi ---
+        async function loadPrestasi() {
+            const { data, error } = await supabase
+                .from('prestasi')
+                .select('*')
+                .order('tanggal', { ascending: false }); // Prestasi paling baru dicapai muncul paling atas
+
+            if (error) { 
+                console.error("Gagal memuat data prestasi: ", error.message); 
+                return; 
+            }
+
+            const tbody = document.getElementById('tabel-prestasi');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Belum ada data prestasi yang dicatat.</td></tr>`;
+                return;
+            }
+
+            // Render baris tabel HTML secara dinamis
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>
+                        <b>${item.judul}</b><br>
+                        <small style="color:#28a745; font-weight:bold;">Pemenang: ${item.pemenang}</small><br>
+                        <small style="color:#666;">Slug: ${item.slug}</small>
+                    </td>
+                    <td style="text-align:center;">${item.kategori}</td>
+                    <td style="text-align:center;">${item.tanggal}</td>
+                    <td style="text-align:center;">
+                        <button onclick="persiapkanEdit('${item.id}', \`${escapeJS(item.judul)}\`, \`${escapeJS(item.pemenang)}\`, '${item.kategori}', '${item.tanggal}', '${item.foto_url || ''}', \`${escapeJS(item.deskripsi)}\`)">Edit</button>
+                        <button onclick="hapusPrestasi('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // --- INTERCEPT SUBMIT FORM (Menggabungkan Logika Create & Update) ---
+        document.getElementById('form-prestasi').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('prestasi-id').value;
+            const judulInput = document.getElementById('input-judul').value;
+            
+            // Otomatis Generate Slug dari Judul Prestasi untuk URL ramah SEO
+            const slugOtomatis = judulInput
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '') // Hapus karakter spesial selain huruf, angka, dan spasi
+                .replace(/\s+/g, '-');        // Ubah spasi menjadi tanda hubung (-)
+
+            const formData = {
+                judul: judulInput,
+                slug: slugOtomatis,
+                pemenang: document.getElementById('input-pemenang').value,
+                kategori: document.getElementById('input-kategori').value,
+                tanggal: document.getElementById('input-tanggal').value,
+                foto_url: document.getElementById('input-foto').value || null,
+                deskripsi: document.getElementById('input-deskripsi').value
+            };
+
+            if (modeForm === "tambah") {
+                // --- 5b. CREATE — Tambah prestasi baru ---
+                const { error } = await supabase
+                    .from('prestasi')
+                    .insert([formData]);
+                
+                if (error) alert("Gagal menambah data prestasi: " + error.message);
+            } else {
+                // --- 5c. UPDATE — Edit data prestasi existing ---
+                const { error } = await supabase
+                    .from('prestasi')
+                    .update(formData)
+                    .eq('id', id);
+                
+                if (error) alert("Gagal memperbarui data prestasi: " + error.message);
+            }
+
+            tutupForm();
+            loadPrestasi(); // Refresh isi tabel secara dinamis tanpa reload halaman
+        });
+
+        // --- 5d. DELETE — Hapus data prestasi ---
+        async function hapusPrestasi(id) {
+            if (!confirm('Yakin ingin menghapus catatan prestasi ini secara permanen?')) return;
+            
+            const { error } = await supabase
+                .from('prestasi')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menghapus prestasi: " + error.message);
+            } else {
+                loadPrestasi(); // Refresh isi tabel setelah berhasil dihapus
+            }
+        }
+
+        // =========================================================
+        // 3. FUNGSI PEMBANTU INTERFACE (UI HELPER)
+        // =========================================================
+        function bukaFormTambah() {
+            modeForm = "tambah";
+            document.getElementById('judul-form').innerText = "Tambah Prestasi Baru";
+            document.getElementById('form-prestasi').reset();
+            document.getElementById('prestasi-id').value = "";
+            document.getElementById('area-form').style.display = "block";
+        }
+
+        function persiapkanEdit(id, judul, pemenang, kategori, tanggal, foto, deskripsi) {
+            modeForm = "edit";
+            document.getElementById('judul-form').innerText = "Edit / Ubah Data Prestasi";
+            document.getElementById('area-form').style.display = "block";
+            
+            // Memetakan (Mapping) data lama dari database ke dalam field input form
+            document.getElementById('prestasi-id').value = id;
+            document.getElementById('input-judul').value = judul;
+            document.getElementById('input-pemenang').value = pemenang;
+            document.getElementById('input-kategori').value = kategori;
+            document.getElementById('input-tanggal').value = tanggal;
+            document.getElementById('input-foto').value = foto;
+            document.getElementById('input-deskripsi').value = deskripsi;
+        }
+
+        function tutupForm() {
+            document.getElementById('area-form').style.display = "none";
+            document.getElementById('form-prestasi').reset();
+        }
+
+        // Fungsi Utility: Mengamankan string teks dari tanda kutip agar map literal template JS tidak rusak
+        function escapeJS(str) {
+            return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // Jalankan perintah load data saat halaman dibuka pertama kali oleh browser
+        loadPrestasi();
     </script>
 </body>
 </html>
