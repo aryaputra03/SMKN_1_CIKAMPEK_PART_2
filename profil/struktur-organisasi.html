@@ -111,33 +111,105 @@ ul { list-style: none; }
 .h-line { height: 2px; background: var(--gold); }
 
 /* ── FOOTER ─────────────────────────────── */
-.footer { background: var(--navy); color: rgba(255,255,255,0.65); }
-.footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 56px 0 40px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.footer-logo-box { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
-.footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.2; }
-.footer-brand-loc { font-size: 11px; color: rgba(255,255,255,0.4); }
-.footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 20px; max-width: 340px; }
+/* ── FOOTER ──────────────────────────────────────── */
+.footer { background: var(--gold); color: var(--navy); }
+.footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
+
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px; padding: 64px 0 48px;
+}
+
+.footer-brand-logo {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.footer-logo-box {
+  width: 44px; height: 44px; background: var(--navy);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0;
+}
+.footer-brand-name { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+.footer-brand-loc { font-size: 11px; color: rgba(30,41,59,0.7); letter-spacing: 0.3px; font-weight: 600;}
+.footer-brand-desc {
+  font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; color: rgba(30,41,59,0.85); font-weight: 500;
+}
 .footer-social { display: flex; gap: 10px; }
-.footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: all 0.2s; }
-.footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+.footer-social a {
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid rgba(30,41,59,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--navy); transition: all 0.2s;
+}
+.footer-social a:hover { border-color: var(--navy); color: var(--gold); background: var(--navy); }
 .footer-social a svg { width: 14px; height: 14px; }
-.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; }
+
+.footer-col-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--navy); margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--navy); display: block;
+}
 .footer-links { display: flex; flex-direction: column; gap: 10px; }
-.footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.55); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
-.footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--gold); flex-shrink: 0; }
-.footer-links a:hover { color: var(--gold); }
-.footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.08); }
-.footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.35); }
-.footer-bottom p strong { color: var(--gold); }
+.footer-links a {
+  font-size: 13.5px; color: rgba(30,41,59,0.8);
+  transition: color 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500;
+}
+.footer-links a::before {
+  content: '';  width: 5px; height: 1px; background: var(--navy); flex-shrink: 0;
+}
+.footer-links a:hover { color: var(--navy); font-weight: 700; }
+
+/* Footer Map + Contact */
+.footer-map-contact {
+  padding: 48px 0;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start;
+}
+.footer-map-title {
+  font-size: 13px; font-weight: 800; color: var(--navy);
+  margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.footer-map-frame {
+  border-radius: var(--r-md); overflow: hidden;
+  border: 1px solid rgba(30,41,59,0.2); height: 240px;
+}
+.footer-map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(15%); }
+.footer-contact-title {
+  font-size: 13px; font-weight: 800; color: var(--navy);
+  margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.footer-contact-list { display: flex; flex-direction: column; gap: 14px; }
+.footer-contact-item {
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.fci-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(30,41,59,0.06); border: 1px solid rgba(30,41,59,0.15);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.fci-icon svg { width: 15px; height: 15px; color: var(--navy); }
+.fci-label { font-size: 10.5px; color: rgba(30,41,59,0.7); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; font-weight: 700; }
+.fci-value { font-size: 13.5px; color: var(--navy); font-weight: 600; }
+
+/* Footer Bottom */
+.footer-bottom {
+  padding: 20px 0; display: flex;
+  align-items: center; justify-content: space-between; gap: 16px;
+  border-top: 1px solid rgba(30,41,59,0.15);
+}
+.footer-bottom p { font-size: 12.5px; color: rgba(30,41,59,0.8); font-weight: 500; }
+.footer-bottom p strong { color: var(--navy); font-weight: 800; }
 .footer-bottom-links { display: flex; gap: 20px; }
-.footer-bottom-links a { font-size: 11.5px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; transition: color 0.2s; }
-.footer-bottom-links a:hover { color: var(--gold); }
+.footer-bottom-links a {
+  font-size: 11.5px; color: rgba(30,41,59,0.7);
+  letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; font-weight: 700;
+}
+.footer-bottom-links a:hover { color: var(--navy); }
 .back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(201,168,76,0.4); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
 .back-to-top.show { opacity: 1; transform: translateY(0); }
 .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
 
-@media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 28px; } .footer-bottom { flex-direction: column; text-align: center; } }
+@media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 32px; } .footer-map-contact { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
 </style>
 </head>
 <body>
@@ -338,40 +410,148 @@ ul { list-style: none; }
 
 <!-- FOOTER -->
 <footer class="footer" id="contact">
-  <div class="container">
-    <div class="footer-main-grid">
-      <div>
-        <div class="footer-brand-logo"><div class="footer-logo-box">S</div><div><p class="footer-brand-name">SMKN 1 Cikampek</p><p class="footer-brand-loc">Karawang, Jawa Barat</p></div></div>
-        <p class="footer-brand-desc">SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>.</p>
-        <div class="footer-social">
-          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-          <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-main-grid">
+        <!-- Brand -->
+        <div class="fade-up">
+          <div class="footer-brand-logo">
+            <div class="footer-logo-box">S</div>
+            <div>
+              <p class="footer-brand-name">SMKN 1 Cikampek</p>
+              <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <p class="footer-brand-desc">
+            SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sebagai kota industri sejak 1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>, kami mengantar lulusan berjaya di kancah nasional dan global.
+          </p>
+          <div class="footer-social">
+            <a href="#" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a href="#" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+          </div>
         </div>
-      </div>
-      <div>
-        <span class="footer-col-title">Navigasi Cepat</span>
-        <div class="footer-links">
-          <a href="../index.html">Beranda</a>
-          <a href="visi-misi.html">Visi &amp; Misi</a>
-          <a href="fasilitas.html">Fasilitas</a>
-          <a href="jurusan.html">Program Keahlian</a>
-          <a href="struktur-organisasi.html">Struktur Organisasi</a>
-          <a href="staff-guru.html">Staff &amp; Guru</a>
+
+        <!-- Navigasi Cepat -->
+        <div class="fade-up">
+          <h4 class="footer-col-title">Navigasi Cepat</h4>
+          <div class="footer-links">
+            <a href="../index.html">Beranda</a>
+            <a href="visi-misi.html">Visi &amp; Misi</a>
+            <a href="fasilitas.html">Fasilitas Sekolah</a>
+            <a href="jurusan.html">Program Keahlian</a>
+            <a href="struktur-organisasi.html">Struktur Organisasi</a>
+            <a href="staff-guru.html">Staff &amp; Guru</a>
+            <a href="../keuangan/bos.html">Dana BOS</a>
+            <a href="../informasi/berita.html">Berita Terbaru</a>
+            <a href="../informasi/prestasi.html">Prestasi</a>
+            <a href="../alumni.html">Profil Alumni</a>
+          </div>
         </div>
-      </div>
-      <div>
-        <span class="footer-col-title">Kontak</span>
-        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.9">
-          <p>Jl. Ahmad Yani No.1, Cikampek,</p><p>Karawang, Jawa Barat</p>
-          <p style="margin-top:8px">(0264) 316xxx</p>
-          <p>info@smkn1cikampek.sch.id</p>
-          <p style="margin-top:8px;color:rgba(255,255,255,0.4)">Senin–Sabtu, 07.00–16.00 WIB</p>
+
+        <!-- Info Terbaru -->
+        <div class="fade-up">
+          <h4 class="footer-col-title">Info Terbaru</h4>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s">PPDB Jalur Afirmasi Disabilitas</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">26 Mei, 2026</p>
+            </div>
+            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">04 Mei, 2026</p>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s">Surat Edaran Kelulusan Siswa Kelas XII</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">18 Apr, 2026</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Map + Contact -->
+  <div class="container">
+    <div class="footer-map-contact">
+      <!-- Map -->
+      <div>
+        <p class="footer-map-title">Denah Lokasi</p>
+        <div class="footer-map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.026!2d107.461!3d-6.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjQnNTcuNiJTIDEwN8KwMjcnMzkuNiJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lokasi SMKN 1 Cikampek">
+          </iframe>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <p class="footer-contact-title">Informasi Kontak</p>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
+            </div>
+            <div>
+              <p class="fci-label">Alamat</p>
+              <p class="fci-value">Jl. Ahmad Yani No.1, Cikampek, Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
+            </div>
+            <div>
+              <p class="fci-label">Telepon</p>
+              <p class="fci-value">(0264) 316xxx</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 6 8-6"/></svg>
+            </div>
+            <div>
+              <p class="fci-label">Email</p>
+              <p class="fci-value">info@smkn1cikampek.sch.id</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg>
+            </div>
+            <div>
+              <p class="fci-label">Jam Operasional</p>
+              <p class="fci-value">Senin – Sabtu, 07.00 – 16.00 WIB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="container">
     <div class="footer-bottom">
       <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
-      <div class="footer-bottom-links"><a href="#">Kebijakan Privasi</a><a href="#">Syarat Penggunaan</a></div>
+      <div class="footer-bottom-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat Penggunaan</a>
+        <a href="#">Dukungan</a>
+      </div>
     </div>
   </div>
 </footer>
