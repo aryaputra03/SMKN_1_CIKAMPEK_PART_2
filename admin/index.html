@@ -1,51 +1,130 @@
-<!-- admin/index.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Admin — SMKN 1 Cikampek</title>
-  <!-- CSS sesuai desain existing (navy + kuning) -->
+  <style>
+    /* Styling sederhana bertema Navy & Kuning Emas */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0c2340; /* Navy Blue */
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #1d3557;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      border-top: 5px solid #ffb703; /* Kuning Emas */
+    }
+    h2 {
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+    p.subtitle {
+      color: #ffb703;
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #457b9d;
+      border-radius: 4px;
+      background-color: #f1faee;
+      color: #1d3557;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ffb703; /* Kuning Emas */
+      border: none;
+      border-radius: 4px;
+      color: #0c2340;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #fb8500;
+    }
+    #error-msg {
+      color: #e63946;
+      font-size: 13px;
+      margin-top: 15px;
+      display: none;
+      background: rgba(230, 57, 70, 0.1);
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #e63946;
+    }
+  </style>
 </head>
 <body>
-  <script>
-    // Letakkan ini di awal <script> setiap halaman admin
-    async function checkAuth() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-        window.location.href = 'index.html'; // redirect ke login
-    }
-    return session;
-    }
 
-    // Panggil di setiap halaman admin
-    checkAuth();
-  </script> 
-  <form id="login-form">
-    <input type="email" id="email" placeholder="Email Admin" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Masuk</button>
-    <p id="error-msg" style="color:red;display:none"></p>
-  </form>
+  <div class="login-container">
+    <h2>SMKN 1 CIKAMPEK</h2>
+    <p class="subtitle">Panel Pengelolaan Data Admin</p>
+
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email Admin" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Masuk</button>
+      <p id="error-msg"></p>
+    </form>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/supabase-client.js"></script>
+  
+  <script src="../assets/js/supabase-client.js"></script>
+  
   <script>
-    // Jika sudah login, langsung ke dashboard
+    // CEK SESSION: Jika admin sudah berstatus login, otomatis lempar ke halaman dashboard
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) window.location.href = 'dashboard.html';
+      if (session) {
+        window.location.href = 'dashboard.html';
+      }
     });
 
+    // PROSES SUBMIT FORM LOGIN
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+      
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+      const submitBtn = e.target.querySelector('button');
 
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      // Reset state error & button teks
+      errorMsg.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Memverifikasi...';
+
+      // Otentikasi ke database Supabase Auth
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        document.getElementById('error-msg').textContent = 'Email atau password salah.';
-        document.getElementById('error-msg').style.display = 'block';
+        errorMsg.textContent = "Gagal Masuk: " + error.message;
+        errorMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Masuk';
       } else {
+        // Jika login sukses, arahkan ke dashboard utama admin
         window.location.href = 'dashboard.html';
       }
     });
