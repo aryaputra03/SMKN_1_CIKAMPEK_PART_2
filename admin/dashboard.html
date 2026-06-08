@@ -100,7 +100,17 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../assets/js/supabase-client.js"></script>
+    <script src="assets/js/supabase-client.js"></script><script>
+  // Auth Guard: Langsung cek sebelum mengambil statistik ringkasan data
+  async function verifikasiAdmin() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      alert("Akses ditolak! Silakan login terlebih dahulu.");
+      window.location.href = 'index.html';
+    }
+  }
+  verifikasiAdmin();
+</script>
     
     <script>
         // =========================================================
