@@ -2283,3 +2283,4 @@ footer ul li a:hover { color: var(--gold-lt); }
 @media (max-width: 768px) {
   .ekskul-grid { grid-template-columns: 1fr; }
 }
+
