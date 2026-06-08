@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
-    </head>
+    <title>Dashboard - Admin SMKN 1 Cikampek</title>
+</head>
 <body>
     <nav>
         <ul>
@@ -23,79 +23,156 @@
 
     <main id="content">
         <h1>Dashboard Admin</h1>
-<div class="widget-container">
-    <div class="widget">
-        <h3>Total Berita</h3>
-        <p id="count-berita">0</p>
-    </div>
-    <div class="widget">
-        <h3>Total Prestasi</h3>
-        <p id="count-prestasi">0</p>
-    </div>
-    <div class="widget">
-        <h3>Total Guru</h3>
-        <p id="count-guru">0</p>
-    </div>
-</div>
-        </main>
+        <p>Selamat datang di Panel Pengelolaan Data Resmi SMKN 1 Cikampek.</p>
+        <br>
+
+        <h2>Ringkasan Data</h2>
+        <div class="widget-container" style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+            <div class="widget" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; min-width: 180px; text-align: center;">
+                <h3 style="margin: 0; color: #555;">Total Berita</h3>
+                <p id="count-berita" style="font-size: 32px; font-weight: bold; margin: 10px 0 0 0;">Memuat...</p>
+            </div>
+            
+            <div class="widget" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; min-width: 180px; text-align: center;">
+                <h3 style="margin: 0; color: #555;">Total Prestasi</h3>
+                <p id="count-prestasi" style="font-size: 32px; font-weight: bold; margin: 10px 0 0 0;">Memuat...</p>
+            </div>
+            
+            <div class="widget" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; min-width: 180px; text-align: center;">
+                <h3 style="margin: 0; color: #555;">Total Guru/Staff</h3>
+                <p id="count-guru" style="font-size: 32px; font-weight: bold; margin: 10px 0 0 0;">Memuat...</p>
+            </div>
+            
+            <div class="widget" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; min-width: 180px; text-align: center;">
+                <h3 style="margin: 0; color: #555;">Total Banner Aktif</h3>
+                <p id="count-banner" style="font-size: 32px; font-weight: bold; margin: 10px 0 0 0;">Memuat...</p>
+            </div>
+
+            <div class="widget" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; min-width: 180px; text-align: center;">
+                <h3 style="margin: 0; color: #555;">Laporan Keuangan</h3>
+                <p id="count-keuangan" style="font-size: 32px; font-weight: bold; margin: 10px 0 0 0;">Memuat...</p>
+            </div>
+        </div>
+
+        <h2>Akses Cepat Modul</h2>
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; max-width: 700px; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2; text-align: left;">
+                    <th>Nama Modul Pengelolaan</th>
+                    <th>Aksi Navigasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Artikel & Pengumuman Sekolah</b></td>
+                    <td><a href="berita.html">Buka Modul Berita &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Pencapaian & Prestasi Siswa</b></td>
+                    <td><a href="prestasi.html">Buka Modul Prestasi &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Biodata Pendidik & Tenaga Kependidikan</b></td>
+                    <td><a href="guru.html">Buka Modul Guru & Staff &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Media Promosi & Banner Slider Beranda</b></td>
+                    <td><a href="banner.html">Buka Modul Banner &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Transparansi Anggaran Keuangan (BOS)</b></td>
+                    <td><a href="bos.html">Buka Modul Laporan BOS &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Transparansi Anggaran Keuangan (APBD)</b></td>
+                    <td><a href="apbd.html">Buka Modul Laporan APBD &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Dokumen Regulasi & Informasi Kurikulum</b></td>
+                    <td><a href="kurikulum.html">Buka Modul Kurikulum &rarr;</a></td>
+                </tr>
+                <tr>
+                    <td><b>Profil Lembaga (Visi, Misi, & Tujuan)</b></td>
+                    <td><a href="visi-misi.html">Buka Modul Visi Misi &rarr;</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
-<script>
-        // Cek Otorisasi Login
+    <script>
+        // =========================================================
+        // 1. SISTEM KEAMANAN OTORISASI (AUTH GUARD & LOGOUT)
+        // =========================================================
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; 
+                window.location.href = 'index.html'; // Tendang kembali ke halaman login jika tidak ada session
             }
             return session;
         }
+        // Jalankan pemeriksaan otorisasi sebelum memproses script lainnya
+        checkAuth();
 
-        // Fungsi Logout
         async function logout() {
             await supabase.auth.signOut();
             window.location.href = 'index.html';
         }
 
-        // Jalankan proteksi halaman dahulu
-        checkAuth();
+        // =========================================================
+        // 2. AMBIL COUNT DATA DARI SUPABASE (Langkah 4 Dashboard)
+        // =========================================================
+        async function loadDashboardStatistics() {
+            try {
+                // Ambil exact count baris dari tabel 'berita'
+                const { count: jumlahBerita, error: errBerita } = await supabase
+                    .from('berita')
+                    .select('*', { count: 'exact', head: true });
 
-        // -----------------------------------------------------------------
-        // DI SINI TEMPAT SPESIFIK UNTUK MENARUH KODE LANGKAH 4 (DASHBOARD)
-        // -----------------------------------------------------------------
-        async function loadDashboardData() {
-            // 1. Mengambil jumlah data berita
-            const { count: jumlahBerita } = await supabase
-                .from('berita')
-                .select('*', { count: 'exact', head: true });
+                // Ambil exact count baris dari tabel 'prestasi'
+                const { count: jumlahPrestasi, error: errPrestasi } = await supabase
+                    .from('prestasi')
+                    .select('*', { count: 'exact', head: true });
 
-            // 2. Mengambil jumlah data prestasi
-            const { count: jumlahPrestasi } = await supabase
-                .from('prestasi')
-                .select('*', { count: 'exact', head: true });
+                // Ambil exact count baris dari tabel 'guru'
+                const { count: jumlahGuru, error: errGuru } = await supabase
+                    .from('guru')
+                    .select('*', { count: 'exact', head: true });
 
-            // 3. Mengambil jumlah data guru
-            const { count: jumlahGuru } = await supabase
-                .from('guru')
-                .select('*', { count: 'exact', head: true });
+                // Ambil exact count dari tabel 'banner' spesifik yang statusnya aktif (aktif = true)
+                const { count: jumlahBanner, error: errBanner } = await supabase
+                    .from('banner')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('aktif', true);
 
-            // 4. Mengambil jumlah data banner yang statusnya aktif saja
-            const { count: jumlahBanner } = await supabase
-                .from('banner')
-                .select('*', { count: 'exact', head: true })
-                .eq('aktif', true); // Hanya menghitung banner yang aktif sesuai instruksi
+                // Ambil exact count baris dari tabel 'laporan_keuangan' (Gabungan BOS & APBD)
+                const { count: jumlahKeuangan, error: errKeuangan } = await supabase
+                    .from('laporan_keuangan')
+                    .select('*', { count: 'exact', head: true });
 
-            // Menampilkan hasil hitungan ke element HTML berdasarkan ID-nya
-            document.getElementById('count-berita').innerText = jumlahBerita ?? 0;
-            document.getElementById('count-prestasi').innerText = jumlahPrestasi ?? 0;
-            document.getElementById('count-guru').innerText = jumlahGuru ?? 0;
-            document.getElementById('count-banner').innerText = jumlahBanner ?? 0;
+                // Penanganan Error Log jika salah satu query gagal
+                if (errBerita) console.error("Error berita:", errBerita.message);
+                if (errPrestasi) console.error("Error prestasi:", errPrestasi.message);
+                if (errGuru) console.error("Error guru:", errGuru.message);
+                if (errBanner) console.error("Error banner:", errBanner.message);
+                if (errKeuangan) console.error("Error laporan keuangan:", errKeuangan.message);
+
+                // Injeksi data angka ke dalam elemen UI HTML (Gunakan fallback 0 jika data kosong/null)
+                document.getElementById('count-berita').innerText = jumlahBerita ?? 0;
+                document.getElementById('count-prestasi').innerText = jumlahPrestasi ?? 0;
+                document.getElementById('count-guru').innerText = jumlahGuru ?? 0;
+                document.getElementById('count-banner').innerText = jumlahBanner ?? 0;
+                document.getElementById('count-keuangan').innerText = jumlahKeuangan ?? 0;
+
+            } catch (globalError) {
+                console.error("Terjadi kesalahan sistem saat memuat data statistik:", globalError);
+            }
         }
 
-        // Panggil fungsi hitung data di atas setelah halaman selesai dimuat
-        loadDashboardData();
-        // -----------------------------------------------------------------
+        // Eksekusi fungsi penarikan data ketika dokumen selesai dimuat browser
+        loadDashboardStatistics();
     </script>
 </body>
 </html>
