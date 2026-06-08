@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman - Admin SMKN 1 Cikampek</title>
-    </head>
+    <title>Kelola Banner - Admin SMKN 1 Cikampek</title>
+</head>
 <body>
     <nav>
         <ul>
@@ -22,13 +22,65 @@
     </nav>
 
     <main id="content">
-        </main>
+        <h1>Kelola Banner Slider</h1>
+        <button onclick="bukaFormTambah()">+ Tambah Banner Baru</button>
+        <br><br>
+
+        <div id="area-form" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 500px;">
+            <h3 id="judul-form">Tambah Banner</h3>
+            <form id="form-banner">
+                <input type="hidden" id="banner-id">
+                
+                <div>
+                    <label>Judul Banner:</label><br>
+                    <input type="text" id="input-judul" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Subjudul Banner:</label><br>
+                    <input type="text" id="input-subjudul" style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>URL Foto Banner:</label><br>
+                    <input type="text" id="input-foto" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Link Tujuan URL (Redirect):</label><br>
+                    <input type="text" id="input-link" style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Urutan Tampil (Angka):</label><br>
+                    <input type="number" id="input-urutan" value="1" required style="width: 80px;">
+                </div><br>
+                <div>
+                    <label>
+                        <input type="checkbox" id="input-aktif" checked> Aktif (Tampilkan di Beranda)
+                    </label>
+                </div><br>
+                <button type="submit">Simpan Data</button>
+                <button type="button" onclick="tutupForm()">Batal</button>
+            </form>
+        </div>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Urutan</th>
+                    <th>Judul</th>
+                    <th>Subjudul</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-banner">
+                </tbody>
+        </table>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
     <script>
-        // Letakkan ini di awal <script> setiap halaman admin
+        // --- AUTH GUARD ---
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
@@ -36,26 +88,136 @@
             }
             return session;
         }
-
-        // Panggil di setiap halaman admin
         checkAuth();
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
-        
-        // ==========================================
-        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
-        // ==========================================
+        // --- LOGOUT ---
         async function logout() {
             await supabase.auth.signOut();
-            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+            window.location.href = 'index.html'; 
         }
-        // ==========================================
 
         // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
+        // SCRIPT SPESIFIK CRUD BANNER (Penerapan Langkah 5)
         // ---------------------------------------------------------
+        
+        // Penanda untuk mengetahui form sedang dalam mode "tambah" atau "edit"
+        let modeForm = "tambah"; 
+
+        // 5a. READ — Tampilkan daftar data banner
+        async function loadBanner() {
+            const { data, error } = await supabase
+                .from('banner')
+                .select('*')
+                .order('urutan', { ascending: true }); // Diurutkan berdasarkan angka urutan tampil
+
+            if (error) { 
+                console.error(error); 
+                return; 
+            }
+
+            const tbody = document.getElementById('tabel-banner');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Belum ada data banner.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td style="text-align:center;">${item.urutan}</td>
+                    <td><b>${item.judul}</b></td>
+                    <td>${item.subjudul || '-'}</td>
+                    <td>${item.aktif ? '<span style="color:green; font-weight:bold;">Aktif</span>' : '<span style="color:red;">Non-Aktif</span>'}</td>
+                    <td>
+                        <button onclick="persiapkanEdit('${item.id}', '${item.judul}', '${item.subjudul}', '${item.foto_url}', '${item.link_url}', ${item.urutan}, ${item.aktif})">Edit</button>
+                        <button onclick="hapusBanner('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Listener Event saat Form di-Submit (Menyatukan logika CREATE & UPDATE)
+        document.getElementById('form-banner').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('banner-id').value;
+            const formData = {
+                judul: document.getElementById('input-judul').value,
+                subjudul: document.getElementById('input-subjudul').value,
+                foto_url: document.getElementById('input-foto').value,
+                link_url: document.getElementById('input-link').value,
+                urutan: parseInt(document.getElementById('input-urutan').value),
+                aktif: document.getElementById('input-aktif').checked
+            };
+
+            if (modeForm === "tambah") {
+                // 5b. CREATE — Tambah data baru
+                const { error } = await supabase
+                    .from('banner')
+                    .insert([formData]);
+                
+                if (error) alert("Gagal menambah banner: " + error.message);
+            } else {
+                // 5c. UPDATE — Edit data yang sudah ada
+                const { error } = await supabase
+                    .from('banner')
+                    .update(formData)
+                    .eq('id', id);
+                
+                if (error) alert("Gagal memperbarui banner: " + error.message);
+            }
+
+            tutupForm();
+            loadBanner(); // Refresh tabel setelah insert/update berhasil
+        });
+
+        // 5d. DELETE — Hapus data banner
+        async function hapusBanner(id) {
+            if (!confirm('Yakin ingin menghapus banner ini?')) return;
+            
+            const { error } = await supabase
+                .from('banner')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menghapus data: " + error.message);
+            } else {
+                loadBanner(); // Refresh tabel setelah data terhapus
+            }
+        }
+
+        // --- FUNGSI BANTUAN INTERFAS FORM (UI HELPER) ---
+        function bukaFormTambah() {
+            modeForm = "tambah";
+            document.getElementById('judul-form').innerText = "Tambah Banner Baru";
+            document.getElementById('form-banner').reset();
+            document.getElementById('banner-id').value = "";
+            document.getElementById('area-form').style.display = "block";
+        }
+
+        function persiapkanEdit(id, judul, subjudul, foto, link, urutan, aktif) {
+            modeForm = "edit";
+            document.getElementById('judul-form').innerText = "Edit Banner";
+            document.getElementById('area-form').style.display = "block";
+            
+            // Mengisi form dengan data lama yang akan diedit
+            document.getElementById('banner-id').value = id;
+            document.getElementById('input-judul').value = judul;
+            document.getElementById('input-subjudul').value = (subjudul === 'null' || subjudul === 'undefined') ? '' : subjudul;
+            document.getElementById('input-foto').value = foto;
+            document.getElementById('input-link').value = (link === 'null' || link === 'undefined') ? '' : link;
+            document.getElementById('input-urutan').value = urutan;
+            document.getElementById('input-aktif').checked = aktif;
+        }
+
+        function tutupForm() {
+            document.getElementById('area-form').style.display = "none";
+            document.getElementById('form-banner').reset();
+        }
+
+        // Jalankan pemuatan data otomatis saat halaman selesai di-load browser
+        loadBanner();
     </script>
 </body>
 </html>
