@@ -22,44 +22,27 @@
     </nav>
 
     <main id="content">
-        <h1>Pengelolaan Profil Lembaga (Visi, Misi, & Tujuan)</h1>
-        <p>Modul ini menggunakan sistem <i>Single Record</i>. Mengubah data di bawah akan langsung memperbarui isi profil utama pada website publik.</p>
-        <br>
+        <h1>Pengelolaan Visi, Misi & Tujuan Sekolah</h1>
+        <p style="color: #666;">Silakan ubah teks di bawah ini dan klik Simpan Perubahan untuk memperbarui halaman publik.</p>
 
-        <div style="border: 1px solid #ccc; padding: 20px; max-width: 700px; background-color: #fafafa; border-radius: 5px;">
-            <h3>Formulir Visi, Misi, & Tujuan Sekolah</h3>
-            <form id="form-visi-misi">
-                
-                <div>
-                    <label><b>Visi Sekolah:</b></label><br>
-                    <textarea id="input-visi" rows="4" required style="width: 100%; font-family: Arial, sans-serif;" placeholder="Tuliskan visi utama SMKN 1 Cikampek..."></textarea>
-                </div><br>
-                
-                <div>
-                    <label><b>Misi Sekolah:</b></label><br>
-                    <small style="color: #666; display: block; margin-bottom: 5px;">
-                        * Tuliskan satu poin misi per baris. Tekan <b>Enter</b> untuk menambah poin misi berikutnya.
-                    </small>
-                    <textarea id="input-misi" rows="8" required style="width: 100%; font-family: Arial, sans-serif;" placeholder="Contoh:&#10;1. Menyelenggarakan pendidikan vokasi yang bermutu&#10;2. Meningkatkan kerjasama dengan IDUKA"></textarea>
-                </div><br>
-                
-                <div>
-                    <label><b>Tujuan Sekolah:</b></label><br>
-                    <small style="color: #666; display: block; margin-bottom: 5px;">
-                        * Tuliskan satu poin tujuan per baris. Tekan <b>Enter</b> untuk menambah poin tujuan berikutnya.
-                    </small>
-                    <textarea id="input-tujuan" rows="8" required style="width: 100%; font-family: Arial, sans-serif;" placeholder="Contoh:&#10;1. Menghasilkan lulusan yang siap kerja dan berwirausaha&#10;2. Memiliki sertifikasi kompetensi standar nasional"></textarea>
-                </div><br>
-                
-                <div id="status-terakhir" style="font-size: 13px; color: #555; margin-bottom: 15px;">
-                    Terakhir diperbarui: Memuat waktu...
-                </div>
+        <form id="form-visi-misi" style="max-width: 700px; border: 1px solid #ccc; padding: 20px; background: #fafafa;">
+            <div>
+                <label><b>Visi Sekolah:</b></label><br>
+                <textarea id="input-visi" rows="3" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Tulis visi sekolah..."></textarea>
+            </div><br>
 
-                <button type="submit" style="padding: 10px 20px; font-weight: bold; cursor: pointer;">
-                    Simpan Perubahan Profil
-                </button>
-            </form>
-        </div>
+            <div>
+                <label><b>Misi Sekolah (Tulis per baris / gunakan Enter untuk poin baru):</b></label><br>
+                <textarea id="input-misi" rows="8" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Misi 1&#10;Misi 2"></textarea>
+            </div><br>
+
+            <div>
+                <label><b>Tujuan Sekolah (Tulis per baris / gunakan Enter untuk poin baru):</b></label><br>
+                <textarea id="input-tujuan" rows="8" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Tujuan 1&#10;Tujuan 2"></textarea>
+            </div><br>
+
+            <button type="submit" id="btn-simpan">Simpan Perubahan Visi Misi</button>
+        </form>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -72,7 +55,7 @@
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // Proteksi halaman, tendang jika tidak valid
+                window.location.href = 'index.html';
             }
             return session;
         }
@@ -84,112 +67,81 @@
         }
 
         // =========================================================
-        // 2. MANAGEMENT LOGIC SINGLE RECORD VISI_MISI
+        // 2. LOGIKA UTAMA: LANGKAH 7 — MODUL KHUSUS VISI MISI
         // =========================================================
-        let recordId = null; // Menyimpan ID data jika baris sudah ada di database
-
-        // --- 5a. READ & PARSE DARI DATABASE ---
+        
+        // Load data yang ada dari database
         async function loadVisiMisi() {
-            try {
-                const { data, error } = await supabase
-                    .from('visi_misi')
-                    .select('*');
+            const { data, error } = await supabase
+                .from('visi_misi')
+                .select('*')
+                .single(); // hanya 1 record (Single Record Target)
 
-                if (error) {
-                    console.error("Gagal menarik data visi-misi:", error.message);
-                    return;
-                }
+            if (error) {
+                console.error("Gagal memuat visi misi:", error.message);
+                return;
+            }
 
-                // Jika data ada di database, petakan (mapping) ke form
-                if (data && data.length > 0) {
-                    const record = data[0];
-                    recordId = record.id; // Ambil uuid untuk target update nanti
-
-                    // Set Nilai Visi (Text standard)
-                    document.getElementById('input-visi').value = record.visi || '';
-
-                    // Parse & Set Nilai Misi (Mengubah Array JSONB ke teks berbaris-baris)
-                    if (Array.isArray(record.misi)) {
-                        document.getElementById('input-misi').value = record.misi.join('\n');
-                    } else {
-                        document.getElementById('input-misi').value = record.misi || '';
-                    }
-
-                    // Parse & Set Nilai Tujuan (Mengubah Array JSONB ke teks berbaris-baris)
-                    if (Array.isArray(record.tujuan)) {
-                        document.getElementById('input-tujuan').value = record.tujuan.join('\n');
-                    } else {
-                        document.getElementById('input-tujuan').value = record.tujuan || '';
-                    }
-
-                    // Tampilkan info tanggal update terakhir
-                    if (record.updated_at) {
-                        const waktuLocal = new Date(record.updated_at).toLocaleString('id-ID');
-                        document.getElementById('status-terakhir').innerText = "Terakhir diperbarui: " + waktuLocal;
-                    }
-                } else {
-                    document.getElementById('status-terakhir').innerText = "Status: Data awal kosong (Akan membuat record pertama saat disimpan).";
-                }
-            } catch (err) {
-                console.error("System error:", err);
+            if (data) {
+                document.getElementById('input-visi').value = data.visi || '';
+                
+                // Untuk misi dan tujuan yang bertipe array, tampilkan sebagai textarea per baris
+                document.getElementById('input-misi').value = data.misi ? data.misi.join('\n') : '';
+                document.getElementById('input-tujuan').value = data.tujuan ? data.tujuan.join('\n') : '';
             }
         }
 
-        // --- 5b & 5c. CREATE ATAU UPDATE DATA KE SUPABASE ---
-        document.getElementById('form-visi-misi').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Simpan perubahan data ke database
+        async function simpanVisiMisi() {
+            const btnSimpan = document.getElementById('btn-simpan');
+            btnSimpan.disabled = true;
+            btnSimpan.innerText = "Menyimpan...";
 
-            const visiValue = document.getElementById('input-visi').value;
-            const misiRaw = document.getElementById('input-misi').value;
-            const tujuanRaw = document.getElementById('input-tujuan').value;
-
-            // Proses pemecahan teks berbasis baris (Enter) menjadi Array bersih untuk kolom JSONB
-            const misiArray = misiRaw
+            const visi = document.getElementById('input-visi').value;
+            
+            // Konversi textarea baris per baris → array
+            const misi = document.getElementById('input-misi').value
                 .split('\n')
-                .map(item => item.trim())
-                .filter(item => item !== ''); // Buang baris kosong jika admin tidak sengaja enter kosong
-
-            const tujuanArray = tujuanRaw
+                .filter(s => s.trim() !== ''); // Membuang baris kosong
+                
+            const tujuan = document.getElementById('input-tujuan').value
                 .split('\n')
-                .map(item => item.trim())
-                .filter(item => item !== ''); // Buang baris kosong
+                .filter(s => s.trim() !== ''); // Membuang baris kosong
 
-            const formData = {
-                visi: visiValue,
-                misi: misiArray,      // Disimpan otomatis sebagai format JSON Array oleh SDK Supabase
-                tujuan: tujuanArray,  // Disimpan otomatis sebagai format JSON Array oleh SDK Supabase
-                updated_at: new Date().toISOString()
-            };
-
-            if (recordId) {
-                // Sesuai instruksi brief: Lakukan UPDATE jika data single record sudah ada
-                const { error } = await supabase
+            try {
+                // Ambil ID dari record yang ada saat ini
+                const { data: existing, error: fetchError } = await supabase
                     .from('visi_misi')
-                    .update(formData)
-                    .eq('id', recordId);
+                    .select('id')
+                    .single();
 
-                if (error) {
-                    alert("Gagal memperbarui data: " + error.message);
-                } else {
-                    alert("Berhasil memperbarui data Visi, Misi, & Tujuan!");
-                    loadVisiMisi();
-                }
-            } else {
-                // Penanganan darurat jika baris database benar-benar kosong, lakukan INSERT record pertama
-                const { error } = await supabase
+                if (fetchError) throw fetchError;
+
+                // Update menggunakan ID tersebut
+                const { error: updateError } = await supabase
                     .from('visi_misi')
-                    .insert([formData]);
+                    .update({ visi, misi, tujuan })
+                    .eq('id', existing.id);
 
-                if (error) {
-                    alert("Gagal menyimpan data baru: " + error.message);
-                } else {
-                    alert("Berhasil mendaftarkan data profil pertama sekolah!");
-                    loadVisiMisi();
-                }
+                if (updateError) throw updateError;
+
+                alert('Visi Misi berhasil disimpan!');
+            } catch (error) {
+                console.error("Proses simpan gagal:", error.message);
+                alert("Gagal menyimpan data: " + error.message);
+            } finally {
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Perubahan Visi Misi";
             }
+        }
+
+        // Intercept submit form agar tidak merefresh halaman web
+        document.getElementById('form-visi-misi').addEventListener('submit', (e) => {
+            e.preventDefault();
+            simpanVisiMisi();
         });
 
-        // Jalankan pemuatan data otomatis sesaat setelah dokumen terbuka sempurna
+        // Jalankan pemuatan data otomatis saat halaman diakses oleh admin
         loadVisiMisi();
     </script>
 </body>
