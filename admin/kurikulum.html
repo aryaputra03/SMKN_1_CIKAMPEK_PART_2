@@ -53,8 +53,11 @@
                 </div><br>
                 
                 <div>
-                    <label>URL Dokumen File (Hasil upload ke storage 'kurikulum-files'):</label><br>
-                    <input type="text" id="input-file-url" placeholder="Contoh: https://.../storage/v1/object/public/kurikulum-files/doc.pdf" style="width: 100%;">
+                    <label>Upload Dokumen File Kurikulum (PDF/Doc/dll):</label><br>
+                    <input type="file" id="input-upload-file" style="margin-bottom: 5px;"><br>
+                    <small style="color: #666;">Atau gunakan URL File secara langsung:</small><br>
+                    <input type="text" id="input-file-url" placeholder="Contoh: https://..." style="width: 100%; margin-top: 5px;">
+                    <small id="status-upload" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                 </div><br>
 
                 <div>
@@ -218,6 +221,64 @@
         }
 
         // =========================================================
+        // IMPLEMENTASI LANGKAH 6: UPLOAD FILE KE STORAGE SUPABASE
+        // =========================================================
+        async function uploadGambar(file, bucket) {
+            // Buat nama file unik
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(namaFile, file);
+
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert("Proses upload gagal: " + error.message);
+                return null;
+            }
+
+            // Ambil URL publik file
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+
+            return publicUrl;
+        }
+
+        document.getElementById('input-upload-file').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const statusUpload = document.getElementById('status-upload');
+            statusUpload.style.display = "block";
+            statusUpload.style.color = "blue";
+            statusUpload.innerText = "Sedang mengunggah file...";
+
+            // Nonaktifkan tombol submit selama upload
+            const btnSubmit = document.querySelector("#form-kurikulum button[type='submit']");
+            const originalBtnText = btnSubmit.innerText;
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "MENGUNGGAH...";
+
+            // Upload ke bucket kurikulum-files
+            const url = await uploadGambar(file, 'kurikulum-files');
+
+            // Kembalikan status tombol
+            btnSubmit.disabled = false;
+            btnSubmit.innerText = originalBtnText;
+
+            if (url) {
+                // Isi URL ke dalam input text URL
+                document.getElementById('input-file-url').value = url;
+                
+                statusUpload.innerText = "Upload Berhasil!";
+                statusUpload.style.color = "green";
+            } else {
+                statusUpload.style.display = "none";
+            }
+        });
+
+
+        // =========================================================
         // 3. FUNGSI PEMBANTU INTERFACE (UI HELPER)
         // =========================================================
         function bukaFormTambah() {
@@ -225,6 +286,8 @@
             document.getElementById('judul-form').innerText = "Tambah Data Kurikulum Baru";
             document.getElementById('form-kurikulum').reset();
             document.getElementById('kurikulum-id').value = "";
+            document.getElementById('input-upload-file').value = "";
+            document.getElementById('status-upload').style.display = "none";
             document.getElementById('area-form').style.display = "block";
         }
 
@@ -238,16 +301,22 @@
             document.getElementById('input-judul').value = judul;
             document.getElementById('input-jenis').value = jenis;
             document.getElementById('input-tahun-ajaran').value = tahun_ajaran;
-            document.getElementById('input-file-url').value = file_url;
-            document.getElementById('input-link-url').value = link_url;
+            document.getElementById('input-file-url').value = file_url === 'null' || file_url === 'undefined' ? '' : file_url;
+            document.getElementById('input-link-url').value = link_url === 'null' || link_url === 'undefined' ? '' : link_url;
             document.getElementById('input-urutan').value = urutan;
             document.getElementById('input-aktif').checked = aktif;
-            document.getElementById('input-deskripsi').value = deskripsi;
+            document.getElementById('input-deskripsi').value = deskripsi === 'null' || deskripsi === 'undefined' ? '' : deskripsi;
+            
+            // Reset state file picker
+            document.getElementById('input-upload-file').value = "";
+            document.getElementById('status-upload').style.display = "none";
         }
 
         function tutupForm() {
             document.getElementById('area-form').style.display = "none";
             document.getElementById('form-kurikulum').reset();
+            document.getElementById('input-upload-file').value = "";
+            document.getElementById('status-upload').style.display = "none";
         }
 
         // Fungsi Utility: Mengamankan string teks dari tanda kutip agar map literal template JS tidak rusak
