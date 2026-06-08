@@ -10,13 +10,13 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --navy: #0F1E38; --navy-mid: #1B2E4A; --navy-light: #243558;
-  --gold: #C9A84C; --gold-light: #E8C96B; --gold-pale: #FAF3DC;
-  --white: #FFFFFF; --off-white: #F8F7F4; --gray-soft: #EDF0F5;
-  --text: #1A1F2E; --text-muted: #64748B; --text-light: #94A3B8;
-  --shadow-sm: 0 2px 8px rgba(15,30,56,0.08);
-  --shadow-md: 0 6px 24px rgba(15,30,56,0.12);
-  --shadow-lg: 0 16px 48px rgba(15,30,56,0.15);
+  --navy: #1E293B; --navy-mid: #334155; --navy-light: #475569;
+  --gold: #FFE600; --gold-light: #E6CF00; --gold-pale: rgba(255, 230, 0, 0.1);
+  --white: #FFFFFF; --off-white: #F8FAFC; --gray-soft: #E2E8F0;
+  --text: #000000; --text-muted: #333333; --text-light: #555555;
+  --shadow-sm: 0 2px 8px rgba(30,41,59,0.05);
+  --shadow-md: 0 6px 24px rgba(30,41,59,0.08);
+  --shadow-lg: 0 16px 48px rgba(30,41,59,0.12);
   --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
   --ease: cubic-bezier(0.4,0,0.2,1);
 }
@@ -71,7 +71,7 @@ ul { list-style: none; }
 .page-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
 .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--off-white); clip-path: ellipse(55% 100% at 50% 100%); }
 .page-hero-inner { position: relative; z-index: 1; text-align: center; }
-.page-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold); font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,230,0,0.15); border: 1px solid rgba(255,230,0,0.35); color: var(--gold); font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
 .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
 .page-hero p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 24px; }
 .breadcrumb-row { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
