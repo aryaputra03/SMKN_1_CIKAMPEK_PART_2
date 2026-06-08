@@ -11,10 +11,11 @@
 
 :root {
   /* Warna Utama & Aksen */
-  --kuning:       #FFD700; 
-  --kuning-tua:   #E5C100;
-  --kuning-muda:  rgba(255, 215, 0, 0.15);
-  --kuning-pale:  rgba(255, 215, 0, 0.05);
+/* Warna Utama & Aksen (Kuning Cerah sesuai Logo) */
+  --kuning:       #FFE600; /* Kuning murni dan cerah */
+  --kuning-tua:   #E6CF00; /* Kuning sedikit lebih pekat untuk efek hover/sentuh */
+  --kuning-muda:  rgba(255, 230, 0, 0.15); /* Kuning transparan untuk background tipis */
+  --kuning-pale:  rgba(255, 230, 0, 0.05); /* Kuning sangat tipis untuk aksen bayangan */
   
   /* Warna Gelap / Formal (Menggantikan Navy Lama dengan Abu-abu Gelap Profesional) */
   --navy:         #1E293B; 
