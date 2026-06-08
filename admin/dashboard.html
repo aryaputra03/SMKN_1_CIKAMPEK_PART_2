@@ -27,35 +27,60 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/supabase-client.js"></script>
     
-    <script>
-        // Letakkan ini di awal <script> setiap halaman admin
+<script>
+        // Cek Otorisasi Login
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = 'index.html'; // redirect ke login
+                window.location.href = 'index.html'; 
             }
             return session;
         }
 
-        // Panggil di setiap halaman admin
-        checkAuth();
-
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
-        
-        // ==========================================
-        // TARUH FUNGSI LOGOUT DI SINI (DI BAWAH checkAuth)
-        // ==========================================
+        // Fungsi Logout
         async function logout() {
             await supabase.auth.signOut();
-            window.location.href = 'index.html'; // Mengalihkan kembali ke halaman login setelah logout
+            window.location.href = 'index.html';
         }
-        // ==========================================
 
-        // ---------------------------------------------------------
-        // Script spesifik halaman (Load data, CRUD) ditulis di bawah ini
-        // ---------------------------------------------------------
+        // Jalankan proteksi halaman dahulu
+        checkAuth();
+
+        // -----------------------------------------------------------------
+        // DI SINI TEMPAT SPESIFIK UNTUK MENARUH KODE LANGKAH 4 (DASHBOARD)
+        // -----------------------------------------------------------------
+        async function loadDashboardData() {
+            // 1. Mengambil jumlah data berita
+            const { count: jumlahBerita } = await supabase
+                .from('berita')
+                .select('*', { count: 'exact', head: true });
+
+            // 2. Mengambil jumlah data prestasi
+            const { count: jumlahPrestasi } = await supabase
+                .from('prestasi')
+                .select('*', { count: 'exact', head: true });
+
+            // 3. Mengambil jumlah data guru
+            const { count: jumlahGuru } = await supabase
+                .from('guru')
+                .select('*', { count: 'exact', head: true });
+
+            // 4. Mengambil jumlah data banner yang statusnya aktif saja
+            const { count: jumlahBanner } = await supabase
+                .from('banner')
+                .select('*', { count: 'exact', head: true })
+                .eq('aktif', true); // Hanya menghitung banner yang aktif sesuai instruksi
+
+            // Menampilkan hasil hitungan ke element HTML berdasarkan ID-nya
+            document.getElementById('count-berita').innerText = jumlahBerita ?? 0;
+            document.getElementById('count-prestasi').innerText = jumlahPrestasi ?? 0;
+            document.getElementById('count-guru').innerText = jumlahGuru ?? 0;
+            document.getElementById('count-banner').innerText = jumlahBanner ?? 0;
+        }
+
+        // Panggil fungsi hitung data di atas setelah halaman selesai dimuat
+        loadDashboardData();
+        // -----------------------------------------------------------------
     </script>
 </body>
 </html>
