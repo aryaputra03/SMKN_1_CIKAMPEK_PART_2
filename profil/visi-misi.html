@@ -202,6 +202,94 @@ ul { list-style: none; }
 .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
 
 @media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 32px; } .footer-map-contact { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+
+/* ── SAMBUTAN KEPALA SEKOLAH ─────────────── */
+.sambutan-section {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-soft);
+  border-top: 5px solid var(--gold);
+  padding: 40px 36px;
+  margin-top: 0;
+}
+.sambutan-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 28px;
+}
+.sambutan-header .vm-label { margin-bottom: 0; }
+.sambutan-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 700; color: var(--navy);
+  margin: 0;
+}
+.sambutan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+.sambutan-video-wrap {
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
+  border-radius: var(--r-md);
+  aspect-ratio: 16/9;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; overflow: hidden;
+}
+.sambutan-video-wrap .play-btn {
+  width: 60px; height: 60px;
+  background: rgba(255, 230, 0, 0.92);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+  z-index: 2;
+}
+.sambutan-video-wrap .play-btn:hover { transform: scale(1.1); background: var(--gold); }
+.sambutan-video-wrap .play-btn svg { width: 24px; height: 24px; color: var(--navy); margin-left: 4px; }
+.sambutan-video-label {
+  position: absolute; bottom: 12px; left: 0; right: 0;
+  text-align: center; font-size: 12px; color: rgba(255,255,255,0.55);
+  font-weight: 600; letter-spacing: 0.5px;
+}
+.sambutan-video-duration {
+  position: absolute; bottom: 12px; right: 14px;
+  font-size: 11.5px; color: rgba(255,255,255,0.7); font-weight: 600;
+}
+.sambutan-text-side {}
+.sambutan-quote {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-left: 3px solid var(--gold);
+  padding-left: 14px;
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+.sambutan-body {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+.sambutan-signature {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-soft);
+  display: flex; align-items: center; gap: 14px;
+}
+.sambutan-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.sambutan-avatar svg { width: 22px; height: 22px; color: var(--gold); }
+.sambutan-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+.sambutan-role { font-size: 12px; color: var(--text-light); }
+
+@media (max-width: 768px) {
+  .sambutan-grid { grid-template-columns: 1fr; }
+  .sambutan-section { padding: 28px 20px; }
+}
 </style>
 </head>
 <body>
@@ -283,41 +371,51 @@ ul { list-style: none; }
 <!-- PAGE BODY -->
 <main class="page-body">
   <div class="vm-grid">
-    <div class="vm-card center-align fade-up">
-      <div class="vm-label">Visi Sekolah</div>
-      <h2>Terwujudnya Sekolah yang Unggul, Berkarakter, dan Berdaya Saing</h2>
-      <p>
-        Terwujudnya sekolah kejuruan yang mampu menghasilkan lulusan profesional yang berakar budaya bangsa, berwawasan kebangsaan dan lingkungan hidup serta bercakrawala global dan siap bersaing di dunia industri.
-      </p>
+
+    <!-- ══ SAMBUTAN KEPALA SEKOLAH ══ -->
+    <div class="sambutan-section fade-up">
+    <div style="margin-bottom:24px">
+      <div class="vm-label">Sambutan</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy);margin:6px 0 0">Sambutan Kepala Sekolah</h2>
     </div>
 
-    <div class="vm-card fade-up">
-      <div class="vm-label">Misi Sekolah</div>
-      <h2>Langkah Menuju Visi</h2>
-      <ol class="misi-list">
-        <li>
-          <div class="misi-num">1</div>
-          <div>Mengembangkan kemampuan akademik dan vokasional berstandar nasional maupun internasional dengan menerapkan dan mengembangkan kurikulum kejuruan yang relevan dengan kebutuhan industri.</div>
-        </li>
-        <li>
-          <div class="misi-num">2</div>
-          <div>Mengembangkan kedisiplinan, kepemimpinan, serta ketakwaan melalui berbagai kegiatan kesiswaan baik dalam organisasi intra sekolah, ekstrakurikuler, kegiatan keagamaan, maupun kegiatan lain yang berakar budaya bangsa.</div>
-        </li>
-        <li>
-          <div class="misi-num">3</div>
-          <div>Mengembangkan sikap berkompetisi yang positif melalui berbagai bidang dan kesempatan dengan mengedepankan semangat kebangsaan dan etos kerja tinggi.</div>
-        </li>
-        <li>
-          <div class="misi-num">4</div>
-          <div>Menanamkan nilai keteladanan dan budi pekerti luhur melalui pengembangan kultur sekolah yang sesuai dengan norma keagamaan, sosial kemasyarakatan, dan kebangsaan serta berwawasan lingkungan.</div>
-        </li>
-        <li>
-          <div class="misi-num">5</div>
-          <div>Membangun kemitraan strategis dengan dunia usaha dan industri untuk memberikan pengalaman kerja nyata dan memperluas peluang karier bagi lulusan SMKN 1 Cikampek.</div>
-        </li>
-      </ol>
+    <div class="sambutan-grid">
+      <!-- Kiri: Video -->
+      <div class="sambutan-video-wrap">
+        <div class="play-btn">
+          <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg>
+        </div>
+        <span class="sambutan-video-duration">4:03</span>
+      </div>
+
+      <!-- Kanan: Teks Sambutan -->
+      <div class="sambutan-text-side">
+        <p class="sambutan-quote">
+          Bismillahirrohmanirahim. Assalamu'alaikum Warahmatullahi Wabarakatuh.
+        </p>
+        <p class="sambutan-body">
+          Segala puji hanya untuk Allah SWT yang telah memberikan kepada kita nikmat iman, Islam, dan kesehatan. Shalawat serta salam semoga selalu tercurah kepada Nabi Muhammad SAW, keluarga, sahabat, dan seluruh umatnya.
+        </p>
+        <p class="sambutan-body" style="margin-top:12px">
+          Kami berkomitmen menjadikan SMKN 1 Cikampek sebagai lembaga pendidikan kejuruan terbaik yang mencetak lulusan siap kerja, berkarakter kuat, dan berdaya saing global. Melalui program-program unggulan dan kolaborasi erat dengan dunia industri, kami terus berupaya memberikan pendidikan berkualitas tinggi bagi generasi penerus bangsa.
+        </p>
+        <p class="sambutan-body" style="margin-top:12px">
+          Semoga Allah SWT senantiasa membimbing langkah kita semua dalam mewujudkan cita-cita mulia ini. Wassalamu'alaikum Wr. Wb.
+        </p>
+
+        <div class="sambutan-signature">
+          <div class="sambutan-avatar">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+          </div>
+          <div>
+            <p class="sambutan-name">Kepala SMKN 1 Cikampek</p>
+            <p class="sambutan-role">SMKN 1 Cikampek — Karawang, Jawa Barat</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 </main>
 
 <!-- FOOTER -->

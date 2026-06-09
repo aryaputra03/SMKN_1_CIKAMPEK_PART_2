@@ -45,45 +45,141 @@ ul { list-style: none; }
 .header {
   position: sticky; top: 0; z-index: 500;
   background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gray-soft);
   transition: box-shadow 0.3s var(--ease);
 }
 .header.scrolled { box-shadow: var(--shadow-md); }
-.header-main { display: flex; align-items: center; gap: 20px; height: 68px; }
 
-.logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.header-main {
+  display: flex; align-items: center;
+  gap: 20px; height: 72px;
+}
+
+.logo-area {
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; text-decoration: none;
+}
 .logo-placeholder {
-  width: 42px; height: 42px; background: var(--gold);
+  width: 44px; height: 44px; background: var(--gold);
   border-radius: 10px; display: flex; align-items: center;
   justify-content: center; font-family: 'Cormorant Garamond', serif;
-  font-size: 21px; font-weight: 700; color: var(--navy); flex-shrink: 0;
+  font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0;
 }
-.logo-text h1 { font-size: 14.5px; font-weight: 700; color: var(--navy); line-height: 1.2; white-space: nowrap; }
-.logo-text p  { font-size: 11px; color: var(--text-muted); }
+.logo-text h1 {
+  font-size: 15px; font-weight: 700; color: var(--navy);
+  line-height: 1.2; white-space: nowrap;
+}
+.logo-text p {
+  font-size: 11px; color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
 
-.navbar { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.navbar { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+
+.nav-item { position: relative; }
+
 .nav-link {
-  padding: 7px 14px; border-radius: var(--r-sm);
+  display: flex; align-items: center; gap: 5px;
+  padding: 8px 14px; border-radius: var(--r-sm);
   font-size: 13.5px; font-weight: 500; color: var(--text);
   background: none; border: none; cursor: pointer;
   transition: color 0.2s, background 0.2s; white-space: nowrap;
   font-family: 'DM Sans', sans-serif;
 }
-.nav-link:hover { background: var(--gray-soft); color: var(--navy); }
-.nav-link.active { background: var(--gold-pale); color: var(--navy); font-weight: 700; }
+.nav-link:hover, .nav-link.active { color: var(--navy); background: var(--gray-soft); }
+.nav-link.active { font-weight: 600; }
 
-/* Hamburger */
-.hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; margin-left: auto; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+.caret {
+  width: 13px; height: 13px; flex-shrink: 0;
+  transition: transform 0.25s;
+}
+.nav-item.open .caret { transform: rotate(180deg); }
+
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--white); border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gray-soft);
+  min-width: 230px; padding: 8px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0.22s;
+}
+.nav-item.has-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: transparent;
+}
+.nav-item.open .dropdown {
+  opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0);
+}
+.dropdown a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: var(--r-sm);
+  font-size: 13.5px; color: var(--text);
+  transition: background 0.2s, color 0.2s;
+}
+.dropdown a:hover { background: var(--gold-pale); color: var(--navy); }
+.dd-icon {
+  width: 30px; height: 30px; background: var(--gray-soft);
+  border-radius: 6px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.dd-icon svg { width: 15px; height: 15px; color: var(--navy-mid); }
+
+.btn-ppdb {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; background: var(--gold);
+  color: var(--navy); font-size: 13.5px; font-weight: 700;
+  border-radius: var(--r-md); transition: background 0.2s, transform 0.2s;
+  white-space: nowrap; flex-shrink: 0; margin-left: 12px;
+}
+.btn-ppdb:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-ppdb svg { width: 16px; height: 16px; }
+
+/* HAMBURGER */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  padding: 8px; background: none; border: none; cursor: pointer;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--navy); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-soft); box-shadow: var(--shadow-lg); padding: 8px 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease); }
-.mobile-menu.open { max-height: 300px; }
-.mobile-menu a { display: block; padding: 12px 24px; font-size: 14px; font-weight: 500; color: var(--text); border-bottom: 1px solid var(--gray-soft); }
-.mobile-menu a:hover { color: var(--navy); background: var(--off-white); }
-.mobile-menu a.active { color: var(--navy); font-weight: 700; }
+
+/* MOBILE MENU */
+.mobile-menu {
+  display: none; position: absolute; top: 100%; left: 0; right: 0;
+  background: var(--white); border-top: 1px solid var(--gray-soft);
+  box-shadow: var(--shadow-lg); padding: 8px 0 16px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s var(--ease);
+}
+.mobile-menu.open { max-height: 600px; }
+.mobile-nav-item { border-bottom: 1px solid var(--gray-soft); }
+.mobile-nav-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 24px; font-size: 14px; font-weight: 500;
+  color: var(--text); cursor: pointer;
+}
+.mobile-dropdown { display: none; background: var(--off-white); }
+.mobile-dropdown.open { display: block; }
+.mobile-dropdown a {
+  display: block; padding: 10px 24px 10px 40px;
+  font-size: 13.5px; color: var(--text-muted);
+  border-bottom: 1px solid var(--gray-soft);
+}
+.mobile-dropdown a:hover { color: var(--navy); }
 
 /* ── PAGE HERO ── */
 .page-hero {
@@ -246,6 +342,7 @@ ul { list-style: none; }
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   .navbar { display: none; }
+  .btn-ppdb { display: none; }
   .hamburger { display: flex; }
   .mobile-menu { display: block; }
   .alumni-grid { grid-template-columns: 1fr 1fr; }
@@ -262,9 +359,11 @@ ul { list-style: none; }
 <!-- ══════════════ HEADER ══════════════ -->
 <header class="header">
   <div class="container header-main">
+
+    <!-- LOGO -->
     <a href="index.html" class="logo-area">
       <img src="assets/images/logo/logo.png" alt="Logo SMKN 1 Cikampek"
-        style="width:42px;height:42px;border-radius:10px;object-fit:cover;"
+        style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <div class="logo-placeholder" style="display:none">S</div>
       <div class="logo-text">
@@ -273,23 +372,109 @@ ul { list-style: none; }
       </div>
     </a>
 
+    <!-- NAVBAR DESKTOP -->
     <nav class="navbar">
-      <a href="index.html" class="nav-link">Beranda</a>
-      <a href="profil/visi-misi.html" class="nav-link">Profil Sekolah</a>
-      <a href="informasi/berita.html" class="nav-link">Informasi</a>
-      <a href="lulusanterbaik.html" class="nav-link active">Lulusan Terbaik</a>
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">Beranda</a>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">
+          Profil Sekolah
+          <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="dropdown">
+          <a href="profil/visi-misi.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span> Visi &amp; Misi
+          </a>
+          <a href="profil/fasilitas.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span> Fasilitas
+          </a>
+          <a href="profil/jurusan.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5"/></svg></span> Jurusan
+          </a>
+          <a href="profil/struktur-organisasi.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span> Struktur Organisasi
+          </a>
+          <a href="profil/staff-guru.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span> Staff &amp; Guru
+          </a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">
+          Informasi
+          <svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <div class="dropdown">
+          <a href="informasi/berita.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span> Berita Sekolah
+          </a>
+          <a href="informasi/prestasi.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span> Prestasi
+          </a>
+          <a href="informasi/ekskul.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span> Org &amp; Ekstrakurikuler
+          </a>
+          <a href="lulusanterbaik.html">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span> Lulusan Terbaik
+          </a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="../kurikulum/index.html" class="nav-link">Kurikulum</a>
+      </div>
     </nav>
 
+    <a href="#ppdb" class="btn-ppdb">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
+      Kontak Person
+    </a>
+
+    <!-- HAMBURGER -->
     <button class="hamburger" aria-label="Buka Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 
+  <!-- MOBILE MENU -->
   <div class="mobile-menu">
-    <a href="index.html">Beranda</a>
-    <a href="profil/visi-misi.html">Profil Sekolah</a>
-    <a href="informasi/berita.html">Informasi</a>
-    <a href="lulusanterbaik.html" class="active">Lulusan Terbaik</a>
+    <div class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-link">Beranda</a>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-profil">
+        Profil Sekolah
+        <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="mobile-dropdown" id="mob-profil">
+        <a href="profil/visi-misi.html">Visi &amp; Misi</a>
+        <a href="profil/fasilitas.html">Fasilitas</a>
+        <a href="profil/jurusan.html">Jurusan</a>
+        <a href="profil/struktur-organisasi.html">Struktur Organisasi</a>
+        <a href="profil/staff-guru.html">Staff &amp; Guru</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-link" data-toggle="mob-informasi">
+        Informasi
+        <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+      <div class="mobile-dropdown" id="mob-informasi">
+        <a href="informasi/berita.html">Berita</a>
+        <a href="informasi/prestasi.html">Prestasi</a>
+        <a href="informasi/ekskul.html">Ekstrakurikuler</a>
+        <a href="lulusanterbaik.html" class="active">Lulusan Terbaik</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <a href="../kurikulum/index.html" class="mobile-nav-link">Kurikulum</a>
+    </div>
+    <div class="mobile-nav-item">
+      <a href="#contact" class="mobile-nav-link">Kontak</a>
+    </div>
+    <div style="padding:16px 24px;">
+      <a href="#ppdb" class="btn-ppdb" style="width:100%;justify-content:center;">Kontak Person</a>
+    </div>
   </div>
 </header>
 
@@ -495,12 +680,50 @@ document.addEventListener('DOMContentLoaded', () => {
     header?.classList.toggle('scrolled', window.scrollY > 50);
   });
 
+  // Dropdown navbar (hover + delay)
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let closeTimer;
+    function openDropdown() {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.add('open');
+    }
+    function closeDropdown() {
+      closeTimer = setTimeout(() => item.classList.remove('open'), 150);
+    }
+    item.addEventListener('mouseenter', openDropdown);
+    item.addEventListener('mouseleave', closeDropdown);
+    const btn = item.querySelector('button.nav-link');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    }
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open'));
+  });
+
   // Hamburger mobile menu
   const hamburger = document.querySelector('.hamburger');
   const mobileMenu = document.querySelector('.mobile-menu');
   hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileMenu?.classList.toggle('open');
+  });
+
+  // Mobile dropdown accordion
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-toggle');
+      const target = document.getElementById(targetId);
+      target?.classList.toggle('open');
+      const caret = btn.querySelector('.mob-caret');
+      if (caret) caret.style.transform = target?.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
   });
 
   // Fade-up on scroll
