@@ -398,234 +398,280 @@
 <main class="page-body">
   <div class="container">
     <!-- FILTER TABS -->
-    <div class="filter-tabs fade-up">
+<div class="filter-tabs fade-up">
       <button class="filter-tab active" onclick="filterEkskul('semua', this)">Semua</button>
       <button class="filter-tab" onclick="filterEkskul('wajib', this)">Wajib</button>
       <button class="filter-tab" onclick="filterEkskul('olahraga', this)">Olahraga</button>
-      <button class="filter-tab" onclick="filterEkskul('seni', this)">Seni &amp; Budaya</button>
-      <button class="filter-tab" onclick="filterEkskul('akademik', this)">Akademik</button>
-      <button class="filter-tab" onclick="filterEkskul('sosial', this)">Sosial &amp; Karakter</button>
+      <button class="filter-tab" onclick="filterEkskul('seni', this)">Seni & Budaya</button>
+      <button class="filter-tab" onclick="filterEkskul('pilihan', this)">Pilihan Lainnya</button>
     </div>
 
     <!-- EKSKUL GRID -->
     <div class="ekskul-grid" id="ekskul-grid">
 
-      <!-- Pramuka -->
-      <div class="ekskul-card fade-up" data-kat="wajib">
+<div class="ekskul-card fade-up" data-kat="wajib">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#1B2E4A,#0F1E38)">
           <span class="ekskul-type-badge badge-wajib">Wajib</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l8 18H4l8-18z"/><path d="M12 22v-6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>
           </div>
-          <h3>Pramuka Inti</h3>
-          <p>Gugus Depan SMKN 1 Cikampek</p>
+          <h3>Pramuka</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Membentuk karakter disiplin, mandiri, tangguh, dan cinta tanah air melalui berbagai kegiatan kepramukaan dan pengabdian masyarakat.</p>
-          <div class="ekskul-meta">
-          </div>
+          <p>Organisasi kepanduan yang membentuk mentalitas tangguh, kemandirian, dan kepedulian sosial melalui berbagai kegiatan edukatif di alam terbuka.</p>
         </div>
       </div>
 
-      <!-- Paskibra -->
-      <div class="ekskul-card fade-up" data-kat="wajib">
+      <div class="ekskul-card fade-up" data-kat="pilihan">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
-          <span class="ekskul-type-badge badge-wajib">Wajib</span>
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
           </div>
-          <h3>Paskibraka</h3>
-          <p>Pasukan Pengibar Bendera Pusaka</p>
+          <h3>Paskibra</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Melatih ketangkasan fisik, mental kebangsaan, dan rasa cinta tanah air melalui latihan baris-berbaris dan pengibaran bendera.</p>
-          <div class="ekskul-meta">
-          </div>
+          <p>Wadah pembinaan karakter yang mencetak generasi muda disiplin, berjiwa kepemimpinan kuat, dan memiliki rasa nasionalisme tinggi melalui seni ketangkasan baris-berbaris.</p>
         </div>
       </div>
 
-      <!-- PMR -->
-      <div class="ekskul-card fade-up" data-kat="sosial">
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#4B5563,#374151)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3>Jurnalistik</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Wadah kreativitas siswa dalam mengasah kemampuan literasi, meliput berita, dan mengelola informasi sekolah secara tajam serta faktual.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#0369a1,#075985)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>CIVOHIS</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Komunitas English Club resmi sekolah yang melatih kepercayaan diri siswa dalam menguasai keterampilan komunikasi global seperti speech, storytelling, dan news anchor.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="pilihan">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#DC2626,#991b1b)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/><path d="M12 7v6"/><path d="M9 10h6"/></svg>
           </div>
-          <h3>Palang Merah Remaja</h3>
-          <p>Unit PMR SMKN 1 Cikampek</p>
+          <h3>PMR</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Melatih kesiapsiagaan, kepedulian sosial, dan pertolongan pertama pada kecelakaan (P3K) untuk mencetak generasi siap tanggap bencana.</p>
-          <div class="ekskul-meta">
-          </div>
+          <p>Ruang kemanusiaan yang melatih kepekaan sosial dan keterampilan pertolongan pertama guna menyiapkan kader kesehatan yang siap membantu sesama.</p>
         </div>
       </div>
 
-      <!-- Futsal -->
-      <div class="ekskul-card fade-up" data-kat="olahraga">
-        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
-          <h3>Futsal</h3>
-          <p>Tim Futsal SMKN 1 Cikampek</p>
+          <h3>ROOTS (Anti-Bullying)</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Mengembangkan bakat sepak bola dalam ruangan dengan latihan taktik, teknik dasar, dan mental bertanding di level kompetitif.</p>
-          <div class="ekskul-meta">
-          </div>
+          <p>Agen perubahan siswa yang bergerak aktif menyebarkan pesan perdamaian dan menciptakan lingkungan sekolah yang aman, inklusif, serta bebas dari perundungan.</p>
         </div>
       </div>
 
-      <!-- Bola Voli -->
-      <div class="ekskul-card fade-up" data-kat="olahraga">
-        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#14B8A6,#0E7490)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18"/></svg>
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
-          <h3>Bola Voli</h3>
-          <p>Tim Bola Voli Putra &amp; Putri</p>
+          <h3>SPW</h3>
+          <p>Bidang Kebangsaan, Sosial & Karakter</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Membina atlet voli berprestasi melalui program latihan terstruktur untuk mengikuti kejuaraan tingkat kabupaten hingga provinsi.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
+          <p>Program inkubator bisnis berbasis teknologi modern untuk mencetak mentalitas wirausaha muda yang mandiri, kreatif, dan berdaya saing digital.</p>
         </div>
       </div>
 
-      <!-- Pencak Silat -->
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#059669,#047857)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </div>
+          <h3>IRMA</h3>
+          <p>Bidang Kerohanian</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Wadah kegiatan keagamaan Islam di sekolah yang berfokus membangun akhlak mulia dan mempererat ukhuwah melalui kegiatan kajian kreatif serta sosial.</p>
+        </div>
+      </div>
+
       <div class="ekskul-card fade-up" data-kat="olahraga">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#D97706,#b45309)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
-          <h3>Pencak Silat</h3>
-          <p>Perguruan Silat SMKN 1 Cikampek</p>
+          <h3>Taekwondo</h3>
+          <p>Bidang Olahraga Bela Diri</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Melestarikan seni bela diri tradisional Indonesia sekaligus melatih fisik, mental, dan disiplin untuk kompetisi regional dan nasional.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
+          <p>Seni bela diri asal Korea yang melatih kekuatan fisik, ketahanan mental, serta kedisiplinan tinggi untuk meraih prestasi di arena pertandingan.</p>
         </div>
       </div>
 
-      <!-- Panahan -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#B45309,#92400E)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/><path d="M14.5 6.5L18 3h3v3l-3.5 3.5"/><path d="M4 16l4 4"/><path d="M3 21l2-2"/></svg>
+          </div>
+          <h3>Pencak Silat</h3>
+          <p>Bidang Olahraga Bela Diri</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Wadah pelestarian budaya bangsa yang mengombinasikan teknik pertahanan diri fisik dengan pembentukan karakter berbudi luhur.</p>
+        </div>
+      </div>
+
       <div class="ekskul-card fade-up" data-kat="olahraga">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#0891b2,#0e7490)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M12 5l7 7-7 7M3 12l2-2 2 2-2 2-2-2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           </div>
           <h3>Panahan</h3>
-          <p>Klub Panahan SMKN 1 Cikampek</p>
+          <p>Bidang Olahraga Bela Diri</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Olahraga panahan yang melatih konsentrasi, ketenangan, dan presisi. Telah menghasilkan atlet juara di tingkat provinsi Jawa Barat.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
+          <p>Cabang olahraga presisi yang melatih tingkat fokus, ketenangan pikiran, kesabaran, dan akurasi tinggi pada setiap bidikan.</p>
         </div>
       </div>
 
-      <!-- Paduan Suara -->
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#F59E0B,#D97706)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+          </div>
+          <h3>Bola Basket</h3>
+          <p>Bidang Olahraga Bola Besar & Kecil</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Sarana pengembangan bakat yang dinamis untuk membangun stamina, kelincahan fisik, taktik permainan, dan kerja sama tim yang solid.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#10B981,#059669)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="12 2 15 8 22 9 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9 9 8 12 2"/></svg>
+          </div>
+          <h3>Sepak Bola</h3>
+          <p>Bidang Olahraga Bola Besar & Kecil</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Olahraga kerja sama tim yang mengasah keterampilan teknik lapangan hijau, kekuatan fisik luar biasa, dan semangat sportivitas yang tinggi.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#16A34A,#15803d)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Futsal</h3>
+          <p>Bidang Olahraga Bola Besar & Kecil</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Komunitas olahraga populer yang memadukan kecepatan berpikir, akurasi operan, dan kerja sama tim di lapangan ruangan secara kompetitif.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Bola Voli</h3>
+          <p>Bidang Olahraga Bola Besar & Kecil</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Sarana pembinaan bakat olahraga yang fokus melatih refleks cepat, kekuatan lompatan, koordinasi motorik, dan kekompakan tim yang erat.</p>
+        </div>
+      </div>
+
+      <div class="ekskul-card fade-up" data-kat="olahraga">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#3B82F6,#2563EB)">
+          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
+          <div class="ekskul-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="6.5"/></svg>
+          </div>
+          <h3>Badminton</h3>
+          <p>Bidang Olahraga Bola Besar & Kecil</p>
+        </div>
+        <div class="ekskul-card-body">
+          <p>Wadah olahraga raket yang menuntut kelincahan gerak kaki, kecepatan pukulan smash, dan ketahanan fisik prima untuk mencetak atlet sekolah yang berprestasi.</p>
+        </div>
+      </div>
+
       <div class="ekskul-card fade-up" data-kat="seni">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#9333EA,#7e22ce)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
           </div>
-          <h3>Paduan Suara</h3>
-          <p>Choir SMKN 1 Cikampek</p>
+          <h3>Seni Musik</h3>
+          <p>Bidang Seni & Kebudayaan</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Mengembangkan kemampuan vokal dan musik secara kolektif untuk tampil di berbagai acara resmi sekolah dan festival paduan suara.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
+          <p>Ruang ekspresi bagi para pencinta melodi untuk mengasah bakat vokal maupun instrumen dalam berbagai genre musik secara harmonis.</p>
         </div>
       </div>
 
-      <!-- Tari Tradisional -->
       <div class="ekskul-card fade-up" data-kat="seni">
         <div class="ekskul-card-header" style="background:linear-gradient(135deg,#E11D48,#be123c)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
           </div>
-          <h3>Tari Tradisional</h3>
-          <p>Sanggar Tari SMKN 1 Cikampek</p>
+          <h3>Seni Tari</h3>
+          <p>Bidang Seni & Kebudayaan</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Melestarikan seni tari tradisional nusantara dari berbagai daerah sebagai wujud kecintaan terhadap budaya bangsa Indonesia.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
+          <p>Media kreativitas estetis yang bertujuan melestarikan warisan gerakan tari tradisional sekaligus mengeksplorasi keindahan seni gerak modern.</p>
         </div>
       </div>
 
-      <!-- Robotika -->
-      <div class="ekskul-card fade-up" data-kat="akademik">
-        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#374151,#1f2937)">
+      <div class="ekskul-card fade-up" data-kat="pilihan">
+        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#F43F5E,#E11D48)">
           <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
           <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 11V3M8 3h8M7 21v1M17 21v1"/><circle cx="8" cy="16" r="1" fill="currentColor"/><circle cx="16" cy="16" r="1" fill="currentColor"/></svg>
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           </div>
-          <h3>Robotika</h3>
-          <p>Klub Robotika &amp; Otomasi</p>
+          <h3>YUME (Japanese Club)</h3>
+          <p>Bidang Seni & Kebudayaan</p>
         </div>
         <div class="ekskul-card-body">
-          <p>Merancang, merakit, dan memprogram robot untuk mengikuti kompetisi nasional. Didukung lab khusus dengan peralatan modern dan pembina berpengalaman.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- English Club -->
-      <div class="ekskul-card fade-up" data-kat="akademik">
-        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#0369a1,#075985)">
-          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
-          <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <h3>English Club</h3>
-          <p>Komunitas Bahasa Inggris</p>
-        </div>
-        <div class="ekskul-card-body">
-          <p>Meningkatkan kemampuan berbahasa Inggris aktif melalui debat, public speaking, dan simulasi percakapan bisnis untuk persiapan dunia kerja global.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Jurnalistik -->
-      <div class="ekskul-card fade-up" data-kat="akademik">
-        <div class="ekskul-card-header" style="background:linear-gradient(135deg,#4B5563,#374151)">
-          <span class="ekskul-type-badge badge-pilihan">Pilihan</span>
-          <div class="ekskul-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-          </div>
-          <h3>Jurnalistik &amp; Fotografi</h3>
-          <p>Majalah Dinding &amp; Media Sekolah</p>
-        </div>
-        <div class="ekskul-card-body">
-          <p>Mengasah kemampuan menulis, meliput berita, dan fotografi untuk media sekolah. Menghasilkan konten untuk website, majalah dinding, dan media sosial resmi sekolah.</p>
-          <div class="ekskul-meta">
-            <div class="ekskul-meta-item">
-          </div>
+          <p>Komunitas pencinta kebudayaan Jepang (Japanese Club) yang menjadi ruang belajar bahasa, seni pop, dan pemahaman budaya kreatif bagi para siswa.</p>
         </div>
       </div>
 
