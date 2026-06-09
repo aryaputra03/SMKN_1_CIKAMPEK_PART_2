@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Lulusan Terbaik - Admin SMKN 1 Cikampek</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Staff</a></li>
+            <li><a href="lulusan.html">Lulusan Terbaik</a></li>
+            <li><a href="banner.html">Banner</a></li>
+            <li><a href="bos.html">Laporan BOS</a></li>
+            <li><a href="apbd.html">Laporan APBD</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum.html">Kurikulum</a></li>
+            <li><a href="struktur_organisasi.html">Struktur Organisasi</a></li>
+            <li><button onclick="logout()">Logout</button></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <h1>Pengelolaan Data Lulusan Terbaik</h1>
+        <p>Tracking alumni dan lulusan terbaik SMKN 1 Cikampek.</p>
+        <br>
+
+        <h2>Data Alumni / Lulusan Terbaik</h2>
+        <button onclick="bukaFormLulusan()">+ Tambah Lulusan Baru</button>
+        <br><br>
+
+        <div id="area-form-lulusan" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 500px;">
+            <h3 id="judul-form-lulusan">Tambah Lulusan Terbaik</h3>
+            <form id="form-lulusan">
+                <input type="hidden" id="lulusan-id">
+                <div>
+                    <label>Nama Alumni:</label><br>
+                    <input type="text" id="lulusan-nama" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Tahun Lulus (Angka):</label><br>
+                    <input type="number" id="lulusan-tahun" placeholder="Contoh: 2025" required style="width: 100px;">
+                </div><br>
+                <div>
+                    <label>Jurusan:</label><br>
+                    <input type="text" id="lulusan-jurusan" placeholder="Contoh: Teknik Komputer dan Jaringan" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Pencapaian / Jejak Karir:</label><br>
+                    <textarea id="lulusan-pencapaian" placeholder="Contoh: Bekerja di PT. Toyota Motor Manufacturing" required style="width: 100%; height: 60px;"></textarea>
+                </div><br>
+                <div>
+                    <label>Urutan Tampil:</label><br>
+                    <input type="number" id="lulusan-urutan" value="0" style="width: 100px;">
+                </div><br>
+                
+                <div>
+                    <label>Upload Foto Alumni:</label><br>
+                    <input type="file" id="input-file-lulusan" accept="image/*" style="width: 100%;">
+                    <input type="hidden" id="lulusan-foto">
+                    <br>
+                    <img id="preview-lulusan" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                    <small id="status-upload-lulusan" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
+                </div><br>
+
+                <button type="submit">Simpan Data Alumni</button>
+                <button type="button" onclick="tutupFormLulusan()">Batal</button>
+            </form>
+        </div>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Urutan</th>
+                    <th>Nama Alumni</th>
+                    <th>Tahun Lulus</th>
+                    <th>Jurusan</th>
+                    <th>Pencapaian</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-lulusan">
+            </tbody>
+        </table>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    
+    <script>
+        // =========================================================
+        // 1. SYSTEM CORE (AUTH)
+        // =========================================================
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) window.location.href = 'index.html';
+            return session;
+        }
+        checkAuth();
+
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        // =========================================================
+        // 2. UPLOAD KE STORAGE SUPABASE
+        // =========================================================
+        async function uploadGambar(file, bucket) {
+            const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+            const { data, error } = await supabase.storage
+                .from(bucket)
+                .upload(namaFile, file);
+
+            if (error) {
+                console.error('Upload gagal:', error.message);
+                alert("Proses upload gagal: " + error.message);
+                return null;
+            }
+
+            const { data: { publicUrl } } = supabase.storage
+                .from(bucket)
+                .getPublicUrl(namaFile);
+
+            return publicUrl;
+        }
+
+        document.getElementById('input-file-lulusan').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const statusUpload = document.getElementById('status-upload-lulusan');
+            statusUpload.style.display = "block";
+            statusUpload.style.color = "blue";
+            statusUpload.innerText = "Sedang mengunggah file ke storage...";
+
+            // Menggunakan bucket 'guru-images' atau disesuaikan dengan kebutuhan Anda
+            const url = await uploadGambar(file, 'guru-images');
+
+            if (url) {
+                document.getElementById('lulusan-foto').value = url;
+                const preview = document.getElementById('preview-lulusan');
+                preview.src = url;
+                preview.style.display = "block";
+                
+                statusUpload.innerText = "Upload Berhasil!";
+                statusUpload.style.color = "green";
+            } else {
+                statusUpload.style.display = "none";
+            }
+        });
+
+        // =========================================================
+        // 3. MODUL CRUD: LULUSAN TERBAIK
+        // =========================================================
+        let modeLulusan = "tambah";
+
+        async function loadLulusan() {
+            const { data, error } = await supabase
+                .from('lulusan_terbaik')
+                .select('*')
+                .order('urutan', { ascending: true })
+                .order('tahun_lulus', { ascending: false });
+
+            if (error) { console.error(error.message); return; }
+
+            const tbody = document.getElementById('tabel-lulusan');
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Belum ada data lulusan terbaik.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td style="text-align:center;">${item.urutan || 0}</td>
+                    <td><b>${item.nama}</b></td>
+                    <td style="text-align:center;">${item.tahun_lulus}</td>
+                    <td>${item.jurusan || ''}</td>
+                    <td>${item.pencapaian || ''}</td>
+                    <td style="text-align:center;">
+                        <button onclick="persiapkanEditLulusan('${item.id}', \`${escapeJS(item.nama)}\`, ${item.tahun_lulus}, \`${escapeJS(item.jurusan || '')}\`, \`${escapeJS(item.pencapaian || '')}\`, ${item.urutan || 0}, '${item.foto_url || ''}')">Edit</button>
+                        <button onclick="hapusLulusan('${item.id}')">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('form-lulusan').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('lulusan-id').value;
+            
+            const formData = {
+                nama: document.getElementById('lulusan-nama').value,
+                tahun_lulus: parseInt(document.getElementById('lulusan-tahun').value),
+                jurusan: document.getElementById('lulusan-jurusan').value,
+                pencapaian: document.getElementById('lulusan-pencapaian').value,
+                urutan: parseInt(document.getElementById('lulusan-urutan').value) || 0,
+                foto_url: document.getElementById('lulusan-foto').value || null
+            };
+
+            if (modeLulusan === "tambah") {
+                const { error } = await supabase.from('lulusan_terbaik').insert([formData]);
+                if (error) alert(error.message);
+            } else {
+                const { error } = await supabase.from('lulusan_terbaik').update(formData).eq('id', id);
+                if (error) alert(error.message);
+            }
+            tutupFormLulusan();
+            loadLulusan();
+        });
+
+        async function hapusLulusan(id) {
+            if (!confirm('Hapus data lulusan terbaik ini?')) return;
+            const { error } = await supabase.from('lulusan_terbaik').delete().eq('id', id);
+            if (!error) loadLulusan();
+        }
+
+        function bukaFormLulusan() {
+            modeLulusan = "tambah";
+            document.getElementById('judul-form-lulusan').innerText = "Tambah Alumni Berprestasi";
+            document.getElementById('form-lulusan').reset();
+            document.getElementById('lulusan-id').value = "";
+            document.getElementById('lulusan-urutan').value = "0";
+            
+            document.getElementById('lulusan-foto').value = "";
+            document.getElementById('input-file-lulusan').value = "";
+            document.getElementById('preview-lulusan').style.display = "none";
+            document.getElementById('preview-lulusan').src = "";
+            document.getElementById('status-upload-lulusan').style.display = "none";
+            
+            document.getElementById('area-form-lulusan').style.display = "block";
+        }
+
+        function persiapkanEditLulusan(id, nama, tahun, jurusan, pencapaian, urutan, foto) {
+            modeLulusan = "edit";
+            document.getElementById('judul-form-lulusan').innerText = "Edit Data Alumni";
+            document.getElementById('area-form-lulusan').style.display = "block";
+            
+            document.getElementById('lulusan-id').value = id;
+            document.getElementById('lulusan-nama').value = nama;
+            document.getElementById('lulusan-tahun').value = tahun;
+            document.getElementById('lulusan-jurusan').value = jurusan;
+            document.getElementById('lulusan-pencapaian').value = pencapaian;
+            document.getElementById('lulusan-urutan').value = urutan;
+            
+            document.getElementById('lulusan-foto').value = foto;
+            document.getElementById('input-file-lulusan').value = "";
+            
+            const preview = document.getElementById('preview-lulusan');
+            if (foto && foto !== "null" && foto !== "") {
+                preview.src = foto;
+                preview.style.display = "block";
+            } else {
+                preview.style.display = "none";
+                preview.src = "";
+            }
+            document.getElementById('status-upload-lulusan').style.display = "none";
+        }
+
+        function tutupFormLulusan() {
+            document.getElementById('area-form-lulusan').style.display = "none";
+        }
+
+        function escapeJS(str) {
+            return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        loadLulusan();
+    </script>
+</body>
+</html>
