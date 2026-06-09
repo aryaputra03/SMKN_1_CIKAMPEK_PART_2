@@ -1,0 +1,315 @@
+/* ==========================================================================
+   PRESTASI MANAGEMENT CSS - SMKN 1 CIKAMPEK ADMIN
+   Spesifik untuk Modul Pengelolaan Data Prestasi Sekolah & Siswa (prestasi.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE SIDEBAR/NAV MENU */
+nav ul li a[href="prestasi.html"] {
+    background-color: var(--sidebar-active, #1e293b) !important;
+    color: var(--white, #ffffff) !important;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* 2. TOMBOL AKSI UTAMA (+ Tambah Prestasi Baru) */
+main#content > button {
+    background-color: #2563eb; /* Biru Modern */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+main#content > button:hover {
+    background-color: #1d4ed8;
+}
+
+main#content > button:active {
+    transform: scale(0.98);
+}
+
+/* 3. CARD CONTAINER FORM (#area-form) */
+#area-form {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    padding: 25px !important;
+    max-width: 650px !important; /* Disesuaikan karena ada textarea deskripsi */
+    margin-bottom: 25px !important;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#judul-form {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #0f172a;
+    font-size: 1.25rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+/* 4. FORM FIELDS & INPUTS STYLING */
+#form-prestasi label {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+#form-prestasi input[type="text"],
+#form-prestasi input[type="number"],
+#form-prestasi select,
+#form-prestasi textarea {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 12px !important;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+#form-prestasi input[type="text"]:focus,
+#form-prestasi input[type="number"]:focus,
+#form-prestasi select:focus,
+#form-prestasi textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+#form-prestasi select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23475569' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 30px !important;
+}
+
+#form-prestasi textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Input File Kustomisasi Ringan */
+#form-prestasi input[type="file"] {
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e1;
+    cursor: pointer;
+}
+
+/* Buttons di dalam Form */
+#form-prestasi button[type="submit"] {
+    background-color: #16a34a; /* Hijau Sukses */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#form-prestasi button[type="submit"]:hover {
+    background-color: #15803d;
+}
+
+#form-prestasi button[type="button"] {
+    background-color: #94a3b8; /* Abu-abu Batal */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.2s;
+}
+
+#form-prestasi button[type="button"]:hover {
+    background-color: #64748b;
+}
+
+/* 5. TABEL DATA PRESTASI */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0 !important;
+}
+
+table th {
+    background-color: #f8fafc !important; /* Slate Cerah Modern */
+    color: #475569 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    padding: 14px 16px !important;
+    border: none !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+}
+
+table td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    color: #334155;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+table tbody tr:hover {
+    background-color: #f8fafc; /* Efek Hover Baris */
+}
+
+/* Judul Prestasi & Deskripsi Kecil */
+table td b {
+    color: #0f172a;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+table td small {
+    color: #64748b !important;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Badge Tingkat Prestasi */
+table td:nth-child(3) {
+    font-weight: 600;
+    color: #0284c7;
+}
+
+/* Tombol Aksi Kolom Tabel (Edit & Hapus) */
+table td button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    margin: 2px;
+}
+
+/* Tombol Edit (Kuning/Amber Pastel) */
+table td button:nth-of-type(1) {
+    background-color: #fef3c7;
+    color: #d97706;
+    border-color: #fde68a;
+}
+
+table td button:nth-of-type(1):hover {
+    background-color: #fde68a;
+    color: #b45309;
+}
+
+/* Tombol Hapus (Merah Pastel) */
+table td button:nth-of-type(2) {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+table td button:nth-of-type(2):hover {
+    background-color: #fca5a5;
+    color: #b91c1c;
+}
+
+/* 6. CSS MODAL UNTUK ZOOM GAMBAR & THUMBNAIL */
+.img-thumbnail {
+    max-width: 100px; 
+    max-height: 70px; 
+    object-fit: cover; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    padding: 2px; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: #fff;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(15, 23, 42, 0.85); /* Slate 900 dengan Opacity */
+    backdrop-filter: blur(4px); /* Efek Blur Estetik */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 45px;
+    font-weight: 300;
+    transition: color 0.2s, transform 0.2s;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+    color: #94a3b8;
+    transform: rotate(90deg);
+}

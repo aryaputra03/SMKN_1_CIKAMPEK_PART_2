@@ -1,0 +1,116 @@
+/* ==========================================================================
+   assets/css/visi-misi.css
+   Tema: Admin Panel SMKN 1 Cikampek (Navy & Gold Accent)
+   Spesifik untuk Modul Pengelolaan Visi, Misi & Tujuan Sekolah (visi-misi.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE SIDEBAR MENU */
+nav ul li a[href="visi-misi.html"] {
+    background-color: #1e293b !important; /* Dark Slate / Navy Active */
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Menetralkan sisa inline style video.html di navbar jika ada */
+nav ul li a[href="video.html"] {
+    color: inherit;
+}
+
+/* 2. FORM CONTAINER (Menimpa inline style bawaan HTML) */
+#form-visi-misi {
+    background-color: #ffffff !important;
+    border: 1px solid #eef2f5 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    padding: 30px !important;
+    max-width: 750px !important;
+    margin-top: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Jarak antar form group div */
+#form-visi-misi > div {
+    margin-bottom: 20px;
+}
+
+/* Mengatur baris baru tanpa mengandalkan tag <br> berlebih */
+#form-visi-misi br {
+    display: none;
+}
+
+/* 3. STYLING LABELS */
+#form-visi-misi label {
+    display: inline-block;
+    font-size: 15px;
+    color: #1d3557 !important; /* Dark Navy */
+    margin-bottom: 8px;
+}
+
+/* 4. TEXTAREA INPUTS (Visi, Misi, Tujuan) */
+#form-visi-misi textarea {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 6px !important;
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif !important; /* Font lebih modern */
+    resize: vertical; /* Hanya izinkan resize ke bawah agar layout tidak rusak */
+    transition: all 0.2s ease !important;
+    box-sizing: border-box;
+}
+
+#form-visi-misi textarea:focus {
+    outline: none !important;
+    border-color: #1d3557 !important;
+    box-shadow: 0 0 0 3px rgba(29, 53, 87, 0.15) !important;
+    background-color: #ffffff !important;
+}
+
+/* Placeholder text styling */
+#form-visi-misi textarea::placeholder {
+    color: #adb5bd;
+    opacity: 1;
+}
+
+/* 5. TOMBOL SIMPAN */
+#btn-simpan {
+    background-color: #1d3557 !important; /* Dark Navy */
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    padding: 12px 24px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 5px rgba(29, 53, 87, 0.2) !important;
+    margin-top: 10px;
+    width: auto;
+    display: inline-block;
+}
+
+#btn-simpan:hover {
+    background-color: #0c2340 !important; /* Navy Pekat */
+    box-shadow: 0 4px 10px rgba(12, 35, 64, 0.3) !important;
+}
+
+#btn-simpan:active {
+    transform: scale(0.98);
+}
+
+#btn-simpan:disabled {
+    background-color: #6c757d !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* 6. ANIMASI */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

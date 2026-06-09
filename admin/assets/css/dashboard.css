@@ -1,0 +1,146 @@
+/* ==========================================================================
+   DASHBOARD CSS - SMKN 1 CIKAMPEK ADMIN
+   Spesifik untuk Halaman Utama / Ringkasan Data (dashboard.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT NAVIGATION MENU */
+/* Memastikan menu Dashboard otomatis aktif/berwarna biru */
+nav ul li a[href="dashboard.html"] {
+    background-color: var(--sidebar-active) !important;
+    color: var(--white) !important;
+    font-weight: bold;
+}
+
+/* 2. SECTION HEADINGS (h2) */
+main#content h2 {
+    font-size: 1.3rem;
+    color: #1e293b;
+    margin-bottom: 18px;
+    margin-top: 10px;
+    font-weight: 600;
+    position: relative;
+    padding-left: 12px;
+}
+
+main#content h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    height: 18px;
+    width: 4px;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-sm);
+}
+
+/* 3. WIDGET CONTAINER & CARDS (Ringkasan Data) */
+.widget-container {
+    display: grid !important; /* Mengganti flex bawaan inline menjadi grid yang presisi */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+    margin-bottom: 40px !important;
+}
+
+.widget {
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-color) !important;
+    border-left: 5px solid var(--primary-color) !important; /* Aksen garis vertikal di kiri */
+    padding: 24px 20px !important;
+    border-radius: var(--border-radius) !important;
+    text-align: center !important;
+    box-shadow: var(--box-shadow) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.widget:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02) !important;
+}
+
+/* Variasi Warna Aksen Garis Kiri untuk Setiap Widget */
+.widget:nth-child(1) { border-left-color: #3b82f6 !important; } /* Biru Berita */
+.widget:nth-child(2) { border-left-color: #f59e0b !important; } /* Amber Prestasi */
+.widget:nth-child(3) { border-left-color: #10b981 !important; } /* Hijau Guru */
+.widget:nth-child(4) { border-left-color: #8b5cf6 !important; } /* Ungu Banner */
+.widget:nth-child(5) { border-left-color: #ec4899 !important; } /* Pink Keuangan */
+
+.widget h3 {
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 600 !important;
+}
+
+.widget p {
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 12px 0 0 0 !important;
+    line-height: 1 !important;
+}
+
+/* 4. QUICK ACCESS TABLE (Modul Akses Cepat) */
+table {
+    width: 100% !important;
+    max-width: 750px !important;
+    border-collapse: collapse !important;
+    border: none !important; /* Menghilangkan border kuno bawaan HTML */
+    background-color: var(--white) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: var(--box-shadow) !important;
+    margin-top: 15px !important;
+}
+
+table th {
+    background-color: #f8fafc !important; /* Header abu-abu soft modern */
+    color: #475569 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.5px !important;
+    padding: 14px 20px !important;
+    border-bottom: 2px solid var(--border-color) !important;
+}
+
+table td {
+    padding: 14px 20px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    color: var(--text-main) !important;
+    font-size: 0.95rem !important;
+}
+
+table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+    background-color: #f8fafc !important; /* Efek highlight baris saat mouse lewat */
+}
+
+table tbody tr:last-child td {
+    border-bottom: none !important; /* Rapikan baris paling bawah */
+}
+
+table td b {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+}
+
+/* Link Navigasi Panah di Tabel */
+table td a {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+table td a:hover {
+    color: var(--primary-hover) !important;
+    transform: translateX(4px); /* Animasi panah bergeser maju sedikit saat di-hover */
+}

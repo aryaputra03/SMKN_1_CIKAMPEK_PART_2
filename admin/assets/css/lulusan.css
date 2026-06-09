@@ -1,0 +1,285 @@
+/* ==========================================================================
+   LULUSAN TERBAIK MANAGEMENT CSS - SMKN 1 CIKAMPEK ADMIN
+   Spesifik untuk Modul Pengelolaan Data Alumni & Lulusan Terbaik (lulusan.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE SIDEBAR/NAV MENU */
+nav ul li a[href="lulusan.html"] {
+    background-color: #1e293b !important; /* Slate Gelap */
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* 2. TOMBOL AKSI UTAMA (+ Tambah Lulusan Baru) */
+main#content > button {
+    background-color: #2563eb; /* Biru Modern */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+main#content > button:hover {
+    background-color: #1d4ed8;
+}
+
+main#content > button:active {
+    transform: scale(0.98);
+}
+
+/* 3. CARD CONTAINER FORM (#area-form-lulusan) */
+#area-form-lulusan {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    padding: 25px !important;
+    max-width: 500px !important;
+    margin-bottom: 25px !important;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#judul-form-lulusan {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #0f172a;
+    font-size: 1.25rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+/* 4. FORM FIELDS & INPUTS STYLING */
+#form-lulusan label {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+#form-lulusan input[type="text"],
+#form-lulusan input[type="number"],
+#form-lulusan textarea {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 12px !important;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+#form-lulusan input[type="text"]:focus,
+#form-lulusan input[type="number"]:focus,
+#form-lulusan textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+#form-lulusan textarea {
+    resize: vertical;
+}
+
+/* Input File Kustomisasi Ringan */
+#form-lulusan input[type="file"] {
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e1;
+    cursor: pointer;
+}
+
+/* Buttons di dalam Form */
+#form-lulusan button[type="submit"] {
+    background-color: #16a34a; /* Hijau Sukses */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#form-lulusan button[type="submit"]:hover {
+    background-color: #15803d;
+}
+
+#form-lulusan button[type="button"] {
+    background-color: #94a3b8; /* Abu-abu Batal */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.2s;
+}
+
+#form-lulusan button[type="button"]:hover {
+    background-color: #64748b;
+}
+
+/* 5. TABEL DATA ALUMNI / LULUSAN */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0 !important;
+}
+
+table th {
+    background-color: #0f172a !important; /* Navy Gelap / Slate 900 */
+    color: #ffffff !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    padding: 14px 16px !important;
+    border: none !important;
+}
+
+table td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+table tbody tr:hover {
+    background-color: #f8fafc; /* Efek Hover Baris */
+}
+
+/* Kolom Nama Alumni */
+table td b {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Tombol Aksi Kolom Tabel (Edit & Hapus) */
+table td button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    margin: 2px;
+}
+
+/* Tombol Edit (Kuning/Amber Pastel) */
+table td button:nth-of-type(1) {
+    background-color: #fef3c7;
+    color: #d97706;
+    border-color: #fde68a;
+}
+
+table td button:nth-of-type(1):hover {
+    background-color: #fde68a;
+    color: #b45309;
+}
+
+/* Tombol Hapus (Merah Pastel) */
+table td button:nth-of-type(2) {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+table td button:nth-of-type(2):hover {
+    background-color: #fca5a5;
+    color: #b91c1c;
+}
+
+/* 6. CSS MODAL UNTUK ZOOM GAMBAR & THUMBNAIL */
+.img-thumbnail {
+    max-width: 80px; 
+    max-height: 80px; 
+    object-fit: cover; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    padding: 2px; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.img-thumbnail:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(15, 23, 42, 0.85); /* Slate 900 dengan Opacity */
+    backdrop-filter: blur(4px); /* Efek Blur Kekinian */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.25s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.2s;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+    color: #cbd5e1;
+    text-decoration: none;
+}

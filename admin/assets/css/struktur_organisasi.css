@@ -1,0 +1,214 @@
+/* ==========================================================================
+   assets/css/struktur_organisasi.css
+   Tema: Admin Panel SMKN 1 Cikampek (Navy & Gold Accent)
+   ========================================================================== */
+
+/* Layout Utama Area Konten */
+#content {
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#content h1 {
+    font-size: 26px;
+    color: #0c2340; /* Navy Blue */
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+#content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Komponen Card (Kotak Pembungkus Konten) */
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #eef2f5;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #1d3557; /* Dark Navy */
+    margin-top: 0;
+    margin-bottom: 22px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #ffb703; /* Aksen Kuning Emas */
+    display: inline-block;
+}
+
+/* Kontainer Pratinjau Gambar (Preview Container) */
+.preview-container {
+    background-color: #f8f9fa;
+    border: 2px dashed #ced4da;
+    border-radius: 6px;
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gambar Struktur Organisasi */
+#preview-struktur {
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+    background: #ffffff;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+}
+
+/* Teks Status Jika Gambar Kosong */
+#no-image {
+    font-size: 15px;
+    color: #8c92ac !important;
+    margin: 0;
+}
+
+/* Form Pengunggahan */
+#form-struktur {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#form-struktur label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #495057;
+}
+
+/* Kustomisasi Input File */
+input[type="file"]#input-file-struktur {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 500px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="file"]#input-file-struktur:hover {
+    background: #f1f3f5;
+    border-color: #a8b2c1;
+}
+
+input[type="file"]#input-file-struktur:focus {
+    outline: none;
+    border-color: #1d3557;
+    box-shadow: 0 0 0 3px rgba(29, 53, 87, 0.15);
+}
+
+/* Alert Teks Status Upload */
+#status-upload {
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 10px 15px;
+    background-color: #e7f1ff;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Tombol Utama (Unggah & Simpan) */
+.btn-primary {
+    background-color: #1d3557; /* Dark Navy */
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start; /* Tombol tidak melebar penuh */
+    box-shadow: 0 2px 5px rgba(29, 53, 87, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #0c2340; /* Navy Lebih Gelap saat Hover */
+    box-shadow: 0 4px 10px rgba(12, 35, 64, 0.3);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Override & Efek Tombol Hapus Bagan */
+#btn-hapus {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.2);
+    transition: all 0.2s ease;
+}
+
+#btn-hapus:hover {
+    background-color: #c82333 !important; /* Merah Lebih Gelap */
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+#btn-hapus:active {
+    transform: scale(0.98);
+}
+
+#btn-hapus:disabled {
+    background-color: #6c757d !important;
+    cursor: not-allowed;
+}
+
+/* Animasi Sederhana */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsif untuk Layar Handphone/Tablet kecil */
+@media (max-width: 768px) {
+    #content {
+        padding: 15px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .btn-primary {
+        width: 100%; /* Tombol penuh pada layar HP */
+        text-align: center;
+    }
+    
+    #btn-hapus {
+        width: 100%;
+    }
+}

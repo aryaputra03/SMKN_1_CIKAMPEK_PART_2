@@ -1,0 +1,133 @@
+/* ==========================================================================
+   assets/css/video.css
+   Tema: Admin Panel SMKN 1 Cikampek (Navy & Gold Accent)
+   Spesifik untuk Modul Pengelolaan Video Profil Sekolah (video.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE SIDEBAR MENU */
+nav ul li a[href="video.html"] {
+    background-color: #1e293b !important; /* Dark Slate / Navy */
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* 2. FORM CONTAINER (Menimpa inline style HTML) */
+main#content > div:first-of-type {
+    background-color: #ffffff !important;
+    border: 1px solid #eef2f5 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    padding: 30px !important;
+    max-width: 750px !important;
+    margin-bottom: 30px !important;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 3. STYLING ELEMEN FORM */
+#form-video label {
+    font-size: 15px !important;
+    color: #1d3557 !important; /* Dark Navy */
+    font-weight: 700 !important;
+    display: inline-block;
+}
+
+#form-video small {
+    color: #6c757d !important;
+    display: inline-block;
+    margin-top: 6px !important;
+    margin-bottom: 12px !important;
+    font-size: 13px !important;
+}
+
+/* Input Tautan YouTube */
+#input-url-video {
+    padding: 12px 16px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 6px !important;
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    font-size: 15px !important;
+    transition: all 0.2s ease !important;
+    font-family: monospace, sans-serif; /* Menggunakan monospace agar URL mudah dibaca */
+    letter-spacing: -0.2px;
+}
+
+#input-url-video:focus {
+    outline: none !important;
+    border-color: #1d3557 !important;
+    box-shadow: 0 0 0 3px rgba(29, 53, 87, 0.15) !important;
+    background-color: #ffffff !important;
+}
+
+/* 4. TOMBOL SIMPAN */
+#btn-simpan {
+    background-color: #1d3557 !important; /* Dark Navy */
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    padding: 12px 24px !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 5px rgba(29, 53, 87, 0.2) !important;
+    margin-top: 5px !important;
+    width: auto !important;
+    display: inline-block;
+}
+
+#btn-simpan:hover {
+    background-color: #0c2340 !important; /* Navy lebih pekat saat hover */
+    box-shadow: 0 4px 10px rgba(12, 35, 64, 0.3) !important;
+}
+
+#btn-simpan:active {
+    transform: scale(0.98);
+}
+
+#btn-simpan:disabled {
+    background-color: #6c757d !important;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none;
+}
+
+/* 5. PREVIEW AREA (Area Pratinjau YouTube) */
+#preview-area {
+    background-color: #ffffff !important;
+    border: 1px solid #eef2f5 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    padding: 30px !important;
+    max-width: 750px !important;
+    animation: slideUp 0.4s ease-out;
+}
+
+#preview-area h3 {
+    color: #1d3557 !important; /* Dark Navy */
+    font-size: 18px !important;
+    margin-top: 0 !important;
+    margin-bottom: 22px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 3px solid #ffb703 !important; /* Garis bawah Kuning Emas */
+    display: inline-block !important;
+}
+
+/* Mempercantik Kontainer Iframe Video */
+#preview-area > div {
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
+    border: 1px solid #dee2e6 !important;
+    background-color: #000000 !important;
+}
+
+/* Animasi Masuk Transisi */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

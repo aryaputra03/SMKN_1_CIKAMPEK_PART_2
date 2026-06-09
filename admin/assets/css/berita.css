@@ -1,0 +1,222 @@
+/* ==========================================================================
+   BERITA MANAGEMENT CSS - SMKN 1 CIKAMPEK ADMIN
+   Spesifik untuk Modul Pengelolaan Berita & Pengumuman (berita.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE MENU */
+nav ul li a[href="berita.html"] {
+    background-color: var(--sidebar-active) !important;
+    color: var(--white) !important;
+    font-weight: bold;
+}
+
+/* 2. MAIN HEADER BUTTONS */
+main#content > button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 18px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+main#content > button:hover {
+    background-color: var(--primary-hover);
+}
+
+main#content > button:active {
+    transform: scale(0.98);
+}
+
+/* 3. FORM CONTAINER (#area-form) */
+#area-form {
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--box-shadow) !important;
+    padding: 24px !important;
+    max-width: 700px !important; /* Diperlebar khusus berita karena ada textarea besar */
+    margin-bottom: 30px !important;
+    animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#area-form h3 {
+    margin-top: 0;
+    color: #0f172a;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Form Input Fields Styling */
+#form-berita label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: #334155;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+#form-berita input[type="text"],
+#form-berita input[type="date"],
+#form-berita select,
+#form-berita textarea {
+    padding: 10px 14px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius-sm) !important;
+    font-size: 0.95rem !important;
+    outline: none !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    width: 100%;
+}
+
+#form-berita input[type="text"]:focus,
+#form-berita input[type="date"]:focus,
+#form-berita select:focus,
+#form-berita textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+    background-color: var(--white) !important;
+}
+
+#form-berita textarea {
+    resize: vertical; /* Hanya bisa ditarik secara vertikal */
+    min-height: 150px;
+}
+
+/* Tombol Submit & Cancel dalam Form */
+#form-berita button[type="submit"] {
+    background-color: var(--success-color) !important;
+    color: var(--white) !important;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#form-berita button[type="submit"]:hover {
+    background-color: var(--success-hover) !important;
+}
+
+#form-berita button[type="button"] {
+    background-color: var(--neutral-color) !important;
+    color: var(--white) !important;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+#form-berita button[type="button"]:hover {
+    background-color: var(--neutral-hover) !important;
+}
+
+/* 4. MODERN TABLE DESIGN */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: none !important;
+    background-color: var(--white) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: var(--box-shadow) !important;
+    margin-top: 15px !important;
+}
+
+table th {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.5px !important;
+    padding: 14px 18px !important;
+    border-bottom: 2px solid var(--border-color) !important;
+}
+
+table td {
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    color: var(--text-main) !important;
+    font-size: 0.95rem !important;
+    vertical-align: middle !important;
+}
+
+table tbody tr:hover {
+    background-color: #f8fafc !important;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* Kustomisasi Kolom Judul Berita & Slug */
+table td b {
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+table td small {
+    display: inline-block;
+    margin-top: 4px;
+    background-color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace; /* Font coding khusus untuk slug */
+    color: #475569 !important;
+}
+
+/* Status Kategori Badge */
+table td:nth-child(3) {
+    font-weight: 500;
+    color: var(--primary-hover);
+}
+
+/* Tombol Aksi Tabel (Edit/Hapus) */
+table td button {
+    padding: 6px 14px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--border-radius-sm) !important;
+    border: 1px solid transparent !important;
+    margin: 2px;
+}
+
+table td button:nth-of-type(1) { /* Edit */
+    background-color: #fffbeb !important;
+    color: #b45309 !important;
+    border-color: #fde68a !important;
+}
+
+table td button:nth-of-type(1):hover {
+    background-color: #fef3c7 !important;
+}
+
+table td button:nth-of-type(2) { /* Hapus */
+    background-color: #fef2f2 !important;
+    color: #991b1b !important;
+    border-color: #fee2e2 !important;
+}
+
+table td button:nth-of-type(2):hover {
+    background-color: #fee2e2 !important;
+}

@@ -1,0 +1,142 @@
+/* ==========================================================================
+   KURIKULUM URL MANAGEMENT CSS - SMKN 1 CIKAMPEK ADMIN
+   Spesifik untuk Modul Pengelolaan Tautan Dokumen Kurikulum (kurikulum_url.html)
+   ========================================================================== */
+
+/* 1. HIGHLIGHT ACTIVE MENU */
+nav ul li a[href="kurikulum_url.html"] {
+    background-color: var(--sidebar-active) !important;
+    color: var(--white) !important;
+    font-weight: bold;
+}
+
+/* 2. FORM CONTAINER SETTINGS */
+div[style*="max-width: 700px"] {
+    background-color: var(--white) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--box-shadow) !important;
+    padding: 30px 40px !important;
+    max-width: 750px !important;
+    margin-bottom: 30px !important;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. FORM INPUT STYLING */
+#form-kurikulum label {
+    font-size: 1.05rem;
+    color: #0f172a;
+    display: inline-block;
+}
+
+#form-kurikulum small {
+    display: inline-block;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
+#form-kurikulum input[type="url"] {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius-sm) !important;
+    padding: 12px 16px !important;
+    font-size: 1rem !important;
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    font-family: monospace; /* Font khusus URL agar mudah dibaca */
+    letter-spacing: -0.2px;
+}
+
+#form-kurikulum input[type="url"]:focus {
+    outline: none !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+    background-color: var(--white) !important;
+}
+
+/* 4. TOMBOL SIMPAN (Action Button) */
+#btn-simpan {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    transition: background-color 0.2s, transform 0.1s;
+    width: auto !important;
+    display: block;
+    margin-top: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#btn-simpan:hover {
+    background-color: var(--primary-hover) !important;
+}
+
+#btn-simpan:active {
+    transform: scale(0.98);
+}
+
+/* 5. PREVIEW AREA (Area Pengujian Tautan) */
+#preview-area {
+    background-color: #f0fdf4 !important; /* Latar belakang hijau sangat muda */
+    border: 1px solid #bbf7d0 !important;
+    border-radius: var(--border-radius) !important;
+    padding: 24px 30px !important;
+    max-width: 750px;
+    box-shadow: var(--box-shadow) !important;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#preview-area h3 {
+    color: #166534 !important; /* Hijau gelap */
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#preview-area h3::before {
+    content: "✓";
+    display: inline-block;
+    background-color: #22c55e;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+}
+
+#preview-area p {
+    color: #15803d !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 18px !important;
+}
+
+/* Tombol Buka Tautan */
+#btn-buka-tautan {
+    background-color: var(--white) !important;
+    color: #15803d !important;
+    border: 1px solid #22c55e !important;
+    transition: all 0.2s ease !important;
+}
+
+#btn-buka-tautan:hover {
+    background-color: #22c55e !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
+}
