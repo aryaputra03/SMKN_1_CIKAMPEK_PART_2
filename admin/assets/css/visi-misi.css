@@ -5,12 +5,7 @@
    ========================================================================== */
 
 /* 1. HIGHLIGHT ACTIVE SIDEBAR MENU */
-nav ul li a[href="visi-misi.html"] {
-    background-color: #1e293b !important; /* Dark Slate / Navy Active */
-    color: #ffffff !important;
-    font-weight: bold;
-    border-radius: 4px;
-}
+
 
 /* Menetralkan sisa inline style video.html di navbar jika ada */
 nav ul li a[href="video.html"] {

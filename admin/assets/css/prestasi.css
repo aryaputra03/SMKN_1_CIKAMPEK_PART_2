@@ -13,7 +13,7 @@ nav ul li a[href="prestasi.html"] {
 
 /* 2. TOMBOL AKSI UTAMA (+ Tambah Prestasi Baru) */
 main#content > button {
-    background-color: #2563eb; /* Biru Modern */
+    background-color: var(--primary-color);
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -26,7 +26,7 @@ main#content > button {
 }
 
 main#content > button:hover {
-    background-color: #1d4ed8;
+    background-color: var(--primary-hover);
 }
 
 main#content > button:active {

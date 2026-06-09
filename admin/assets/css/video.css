@@ -5,12 +5,7 @@
    ========================================================================== */
 
 /* 1. HIGHLIGHT ACTIVE SIDEBAR MENU */
-nav ul li a[href="video.html"] {
-    background-color: #1e293b !important; /* Dark Slate / Navy */
-    color: #ffffff !important;
-    font-weight: bold;
-    border-radius: 4px;
-}
+
 
 /* 2. FORM CONTAINER (Menimpa inline style HTML) */
 main#content > div:first-of-type {

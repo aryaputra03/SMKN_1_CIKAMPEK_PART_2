@@ -45,6 +45,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
@@ -105,9 +109,8 @@ nav ul li a:hover {
     padding-left: 20px;
 }
 
-/* Penanda Menu Aktif */
-nav ul li a.active,
-nav ul li a[style*="color: #ffb703"] /* Fallback jika masih pakai style inline */ {
+/* Penanda Menu Aktif (Hanya menggunakan sistem Class .active) */
+nav ul li a.active {
     background-color: var(--sidebar-active) !important;
     color: var(--white) !important;
     font-weight: bold;
@@ -126,11 +129,15 @@ nav ul li button {
     font-size: 0.95rem;
     text-align: left;
     margin-top: 20px;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
 }
 
 nav ul li button:hover {
     background-color: var(--danger-hover);
+}
+
+nav ul li button:active {
+    transform: scale(0.98);
 }
 
 /* 3. MAIN CONTENT WRAPPER */
@@ -203,8 +210,8 @@ main#content > p {
 
 /* Thumbnail Gambar Default di Tabel */
 .img-thumbnail {
-    max-width: 80px; 
-    max-height: 60px; 
+    width: 80px; 
+    height: 60px; 
     object-fit: cover; 
     border: 1px solid var(--border-color); 
     border-radius: var(--border-radius-sm); 
