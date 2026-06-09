@@ -102,11 +102,12 @@
             const visi = document.getElementById('input-visi').value.trim();
             
             // MODIFIKASI: Jika kosong, berikan array kosong [], jika ada teks baru diproses split
+            // Jika kosong, sistem mengirim NULL ke database
             const inputMisi = document.getElementById('input-misi').value.trim();
-            const misi = inputMisi ? inputMisi.split('\n').map(s => s.trim()).filter(s => s !== '') : [];
+            const misi = inputMisi ? inputMisi.split('\n').map(s => s.trim()).filter(s => s !== '') : null;
                 
             const inputTujuan = document.getElementById('input-tujuan').value.trim();
-            const tujuan = inputTujuan ? inputTujuan.split('\n').map(s => s.trim()).filter(s => s !== '') : [];
+            const tujuan = inputTujuan ? inputTujuan.split('\n').map(s => s.trim()).filter(s => s !== '') : null;
 
             try {
                 // Ambil ID dari record yang ada saat ini
