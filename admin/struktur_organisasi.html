@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Struktur Organisasi - Admin SMKN 1 Cikampek</title>
+    
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Lulusan</a></li>
+            <li><a href="banner.html">Banner</a></li>
+            <li><a href="bos.html">Laporan BOS</a></li>
+            <li><a href="apbd.html">Laporan APBD</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum.html">Kurikulum</a></li>
+            <li><a href="struktur_organisasi.html" style="color: #ffb703;">Struktur Organisasi</a></li>
+            <li><button onclick="logout()">Logout</button></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <h1>Pengelolaan Struktur Organisasi</h1>
+        <p style="color: #666;">Halaman ini digunakan untuk mengunggah bagan/gambar Struktur Organisasi Sekolah yang akan ditampilkan di halaman publik.</p>
+
+        <div class="card">
+            <h3>Bagan Struktur Saat Ini</h3>
+            <div class="preview-container">
+                <p id="no-image" style="color: #999; font-style: italic;">Belum ada gambar struktur organisasi yang diunggah.</p>
+                <img id="preview-struktur" src="" alt="Struktur Organisasi" style="display: none;">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Perbarui Gambar Struktur</h3>
+            <form id="form-struktur">
+                <label for="input-file-struktur">Pilih File Gambar (PNG/JPG/WebP, disarankan resolusi tinggi):</label>
+                <input type="file" id="input-file-struktur" accept="image/*" required>
+                
+                <p id="status-upload" style="display: none; color: #007bff; font-weight: bold;"></p>
+                
+                <button type="submit" id="btn-simpan" class="btn-primary">Unggah & Simpan Perubahan</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Supabase Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    <script>
+        // Auth Guard: Memastikan user telah login sebelum mengakses halaman
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html';
+            }
+            return session;
+        }
+
+        // Fungsi Logout
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        let existingId = null;
+
+        // Memuat gambar struktur organisasi dari database
+        async function loadStruktur() {
+            try {
+                const { data, error } = await supabase
+                    .from('struktur_organisasi')
+                    .select('*')
+                    .maybeSingle(); // Menggunakan maybeSingle agar tidak crash jika data masih kosong
+
+                if (error) throw error;
+
+                const previewImg = document.getElementById('preview-struktur');
+                const noImageText = document.getElementById('no-image');
+
+                if (data && data.foto_url) {
+                    existingId = data.id;
+                    previewImg.src = data.foto_url;
+                    previewImg.style.display = 'block';
+                    noImageText.style.display = 'none';
+                } else {
+                    previewImg.style.display = 'none';
+                    noImageText.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Gagal memuat data struktur:", err.message);
+            }
+        }
+
+        // Menyimpan atau memperbarui data gambar bagan organisasi
+        async function simpanStruktur(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('input-file-struktur');
+            const btnSimpan = document.getElementById('btn-simpan');
+            const statusUpload = document.getElementById('status-upload');
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert("Silakan pilih file gambar terlebih dahulu.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            
+            // Kunci tombol agar tidak klik ganda
+            btnSimpan.disabled = true;
+            statusUpload.innerText = "Sedang mengunggah gambar ke Storage...";
+            statusUpload.style.display = "block";
+
+            try {
+                // 1. Upload file gambar ke Supabase Storage (Bucket: struktur-images)
+                const fileExt = file.name.split('.').pop();
+                const fileName = `struktur_${Date.now()}.${fileExt}`;
+                const filePath = `${fileName}`;
+
+                const { data: uploadData, error: uploadError } = await supabase.storage
+                    .from('struktur-images')
+                    .upload(filePath, file);
+
+                if (uploadError) throw uploadError;
+
+                // 2. Ambil Public URL hasil upload gambar
+                const { data: urlData } = supabase.storage
+                    .from('struktur-images')
+                    .getPublicUrl(filePath);
+                
+                const fotoUrl = urlData.publicUrl;
+
+                statusUpload.innerText = "Menyimpan data URL ke Database...";
+
+                // 3. Simpan data URL ke tabel struktur_organisasi (Insert jika kosong, Update jika sudah ada)
+                if (existingId) {
+                    const { error: updateError } = await supabase
+                        .from('struktur_organisasi')
+                        .update({ foto_url: fotoUrl, updated_at: new Date() })
+                        .eq('id', existingId);
+
+                    if (updateError) throw updateError;
+                } else {
+                    const { error: insertError } = await supabase
+                        .from('struktur_organisasi')
+                        .insert([{ foto_url: fotoUrl }]);
+
+                    if (insertError) throw insertError;
+                }
+
+                alert("Struktur organisasi berhasil diperbarui!");
+                fileInput.value = ""; // Reset input file picker
+                loadStruktur(); // Muat ulang preview gambar terbaru
+
+            } catch (err) {
+                console.error("Proses penyimpanan gagal:", err.message);
+                alert("Gagal memperbarui struktur organisasi: " + err.message);
+            } finally {
+                btnSimpan.disabled = false;
+                statusUpload.style.display = "none";
+            }
+        }
+
+        // Jalankan inisialisasi awal saat halaman dibuka browser
+        async function init() {
+            await checkAuth();
+            loadStruktur();
+            document.getElementById('form-struktur').addEventListener('submit', simpanStruktur);
+        }
+
+        init();
+    </script>
+</body>
+</html>
