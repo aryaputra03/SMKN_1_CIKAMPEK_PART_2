@@ -3,32 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Guru & Lulusan - Admin SMKN 1 Cikampek</title>
-    <style>
-        /* Gaya Sederhana untuk Tab */
-        .tab-button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            font-weight: bold;
-        }
-        .tab-button.active {
-            background-color: #fff;
-            border-bottom: 1px solid #fff;
-            color: #007bff;
-        }
-        .tab-content {
-            display: none;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #fff;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+    <title>Kelola Guru & Staff - Admin SMKN 1 Cikampek</title>
 </head>
 <body>
     <nav>
@@ -36,7 +11,8 @@
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="berita.html">Berita</a></li>
             <li><a href="prestasi.html">Prestasi</a></li>
-            <li><a href="guru.html">Guru & Lulusan</a></li>
+            <li><a href="guru.html">Guru & Staff</a></li>
+            <li><a href="lulusan.html">Lulusan Terbaik</a></li>
             <li><a href="banner.html">Banner</a></li>
             <li><a href="bos.html">Laporan BOS</a></li>
             <li><a href="apbd.html">Laporan APBD</a></li>
@@ -48,129 +24,62 @@
     </nav>
 
     <main id="content">
-        <h1>Pengelolaan Data Guru & Lulusan</h1>
-        <p>Manajemen data tenaga pendidik dan tracking alumni/lulusan terbaik SMKN 1 Cikampek.</p>
+        <h1>Pengelolaan Data Guru & Staff</h1>
+        <p>Manajemen data tenaga pendidik SMKN 1 Cikampek.</p>
         <br>
 
-        <div style="display: flex;">
-            <button class="tab-button active" onclick="pindahTab('tab-guru', this)">Kelola Guru & Staff</button>
-            <button class="tab-button" onclick="pindahTab('tab-lulusan', this)">Kelola Lulusan Terbaik</button>
+        <h2>Daftar Guru & Tenaga Kependidikan</h2>
+        <button onclick="bukaFormGuru()">+ Tambah Guru/Staff Baru</button>
+        <br><br>
+
+        <div id="area-form-guru" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 500px;">
+            <h3 id="judul-form-guru">Tambah Guru</h3>
+            <form id="form-guru">
+                <input type="hidden" id="guru-id">
+                <div>
+                    <label>Nama Lengkap & Gelar:</label><br>
+                    <input type="text" id="guru-nama" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>NIP / NUPTK (Isi '-' jika tidak ada):</label><br>
+                    <input type="text" id="guru-nip" required style="width: 100%;">
+                </div><br>
+                <div>
+                    <label>Jabatan / Mata Pelajaran:</label><br>
+                    <input type="text" id="guru-jabatan" placeholder="Contoh: Guru Produktif Otomotif / Kepala Sekolah" required style="width: 100%;">
+                </div><br>
+                
+                <div>
+                    <label>Upload Foto Guru/Staff:</label><br>
+                    <input type="file" id="input-file-guru" accept="image/*" style="width: 100%;">
+                    <input type="hidden" id="guru-foto">
+                    <br>
+                    <img id="preview-guru" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
+                    <small id="status-upload-guru" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
+                </div><br>
+
+                <div>
+                    <label>Urutan Tampil (Angka):</label><br>
+                    <input type="number" id="guru-urutan" value="1" required style="width: 80px;">
+                </div><br>
+                <button type="submit">Simpan Data Guru</button>
+                <button type="button" onclick="tutupFormGuru()">Batal</button>
+            </form>
         </div>
 
-        <div id="tab-guru" class="tab-content active">
-            <h2>Daftar Guru & Tenaga Kependidikan</h2>
-            <button onclick="bukaFormGuru()">+ Tambah Guru/Staff Baru</button>
-            <br><br>
-
-            <div id="area-form-guru" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 500px;">
-                <h3 id="judul-form-guru">Tambah Guru</h3>
-                <form id="form-guru">
-                    <input type="hidden" id="guru-id">
-                    <div>
-                        <label>Nama Lengkap & Gelar:</label><br>
-                        <input type="text" id="guru-nama" required style="width: 100%;">
-                    </div><br>
-                    <div>
-                        <label>NIP / NUPTK (Isi '-' jika tidak ada):</label><br>
-                        <input type="text" id="guru-nip" required style="width: 100%;">
-                    </div><br>
-                    <div>
-                        <label>Jabatan / Mata Pelajaran:</label><br>
-                        <input type="text" id="guru-jabatan" placeholder="Contoh: Guru Produktif Otomotif / Kepala Sekolah" required style="width: 100%;">
-                    </div><br>
-                    
-                    <div>
-                        <label>Upload Foto Guru/Staff:</label><br>
-                        <input type="file" id="input-file-guru" accept="image/*" style="width: 100%;">
-                        <input type="hidden" id="guru-foto">
-                        <br>
-                        <img id="preview-guru" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
-                        <small id="status-upload-guru" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
-                    </div><br>
-
-                    <div>
-                        <label>Urutan Tampil (Angka):</label><br>
-                        <input type="number" id="guru-urutan" value="1" required style="width: 80px;">
-                    </div><br>
-                    <button type="submit">Simpan Data Guru</button>
-                    <button type="button" onclick="tutupFormGuru()">Batal</button>
-                </form>
-            </div>
-
-            <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background-color: #f2f2f2;">
-                        <th>Urutan</th>
-                        <th>Nama Guru</th>
-                        <th>NIP/NUPTK</th>
-                        <th>Jabatan / Mapel</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="tabel-guru">
-                </tbody>
-            </table>
-        </div>
-
-        <div id="tab-lulusan" class="tab-content">
-            <h2>Data Alumni / Lulusan Terbaik</h2>
-            <button onclick="bukaFormLulusan()">+ Tambah Lulusan Baru</button>
-            <br><br>
-
-<div id="area-form-lulusan" style="display: none; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; max-width: 500px;">
-    <h3 id="judul-form-lulusan">Tambah Lulusan Terbaik</h3>
-    <form id="form-lulusan">
-        <input type="hidden" id="lulusan-id">
-        <div>
-            <label>Nama Alumni:</label><br>
-            <input type="text" id="lulusan-nama" required style="width: 100%;">
-        </div><br>
-        <div>
-            <label>Tahun Lulus (Angka):</label><br>
-            <input type="number" id="lulusan-tahun" placeholder="Contoh: 2025" required style="width: 100px;">
-        </div><br>
-        <div>
-            <label>Jurusan:</label><br>
-            <input type="text" id="lulusan-jurusan" placeholder="Contoh: Teknik Komputer dan Jaringan" required style="width: 100%;">
-        </div><br>
-        <div>
-            <label>Pencapaian / Jejak Karir:</label><br>
-            <textarea id="lulusan-pencapaian" placeholder="Contoh: Bekerja di PT. Toyota Motor Manufacturing" required style="width: 100%; height: 60px;"></textarea>
-        </div><br>
-        <div>
-            <label>Urutan Tampil:</label><br>
-            <input type="number" id="lulusan-urutan" value="0" style="width: 100px;">
-        </div><br>
-        
-        <div>
-            <label>Upload Foto Alumni:</label><br>
-            <input type="file" id="input-file-lulusan" accept="image/*" style="width: 100%;">
-            <input type="hidden" id="lulusan-foto">
-            <br>
-            <img id="preview-lulusan" style="max-width: 150px; margin-top: 10px; display: none; border-radius: 5px; border: 1px solid #ddd;">
-            <small id="status-upload-lulusan" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
-        </div><br>
-
-        <button type="submit">Simpan Data Alumni</button>
-        <button type="button" onclick="tutupFormLulusan()">Batal</button>
-    </form>
-</div>
-
-<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th>Urutan</th>
-            <th>Nama Alumni</th>
-            <th>Tahun Lulus</th>
-            <th>Jurusan</th>
-            <th>Pencapaian</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody id="tabel-lulusan">
-    </tbody>
-</table>
-        </div>
+        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Urutan</th>
+                    <th>Nama Guru</th>
+                    <th>NIP/NUPTK</th>
+                    <th>Jabatan / Mapel</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabel-guru">
+            </tbody>
+        </table>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -178,7 +87,7 @@
     
     <script>
         // =========================================================
-        // 1. SYSTEM CORE (AUTH & TABS)
+        // 1. SYSTEM CORE (AUTH)
         // =========================================================
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
@@ -192,16 +101,8 @@
             window.location.href = 'index.html';
         }
 
-        function pindahTab(tabId, tombol) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            tombol.classList.add('active');
-        }
-
         // =========================================================
-        // IMPLEMENTASI LANGKAH 6: UPLOAD KE STORAGE SUPABASE
+        // 2. UPLOAD KE STORAGE SUPABASE
         // =========================================================
         async function uploadGambar(file, bucket) {
             const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
@@ -222,7 +123,6 @@
             return publicUrl;
         }
 
-        // Event Listener untuk Upload Foto Guru
         document.getElementById('input-file-guru').addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -232,7 +132,6 @@
             statusUpload.style.color = "blue";
             statusUpload.innerText = "Sedang mengunggah file ke storage...";
 
-            // Memanggil fungsi upload dengan mapping bucket 'guru-images'
             const url = await uploadGambar(file, 'guru-images');
 
             if (url) {
@@ -248,35 +147,8 @@
             }
         });
 
-        // Event Listener untuk Upload Foto Lulusan Terbaik
-        document.getElementById('input-file-lulusan').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const statusUpload = document.getElementById('status-upload-lulusan');
-            statusUpload.style.display = "block";
-            statusUpload.style.color = "blue";
-            statusUpload.innerText = "Sedang mengunggah file ke storage...";
-
-            // Memanggil fungsi upload dengan mapping bucket 'guru-images' juga
-            const url = await uploadGambar(file, 'guru-images');
-
-            if (url) {
-                document.getElementById('lulusan-foto').value = url;
-                const preview = document.getElementById('preview-lulusan');
-                preview.src = url;
-                preview.style.display = "block";
-                
-                statusUpload.innerText = "Upload Berhasil!";
-                statusUpload.style.color = "green";
-            } else {
-                statusUpload.style.display = "none";
-            }
-        });
-
-
         // =========================================================
-        // 2. MODUL CRUD: GURU & STAFF
+        // 3. MODUL CRUD: GURU & STAFF
         // =========================================================
         let modeGuru = "tambah";
 
@@ -342,7 +214,6 @@
             document.getElementById('form-guru').reset();
             document.getElementById('guru-id').value = "";
             
-            // Bersihkan sisa elemen file & preview lama
             document.getElementById('guru-foto').value = "";
             document.getElementById('input-file-guru').value = "";
             document.getElementById('preview-guru').style.display = "none";
@@ -363,11 +234,9 @@
             document.getElementById('guru-jabatan').value = jabatan;
             document.getElementById('guru-urutan').value = urutan;
             
-            // Set URL foto lama ke hidden input
             document.getElementById('guru-foto').value = foto;
-            document.getElementById('input-file-guru').value = ""; // Reset picker file
+            document.getElementById('input-file-guru').value = "";
             
-            // Rekonstruksi preview gambar jika data lama memiliki foto
             const preview = document.getElementById('preview-guru');
             if (foto && foto !== "null" && foto !== "") {
                 preview.src = foto;
@@ -383,129 +252,11 @@
             document.getElementById('area-form-guru').style.display = "none";
         }
 
-
-// =========================================================
-// 3. MODUL CRUD: LULUSAN TERBAIK
-// =========================================================
-let modeLulusan = "tambah";
-
-async function loadLulusan() {
-    const { data, error } = await supabase
-        .from('lulusan_terbaik')
-        .select('*')
-        .order('urutan', { ascending: true }) // Urutkan berdasarkan urutan dulu
-        .order('tahun_lulus', { ascending: false });
-
-    if (error) { console.error(error.message); return; }
-
-    const tbody = document.getElementById('tabel-lulusan');
-    if (data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Belum ada data lulusan terbaik.</td></tr>`;
-        return;
-    }
-
-    tbody.innerHTML = data.map(item => `
-        <tr>
-            <td style="text-align:center;">${item.urutan || 0}</td>
-            <td><b>${item.nama}</b></td>
-            <td style="text-align:center;">${item.tahun_lulus}</td>
-            <td>${item.jurusan || ''}</td>
-            <td>${item.pencapaian || ''}</td>
-            <td style="text-align:center;">
-                <button onclick="persiapkanEditLulusan('${item.id}', \`${escapeJS(item.nama)}\`, ${item.tahun_lulus}, \`${escapeJS(item.jurusan || '')}\`, \`${escapeJS(item.pencapaian || '')}\`, ${item.urutan || 0}, '${item.foto_url || ''}')">Edit</button>
-                <button onclick="hapusLulusan('${item.id}')">Hapus</button>
-            </td>
-        </tr>
-    `).join('');
-}
-
-document.getElementById('form-lulusan').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const id = document.getElementById('lulusan-id').value;
-    
-    // Sesuaikan properti dengan nama kolom di Database SQL
-    const formData = {
-        nama: document.getElementById('lulusan-nama').value,
-        tahun_lulus: parseInt(document.getElementById('lulusan-tahun').value),
-        jurusan: document.getElementById('lulusan-jurusan').value,
-        pencapaian: document.getElementById('lulusan-pencapaian').value,
-        urutan: parseInt(document.getElementById('lulusan-urutan').value) || 0,
-        foto_url: document.getElementById('lulusan-foto').value || null
-    };
-
-    if (modeLulusan === "tambah") {
-        const { error } = await supabase.from('lulusan_terbaik').insert([formData]);
-        if (error) alert(error.message);
-    } else {
-        const { error } = await supabase.from('lulusan_terbaik').update(formData).eq('id', id);
-        if (error) alert(error.message);
-    }
-    tutupFormLulusan();
-    loadLulusan();
-});
-
-async function hapusLulusan(id) {
-    if (!confirm('Hapus data lulusan terbaik ini?')) return;
-    const { error } = await supabase.from('lulusan_terbaik').delete().eq('id', id);
-    if (!error) loadLulusan();
-}
-
-function bukaFormLulusan() {
-    modeLulusan = "tambah";
-    document.getElementById('judul-form-lulusan').innerText = "Tambah Alumni Berprestasi";
-    document.getElementById('form-lulusan').reset();
-    document.getElementById('lulusan-id').value = "";
-    document.getElementById('lulusan-urutan').value = "0"; // Set default urutan
-    
-    // Bersihkan sisa elemen file & preview lama
-    document.getElementById('lulusan-foto').value = "";
-    document.getElementById('input-file-lulusan').value = "";
-    document.getElementById('preview-lulusan').style.display = "none";
-    document.getElementById('preview-lulusan').src = "";
-    document.getElementById('status-upload-lulusan').style.display = "none";
-    
-    document.getElementById('area-form-lulusan').style.display = "block";
-}
-
-function persiapkanEditLulusan(id, nama, tahun, jurusan, pencapaian, urutan, foto) {
-    modeLulusan = "edit";
-    document.getElementById('judul-form-lulusan').innerText = "Edit Data Alumni";
-    document.getElementById('area-form-lulusan').style.display = "block";
-    
-    // Isi data ke input field baru
-    document.getElementById('lulusan-id').value = id;
-    document.getElementById('lulusan-nama').value = nama;
-    document.getElementById('lulusan-tahun').value = tahun;
-    document.getElementById('lulusan-jurusan').value = jurusan;
-    document.getElementById('lulusan-pencapaian').value = pencapaian;
-    document.getElementById('lulusan-urutan').value = urutan;
-    
-    // Set URL foto lama ke hidden input
-    document.getElementById('lulusan-foto').value = foto;
-    document.getElementById('input-file-lulusan').value = ""; // Reset picker file
-    
-    // Rekonstruksi preview gambar
-    const preview = document.getElementById('preview-lulusan');
-    if (foto && foto !== "null" && foto !== "") {
-        preview.src = foto;
-        preview.style.display = "block";
-    } else {
-        preview.style.display = "none";
-        preview.src = "";
-    }
-    document.getElementById('status-upload-lulusan').style.display = "none";
-}
-
-function tutupFormLulusan() {
-    document.getElementById('area-form-lulusan').style.display = "none";
-}
-
         function escapeJS(str) {
             return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
         loadGuru();
-        loadLulusan();
     </script>
 </body>
 </html>

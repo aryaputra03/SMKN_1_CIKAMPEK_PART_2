@@ -42,10 +42,10 @@
                     <select id="input-kategori" required style="width: 100%; padding: 5px;">
                         <option value="">-- Pilih Kategori --</option>
                         <option value="Pengumuman">Pengumuman</option>
-                        <option value="Kegiatan">Kegiatan Sekolah</option>
-                        <option value="Artikel">Artikel / Opini</option>
+                        <option value="Kegiatan Sekolah">Kegiatan Sekolah</option>
+                        <option value="Berita Umum">Berita Umum</option> <option value="Artikel & Opini">Artikel / Opini</option>
                         <option value="Info Kelulusan">Info Kelulusan</option>
-                    </select>
+                        <option value="Lainnya">Lainnya</option> </select>
                 </div><br>
                 
                 <div>
@@ -194,7 +194,6 @@
         // IMPLEMENTASI LANGKAH 6: LOGIKA UPLOAD KE STORAGE SUPABASE
         // =========================================================
         async function uploadGambar(file, bucket) {
-            // Buat nama file unik menggunakan timestamp mili-detik untuk menghindari konflik nama yang sama
             const namaFile = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
             
             const { data, error } = await supabase.storage
@@ -207,7 +206,6 @@
                 return null;
             }
 
-            // Ambil URL publik gambar dari bucket untuk disimpan di database
             const { data: { publicUrl } } = supabase.storage
                 .from(bucket)
                 .getPublicUrl(namaFile);
@@ -215,7 +213,6 @@
             return publicUrl;
         }
 
-        // Event Listener Otomatis Terpicu saat Admin Memilih File Gambar
         document.getElementById('input-file-foto').addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -225,14 +222,11 @@
             labelStatus.style.color = "blue";
             labelStatus.innerText = "Sedang mengunggah file ke storage...";
 
-            // Memanggil fungsi upload dengan parameter mapping bucket 'berita-images'
             const url = await uploadGambar(file, 'berita-images');
 
             if (url) {
-                // Simpan URL publik ke hidden input agar terbaca saat form disubmit
                 document.getElementById('input-foto').value = url;
                 
-                // Tampilkan preview gambar di bawah form
                 const previewImg = document.getElementById('preview-foto');
                 previewImg.src = url;
                 previewImg.style.display = "block";
@@ -253,7 +247,6 @@
             document.getElementById('form-berita').reset();
             document.getElementById('berita-id').value = "";
             
-            // Bersihkan sisa-sisa elemen file & preview lama
             document.getElementById('input-foto').value = "";
             document.getElementById('input-file-foto').value = "";
             document.getElementById('preview-foto').style.display = "none";
@@ -273,11 +266,9 @@
             document.getElementById('input-kategori').value = kategori;
             document.getElementById('input-tanggal').value = tanggal;
             
-            // Set data lama link URL foto ke hidden input
             document.getElementById('input-foto').value = foto;
-            document.getElementById('input-file-foto').value = ""; // Reset pilihan picker file baru
+            document.getElementById('input-file-foto').value = ""; 
             
-            // Rekonstruksi preview gambar jika data lama memiliki gambar sampul
             const previewImg = document.getElementById('preview-foto');
             if (foto && foto !== "null" && foto !== "") {
                 previewImg.src = foto;
