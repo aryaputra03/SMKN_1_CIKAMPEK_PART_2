@@ -99,9 +99,10 @@ ul { list-style: none; }
 .table-wrap { overflow-x: auto; }
 .data-table { width: 100%; border-collapse: collapse; }
 .data-table th { background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 600; }
-.data-table th:first-child { border-radius: var(--r-sm) 0 0 0; }
+.data-table th:first-child { border-radius: var(--r-sm) 0 0 0; width: 52px; }
 .data-table th:last-child { border-radius: 0 var(--r-sm) 0 0; }
 .data-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--gray-soft); }
+.data-table td.nip { font-family: 'Courier New', Courier, monospace; font-size: 12.5px; color: var(--text-muted); letter-spacing: 0.5px; white-space: nowrap; }
 .data-table tr:hover td { background: var(--gold-pale); }
 .data-table tr:last-child td { border-bottom: none; }
 .note { margin-top: 16px; font-size: 13px; color: var(--text-muted); }
@@ -301,31 +302,32 @@ ul { list-style: none; }
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Nama Lengkap</th>
+            <th>NIP</th>
             <th>Jabatan / Mata Pelajaran</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>1</td><td>Drs. Budi Santoso, M.Pd</td><td>Kepala Sekolah</td></tr>
-          <tr><td>2</td><td>Sri Wahyuni, S.Pd, M.Pd</td><td>Waka Kurikulum / Matematika</td></tr>
-          <tr><td>3</td><td>Ahmad Rizki, S.T, M.T</td><td>Waka Kesiswaan / Teknik Jaringan</td></tr>
-          <tr><td>4</td><td>Dewi Kusuma, S.Pd</td><td>Waka Sarpras / Bahasa Inggris</td></tr>
-          <tr><td>5</td><td>Reza Pratama, S.Kom</td><td>Waka Humas / Informatika</td></tr>
-          <tr><td>6</td><td>Sari Indah, S.T, M.T</td><td>Ketua Jurusan TP / Pemesinan</td></tr>
-          <tr><td>7</td><td>Hendra Gunawan, S.Pd</td><td>Pendidikan Jasmani &amp; Olahraga</td></tr>
-          <tr><td>8</td><td>Rina Safitri, S.Ds</td><td>Ketua Jurusan DKV / Desain Grafis</td></tr>
-          <tr><td>9</td><td>Muhammad Fauzi, S.Ag</td><td>Pendidikan Agama &amp; Budi Pekerti</td></tr>
-          <tr><td>10</td><td>Nurul Hidayah, S.Pd</td><td>Bahasa Indonesia</td></tr>
-          <tr><td>11</td><td>Agus Setiawan, S.T</td><td>Teknik Elektronika Industri</td></tr>
-          <tr><td>12</td><td>Lia Permata, S.E, M.M</td><td>Ketua Jurusan AKL / Akuntansi</td></tr>
-          <tr><td>13</td><td>Bambang Supriyadi, S.T</td><td>Teknik Otomasi Industri</td></tr>
-          <tr><td>14</td><td>Fitri Andriani, S.Pd</td><td>Pendidikan Pancasila &amp; Kewarganegaraan</td></tr>
-          <tr><td>15</td><td>Drs. Wahyu Nugroho</td><td>Sejarah Indonesia</td></tr>
-          <tr><td>16</td><td>Yanti Kusumawati, S.Pd</td><td>Bahasa Inggris</td></tr>
-          <tr><td>17</td><td>Ridwan Prasetyo, S.T</td><td>Teknik Komputer &amp; Jaringan</td></tr>
-          <tr><td>18</td><td>Sinta Rahayu, S.Pd</td><td>Matematika</td></tr>
-          <tr><td>19</td><td>Dedi Hermawan, S.Pd</td><td>Seni Budaya</td></tr>
-          <tr><td>20</td><td>Wulandari, S.Psi</td><td>Bimbingan &amp; Konseling</td></tr>
+          <tr><td>1</td><td>Drs. Budi Santoso, M.Pd</td><td class="nip">196503121990031005</td><td>Kepala Sekolah</td></tr>
+          <tr><td>2</td><td>Sri Wahyuni, S.Pd, M.Pd</td><td class="nip">197204251998022003</td><td>Waka Kurikulum / Matematika</td></tr>
+          <tr><td>3</td><td>Ahmad Rizki, S.T, M.T</td><td class="nip">198001152005011002</td><td>Waka Kesiswaan / Teknik Jaringan</td></tr>
+          <tr><td>4</td><td>Dewi Kusuma, S.Pd</td><td class="nip">197809082003122004</td><td>Waka Sarpras / Bahasa Inggris</td></tr>
+          <tr><td>5</td><td>Reza Pratama, S.Kom</td><td class="nip">198506172009011007</td><td>Waka Humas / Informatika</td></tr>
+          <tr><td>6</td><td>Sari Indah, S.T, M.T</td><td class="nip">197712202002122001</td><td>Ketua Jurusan TP / Pemesinan</td></tr>
+          <tr><td>7</td><td>Hendra Gunawan, S.Pd</td><td class="nip">198203042006041003</td><td>Pendidikan Jasmani &amp; Olahraga</td></tr>
+          <tr><td>8</td><td>Rina Safitri, S.Ds</td><td class="nip">198710192012122002</td><td>Ketua Jurusan DKV / Desain Grafis</td></tr>
+          <tr><td>9</td><td>Muhammad Fauzi, S.Ag</td><td class="nip">197905112004011006</td><td>Pendidikan Agama &amp; Budi Pekerti</td></tr>
+          <tr><td>10</td><td>Nurul Hidayah, S.Pd</td><td class="nip">198401272007012008</td><td>Bahasa Indonesia</td></tr>
+          <tr><td>11</td><td>Agus Setiawan, S.T</td><td class="nip">198308132008011004</td><td>Teknik Elektronika Industri</td></tr>
+          <tr><td>12</td><td>Lia Permata, S.E, M.M</td><td class="nip">197611082001122005</td><td>Ketua Jurusan AKL / Akuntansi</td></tr>
+          <tr><td>13</td><td>Bambang Supriyadi, S.T</td><td class="nip">198002252006041002</td><td>Teknik Otomasi Industri</td></tr>
+          <tr><td>14</td><td>Fitri Andriani, S.Pd</td><td class="nip">198907142014022003</td><td>Pendidikan Pancasila &amp; Kewarganegaraan</td></tr>
+          <tr><td>15</td><td>Drs. Wahyu Nugroho</td><td class="nip">196712301994031009</td><td>Sejarah Indonesia</td></tr>
+          <tr><td>16</td><td>Yanti Kusumawati, S.Pd</td><td class="nip">198104162005012006</td><td>Bahasa Inggris</td></tr>
+          <tr><td>17</td><td>Ridwan Prasetyo, S.T</td><td class="nip">198611072010011005</td><td>Teknik Komputer &amp; Jaringan</td></tr>
+          <tr><td>18</td><td>Sinta Rahayu, S.Pd</td><td class="nip">199002182015022001</td><td>Matematika</td></tr>
+          <tr><td>19</td><td>Dedi Hermawan, S.Pd</td><td class="nip">198509292009041007</td><td>Seni Budaya</td></tr>
+          <tr><td>20</td><td>Wulandari, S.Psi</td><td class="nip">198803112012122004</td><td>Bimbingan &amp; Konseling</td></tr>
         </tbody>
       </table>
     </div>
