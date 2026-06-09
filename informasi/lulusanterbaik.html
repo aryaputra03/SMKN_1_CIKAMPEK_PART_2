@@ -295,49 +295,322 @@ ul { list-style: none; }
 .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+/* ── WHATSAPP FLOAT BUTTON ── */
+.wa-float {
+  position: fixed;
+  bottom: 80px;
+  right: 28px;
+  z-index: 9999;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15);
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+.wa-float:hover {
+  transform: scale(1.10) translateY(-3px);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.55), 0 4px 12px rgba(0,0,0,0.18);
+  animation: none;
+}
+.wa-float svg {
+  width: 30px; height: 30px; fill: #ffffff; flex-shrink: 0;
+}
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.35); }
+  50%       { box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 0 0 10px rgba(37,211,102,0); }
+}
+
 /* ── FOOTER ── */
 .footer {
-  background: var(--navy);
-  padding: 40px 0 28px;
+  background: var(--gold);
+  color: var(--navy);
 }
-.footer-inner {
-  display: flex; flex-wrap: wrap; gap: 32px;
-  align-items: flex-start; justify-content: space-between;
-  padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.07);
+
+.footer-top {
+  border-bottom: 1px solid rgba(30, 41, 59, 0.1);
+}
+
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+  padding: 64px 0 48px;
+}
+
+.footer-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
 }
-.footer-brand { max-width: 300px; }
-.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+
 .footer-logo-box {
-  width: 38px; height: 38px; background: var(--gold);
-  border-radius: 8px; display: flex; align-items: center;
-  justify-content: center; font-family: 'Cormorant Garamond', serif;
-  font-size: 19px; font-weight: 700; color: var(--navy);
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
 }
-.footer-brand-name { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.2; }
-.footer-brand-sub  { font-size: 11px; color: rgba(255,255,255,0.4); }
-.footer-desc { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
-.footer-links-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
-.footer-links-col a  { display: block; font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 8px; transition: color 0.2s; }
-.footer-links-col a:hover { color: var(--gold); }
+.footer-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
 
-.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+.footer-brand-loc {
+  font-size: 11px;
+  color: rgba(30, 41, 59, 0.7);
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.footer-brand-desc {
+  font-size: 13.5px;
+  line-height: 1.8;
+  margin-bottom: 22px;
+  max-width: 340px;
+  color: rgba(30, 41, 59, 0.85);
+  font-weight: 500;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-social a {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(30, 41, 59, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  transition: all 0.2s;
+}
+
+.footer-social a:hover {
+  border-color: var(--navy);
+  color: var(--gold);
+  background: var(--navy);
+}
+
+.footer-social a svg {
+  width: 14px;
+  height: 14px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--navy);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 13.5px;
+  color: rgba(30, 41, 59, 0.8);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.footer-links a::before {
+  content: '';
+  width: 5px;
+  height: 1px;
+  background: var(--navy);
+  flex-shrink: 0;
+}
+
+.footer-links a:hover {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.footer-map-contact {
+  padding: 48px 0;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.footer-map-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footer-map-frame {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid rgba(30, 41, 59, 0.2);
+  height: 240px;
+}
+
+.footer-map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(15%);
+}
+
+.footer-contact-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-contact-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.fci-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.06);
+  border: 1px solid rgba(30, 41, 59, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fci-icon svg {
+  width: 15px;
+  height: 15px;
+  color: var(--navy);
+}
+
+.fci-label {
+  font-size: 10.5px;
+  color: rgba(30, 41, 59, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.fci-value {
+  font-size: 13.5px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.footer-bottom {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(30, 41, 59, 0.15);
+}
+
+.footer-bottom p {
+  font-size: 12.5px;
+  color: rgba(30, 41, 59, 0.8);
+  font-weight: 500;
+}
+
+.footer-bottom p strong {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-bottom-links a {
+  font-size: 11.5px;
+  color: rgba(30, 41, 59, 0.7);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  font-weight: 700;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--navy);
+}
 
 /* ── BACK TO TOP ── */
 .back-to-top {
-  position: fixed; bottom: 24px; right: 24px; z-index: 900;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--navy); color: #fff;
-  border: 1px solid rgba(255,255,255,0.12); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: var(--shadow-md);
-  opacity: 0; pointer-events: none; transform: translateY(10px);
-  transition: opacity 0.25s, transform 0.25s;
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s;
 }
-.back-to-top.show { opacity: 1; pointer-events: all; transform: translateY(0); }
-.back-to-top:hover { background: var(--navy-mid); }
+
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
@@ -346,11 +619,14 @@ ul { list-style: none; }
   .hamburger { display: flex; }
   .mobile-menu { display: block; }
   .alumni-grid { grid-template-columns: 1fr 1fr; }
-  .footer-inner { flex-direction: column; gap: 24px; }
+  .footer-main-grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 32px; }
+  .footer-map-contact { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
 }
 @media (max-width: 540px) {
   .alumni-grid { grid-template-columns: 1fr; }
   .page-hero { padding: 52px 0 44px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-bottom-links { gap: 12px; }
 }
   </style>
 </head>
@@ -576,36 +852,180 @@ ul { list-style: none; }
   </div>
 </section>
 
+<!-- WhatsApp Float -->
+<a href="https://wa.me/6281316865033" target="_blank" rel="noopener noreferrer" class="wa-float"
+  aria-label="Chat via WhatsApp" title="Hubungi kami via WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.002 2.667C8.638 2.667 2.667 8.638 2.667 16c0 2.355.636 4.655 1.842 6.667L2.667 29.333l6.865-1.803A13.255 13.255 0 0016.002 29.333C23.366 29.333 29.333 23.362 29.333 16S23.366 2.667 16.002 2.667zm0 2.4c5.923 0 10.931 5.008 10.931 10.933 0 5.924-5.008 10.933-10.931 10.933a10.878 10.878 0 01-5.526-1.507l-.396-.232-4.073 1.07 1.092-3.972-.257-.41A10.872 10.872 0 015.07 16c0-5.925 5.007-10.933 10.932-10.933zm-3.61 5.6c-.196 0-.515.073-.785.365-.27.293-1.03 1.003-1.03 2.446s1.054 2.836 1.2 3.031c.146.195 2.05 3.264 5.042 4.454.704.277 1.252.443 1.68.568.707.205 1.35.176 1.858.107.567-.077 1.746-.71 1.993-1.397.246-.686.246-1.274.172-1.396-.073-.122-.27-.196-.565-.343-.294-.147-1.744-.858-2.014-.954-.27-.098-.466-.147-.662.147-.196.293-.76.954-.931 1.15-.171.196-.343.22-.637.073-.294-.147-1.242-.458-2.366-1.459-.875-.78-1.466-1.742-1.638-2.036-.171-.293-.018-.452.129-.597.131-.13.294-.343.44-.514.147-.171.196-.294.294-.489.098-.196.049-.367-.025-.514-.073-.147-.662-1.597-.907-2.186-.239-.572-.481-.494-.662-.503l-.564-.01z" />
+  </svg>
+</a>
+
 <!-- ══════════════ FOOTER ══════════════ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-box">S</div>
-          <div>
-            <p class="footer-brand-name">SMKN 1 Cikampek</p>
-            <p class="footer-brand-sub">Karawang, Jawa Barat</p>
+<footer class="footer" id="contact">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-main-grid">
+        <!-- Brand -->
+        <div class="fade-up">
+<div class="footer-brand-logo">
+  <img src="../assets/images/logo/logosekolah.png" alt="Logo SMKN 1 Cikampek"
+    style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
+  <div>
+    <p class="footer-brand-name">SMKN 1 Cikampek</p>
+    <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+  </div>
+</div>
+          <p class="footer-brand-desc">
+            SMKN 1 Cikampek telah menjadi bagian tak terpisahkan dari perjalanan Karawang sebagai kota industri sejak
+            1970. Dijiwai motto <em>Unggul, Berkarakter, Berdaya Saing</em>, kami mengantar lulusan berjaya di kancah
+            nasional dan global.
+          </p>
+          <div class="footer-social">
+            <a href="#" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+              </svg>
+            </a>
+            <a href="#" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+              </svg>
+            </a>
+            <a href="#" title="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+              </svg>
+            </a>
           </div>
         </div>
-        <p class="footer-desc">Unggul, Berkarakter, Berdaya Saing. Mencetak generasi profesional siap industri sejak 1970.</p>
-      </div>
-      <div class="footer-links-col">
-        <h4>Navigasi</h4>
-        <a href="index.html">Beranda</a>
-        <a href="profil/visi-misi.html">Profil Sekolah</a>
-        <a href="informasi/berita.html">Informasi</a>
-        <a href="lulusanterbaik.html">Lulusan Terbaik</a>
-      </div>
-      <div class="footer-links-col">
-        <h4>Kontak</h4>
-        <a href="#">Jl. Ahmad Yani No.1, Cikampek</a>
-        <a href="#">(0264) 316xxx</a>
-        <a href="#">info@smkn1cikampek.sch.id</a>
+
+        <!-- Navigasi Cepat -->
+        <div class="fade-up">
+          <h4 class="footer-col-title">Navigasi Cepat</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="profil/visi-misi.html">Visi &amp; Misi</a>
+            <a href="profil/fasilitas.html">Fasilitas Sekolah</a>
+            <a href="profil/jurusan.html">Program Keahlian</a>
+            <a href="profil/struktur-organisasi.html">Struktur Organisasi</a>
+            <a href="profil/staff-guru.html">Staff &amp; Guru</a>
+            <a href="keuangan/bos.html">Dana BOS</a>
+            <a href="informasi/berita.html">Berita Terbaru</a>
+            <a href="informasi/prestasi.html">Prestasi</a>
+            <a href="alumni.html">Profil Alumni</a>
+          </div>
+        </div>
+
+        <!-- Info Terbaru -->
+        <div class="fade-up">
+          <h4 class="footer-col-title">Info Terbaru</h4>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#1a3666'" onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">26 Mei, 2026</p>
+            </div>
+            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#1a3666'" onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">04 Mei, 2026</p>
+            </div>
+            <div>
+              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#1a3666'" onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a>
+              </p>
+              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">18 Apr, 2026</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- Map + Contact -->
+  <div class="container">
+    <div class="footer-map-contact">
+      <!-- Map -->
+      <div>
+        <p class="footer-map-title">Denah Lokasi</p>
+        <div class="footer-map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.026!2d107.461!3d-6.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjQnNTcuNiJTIDEwN8KwMjcnMzkuNiJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Lokasi SMKN 1 Cikampek">
+          </iframe>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <p class="footer-contact-title">Informasi Kontak</p>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z" />
+                <path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z" />
+              </svg>
+            </div>
+            <div>
+              <p class="fci-label">Alamat</p>
+              <p class="fci-value">Jl. Ahmad Yani No.1, Cikampek, Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z" />
+              </svg>
+            </div>
+            <div>
+              <p class="fci-label">Telepon</p>
+              <p class="fci-value">(0264) 316xxx</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z" />
+                <path d="M2 4l8 6 8-6" />
+              </svg>
+            </div>
+            <div>
+              <p class="fci-label">Email</p>
+              <p class="fci-value">info@smkn1cikampek.sch.id</p>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fci-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="7" />
+                <path d="M10 6v4l3 3" />
+              </svg>
+            </div>
+            <div>
+              <p class="fci-label">Jam Operasional</p>
+              <p class="fci-value">Senin – Sabtu, 07.00 – 16.00 WIB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="container">
     <div class="footer-bottom">
-      <p>© 2024 SMKN 1 Cikampek. Hak Cipta Dilindungi.</p>
+      <p>© 2024 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat Penggunaan</a>
+        <a href="#">Dukungan</a>
+      </div>
     </div>
   </div>
 </footer>

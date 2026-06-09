@@ -85,23 +85,129 @@ ul { list-style: none; }
 
 /* ── VISI MISI CONTENT ──────────────────── */
 .vm-grid { display: flex; flex-direction: column; gap: 32px; margin-bottom: 48px; }
+.vm-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+
+/* ── VISI CARD — full-width navy banner ── */
+.visi-card {
+  background: var(--navy);
+  border-radius: var(--r-lg);
+  padding: 52px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.visi-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px; left: 28px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 220px;
+  font-weight: 700;
+  color: rgba(255,230,0,0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+.visi-card .vm-label { color: var(--gold); }
+.visi-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.visi-text {
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.82);
+  max-width: 820px;
+  font-style: italic;
+  border-left: 3px solid var(--gold);
+  padding-left: 22px;
+}
+.visi-tagline {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.visi-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,230,0,0.12);
+  border: 1px solid rgba(255,230,0,0.3);
+  color: var(--gold);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 5px 13px;
+  border-radius: 100px;
+}
+
+/* ── MISI CARD ── */
+.misi-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-soft);
+  border-top: 4px solid var(--gold);
+  padding: 40px 40px;
+}
+.misi-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+.misi-list { list-style: none; margin-top: 0; padding: 0; }
+.misi-list li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gray-soft);
+  transition: background 0.2s;
+}
+.misi-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.misi-list li:first-child { padding-top: 0; }
+.misi-num {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: var(--navy);
+  color: var(--gold);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 700;
+  margin-top: 0;
+}
+.misi-text-wrap {}
+.misi-text-wrap strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.3px;
+  margin-bottom: 3px;
+}
+.misi-text-wrap p {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* legacy .vm-card still used by sambutan */
 .vm-card {
   background: var(--white);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-sm);
   padding: 40px 36px;
-  border-top: 5px solid var(--gold);
   border: 1px solid var(--gray-soft);
   border-top: 5px solid var(--gold);
 }
-.vm-card.center-align { text-align: center; }
-.vm-card.center-align p { font-size: 17px; max-width: 800px; margin: 0 auto; line-height: 1.85; color: var(--text-muted); }
-.vm-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
 .vm-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
-.misi-list { list-style: none; margin-top: 8px; padding: 0; }
-.misi-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-soft); font-size: 15px; line-height: 1.75; color: var(--text-muted); }
-.misi-list li:last-child { border-bottom: none; }
-.misi-num { flex-shrink: 0; width: 32px; height: 32px; background: var(--navy); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 700; margin-top: 2px; }
 
 /* ── FOOTER ──────────────────────────────────────── */
 .footer { background: var(--gold); color: var(--navy); }
@@ -201,7 +307,19 @@ ul { list-style: none; }
 .back-to-top.show { opacity: 1; transform: translateY(0); }
 .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
 
-@media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 32px; } .footer-map-contact { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+@media (max-width: 768px) {
+  .navbar, .btn-ppdb { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+  .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-map-contact { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .visi-card { padding: 36px 24px; }
+  .visi-card::before { font-size: 140px; }
+  .misi-card { padding: 28px 20px; }
+  .misi-list li { grid-template-columns: 38px 1fr; gap: 14px; }
+  .misi-num { width: 38px; height: 38px; font-size: 16px; }
+}
 
 /* ── SAMBUTAN KEPALA SEKOLAH ─────────────── */
 .sambutan-section {
@@ -418,6 +536,59 @@ ul { list-style: none; }
     </div>
   </div>
 
+    <!-- ══ VISI ══ -->
+    <div class="visi-card fade-up">
+      <span class="vm-label">Tujuan Utama</span>
+      <h2>Visi Kami</h2>
+      <p class="visi-text">
+        "Terwujudnya peserta didik SMKN 1 Cikampek yang Cageur, Bageur, Bener, Pinter, dan Singer melalui peningkatan kemampuan literasi dan numerasi, pembelajaran berkualitas, serta penyerapan lulusan yang unggul, berkarakter, dan berdaya saing."
+      </p>
+      <div class="visi-tagline">
+        <span class="visi-tag">Cageur</span>
+        <span class="visi-tag">Bageur</span>
+        <span class="visi-tag">Bener</span>
+        <span class="visi-tag">Pinter</span>
+        <span class="visi-tag">Singer</span>
+      </div>
+    </div>
+
+    <!-- ══ MISI ══ -->
+    <div class="misi-card fade-up">
+      <span class="vm-label">Langkah Strategis</span>
+      <h2>Misi Kami</h2>
+      <ul class="misi-list">
+        <li>
+          <div class="misi-num">1</div>
+          <div class="misi-text-wrap">
+            <strong>Lulusan Kompeten &amp; Berkarakter</strong>
+            <p>Menghasilkan lulusan yang mandiri, disiplin, jujur, bertanggung jawab, dan kompeten di bidangnya.</p>
+          </div>
+        </li>
+        <li>
+          <div class="misi-num">2</div>
+          <div class="misi-text-wrap">
+            <strong>Pembelajaran Berkualitas Berbasis ICT</strong>
+            <p>Mengimplementasikan sistem pembelajaran berkualitas berbasis ICT, produksi, dan wirausaha.</p>
+          </div>
+        </li>
+        <li>
+          <div class="misi-num">3</div>
+          <div class="misi-text-wrap">
+            <strong>Literasi &amp; Numerasi Global</strong>
+            <p>Meningkatkan kemampuan literasi dan numerasi sebagai bekal daya saing di era globalisasi.</p>
+          </div>
+        </li>
+        <li>
+          <div class="misi-num">4</div>
+          <div class="misi-text-wrap">
+            <strong>Karakter Religius &amp; Budaya Industri</strong>
+            <p>Membangun karakter peserta didik yang dilandasi nilai-nilai religius dan budaya kerja industri.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div><!-- end vm-grid -->
 </main>
 
 <!-- FOOTER -->
