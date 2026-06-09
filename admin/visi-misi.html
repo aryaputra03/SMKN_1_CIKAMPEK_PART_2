@@ -24,22 +24,22 @@
 
     <main id="content">
         <h1>Pengelolaan Visi, Misi & Tujuan Sekolah</h1>
-        <p style="color: #666;">Silakan ubah teks di bawah ini dan klik Simpan Perubahan untuk memperbarui halaman publik.</p>
+        <p style="color: #666;">Silakan ubah teks di bawah ini dan klik Simpan Perubahan untuk memperbarui halaman publik. Kosongkan kotak jika ingin menghapus data.</p>
 
         <form id="form-visi-misi" style="max-width: 700px; border: 1px solid #ccc; padding: 20px; background: #fafafa;">
             <div>
                 <label><b>Visi Sekolah:</b></label><br>
-                <textarea id="input-visi" rows="3" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Tulis visi sekolah..."></textarea>
+                <textarea id="input-visi" rows="3" style="width: 100%; font-family: Arial, sans-serif;" placeholder="Tulis visi sekolah..."></textarea>
             </div><br>
 
             <div>
                 <label><b>Misi Sekolah (Tulis per baris / gunakan Enter untuk poin baru):</b></label><br>
-                <textarea id="input-misi" rows="8" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Misi 1&#10;Misi 2"></textarea>
+                <textarea id="input-misi" rows="8" style="width: 100%; font-family: Arial, sans-serif;" placeholder="Misi 1&#10;Misi 2"></textarea>
             </div><br>
 
             <div>
                 <label><b>Tujuan Sekolah (Tulis per baris / gunakan Enter untuk poin baru):</b></label><br>
-                <textarea id="input-tujuan" rows="8" style="width: 100%; font-family: Arial, sans-serif;" required placeholder="Tujuan 1&#10;Tujuan 2"></textarea>
+                <textarea id="input-tujuan" rows="8" style="width: 100%; font-family: Arial, sans-serif;" placeholder="Tujuan 1&#10;Tujuan 2"></textarea>
             </div><br>
 
             <button type="submit" id="btn-simpan">Simpan Perubahan Visi Misi</button>
@@ -68,7 +68,7 @@
         }
 
         // =========================================================
-        // 2. LOGIKA UTAMA: LANGKAH 7 — MODUL KHUSUS VISI MISI
+        // 2. LOGIKA UTAMA: MODUL VISI MISI (BISA DIKOSONGKAN)
         // =========================================================
         
         // Load data yang ada dari database
@@ -76,7 +76,7 @@
             const { data, error } = await supabase
                 .from('visi_misi')
                 .select('*')
-                .single(); // hanya 1 record (Single Record Target)
+                .single(); 
 
             if (error) {
                 console.error("Gagal memuat visi misi:", error.message);
@@ -86,7 +86,7 @@
             if (data) {
                 document.getElementById('input-visi').value = data.visi || '';
                 
-                // Untuk misi dan tujuan yang bertipe array, tampilkan sebagai textarea per baris
+                // Jika array kosong atau null, tampilkan string kosong di textarea
                 document.getElementById('input-misi').value = data.misi ? data.misi.join('\n') : '';
                 document.getElementById('input-tujuan').value = data.tujuan ? data.tujuan.join('\n') : '';
             }
@@ -98,16 +98,15 @@
             btnSimpan.disabled = true;
             btnSimpan.innerText = "Menyimpan...";
 
-            const visi = document.getElementById('input-visi').value;
+            // MODIFIKASI: Menggunakan .trim() agar spasi tidak sengaja terhitung sebagai teks
+            const visi = document.getElementById('input-visi').value.trim();
             
-            // Konversi textarea baris per baris → array
-            const misi = document.getElementById('input-misi').value
-                .split('\n')
-                .filter(s => s.trim() !== ''); // Membuang baris kosong
+            // MODIFIKASI: Jika kosong, berikan array kosong [], jika ada teks baru diproses split
+            const inputMisi = document.getElementById('input-misi').value.trim();
+            const misi = inputMisi ? inputMisi.split('\n').map(s => s.trim()).filter(s => s !== '') : [];
                 
-            const tujuan = document.getElementById('input-tujuan').value
-                .split('\n')
-                .filter(s => s.trim() !== ''); // Membuang baris kosong
+            const inputTujuan = document.getElementById('input-tujuan').value.trim();
+            const tujuan = inputTujuan ? inputTujuan.split('\n').map(s => s.trim()).filter(s => s !== '') : [];
 
             try {
                 // Ambil ID dari record yang ada saat ini
@@ -118,7 +117,7 @@
 
                 if (fetchError) throw fetchError;
 
-                // Update menggunakan ID tersebut
+                // Update menggunakan ID tersebut (Mendukung pengiriman teks kosong / array kosong)
                 const { error: updateError } = await supabase
                     .from('visi_misi')
                     .update({ visi, misi, tujuan })
@@ -127,6 +126,7 @@
                 if (updateError) throw updateError;
 
                 alert('Visi Misi berhasil disimpan!');
+                loadVisiMisi(); // Muat ulang data untuk memastikan visual sinkron dengan database
             } catch (error) {
                 console.error("Proses simpan gagal:", error.message);
                 alert("Gagal menyimpan data: " + error.message);
