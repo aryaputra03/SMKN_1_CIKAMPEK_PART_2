@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Video Profil - Admin SMKN 1 Cikampek</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Staff</a></li>
+            <li><a href="lulusan.html">Lulusan Terbaik</a></li>
+            <li><a href="banner.html">Banner</a></li>
+            <li><a href="bos.html">Laporan BOS</a></li>
+            <li><a href="apbd.html">Laporan APBD</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum_url.html">Kurikulum</a></li>
+            <li><a href="struktur_organisasi.html">Struktur Organisasi</a></li>
+            <li><a href="video.html" style="color: #ffb703;">Video Profil</a></li>
+            <li><button onclick="logout()">Logout</button></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <h1>Pengelolaan Video Profil Sekolah</h1>
+        <p style="color: #666;">Halaman ini digunakan untuk memperbarui tautan (URL) video profil sekolah yang akan ditampilkan di halaman utama website.</p>
+
+        <div style="border: 1px solid #ccc; padding: 20px; max-width: 700px; background-color: #fafafa; border-radius: 8px;">
+            <form id="form-video">
+                <div>
+                    <label style="font-weight: bold;">Tautan Video YouTube:</label><br>
+                    <small style="color: #666;">Salin dan tempel URL video dari YouTube (contoh: https://www.youtube.com/watch?v=xxxxxx)</small><br>
+                    <input type="url" id="input-url-video" required style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px;" placeholder="Masukkan URL YouTube di sini...">
+                </div>
+
+                <button type="submit" id="btn-simpan" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Simpan Tautan Video</button>
+            </form>
+        </div>
+
+        <div id="preview-area" style="margin-top: 30px; display: none;">
+            <h3>Pratinjau Video Saat Ini:</h3>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 700px; background: #000; border-radius: 8px;">
+                <iframe id="video-preview" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    
+    <script>
+        // =========================================================
+        // 1. GLOBAL SYSTEM (AUTH & LOGOUT)
+        // =========================================================
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html'; 
+                return null;
+            }
+            return session;
+        }
+
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        // =========================================================
+        // 2. FUNGSI EKSTRAK URL YOUTUBE KE FORMAT EMBED
+        // =========================================================
+        // Fungsi ini mengubah link tontonan biasa menjadi link embed agar bisa diputar di dalam web
+        function getYouTubeEmbedUrl(url) {
+            let videoId = null;
+            try {
+                // Pola pencarian ID YouTube
+                const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+                const match = url.match(regex);
+                if (match && match[1]) {
+                    videoId = match[1];
+                }
+            } catch (e) {
+                console.error("Format URL tidak valid");
+            }
+            return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+        }
+
+        // =========================================================
+        // 3. LOGIKA UPDATE SINGLE RECORD VIDEO
+        // =========================================================
+        
+        // Memuat data dari tabel video_profil (ID = 1)
+        async function loadVideo() {
+            const { data, error } = await supabase
+                .from('video_profil')
+                .select('url_video')
+                .eq('id', 1)
+                .single();
+
+            if (error) {
+                console.error("Gagal memuat video:", error.message);
+                return;
+            }
+
+            if (data && data.url_video) {
+                document.getElementById('input-url-video').value = data.url_video;
+                
+                const embedUrl = getYouTubeEmbedUrl(data.url_video);
+                if (embedUrl) {
+                    document.getElementById('video-preview').src = embedUrl;
+                    document.getElementById('preview-area').style.display = "block";
+                }
+            }
+        }
+
+        // Menyimpan data ke tabel video_profil (ID = 1)
+        document.getElementById('form-video').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnSimpan = document.getElementById('btn-simpan');
+            btnSimpan.disabled = true;
+            btnSimpan.innerText = "Menyimpan...";
+
+            const urlInput = document.getElementById('input-url-video').value;
+            
+            // Validasi apakah link yang dimasukkan benar-benar link YouTube
+            const embedUrl = getYouTubeEmbedUrl(urlInput);
+            if (!embedUrl && urlInput.trim() !== '') {
+                alert("Peringatan: Tautan yang Anda masukkan sepertinya bukan dari YouTube. Silakan periksa kembali.");
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Tautan Video";
+                return;
+            }
+
+            try {
+                // Update record dengan id = 1
+                const { error } = await supabase
+                    .from('video_profil')
+                    .update({ 
+                        url_video: urlInput,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', 1);
+
+                if (error) throw error;
+
+                alert("Tautan video profil berhasil diperbarui!");
+                loadVideo(); // Refresh pratinjau
+
+            } catch (err) {
+                alert("Gagal memperbarui tautan video: " + err.message);
+            } finally {
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Tautan Video";
+            }
+        });
+
+        // =========================================================
+        // 4. INISIALISASI
+        // =========================================================
+        async function init() {
+            const session = await checkAuth();
+            if (session) {
+                loadVideo();
+            }
+        }
+        init();
+    </script>
+</body>
+</html>

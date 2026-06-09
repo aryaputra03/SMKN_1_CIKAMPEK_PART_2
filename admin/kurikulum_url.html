@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Kurikulum - Admin SMKN 1 Cikampek</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Staff</a></li>
+            <li><a href="lulusan.html">Lulusan Terbaik</a></li>
+            <li><a href="banner.html">Banner</a></li>
+            <li><a href="bos.html">Laporan BOS</a></li>
+            <li><a href="apbd.html">Laporan APBD</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum_url.html">Kurikulum</a></li>
+            <li><a href="struktur_organisasi.html">Struktur Organisasi</a></li>
+            <li><a href="video.html" style="color: #ffb703;">Video Profil</a></li>
+            <li><button onclick="logout()">Logout</button></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <h1>Pengelolaan Tautan Kurikulum Sekolah</h1>
+        <p style="color: #666;">Halaman ini digunakan untuk memperbarui tautan (URL) dokumen kurikulum sekolah (seperti Google Drive, Dropbox, atau file PDF online) yang dapat diunduh oleh siswa atau publik.</p>
+
+        <div style="border: 1px solid #ccc; padding: 20px; max-width: 700px; background-color: #fafafa; border-radius: 8px;">
+            <form id="form-kurikulum">
+                <div>
+                    <label style="font-weight: bold;">Tautan Dokumen Kurikulum:</label><br>
+                    <small style="color: #666;">Masukkan URL lengkap dokumen kurikulum (contoh: https://drive.google.com/file/d/xxxxxx atau tautan PDF langsung)</small><br>
+                    <input type="url" id="input-url-kurikulum" required style="width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px;" placeholder="Masukkan URL dokumen kurikulum di sini...">
+                </div>
+
+                <button type="submit" id="btn-simpan" style="padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Simpan Tautan Kurikulum</button>
+            </form>
+        </div>
+
+        <div id="preview-area" style="margin-top: 30px; display: none;">
+            <h3>Tautan Aktif Saat Ini:</h3>
+            <p>Anda dapat menguji tautan yang tersimpan melalui tombol di bawah ini:</p>
+            <a id="btn-buka-tautan" href="#" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">Buka Dokumen Kurikulum</a>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    
+    <script>
+        // =========================================================
+        // 1. GLOBAL SYSTEM (AUTH & LOGOUT)
+        // =========================================================
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html'; 
+                return null;
+            }
+            return session;
+        }
+
+        async function logout() {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        }
+
+        // =========================================================
+        // 2. LOGIKA UPDATE SINGLE RECORD KURIKULUM (Tabel: kurikulum_url)
+        // =========================================================
+        
+        // Memuat data dari tabel kurikulum_url (ID = 1)
+        async function loadKurikulum() {
+            const { data, error } = await supabase
+                .from('kurikulum_url')
+                .select('url_kurikulum')
+                .eq('id', 1)
+                .single();
+
+            if (error) {
+                console.error("Gagal memuat data kurikulum:", error.message);
+                return;
+            }
+
+            if (data && data.url_kurikulum) {
+                document.getElementById('input-url-kurikulum').value = data.url_kurikulum;
+                
+                // Menampilkan area pengujian tautan jika tautan tidak kosong
+                if (data.url_kurikulum.trim() !== "") {
+                    const btnBuka = document.getElementById('btn-buka-tautan');
+                    btnBuka.href = data.url_kurikulum;
+                    document.getElementById('preview-area').style.display = "block";
+                } else {
+                    document.getElementById('preview-area').style.display = "none";
+                }
+            }
+        }
+
+        // Menyimpan data ke tabel kurikulum_url (ID = 1)
+        document.getElementById('form-kurikulum').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnSimpan = document.getElementById('btn-simpan');
+            btnSimpan.disabled = true;
+            btnSimpan.innerText = "Menyimpan...";
+
+            const urlInput = document.getElementById('input-url-kurikulum').value;
+
+            try {
+                // Update record dengan id = 1 ke tabel kurikulum_url
+                const { error } = await supabase
+                    .from('kurikulum_url')
+                    .update({ 
+                        url_kurikulum: urlInput,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', 1);
+
+                if (error) throw error;
+
+                alert("Tautan kurikulum sekolah berhasil diperbarui!");
+                loadKurikulum(); // Refresh tampilan tombol pengujian
+
+            } catch (err) {
+                alert("Gagal memperbarui tautan kurikulum: " + err.message);
+            } finally {
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Tautan Kurikulum";
+            }
+        });
+
+        // =========================================================
+        // 3. INISIALISASI
+        // =========================================================
+        async function init() {
+            const session = await checkAuth();
+            if (session) {
+                loadKurikulum();
+            }
+        }
+        init();
+    </script>
+</body>
+</html>
