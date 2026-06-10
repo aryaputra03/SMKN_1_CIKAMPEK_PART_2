@@ -46,7 +46,7 @@
                     <input type="text" id="input-subjudul" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>Foto Banner:</label><br>
+                    <label>Foto Banner (Maks 3 MB):</label><br>
                     <input type="file" id="input-file-foto" accept="image/*" style="margin-bottom: 5px;"><br>
                     <small style="color: #666;">Atau gunakan URL Foto secara langsung:</small><br>
                     <input type="text" id="input-foto" required style="width: 100%; margin-top: 5px;">
@@ -234,6 +234,14 @@
             const file = e.target.files[0];
             if (!file) return;
 
+            // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
+            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam satuan Bytes
+            if (file.size > maksUkuran) {
+                alert("⚠️ Ukuran gambar terlalu besar! Maksimal ukuran file banner adalah 3 MB.");
+                e.target.value = ""; // Mengosongkan kembali input file
+                return; // Batalkan proses unggah
+            }
+
             const btnSubmit = document.querySelector("#form-banner button[type='submit']");
             const txtAsliBtn = btnSubmit.innerText;
             btnSubmit.disabled = true;
@@ -319,7 +327,6 @@
             document.getElementById("myModal").style.display = "none";
         }
 
-        // PERBAIKAN 2: Menggunakan addEventListener agar lebih aman & standar clean code
         window.addEventListener('click', function(event) {
             const modal = document.getElementById("myModal");
             if (event.target === modal) {
