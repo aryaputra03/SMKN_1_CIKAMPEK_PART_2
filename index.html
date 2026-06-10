@@ -714,8 +714,8 @@
 .hero-overlay {
       position: absolute;
       inset: 0;
-      /* Membuat sisi kiri sedikit lebih gelap agar teks putih kontras, tapi foto gedung di kanan tetap jelas */
-      background: linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.1) 100%) !important;
+      /* Gradien gelap di kiri (untuk teks) dan memudar ke transparan di kanan (agar foto gedung terlihat jelas) */
+      background: linear-gradient(90deg, rgba(10, 18, 35, 0.95) 0%, rgba(10, 18, 35, 0.5) 55%, rgba(10, 18, 35, 0) 100%);
     }
 
     .hero-content {
@@ -726,15 +726,11 @@
       align-items: center;
     }
 
-.hero-inner {
-      background: rgba(15, 23, 42, 0.8); /* Kotak pelindung gelap transparan */
-      padding: 40px;
-      border-radius: 16px;
-      backdrop-filter: blur(12px); /* Efek blur kaca di belakang teks */
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 230, 0, 0.25); /* Garis tepi tipis warna emas */
-      max-width: 680px; /* Membatasi lebar agar teks rapi */
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    .hero-inner {
+      padding: 0 28px;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .hero-badge {
@@ -777,21 +773,19 @@
 
 .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 6vw, 80px) !important;
-      font-weight: 700 !important;
-      color: #FFFFFF !important; /* Mengunci warna menjadi PUTIH */
-      /* Bayangan hitam tebal di belakang teks agar tulisan terpisah sempurna dari detail gambar gedung */
-      text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.85) !important; 
+      font-size: clamp(42px, 6vw, 80px);
+      font-weight: 700;
+      color: var(--gold); /* Diubah menjadi warna Emas (Kuning) */
+      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
     }
 
 .hero-subtitle {
-      font-size: 16px !important;
-      color: #FFFFFF !important; /* Mengunci warna menjadi PUTIH */
-      /* Bayangan hitam lembut agar teks deskripsi yang lebih kecil tetap tajam dan terbaca */
-      text-shadow: 1px 2px 10px rgba(0, 0, 0, 0.9) !important; 
+      font-size: 16px;
+      color: #ffffff; /* Diubah menjadi putih solid (tidak transparan) */
+      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8); /* Efek bayangan hitam agak tebal */
       max-width: 480px;
       margin-bottom: 36px;
       line-height: 1.7;
