@@ -106,31 +106,6 @@
       --r-lg: 16px;
       --r-xl: 24px;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
-
-      /* Pemaksa warna hitam untuk semua elemen teks */
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      span,
-      a,
-      li,
-      button {
-        color: #000000 !important;
-      }
-
-      /* Khusus untuk teks footer yang semula putih, kita kembalikan ke warna gelap */
-      .footer,
-      .footer-brand-desc,
-      .footer-links a,
-      .footer-contact-item p,
-      .footer-bottom p {
-        color: #111111 !important;
-      }
     }
 
     html {
@@ -711,10 +686,11 @@
       background-position: center;
     }
 
-    .hero-overlay {
+.hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, rgba(10, 18, 35, 0.88) 0%, rgba(10, 18, 35, 0.6) 60%, rgba(10, 18, 35, 0.35) 100%);
+      /* Gradien gelap di kiri (untuk teks) dan memudar ke transparan di kanan (agar foto gedung terlihat jelas) */
+      background: linear-gradient(90deg, rgba(10, 18, 35, 0.95) 0%, rgba(10, 18, 35, 0.5) 55%, rgba(10, 18, 35, 0) 100%);
     }
 
     .hero-content {
@@ -770,19 +746,21 @@
       }
     }
 
-    .hero-title {
+.hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(42px, 6vw, 80px);
       font-weight: 700;
-      color: var(--white);
+      color: #ffffff !important; /* Putih agar terlihat jelas di atas foto hero */
+      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
     }
 
-    .hero-subtitle {
+.hero-subtitle {
       font-size: 16px;
-      color: rgba(255, 255, 255, 0.65);
+      color: #ffffff; /* Diubah menjadi putih solid (tidak transparan) */
+      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8); /* Efek bayangan hitam agak tebal */
       max-width: 480px;
       margin-bottom: 36px;
       line-height: 1.7;
@@ -823,8 +801,8 @@
       gap: 8px;
       padding: 13px 28px;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
       font-size: 14px;
       font-weight: 600;
       border-radius: var(--r-md);
@@ -2197,7 +2175,34 @@
       }
 
       .hero {
-        height: 70vh;
+        height: auto;
+        min-height: 100svh;
+        min-height: 100vh;
+        overflow: visible;
+      }
+
+      .hero-content {
+        position: relative;
+        padding: 100px 0 64px;
+        align-items: flex-start;
+      }
+
+      .hero-subtitle {
+        font-size: 14.5px;
+        max-width: 100%;
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-outline {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
       }
     }
 
@@ -2404,8 +2409,10 @@
 <body>
 
   <!-- PRELOADER -->
-  <div id="preloader">
-    <div class="preloader-logo">S</div>
+<div id="preloader">
+    <div class="preloader-logo" style="background: transparent;">
+      <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek" style="width: 100%; height: 100%; object-fit: contain;">
+    </div>
     <p class="preloader-text">Memuat halaman…</p>
   </div>
 
@@ -2573,11 +2580,12 @@
 
   <!-- ══════════════ BANNER TICKER ══════════════ -->
   <!-- ══════════════ HERO SLIDER ══════════════ -->
-  <section class="hero">
-    <div class="hero-slide active">
-      <div class="hero-bg" style="background: linear-gradient(135deg,#0F1E38 0%,#1B2E4A 50%,#0f2547 100%)"></div>
-      <div class="hero-overlay"></div>
-    </div>
+<section class="hero">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image: url('assets/images/FOTOUTAMASMKNEGERI1CIKAMPEK.png');"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  ...
     <div class="hero-slide">
       <div class="hero-bg" style="background: linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%)"></div>
       <div class="hero-overlay"></div>
@@ -2988,7 +2996,7 @@
       <div class="jurusan-grid">
  <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
-            <img src="assets/images/jurusan/agribisnistanamanpangandan hortikultura.PNG" alt="ATPH" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="assets/images/jurusan/agribisnistanamanpangandan holtikultura.png" alt="ATPH" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
           <h3>Agribisnis Tanaman Pangan dan Hortikultura</h3>
           <p>Membekali siswa keahlian budidaya tanaman dan kewirausahaan pertanian.</p>
@@ -3244,7 +3252,7 @@
           <!-- Brand -->
           <div class="fade-up">
  <div class="footer-brand-logo">
-  <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
+  <img src="assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
     style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
   <div>
     <p class="footer-brand-name">SMKN 1 Cikampek</p>
@@ -3296,26 +3304,26 @@
           <div class="fade-up">
             <h4 class="footer-col-title">Info Terbaru</h4>
             <div style="display:flex;flex-direction:column;gap:16px">
-              <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">26 Mei, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">26 Mei, 2026</p>
               </div>
-              <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">04 Mei, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">04 Mei, 2026</p>
               </div>
               <div>
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">18 Apr, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">18 Apr, 2026</p>
               </div>
             </div>
           </div>
