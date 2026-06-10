@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/berita.css">
 </head>
 <body>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <nav>
         <ul>
             <li><a href="dashboard.html">Dashboard</a></li>
@@ -327,6 +329,27 @@
         }
 
         loadBerita();
+
+        // ---------------------------------------------------------
+        // LOGIKA SIDEBAR HAMBURGER (MOBILE)
+        // ---------------------------------------------------------
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('nav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            navMenu.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            
+            if (navMenu.classList.contains('active')) {
+                menuToggle.innerHTML = '✕';
+            } else {
+                menuToggle.innerHTML = '☰';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html>

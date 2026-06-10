@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/banner.css">
 </head>
 <body>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <nav>
         <ul>
             <li><a href="dashboard.html" >Dashboard</a></li>
@@ -71,23 +73,24 @@
             </form>
         </div>
 
-        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-            <thead>
-                <tr style="background-color: #f2f2f2;">
-                    <th>Urutan</th>
-                    <th>Gambar</th>
-                    <th>Judul</th>
-                    <th>Subjudul</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="tabel-banner">
+        <div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 15px;">
+            <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; min-width: 650px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th>Urutan</th>
+                        <th>Gambar</th>
+                        <th>Judul</th>
+                        <th>Subjudul</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-banner">
                 </tbody>
-        </table>
+            </table>
+        </div>
     </main>
 
-    <!-- Modal Element untuk Zoom Gambar -->
     <div id="myModal" class="modal">
       <span class="close" onclick="tutupModal()">&times;</span>
       <img class="modal-content" id="img01">
@@ -316,16 +319,37 @@
             document.getElementById("myModal").style.display = "none";
         }
 
-        // Tutup modal jika user mengklik area kosong di luar gambar
-        window.onclick = function(event) {
+        // PERBAIKAN 2: Menggunakan addEventListener agar lebih aman & standar clean code
+        window.addEventListener('click', function(event) {
             const modal = document.getElementById("myModal");
             if (event.target === modal) {
                 modal.style.display = "none";
             }
+        });
+
+        // Inisialisasi data banner saat halaman dimuat
+        loadBanner();
+
+        // ---------------------------------------------------------
+        // LOGIKA SIDEBAR HAMBURGER (MOBILE)
+        // ---------------------------------------------------------
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('nav');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            navMenu.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            
+            if (navMenu.classList.contains('active')) {
+                menuToggle.innerHTML = '✕';
+            } else {
+                menuToggle.innerHTML = '☰';
+            }
         }
 
-        // Inisialisasi
-        loadBanner();
+        menuToggle.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html>
