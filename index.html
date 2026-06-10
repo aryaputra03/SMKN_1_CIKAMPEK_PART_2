@@ -711,10 +711,11 @@
       background-position: center;
     }
 
-    .hero-overlay {
+.hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, rgba(10, 18, 35, 0.88) 0%, rgba(10, 18, 35, 0.6) 60%, rgba(10, 18, 35, 0.35) 100%);
+      /* Gradien gelap di kiri (untuk teks) dan memudar ke transparan di kanan (agar foto gedung terlihat jelas) */
+      background: linear-gradient(90deg, rgba(10, 18, 35, 0.95) 0%, rgba(10, 18, 35, 0.5) 55%, rgba(10, 18, 35, 0) 100%);
     }
 
     .hero-content {
@@ -770,19 +771,21 @@
       }
     }
 
-    .hero-title {
+.hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(42px, 6vw, 80px);
       font-weight: 700;
-      color: var(--white);
+      color: var(--gold); /* Diubah menjadi warna Emas (Kuning) */
+      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
     }
 
-    .hero-subtitle {
+.hero-subtitle {
       font-size: 16px;
-      color: rgba(255, 255, 255, 0.65);
+      color: #ffffff; /* Diubah menjadi putih solid (tidak transparan) */
+      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8); /* Efek bayangan hitam agak tebal */
       max-width: 480px;
       margin-bottom: 36px;
       line-height: 1.7;
@@ -2575,11 +2578,12 @@
 
   <!-- ══════════════ BANNER TICKER ══════════════ -->
   <!-- ══════════════ HERO SLIDER ══════════════ -->
-  <section class="hero">
-    <div class="hero-slide active">
-      <div class="hero-bg" style="background: linear-gradient(135deg,#0F1E38 0%,#1B2E4A 50%,#0f2547 100%)"></div>
-      <div class="hero-overlay"></div>
-    </div>
+<section class="hero">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image: url('assets/images/FOTOUTAMASMKNEGERI1CIKAMPEK.png');"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  ...
     <div class="hero-slide">
       <div class="hero-bg" style="background: linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%)"></div>
       <div class="hero-overlay"></div>
