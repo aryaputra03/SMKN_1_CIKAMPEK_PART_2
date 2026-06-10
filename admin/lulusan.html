@@ -61,7 +61,7 @@
                 </div><br>
                 
                 <div>
-                    <label>Upload Foto Alumni:</label><br>
+                    <label>Upload Foto Alumni (Maks 3 MB):</label><br>
                     <input type="file" id="input-file-lulusan" accept="image/*" style="width: 100%;">
                     <input type="hidden" id="lulusan-foto">
                     <br>
@@ -69,7 +69,7 @@
                     <small id="status-upload-lulusan" style="color: blue; display: none; font-weight: bold; margin-top: 5px;"></small>
                 </div><br>
 
-                <button type="submit">Simpan Data Alumni</button>
+                <button type="submit" id="btn-simpan-lulusan">Simpan Data Alumni</button>
                 <button type="button" onclick="tutupFormLulusan()">Batal</button>
             </form>
         </div>
@@ -141,10 +141,21 @@
             const file = e.target.files[0];
             if (!file) return;
 
+            // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
+            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam Bytes
+            if (file.size > maksUkuran) {
+                alert("⚠️ Ukuran file terlalu besar! Maksimal ukuran foto alumni adalah 3 MB.");
+                e.target.value = ""; // Reset input file menjadi kosong
+                return; // Batalkan proses unggah
+            }
+
             const statusUpload = document.getElementById('status-upload-lulusan');
+            const btnSimpan = document.getElementById('btn-simpan-lulusan');
+
             statusUpload.style.display = "block";
             statusUpload.style.color = "blue";
             statusUpload.innerText = "Sedang mengunggah file ke storage...";
+            btnSimpan.disabled = true; // Kunci tombol simpan agar data tidak corrupt saat uploading
 
             const url = await uploadGambar(file, 'guru-images');
 
@@ -159,6 +170,7 @@
             } else {
                 statusUpload.style.display = "none";
             }
+            btnSimpan.disabled = false; // Buka kembali tombol simpan
         });
 
         // =========================================================
@@ -291,7 +303,6 @@
             document.getElementById("myModal").style.display = "none";
         }
 
-        // Tutup modal jika user mengklik area kosong di luar gambar
         window.onclick = function(event) {
             const modal = document.getElementById("myModal");
             if (event.target === modal) {
@@ -321,7 +332,6 @@
 
         menuToggle.addEventListener('click', toggleSidebar);
         sidebarOverlay.addEventListener('click', toggleSidebar);
-    </script>
     </script>
 </body>
 </html>

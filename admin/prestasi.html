@@ -59,7 +59,7 @@
                 </div><br>
                 
                 <div>
-                    <label>Upload Foto Dokumentasi Prestasi:</label><br>
+                    <label>Upload Foto Dokumentasi Prestasi (Maks 3 MB):</label><br>
                     <input type="file" id="input-file-foto" accept="image/*" style="width: 100%;">
                     <input type="hidden" id="input-foto">
                     <br>
@@ -237,6 +237,14 @@
             const file = e.target.files[0];
             if (!file) return;
 
+            // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
+            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam Bytes
+            if (file.size > maksUkuran) {
+                alert("⚠️ Ukuran file terlalu besar! Maksimal ukuran gambar dokumentasi adalah 3 MB.");
+                e.target.value = ""; // Reset input file menjadi kosong
+                return; // Batalkan proses unggah ke storage
+            }
+
             const labelStatus = document.getElementById('status-upload');
             const btnSimpan = document.getElementById('btn-simpan');
 
@@ -331,7 +339,6 @@
             document.getElementById("modalFotoPrestasi").style.display = "none";
         }
 
-        // Otomatis tutup modal jika pengguna mengklik area hitam di luar gambar
         window.onclick = function(event) {
             const modal = document.getElementById("modalFotoPrestasi");
             if (event.target === modal) {
@@ -367,7 +374,6 @@
 
         menuToggle.addEventListener('click', toggleSidebar);
         sidebarOverlay.addEventListener('click', toggleSidebar);
-    </script>
     </script>
 </body>
 </html>
