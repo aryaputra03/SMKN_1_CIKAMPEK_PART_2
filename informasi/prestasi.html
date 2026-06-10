@@ -525,16 +525,9 @@
      GANTI nilai SUPABASE_URL dan SUPABASE_ANON_KEY
      dengan credential project Supabase Anda.
 ══════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
 <script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-  /* ─── KONFIGURASI ─── 
-     Ganti dua baris di bawah ini dengan URL dan anon key 
-     dari project Supabase Anda (Settings → API)          */
-  const SUPABASE_URL      = 'https://XXXX.supabase.co';        // ← ganti
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6...'; // ← ganti
-
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   /* ─── KONFIGURASI TAMPILAN ─── */
   const PER_PAGE = 8; // jumlah item per halaman
