@@ -109,8 +109,65 @@ ul { list-style: none; }
 .data-table tr:last-child td { border-bottom: none; }
 .note { margin-top: 16px; font-size: 13px; color: var(--text-muted); }
 
+/* ── FOTO THUMBNAIL DI TABEL ─────────────── */
+.foto-thumb {
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover; border: 2px solid var(--gray-soft);
+  display: block; margin: 0 auto;
+  cursor: zoom-in;
+  transition: border-color 0.2s;
+}
+.foto-thumb:hover { border-color: var(--gold); }
+.foto-placeholder {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gray-soft); display: flex; align-items: center;
+  justify-content: center; margin: 0 auto;
+}
+.foto-placeholder svg { width: 20px; height: 20px; color: var(--navy-light); }
+
+/* ── SKELETON LOADING ─────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-row td { padding: 12px 16px; border-bottom: 1px solid var(--gray-soft); }
+.skeleton-line { height: 14px; border-radius: 4px; }
+
+/* ── LIGHTBOX FOTO ────────────────────── */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.lightbox-overlay.show { display: flex; }
+.lightbox-inner {
+  position: relative; max-width: 90vw; max-height: 90vh;
+}
+.lightbox-inner img {
+  max-width: 100%; max-height: 85vh;
+  border-radius: var(--r-md); box-shadow: var(--shadow-lg);
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute; top: -14px; right: -14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--gold); color: var(--navy);
+  border: none; cursor: pointer; font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.lightbox-name {
+  text-align: center; margin-top: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 600;
+}
+
 /* ── FOOTER ─────────────────────────────── */
-/* ── FOOTER ──────────────────────────────────────── */
 .footer { background: var(--gold); color: var(--navy); }
 .footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
 
@@ -299,7 +356,7 @@ ul { list-style: none; }
     <p class="photo-caption">Foto bersama seluruh tenaga pendidik dan kependidikan SMKN 1 Cikampek Tahun Ajaran 2024/2025</p>
   </div>
 
-  <!-- Tabel Guru -->
+  <!-- Tabel Guru — DATA DINAMIS -->
   <div class="card fade-up">
     <div class="section-title">Daftar Lengkap Tenaga Pendidik</div>
     <p class="section-sub">Data guru dan mata pelajaran yang diampu di SMKN 1 Cikampek</p>
@@ -308,39 +365,72 @@ ul { list-style: none; }
         <thead>
           <tr>
             <th>No</th>
+            <th style="width:60px; text-align:center;">Foto</th>
             <th>Nama Lengkap</th>
-            <th>NIP</th>
+            <th>NIP / NUPTK</th>
             <th>Jabatan / Mata Pelajaran</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td>1</td><td>Drs. Budi Santoso, M.Pd</td><td class="nip">196503121990031005</td><td>Kepala Sekolah</td></tr>
-          <tr><td>2</td><td>Sri Wahyuni, S.Pd, M.Pd</td><td class="nip">197204251998022003</td><td>Waka Kurikulum / Matematika</td></tr>
-          <tr><td>3</td><td>Ahmad Rizki, S.T, M.T</td><td class="nip">198001152005011002</td><td>Waka Kesiswaan / Teknik Jaringan</td></tr>
-          <tr><td>4</td><td>Dewi Kusuma, S.Pd</td><td class="nip">197809082003122004</td><td>Waka Sarpras / Bahasa Inggris</td></tr>
-          <tr><td>5</td><td>Reza Pratama, S.Kom</td><td class="nip">198506172009011007</td><td>Waka Humas / Informatika</td></tr>
-          <tr><td>6</td><td>Sari Indah, S.T, M.T</td><td class="nip">197712202002122001</td><td>Ketua Jurusan TP / Pemesinan</td></tr>
-          <tr><td>7</td><td>Hendra Gunawan, S.Pd</td><td class="nip">198203042006041003</td><td>Pendidikan Jasmani &amp; Olahraga</td></tr>
-          <tr><td>8</td><td>Rina Safitri, S.Ds</td><td class="nip">198710192012122002</td><td>Ketua Jurusan DKV / Desain Grafis</td></tr>
-          <tr><td>9</td><td>Muhammad Fauzi, S.Ag</td><td class="nip">197905112004011006</td><td>Pendidikan Agama &amp; Budi Pekerti</td></tr>
-          <tr><td>10</td><td>Nurul Hidayah, S.Pd</td><td class="nip">198401272007012008</td><td>Bahasa Indonesia</td></tr>
-          <tr><td>11</td><td>Agus Setiawan, S.T</td><td class="nip">198308132008011004</td><td>Teknik Elektronika Industri</td></tr>
-          <tr><td>12</td><td>Lia Permata, S.E, M.M</td><td class="nip">197611082001122005</td><td>Ketua Jurusan AKL / Akuntansi</td></tr>
-          <tr><td>13</td><td>Bambang Supriyadi, S.T</td><td class="nip">198002252006041002</td><td>Teknik Otomasi Industri</td></tr>
-          <tr><td>14</td><td>Fitri Andriani, S.Pd</td><td class="nip">198907142014022003</td><td>Pendidikan Pancasila &amp; Kewarganegaraan</td></tr>
-          <tr><td>15</td><td>Drs. Wahyu Nugroho</td><td class="nip">196712301994031009</td><td>Sejarah Indonesia</td></tr>
-          <tr><td>16</td><td>Yanti Kusumawati, S.Pd</td><td class="nip">198104162005012006</td><td>Bahasa Inggris</td></tr>
-          <tr><td>17</td><td>Ridwan Prasetyo, S.T</td><td class="nip">198611072010011005</td><td>Teknik Komputer &amp; Jaringan</td></tr>
-          <tr><td>18</td><td>Sinta Rahayu, S.Pd</td><td class="nip">199002182015022001</td><td>Matematika</td></tr>
-          <tr><td>19</td><td>Dedi Hermawan, S.Pd</td><td class="nip">198509292009041007</td><td>Seni Budaya</td></tr>
-          <tr><td>20</td><td>Wulandari, S.Psi</td><td class="nip">198803112012122004</td><td>Bimbingan &amp; Konseling</td></tr>
+        <tbody id="tabel-guru-publik">
+          <!-- Skeleton 6 baris saat loading -->
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:80%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:60%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:70%;"></div></td>
+          </tr>
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:75%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:55%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:65%;"></div></td>
+          </tr>
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:85%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:62%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:72%;"></div></td>
+          </tr>
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:70%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:58%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:68%;"></div></td>
+          </tr>
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:78%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:64%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:74%;"></div></td>
+          </tr>
+          <tr class="skeleton-row">
+            <td><div class="skeleton skeleton-line" style="width:20px;"></div></td>
+            <td><div class="skeleton" style="width:44px;height:44px;border-radius:50%;margin:0 auto;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:82%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:60%;"></div></td>
+            <td><div class="skeleton skeleton-line" style="width:70%;"></div></td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <p class="note">* Data ditampilkan sebagian. Total tenaga pendidik aktif 60+ orang.</p>
+    <p class="note" id="note-total" style="display:none;"></p>
   </div>
 
 </main>
+
+<!-- LIGHTBOX FOTO GURU -->
+<div class="lightbox-overlay" id="lightbox" onclick="tutupLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="tutupLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-name" id="lightbox-nama"></p>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer" id="contact">
@@ -495,11 +585,156 @@ ul { list-style: none; }
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
+<!-- ══════════════════════════════════════════════════════════
+     SUPABASE SDK + CLIENT
+     Pastikan supabase-client.js mengekspos:
+       window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+══════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
+
 <script>
+// ═══════════════════════════════════════════════════════════════
+// STAFF & GURU — DATA DINAMIS DARI SUPABASE
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * escapeHtml(str)
+ * Sanitasi teks untuk mencegah XSS sebelum disisipkan ke innerHTML.
+ */
+function escapeHtml(str) {
+  if (!str) return '';
+  const d = document.createElement('div');
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+}
+
+/**
+ * bukaLightbox(url, nama)
+ * Membuka overlay lightbox untuk memperbesar foto guru.
+ */
+function bukaLightbox(url, nama) {
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox-nama').textContent = nama;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+/**
+ * tutupLightbox(event)
+ * Menutup lightbox saat tombol × diklik atau area luar gambar diklik.
+ */
+function tutupLightbox(event) {
+  // Jika dipanggil dari onclick overlay, tutup hanya bila klik di luar gambar
+  if (event && event.target !== document.getElementById('lightbox')) return;
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+// Tutup lightbox dengan tombol Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('show');
+});
+
+/**
+ * renderGuru(data)
+ * Mengisi tbody tabel dengan data guru dari Supabase.
+ * Kolom: No | Foto | Nama | NIP | Jabatan/Mapel
+ */
+function renderGuru(data) {
+  const tbody    = document.getElementById('tabel-guru-publik');
+  const noteEl   = document.getElementById('note-total');
+
+  if (!data || data.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" style="text-align:center;padding:32px;color:var(--text-muted);font-style:italic;">
+          Data guru belum tersedia.
+        </td>
+      </tr>`;
+    return;
+  }
+
+  tbody.innerHTML = data.map((item, idx) => {
+    // Kolom foto: tampilkan thumbnail jika ada foto_url, avatar SVG jika tidak
+    const fotoKolom = item.foto_url
+      ? `<img
+           src="${escapeHtml(item.foto_url)}"
+           alt="Foto ${escapeHtml(item.nama)}"
+           class="foto-thumb"
+           loading="lazy"
+           onclick="bukaLightbox('${escapeHtml(item.foto_url)}', '${escapeHtml(item.nama).replace(/'/g, "\\'")}')"
+           onerror="this.parentElement.innerHTML='<div class=\\'foto-placeholder\\'><svg viewBox=\\'0 0 20 20\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><circle cx=\\'10\\' cy=\\'6\\' r=\\'3\\'/><path d=\\'M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7\\'/></svg></div>'"
+         >`
+      : `<div class="foto-placeholder">
+           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+             <circle cx="10" cy="6" r="3"/>
+             <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
+           </svg>
+         </div>`;
+
+    // Gabungkan jabatan dan mapel jika keduanya ada
+    const jabatanMapel = [item.jabatan, item.mapel]
+      .filter(v => v && v.trim() !== '' && v.trim() !== '-')
+      .join(' / ') || '-';
+
+    return `
+      <tr>
+        <td style="text-align:center;">${idx + 1}</td>
+        <td style="text-align:center;">${fotoKolom}</td>
+        <td><b>${escapeHtml(item.nama)}</b></td>
+        <td class="nip">${escapeHtml(item.nip) || '-'}</td>
+        <td>${escapeHtml(jabatanMapel)}</td>
+      </tr>`;
+  }).join('');
+
+  // Tampilkan catatan jumlah total guru
+  noteEl.textContent = `* Menampilkan ${data.length} tenaga pendidik dan kependidikan aktif.`;
+  noteEl.style.display = 'block';
+}
+
+/**
+ * loadGuru()
+ * Fungsi utama: ambil semua data dari tabel `guru` di Supabase,
+ * diurutkan berdasarkan kolom `urutan` (ascending).
+ */
+async function loadGuru() {
+  try {
+    const { data, error } = await supabase
+      .from('guru')
+      .select('id, nama, nip, jabatan, mapel, foto_url, urutan')
+      .order('urutan', { ascending: true });
+
+    if (error) {
+      console.error('[Staff & Guru] Gagal memuat data:', error.message);
+      document.getElementById('tabel-guru-publik').innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align:center;padding:32px;color:#e11d48;font-size:13px;">
+            Gagal memuat data. Silakan muat ulang halaman.
+          </td>
+        </tr>`;
+      return;
+    }
+
+    renderGuru(data);
+
+  } catch (err) {
+    console.error('[Staff & Guru] Error tidak terduga:', err);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI INTERAKTIF — Header, Mobile Menu, Animasi Scroll
+// (Tidak ada perubahan dari kode asli)
+// ═══════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Panggil loader data Supabase
+  loadGuru();
+
+  // Header scroll shadow
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
+  // Dropdown desktop
   document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
     let timer;
     item.addEventListener('mouseenter', () => {
@@ -518,16 +753,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
 
-  const hamburger = document.getElementById('hamburger-btn');
+  // Mobile menu hamburger
+  const hamburger  = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
   document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
   });
 
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  // Fade-up scroll animation
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
+  // Back to top button
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
