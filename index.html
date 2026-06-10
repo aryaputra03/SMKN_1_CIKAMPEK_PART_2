@@ -726,11 +726,15 @@
       align-items: center;
     }
 
-    .hero-inner {
-      padding: 0 28px;
-      max-width: 1240px;
-      margin: 0 auto;
-      width: 100%;
+.hero-inner {
+      background: rgba(15, 23, 42, 0.8); /* Kotak pelindung gelap transparan */
+      padding: 40px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px); /* Efek blur kaca di belakang teks */
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 230, 0, 0.25); /* Garis tepi tipis warna emas */
+      max-width: 680px; /* Membatasi lebar agar teks rapi */
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .hero-badge {
@@ -773,22 +777,22 @@
 
 .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 6vw, 80px);
-      font-weight: 700;
-      color: var(--gold); /* Diubah menjadi warna Emas (Kuning) */
-      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
-      line-height: 1.1;
+      font-size: clamp(38px, 5.5vw, 68px) !important;
+      font-weight: 700 !important;
+      color: #FFE600 !important; /* Memaksa warna EMAS CERAH */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+      line-height: 1.15;
       letter-spacing: -0.5px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
 .hero-subtitle {
-      font-size: 16px;
-      color: #ffffff; /* Diubah menjadi putih solid (tidak transparan) */
-      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8); /* Efek bayangan hitam agak tebal */
-      max-width: 480px;
+      font-size: 15.5px !important;
+      color: #FFFFFF !important; /* Memaksa warna PUTIH BERSIH */
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important;
+      max-width: 100% !important;
       margin-bottom: 36px;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     .hero-actions {
