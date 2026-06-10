@@ -106,31 +106,6 @@
       --r-lg: 16px;
       --r-xl: 24px;
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
-
-      /* Pemaksa warna hitam untuk semua elemen teks */
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      span,
-      a,
-      li,
-      button {
-        color: #000000 !important;
-      }
-
-      /* Khusus untuk teks footer yang semula putih, kita kembalikan ke warna gelap */
-      .footer,
-      .footer-brand-desc,
-      .footer-links a,
-      .footer-contact-item p,
-      .footer-bottom p {
-        color: #111111 !important;
-      }
     }
 
     html {
@@ -775,7 +750,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(42px, 6vw, 80px);
       font-weight: 700;
-      color: var(--gold); /* Diubah menjadi warna Emas (Kuning) */
+      color: #ffffff !important; /* Putih agar terlihat jelas di atas foto hero */
       text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
       line-height: 1.1;
       letter-spacing: -0.5px;
@@ -826,8 +801,8 @@
       gap: 8px;
       padding: 13px 28px;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
       font-size: 14px;
       font-weight: 600;
       border-radius: var(--r-md);
