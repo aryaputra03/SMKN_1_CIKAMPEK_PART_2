@@ -185,15 +185,53 @@ ul { list-style: none; }
   margin-top: 0;
 }
 .misi-text-wrap {}
-.misi-text-wrap strong {
-  display: block;
-  font-size: 13px;
+.misi-text-wrap p {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── TUJUAN CARD ── */
+.tujuan-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-soft);
+  border-top: 4px solid var(--navy);
+  padding: 40px 40px;
+}
+.tujuan-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 2.5vw, 28px);
   font-weight: 700;
   color: var(--navy);
-  letter-spacing: 0.3px;
-  margin-bottom: 3px;
+  margin-bottom: 28px;
 }
-.misi-text-wrap p {
+.tujuan-list { list-style: none; margin-top: 0; padding: 0; }
+.tujuan-list li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gray-soft);
+  transition: background 0.2s;
+}
+.tujuan-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.tujuan-list li:first-child { padding-top: 0; }
+.tujuan-num {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 700;
+  margin-top: 0;
+}
+.tujuan-text-wrap p {
   font-size: 14.5px;
   line-height: 1.75;
   color: var(--text-muted);
@@ -210,6 +248,23 @@ ul { list-style: none; }
   border-top: 5px solid var(--gold);
 }
 .vm-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+
+/* ── SKELETON LOADING ─── */
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-text { height: 18px; margin-bottom: 10px; }
+.skeleton-text.wide { width: 90%; }
+.skeleton-text.medium { width: 65%; }
+.skeleton-text.short { width: 40%; }
+.skeleton-block { height: 80px; width: 100%; margin-bottom: 12px; }
 
 /* ── FOOTER ──────────────────────────────────────── */
 .footer { background: var(--gold); color: var(--navy); }
@@ -321,6 +376,9 @@ ul { list-style: none; }
   .misi-card { padding: 28px 20px; }
   .misi-list li { grid-template-columns: 38px 1fr; gap: 14px; }
   .misi-num { width: 38px; height: 38px; font-size: 16px; }
+  .tujuan-card { padding: 28px 20px; }
+  .tujuan-list li { grid-template-columns: 38px 1fr; gap: 14px; }
+  .tujuan-num { width: 38px; height: 38px; font-size: 16px; }
 }
 
 /* ── SAMBUTAN KEPALA SEKOLAH ─────────────── */
@@ -496,98 +554,91 @@ ul { list-style: none; }
 
     <!-- ══ SAMBUTAN KEPALA SEKOLAH ══ -->
     <div class="sambutan-section fade-up">
-    <div style="margin-bottom:24px">
-      <div class="vm-label">Sambutan</div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy);margin:6px 0 0">PROFIL SEKOLAH</h2>
-    </div>
-
-    <div class="sambutan-grid">
-      <!-- Kiri: Video -->
-      <div class="sambutan-video-wrap">
-        <div class="play-btn">
-          <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg>
-        </div>
-        <span class="sambutan-video-duration">4:03</span>
+      <div style="margin-bottom:24px">
+        <div class="vm-label">Sambutan</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy);margin:6px 0 0">PROFIL SEKOLAH</h2>
       </div>
 
-      <!-- Kanan: Teks Sambutan -->
-      <div class="sambutan-text-side">
-        <p class="sambutan-quote">
-          Bismillahirrohmanirahim. Assalamu'alaikum Warahmatullahi Wabarakatuh.
-        </p>
-        <p class="sambutan-body">
-          Segala puji hanya untuk Allah SWT yang telah memberikan kepada kita nikmat iman, Islam, dan kesehatan. Shalawat serta salam semoga selalu tercurah kepada Nabi Muhammad SAW, keluarga, sahabat, dan seluruh umatnya.
-        </p>
-        <p class="sambutan-body" style="margin-top:12px">
-          Kami berkomitmen menjadikan SMKN 1 Cikampek sebagai lembaga pendidikan kejuruan terbaik yang mencetak lulusan siap kerja, berkarakter kuat, dan berdaya saing global. Melalui program-program unggulan dan kolaborasi erat dengan dunia industri, kami terus berupaya memberikan pendidikan berkualitas tinggi bagi generasi penerus bangsa.
-        </p>
-        <p class="sambutan-body" style="margin-top:12px">
-          Semoga Allah SWT senantiasa membimbing langkah kita semua dalam mewujudkan cita-cita mulia ini. Wassalamu'alaikum Wr. Wb.
-        </p>
-
-        <div class="sambutan-signature">
-          <div class="sambutan-avatar">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+      <div class="sambutan-grid">
+        <!-- Kiri: Video -->
+        <div class="sambutan-video-wrap">
+          <div class="play-btn">
+            <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg>
           </div>
-          <div>
-            <p class="sambutan-name">Kepala SMKN 1 Cikampek</p>
-            <p class="sambutan-role">SMKN 1 Cikampek — Karawang, Jawa Barat</p>
+          <span class="sambutan-video-duration">4:03</span>
+        </div>
+
+        <!-- Kanan: Teks Sambutan -->
+        <div class="sambutan-text-side">
+          <p class="sambutan-quote">
+            Bismillahirrohmanirahim. Assalamu'alaikum Warahmatullahi Wabarakatuh.
+          </p>
+          <p class="sambutan-body">
+            Segala puji hanya untuk Allah SWT yang telah memberikan kepada kita nikmat iman, Islam, dan kesehatan. Shalawat serta salam semoga selalu tercurah kepada Nabi Muhammad SAW, keluarga, sahabat, dan seluruh umatnya.
+          </p>
+          <p class="sambutan-body" style="margin-top:12px">
+            Kami berkomitmen menjadikan SMKN 1 Cikampek sebagai lembaga pendidikan kejuruan terbaik yang mencetak lulusan siap kerja, berkarakter kuat, dan berdaya saing global. Melalui program-program unggulan dan kolaborasi erat dengan dunia industri, kami terus berupaya memberikan pendidikan berkualitas tinggi bagi generasi penerus bangsa.
+          </p>
+          <p class="sambutan-body" style="margin-top:12px">
+            Semoga Allah SWT senantiasa membimbing langkah kita semua dalam mewujudkan cita-cita mulia ini. Wassalamu'alaikum Wr. Wb.
+          </p>
+
+          <div class="sambutan-signature">
+            <div class="sambutan-avatar">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+            </div>
+            <div>
+              <p class="sambutan-name">Kepala SMKN 1 Cikampek</p>
+              <p class="sambutan-role">SMKN 1 Cikampek — Karawang, Jawa Barat</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-    <!-- ══ VISI ══ -->
-    <div class="visi-card fade-up">
+    <!-- ══ VISI (DINAMIS) ══ -->
+    <div class="visi-card fade-up" id="section-visi">
       <span class="vm-label">Tujuan Utama</span>
       <h2>Visi Kami</h2>
-      <p class="visi-text">
-        "Terwujudnya peserta didik SMKN 1 Cikampek yang Cageur, Bageur, Bener, Pinter, dan Singer melalui peningkatan kemampuan literasi dan numerasi, pembelajaran berkualitas, serta penyerapan lulusan yang unggul, berkarakter, dan berdaya saing."
-      </p>
-      <div class="visi-tagline">
-        <span class="visi-tag">Cageur</span>
-        <span class="visi-tag">Bageur</span>
-        <span class="visi-tag">Bener</span>
-        <span class="visi-tag">Pinter</span>
-        <span class="visi-tag">Singer</span>
+      <!-- Skeleton saat loading -->
+      <div id="visi-skeleton">
+        <div class="skeleton skeleton-text wide"></div>
+        <div class="skeleton skeleton-text wide"></div>
+        <div class="skeleton skeleton-text medium"></div>
       </div>
+      <!-- Konten dinamis -->
+      <p class="visi-text" id="visi-text" style="display:none;"></p>
+      <div class="visi-tagline" id="visi-tagline" style="display:none;"></div>
     </div>
 
-    <!-- ══ MISI ══ -->
-    <div class="misi-card fade-up">
+    <!-- ══ MISI (DINAMIS) ══ -->
+    <div class="misi-card fade-up" id="section-misi">
       <span class="vm-label">Langkah Strategis</span>
       <h2>Misi Kami</h2>
-      <ul class="misi-list">
-        <li>
-          <div class="misi-num">1</div>
-          <div class="misi-text-wrap">
-            <strong>Lulusan Kompeten &amp; Berkarakter</strong>
-            <p>Menghasilkan lulusan yang mandiri, disiplin, jujur, bertanggung jawab, dan kompeten di bidangnya.</p>
-          </div>
-        </li>
-        <li>
-          <div class="misi-num">2</div>
-          <div class="misi-text-wrap">
-            <strong>Pembelajaran Berkualitas Berbasis ICT</strong>
-            <p>Mengimplementasikan sistem pembelajaran berkualitas berbasis ICT, produksi, dan wirausaha.</p>
-          </div>
-        </li>
-        <li>
-          <div class="misi-num">3</div>
-          <div class="misi-text-wrap">
-            <strong>Literasi &amp; Numerasi Global</strong>
-            <p>Meningkatkan kemampuan literasi dan numerasi sebagai bekal daya saing di era globalisasi.</p>
-          </div>
-        </li>
-        <li>
-          <div class="misi-num">4</div>
-          <div class="misi-text-wrap">
-            <strong>Karakter Religius &amp; Budaya Industri</strong>
-            <p>Membangun karakter peserta didik yang dilandasi nilai-nilai religius dan budaya kerja industri.</p>
-          </div>
-        </li>
-      </ul>
+      <!-- Skeleton saat loading -->
+      <div id="misi-skeleton">
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+      </div>
+      <!-- Konten dinamis -->
+      <ul class="misi-list" id="misi-list" style="display:none;"></ul>
+      <p id="misi-empty" style="display:none;font-size:14px;color:var(--text-light);font-style:italic;">Misi belum diisi.</p>
+    </div>
+
+    <!-- ══ TUJUAN (DINAMIS) ══ -->
+    <div class="tujuan-card fade-up" id="section-tujuan">
+      <span class="vm-label">Target Pencapaian</span>
+      <h2>Tujuan Kami</h2>
+      <!-- Skeleton saat loading -->
+      <div id="tujuan-skeleton">
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+      </div>
+      <!-- Konten dinamis -->
+      <ul class="tujuan-list" id="tujuan-list" style="display:none;"></ul>
+      <p id="tujuan-empty" style="display:none;font-size:14px;color:var(--text-light);font-style:italic;">Tujuan belum diisi.</p>
     </div>
 
   </div><!-- end vm-grid -->
@@ -746,11 +797,186 @@ ul { list-style: none; }
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
+<!-- ══════════════════════════════════════════════════════════
+     SUPABASE SDK + CLIENT
+     Pastikan file supabase-client.js berisi:
+       import { createClient } from '...'
+       const SUPABASE_URL = 'https://XXXX.supabase.co'
+       const SUPABASE_ANON_KEY = 'eyJ...'
+       window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+     — ATAU sesuaikan path import di bawah dengan struktur folder Anda.
+══════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
+
 <script>
+// ═══════════════════════════════════════════════════════════════
+// VISI MISI — DATA DINAMIS DARI SUPABASE
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * renderVisi(visiText)
+ * Mengisi card visi dengan teks dari database.
+ * Jika kosong/null, tampilkan placeholder.
+ */
+function renderVisi(visiText) {
+  const skeleton = document.getElementById('visi-skeleton');
+  const elText   = document.getElementById('visi-text');
+  const elTags   = document.getElementById('visi-tagline');
+
+  // Sembunyikan skeleton
+  skeleton.style.display = 'none';
+
+  if (visiText && visiText.trim() !== '') {
+    // Tampilkan teks visi
+    elText.textContent = '"' + visiText.trim() + '"';
+    elText.style.display = 'block';
+
+    // Auto-extract kata kunci (kata ≥ 5 huruf & kapital pertama) sebagai tag
+    // Atau fallback ke tag default jika tidak ditemukan pola
+    const matches = visiText.match(/\b[A-Z][a-z]{3,}\b/g);
+    const tags    = matches ? [...new Set(matches)].slice(0, 7) : [];
+
+    if (tags.length > 0) {
+      elTags.innerHTML = tags
+        .map(t => `<span class="visi-tag">${t}</span>`)
+        .join('');
+      elTags.style.display = 'flex';
+    }
+  } else {
+    // Fallback: teks kosong di database
+    elText.textContent = 'Visi sekolah belum diisi.';
+    elText.style.fontStyle = 'normal';
+    elText.style.color = 'rgba(255,255,255,0.5)';
+    elText.style.borderLeft = 'none';
+    elText.style.paddingLeft = '0';
+    elText.style.display = 'block';
+  }
+}
+
+/**
+ * renderMisi(misiArray)
+ * Mengisi card misi dengan array poin dari database (jsonb).
+ * Setiap elemen array menjadi satu <li> bernomor.
+ */
+function renderMisi(misiArray) {
+  const skeleton  = document.getElementById('misi-skeleton');
+  const list      = document.getElementById('misi-list');
+  const emptyMsg  = document.getElementById('misi-empty');
+
+  skeleton.style.display = 'none';
+
+  if (misiArray && misiArray.length > 0) {
+    list.innerHTML = misiArray
+      .filter(item => item && item.trim() !== '')
+      .map((item, idx) => `
+        <li>
+          <div class="misi-num">${idx + 1}</div>
+          <div class="misi-text-wrap">
+            <p>${escapeHtml(item.trim())}</p>
+          </div>
+        </li>
+      `)
+      .join('');
+    list.style.display = 'block';
+  } else {
+    emptyMsg.style.display = 'block';
+  }
+}
+
+/**
+ * renderTujuan(tujuanArray)
+ * Mengisi card tujuan dengan array poin dari database (jsonb).
+ */
+function renderTujuan(tujuanArray) {
+  const skeleton  = document.getElementById('tujuan-skeleton');
+  const list      = document.getElementById('tujuan-list');
+  const emptyMsg  = document.getElementById('tujuan-empty');
+  const section   = document.getElementById('section-tujuan');
+
+  skeleton.style.display = 'none';
+
+  if (tujuanArray && tujuanArray.length > 0) {
+    list.innerHTML = tujuanArray
+      .filter(item => item && item.trim() !== '')
+      .map((item, idx) => `
+        <li>
+          <div class="tujuan-num">${idx + 1}</div>
+          <div class="tujuan-text-wrap">
+            <p>${escapeHtml(item.trim())}</p>
+          </div>
+        </li>
+      `)
+      .join('');
+    list.style.display = 'block';
+  } else {
+    // Jika tujuan kosong, sembunyikan seluruh card tujuan agar rapi
+    emptyMsg.style.display = 'block';
+  }
+}
+
+/**
+ * escapeHtml(str)
+ * Mencegah XSS — karakter HTML di-escape sebelum dimasukkan ke DOM.
+ */
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+/**
+ * loadVisiMisi()
+ * Fungsi utama: ambil data dari tabel visi_misi di Supabase,
+ * lalu render ke masing-masing section.
+ */
+async function loadVisiMisi() {
+  try {
+    const { data, error } = await supabase
+      .from('visi_misi')
+      .select('visi, misi, tujuan')
+      .single();
+
+    if (error) {
+      console.error('[Visi Misi] Gagal memuat data:', error.message);
+      // Sembunyikan semua skeleton, tampilkan pesan error
+      ['visi-skeleton', 'misi-skeleton', 'tujuan-skeleton'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<p style="font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;">Gagal memuat data.</p>';
+      });
+      return;
+    }
+
+    if (data) {
+      renderVisi(data.visi);
+      renderMisi(data.misi);
+      renderTujuan(data.tujuan);
+    } else {
+      // Tidak ada row sama sekali
+      renderVisi(null);
+      renderMisi(null);
+      renderTujuan(null);
+    }
+
+  } catch (err) {
+    console.error('[Visi Misi] Error tidak terduga:', err);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI INTERAKTIF (HEADER, MOBILE MENU, ANIMASI SCROLL)
+// — Tidak ada perubahan dari kode asli —
+// ═══════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Panggil loader data Supabase
+  loadVisiMisi();
+
+  // Header scroll shadow
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
+  // Dropdown desktop
   document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
     let timer;
     item.addEventListener('mouseenter', () => {
@@ -769,16 +995,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
 
-  const hamburger = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  // Mobile menu hamburger
+  const hamburger   = document.getElementById('hamburger-btn');
+  const mobileMenu  = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
   document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
   });
 
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  // Fade-up scroll animation
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
+  // Back to top button
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
