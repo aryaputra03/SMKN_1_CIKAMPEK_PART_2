@@ -193,22 +193,71 @@ input[type="file"]#input-file-struktur:focus {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsif untuk Layar Handphone/Tablet kecil */
+
+/* ==========================================================================
+   7. REVISI MOBILE RESPONSIVE (Layar Smartphone & Tablet - Maksimal 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
+    /* Mengurangi padding luar konten agar grid tidak terkompresi */
     #content {
-        padding: 15px;
+        padding: 20px 15px;
     }
     
+    /* Penyesuaian ukuran teks judul agar proporsional di HP */
+    #content h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    
+    #content p {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+    
+    /* Mempersempit padding internal boks Card */
     .card {
-        padding: 20px;
+        padding: 20px 15px !important;
+        margin-bottom: 20px;
     }
     
+    .card h3 {
+        font-size: 16px;
+        margin-bottom: 18px;
+    }
+
+    /* Mengoptimalkan ruang render pratinjau gambar bagan struktur */
+    .preview-container {
+        padding: 25px 12px;
+        min-height: 200px;
+    }
+
+    /* Membatasi tinggi gambar pratinjau agar admin tidak perlu scroll terlalu panjang */
+    #preview-struktur {
+        max-height: 380px;
+        padding: 6px;
+    }
+
+    /* Memaksa input file upload dan box alert status mengisi lebar penuh layar */
+    input[type="file"]#input-file-struktur,
+    #status-upload {
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Mengubah tombol menjadi bertumpuk (stacked) fluid lebar penuh */
     .btn-primary {
-        width: 100%; /* Tombol penuh pada layar HP */
+        width: 100% !important;
         text-align: center;
+        padding: 14px 20px; /* Ditambahkan ketebalan agar mudah ditekan jari */
+        font-size: 14px;
+        align-self: stretch; /* Menetralkan flex-start bawaan desktop */
     }
     
+    /* Penyesuaian tombol hapus bagan di bawah pratinjau gambar */
     #btn-hapus {
-        width: 100%;
+        width: 100% !important;
+        padding: 12px 20px;
+        margin-top: 12px;
     }
 }

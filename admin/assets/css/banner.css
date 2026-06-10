@@ -281,3 +281,213 @@ table td button:nth-of-type(2):hover {
     color: #94a3b8 !important;
     transform: rotate(90deg);
 }
+
+/* ==========================================================================
+   RESPONSIVE — MOBILE & TABLET
+   Breakpoints: ≤768px (tablet), ≤480px (mobile)
+   ========================================================================== */
+
+/* ── TABLET (≤768px) ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Form container — full width, kurangi padding */
+  #area-form {
+    max-width: 100% !important;
+    padding: 18px !important;
+    margin-bottom: 20px !important;
+  }
+
+  #area-form h3 {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+
+  /* Tombol utama header — full width */
+  main#content > button,
+  main#content > div > button {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  /* Form buttons row — stack jika perlu */
+  #area-form > div[style*="display:flex"],
+  #area-form > div[style*="display: flex"] {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #btn-simpan,
+  #area-form button[type="button"] {
+    flex: 1 1 auto;
+    margin-left: 0 !important;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  /* ── TABLE: scroll horizontal pada layar kecil ── */
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  /* Jika wrapper belum ada di HTML, paksa table scroll sendiri */
+  table {
+    min-width: 620px !important; /* paksa scroll horizontal */
+    box-shadow: none !important; /* shadow sudah di wrapper */
+    border-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  table th {
+    padding: 11px 12px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
+
+  table td {
+    padding: 11px 12px !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Thumbnail lebih kecil */
+  .img-thumbnail {
+    max-width: 80px;
+    max-height: 50px;
+  }
+
+  /* Tombol aksi di baris tabel — lebih compact */
+  table td button {
+    padding: 5px 10px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Modal image — lebih besar di tablet */
+  .modal-content {
+    max-width: 92% !important;
+    max-height: 75vh;
+  }
+
+  .close {
+    top: 14px;
+    right: 20px;
+    font-size: 36px !important;
+  }
+}
+
+/* ── MOBILE (≤480px) ──────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* Form container */
+  #area-form {
+    padding: 14px !important;
+    border-radius: 10px !important;
+  }
+
+  #area-form h3 {
+    font-size: 1rem;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+  }
+
+  /* Form labels & inputs */
+  #form-banner label {
+    font-size: 0.83rem;
+  }
+
+  #form-banner input[type="text"],
+  #form-banner input[type="number"] {
+    padding: 9px 12px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Checkbox label — text kecil */
+  #form-banner label:has(input[type="checkbox"]) {
+    font-size: 0.85rem;
+  }
+
+  /* Tombol form — full width stack */
+  #btn-simpan,
+  #area-form button[type="button"] {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-top: 6px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+
+  /* Table min-width lebih sempit biar tidak scroll terlalu jauh */
+  table {
+    min-width: 520px !important;
+  }
+
+  table th {
+    padding: 10px 10px !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.3px !important;
+  }
+
+  table td {
+    padding: 10px 10px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Thumbnail lebih kecil lagi */
+  .img-thumbnail {
+    max-width: 60px;
+    max-height: 40px;
+    border-radius: 4px;
+  }
+
+  /* Tombol aksi tabel — sangat compact */
+  table td button {
+    padding: 4px 8px !important;
+    font-size: 0.75rem !important;
+    margin-right: 4px;
+  }
+
+  /* Badge status */
+  table td span[style*="color:green"],
+  table td span[style*="color:red"] {
+    padding: 3px 8px !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Modal full screen di mobile */
+  .modal {
+    padding-top: 40px;
+  }
+
+  .modal-content {
+    max-width: 96% !important;
+    max-height: 70vh;
+    border-radius: 10px !important;
+  }
+
+  .close {
+    top: 10px;
+    right: 14px;
+    font-size: 30px !important;
+  }
+}
+
+/* ── UTILITY: Wrapper scrollable untuk table (tambahkan di HTML) ───────────
+   Pakai dengan membungkus <table> dengan:
+   <div class="table-scroll-wrap"> ... </table> </div>
+   ─────────────────────────────────────────────────────────────────────────── */
+.table-scroll-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 15px;
+}
+
+/* Jika table ada di dalam .table-scroll-wrap, reset shadow & margin tabel */
+.table-scroll-wrap table {
+  margin-top: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}

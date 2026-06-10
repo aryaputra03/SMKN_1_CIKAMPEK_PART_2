@@ -52,6 +52,7 @@ div[style*="max-width: 700px"] {
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
     font-family: monospace; /* Font khusus URL agar mudah dibaca */
     letter-spacing: -0.2px;
+    width: 100%;
 }
 
 #form-kurikulum input[type="url"]:focus {
@@ -139,4 +140,57 @@ div[style*="max-width: 700px"] {
     background-color: #22c55e !important;
     color: var(--white) !important;
     box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
+}
+
+
+/* ==========================================================================
+   6. MOBILE RESPONSIVE (Layar Smartphone - Maksimal 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Mengatasi keterbatasan inline style max-width pada container form */
+    div[style*="max-width: 700px"] {
+        padding: 20px 16px !important; /* Memperkecil padding agar tidak sesak */
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Input URL dioptimalkan ukurannya */
+    #form-kurikulum input[type="url"] {
+        font-size: 0.9rem !important; /* Sedikit lebih kecil agar teks URL panjang terlihat jelas */
+        padding: 10px 12px !important;
+    }
+
+    /* Tombol Simpan Menjadi Lebar Penuh (Full-Width) */
+    #btn-simpan {
+        width: 100% !important;
+        padding: 12px !important; /* Sedikit lebih tebal agar mudah disentuh jempol */
+        text-align: center !important;
+    }
+
+    /* Penyesuaian Area Kotak Hijau Pratinjau */
+    #preview-area {
+        padding: 18px 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #preview-area h3 {
+        font-size: 1rem !important;
+    }
+
+    #preview-area p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Tombol Uji Dokumen Menjadi Lebar Penuh */
+    #btn-buka-tautan {
+        width: 100% !important;
+        padding: 12px !important;
+        text-align: center !important;
+        display: block !important;
+    }
 }

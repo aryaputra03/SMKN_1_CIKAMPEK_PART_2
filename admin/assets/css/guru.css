@@ -3,14 +3,7 @@
    Spesifik untuk Modul Data Tenaga Pendidik & Kependidikan (guru.html)
    ========================================================================== */
 
-/* 1. HIGHLIGHT ACTIVE MENU */
-nav ul li a[href="guru.html"] {
-    background-color: var(--sidebar-active) !important;
-    color: var(--white) !important;
-    font-weight: bold;
-}
-
-/* 2. MAIN HEADER & ACTION BUTTONS */
+/* 1. MAIN HEADER & ACTION BUTTONS */
 main#content > button {
     background-color: var(--primary-color);
     color: var(--white);
@@ -32,7 +25,7 @@ main#content > button:active {
     transform: scale(0.98);
 }
 
-/* 3. FORM CONTAINER (#area-form-guru) */
+/* 2. FORM CONTAINER (#area-form-guru) */
 #area-form-guru {
     background-color: var(--white) !important;
     border: 1px solid var(--border-color) !important;
@@ -80,6 +73,7 @@ main#content > button:active {
     color: #0f172a !important;
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    width: 100%;
 }
 
 #form-guru input[type="text"]:focus,
@@ -98,7 +92,7 @@ main#content > button:active {
 }
 
 #form-guru input[type="number"] {
-    text-align: center;
+    text-align: left;
 }
 
 /* Preview Foto & Status Upload di Form */
@@ -149,7 +143,7 @@ main#content > button:active {
 }
 
 
-/* 4. MODERN TABLE DESIGN FOR GTK */
+/* 3. MODERN TABLE DESIGN FOR GURU & STAFF */
 table {
     width: 100% !important;
     border-collapse: collapse !important;
@@ -249,7 +243,7 @@ table td button:nth-of-type(2):hover {
 }
 
 
-/* 5. MODAL LIGHTBOX / ZOOM FOTO GURU */
+/* 4. MODAL LIGHTBOX / ZOOM FOTO GURU */
 .modal {
     display: none; 
     position: fixed; 
@@ -260,15 +254,15 @@ table td button:nth-of-type(2):hover {
     width: 100%; 
     height: 100%; 
     overflow: auto; 
-    background-color: rgba(15, 23, 42, 0.85); /* Backdrop gelap pekat */
-    backdrop-filter: blur(4px); /* Efek blur estetik pada latar belakang */
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
 }
 
 .modal-content {
     margin: auto;
     display: block;
     width: auto;
-    max-width: 350px; /* Lebar maksimal pas foto saat di-zoom */
+    max-width: 350px;
     max-height: 80vh;
     object-fit: contain;
     border-radius: 8px;
@@ -297,4 +291,102 @@ table td button:nth-of-type(2):hover {
 .close:focus {
     color: var(--white);
     text-decoration: none;
+}
+
+
+/* ==========================================================================
+   5. MOBILE RESPONSIVE (Layar Smartphone - Maksimal 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Tombol Utama (+ Tambah Guru) Menjadi Penuh */
+    main#content > button {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Penyesuaian Kotak Form */
+    #area-form-guru {
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    /* Tombol Simpan & Batal Bertingkat */
+    #form-guru button[type="submit"],
+    #form-guru button[type="button"] {
+        width: 100%;
+        margin: 5px 0 0 0;
+        display: block;
+    }
+
+    /* ----------------------------------------------------
+       TRANSFORMASI TABEL GURU MENJADI BENTUK CARD (KARTU)
+       ---------------------------------------------------- */
+    table, thead, tbody, th, td, tr {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Menyembunyikan Header Tabel */
+    table thead {
+        display: none !important;
+    }
+
+    /* Tiap baris tabel menjadi sebuah Card */
+    table tbody tr {
+        margin-bottom: 20px !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+        padding: 10px !important;
+        background-color: var(--white) !important;
+    }
+
+    /* Pengaturan Tata Letak Kolom Kiri-Kanan */
+    table td {
+        text-align: right !important;
+        position: relative !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        padding: 12px 10px 12px 40% !important; /* Sisakan 40% di kiri untuk label */
+        min-height: 50px;
+    }
+
+    /* Kolom terakhir (Tombol Aksi) ditaruh paling bawah */
+    table td:last-child {
+        border-bottom: none !important;
+        justify-content: center !important;
+        padding-left: 10px !important;
+        gap: 10px;
+    }
+
+    /* Memunculkan Label Nama Kolom di Sisi Kiri */
+    table td::before {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35%;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    /* Label Spesifik Untuk Tabel Guru */
+    table td:nth-child(1)::before { content: "Urutan Tampil:"; }
+    table td:nth-child(2)::before { content: "Foto Profil:"; }
+    table td:nth-child(3)::before { content: "Nama Guru:"; }
+    table td:nth-child(4)::before { content: "NIP/NUPTK:"; }
+    table td:nth-child(5)::before { content: "Jabatan:"; }
+    table td:nth-child(6)::before { display: none; } /* Sel aksi tidak diberi label */
+
+    /* Menyeimbangkan Ukuran Tombol Aksi (Edit & Hapus) */
+    table td button {
+        flex: 1; /* Agar tombolnya rata membagi 2 kolom */
+        padding: 10px !important;
+    }
 }

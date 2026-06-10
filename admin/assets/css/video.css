@@ -126,3 +126,67 @@ main#content > div:first-of-type {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ==========================================================================
+   6. MOBILE RESPONSIVE (Layar Smartphone & Tablet - Maksimal 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Mengurangi padding kontainer agar isi form tidak terlalu terjepit di HP */
+    main#content > div:first-of-type {
+        padding: 20px 15px !important;
+        margin-bottom: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Mengatur kolom input agar otomatis fleksibel melebar penuh */
+    #form-video,
+    #input-url-video {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 14px !important; /* Sedikit dikecilkan agar link panjang YouTube termuat baik */
+    }
+
+    /* Mengubah tombol simpan tautan menjadi block lebar penuh (Full-Width) */
+    #btn-simpan {
+        width: 100% !important;
+        display: block !important;
+        text-align: center !important;
+        padding: 14px 20px !important; /* Dipertebal agar ergonomis saat ditekan jempol */
+        box-sizing: border-box !important;
+        margin-top: 10px !important;
+    }
+
+    /* Penyesuaian boks area pratinjau (Preview Area) */
+    #preview-area {
+        padding: 20px 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #preview-area h3 {
+        font-size: 16px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* ----------------------------------------------------
+       RESPONSIVE EMBED: Mengunci Rasio Video YouTube (16:9)
+       ---------------------------------------------------- */
+    #preview-area > div {
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    /* Memaksa elemen iframe di dalamnya mengikuti grid rasio layar HP */
+    #preview-area > div iframe {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9 !important; /* Mempertahankan rasio sinematik YouTube secara otomatis */
+        display: block;
+        border: none;
+    }
+}

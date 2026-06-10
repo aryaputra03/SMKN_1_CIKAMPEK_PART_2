@@ -144,3 +144,79 @@ table td a:hover {
     color: var(--primary-hover) !important;
     transform: translateX(4px); /* Animasi panah bergeser maju sedikit saat di-hover */
 }
+
+
+/* ==========================================================================
+   5. MOBILE RESPONSIVE (Layar di bawah 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Optimasi Jarak Widget Ringkasan Data */
+    .widget-container {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important; /* Membuat widget bisa berjejer 2 kolom di HP */
+        gap: 12px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .widget {
+        padding: 16px 12px !important; /* Mengurangi padding agar hemat ruang */
+    }
+
+    .widget h3 {
+        font-size: 0.75rem !important; /* Teks judul statistik lebih kecil sedikit */
+    }
+
+    .widget p {
+        font-size: 1.8rem !important; /* Angka statistik disesuaikan agar tidak over-size */
+        margin-top: 8px !important;
+    }
+
+    /* MENGUBAH TABEL AKSES CEPAT MENJADI KARTU LIST */
+    table, thead, tbody, th, td, tr {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Sembunyikan Header Tabel karena tidak diperlukan di HP */
+    table thead {
+        display: none !important;
+    }
+
+    /* Mengubah baris menjadi kotak list item */
+    table tbody tr {
+        margin-bottom: 12px !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        padding: 12px 16px !important;
+        background-color: var(--white) !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+    }
+
+    table tbody tr:hover {
+        background-color: var(--white) !important; /* Matikan efek hover baris pc */
+    }
+
+    /* Reset format sel kolom */
+    table td {
+        padding: 6px 0 !important;
+        border-bottom: none !important;
+        text-align: left !important;
+    }
+
+    /* Kolom Pertama: Nama Modul Pengelolaan */
+    table td:nth-child(1) {
+        font-size: 0.95rem !important;
+    }
+
+    /* Kolom Kedua: Aksi Navigasi (Tautan) */
+    table td:nth-child(2) {
+        padding-top: 10px !important;
+        margin-top: 6px !important;
+        border-top: 1px dashed #e2e8f0 !important; /* Garis pemisah horizontal halus */
+    }
+    
+    table td a {
+        width: 100%; /* Membuat area klik link lebih luas di HP */
+        font-size: 0.85rem !important;
+    }
+}

@@ -80,6 +80,7 @@ main#content > button:active {
     background-color: #f8fafc;
     box-sizing: border-box;
     transition: all 0.2s ease;
+    width: 100%; /* Memastikan elemen input responsif mengisi container */
 }
 
 #form-prestasi input[type="text"]:focus,
@@ -113,6 +114,8 @@ main#content > button:active {
     border-radius: 6px;
     border: 1px dashed #cbd5e1;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Buttons di dalam Form */
@@ -312,4 +315,132 @@ table td button:nth-of-type(2):hover {
 .close:focus {
     color: #94a3b8;
     transform: rotate(90deg);
+}
+
+
+/* ==========================================================================
+   7. MOBILE RESPONSIVE (Layar Smartphone - Maksimal 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Tombol Utama (+ Tambah Prestasi Baru) Menjadi Lebar Penuh */
+    main#content > button {
+        width: 100%;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* Penyesuaian Kotak Kontainer Form */
+    #area-form {
+        padding: 20px 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Tombol di dalam Form (Simpan & Batal) Menjadi Bertingkat Vertikal */
+    #form-prestasi button[type="submit"],
+    #form-prestasi button[type="button"] {
+        width: 100%;
+        margin: 8px 0 0 0 !important;
+        display: block;
+        box-sizing: border-box;
+        padding: 12px !important; /* Dipertebal agar mudah disentuh jempol */
+    }
+
+    /* ----------------------------------------------------
+       TRANSFORMASI TABEL DATA PRESTASI MENJADI KARTU (CARD)
+       ---------------------------------------------------- */
+    table, thead, tbody, th, td, tr {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Sembunyikan Header Tabel Desktop */
+    table thead {
+        display: none !important;
+    }
+
+    /* Setiap Baris Data Diubah Menjadi 1 Blok Kartu Terpisah */
+    table tbody tr {
+        margin-bottom: 20px !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02) !important;
+        padding: 10px !important;
+        background-color: #ffffff !important;
+    }
+
+    /* Penataan Komponen Grid Kiri-Kanan Sel Data */
+    table td {
+        text-align: right !important;
+        position: relative !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        padding: 12px 10px 12px 38% !important; /* Ruang 38% di kiri untuk label */
+        min-height: 48px;
+        box-sizing: border-box !important;
+    }
+
+    /* Modifikasi Khusus Isian Info Detail Prestasi (Agar Teks Panjang Rata Kanan Bagus) */
+    table td b, table td small {
+        text-align: right !important;
+        width: 100%;
+    }
+
+    /* Kolom Paling Bawah (Tempat Tombol Aksi Edit & Hapus) */
+    table td:last-child {
+        border-bottom: none !important;
+        justify-content: center !important; /* Pusatkan tombol aksi di HP */
+        padding-left: 10px !important;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    /* Memunculkan Judul Label di Sisi Kiri Sel Kartu Secara Absolut */
+    table td::before {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 33%;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    /* Pemetaan Label Dinamis Sesuai Struktur Kolom Default Modul Prestasi */
+    table td:nth-child(1)::before { content: "No / Urutan:"; }
+    table td:nth-child(2)::before { content: "Foto / Berkas:"; }
+    table td:nth-child(3)::before { content: "Tingkat:"; }
+    table td:nth-child(4)::before { content: "Detail Prestasi:"; }
+    table td:nth-child(5)::before { display: none; } /* Kolom aksi tidak memerlukan label kiri */
+
+    /* Reset Margin Auto Pratinjau Gambar di HP Agar Pas Menempel di Kanan */
+    .img-thumbnail {
+        margin: 0 !important;
+    }
+
+    /* Tombol Edit & Hapus Mengisi Lebar Merata Sejajar */
+    table td button {
+        flex: 1;
+        padding: 10px !important;
+        text-align: center;
+    }
+
+    /* Optimasi Lebar Pratinjau Gambar Zoom (Modal) saat di HP */
+    .modal-content {
+        max-width: 92%;
+    }
+    
+    .close {
+        top: 15px;
+        right: 20px;
+        font-size: 38px;
+    }
 }

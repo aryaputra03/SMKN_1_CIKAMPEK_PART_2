@@ -220,3 +220,104 @@ table td button:nth-of-type(2) { /* Hapus */
 table td button:nth-of-type(2):hover {
     background-color: #fee2e2 !important;
 }
+
+
+/* ==========================================================================
+   5. MOBILE RESPONSIVE (Layar di bawah 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* Tombol Utama Lebar Penuh */
+    main#content > button {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Penyesuaian Ruang Form */
+    #area-form {
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    /* Tombol Batal & Simpan menjadi ke bawah */
+    #form-berita button[type="submit"],
+    #form-berita button[type="button"] {
+        width: 100%;
+        margin: 5px 0 0 0;
+        display: block;
+    }
+
+    /* MENGUBAH TABEL MENJADI BENTUK CARD (KARTU) */
+    table, thead, tbody, th, td, tr {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Sembunyikan Header Tabel */
+    table thead {
+        display: none !important;
+    }
+
+    /* Styling Tiap Baris Menjadi Kotak Kartu */
+    table tbody tr {
+        margin-bottom: 20px !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--border-radius) !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+        padding: 10px !important;
+        background-color: var(--white) !important;
+    }
+
+    /* Styling Tiap Sel Data (Kanan-Kiri) */
+    table td {
+        text-align: right !important;
+        position: relative !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        padding: 12px 10px 12px 40% !important; /* Ruang kosong 40% di kiri untuk label */
+        min-height: 50px;
+    }
+
+    table td:last-child {
+        border-bottom: none !important;
+        justify-content: center !important;
+        padding-left: 10px !important; /* Reset padding di sel terakhir */
+        gap: 10px;
+    }
+
+    /* Memunculkan Label Nama Kolom di Sebelah Kiri */
+    table td::before {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35%;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    /* Teks Label Berdasarkan Kolom */
+    table td:nth-child(1)::before { content: "Judul Berita:"; }
+    table td:nth-child(2)::before { content: "Gambar:"; }
+    table td:nth-child(3)::before { content: "Kategori:"; }
+    table td:nth-child(4)::before { content: "Tanggal:"; }
+    table td:nth-child(5)::before { display: none; } /* Sel aksi tidak perlu label */
+
+    /* Kustomisasi Kolom Pertama (Karena berisi <b> dan <small>) */
+    table td:nth-child(1) {
+        flex-direction: column;
+        align-items: flex-end !important;
+        justify-content: center !important;
+    }
+
+    /* Kustomisasi Tombol Aksi agar proporsional */
+    table td button {
+        flex: 1; /* Membuat tombol Edit dan Hapus seimbang */
+        padding: 10px !important;
+    }
+}
