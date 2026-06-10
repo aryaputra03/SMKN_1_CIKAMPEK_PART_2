@@ -67,7 +67,6 @@
     .nav-item.open .caret { transform: rotate(180deg); }
     .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
     .nav-item.open .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
-/* Bridge: tutup celah agar mouse tidak keluar saat geser ke dropdown */
 .nav-item.has-dropdown::after {
   content: '';
   position: absolute;
@@ -162,6 +161,14 @@
       z-index: 2;
     }
     .psp-thumb::before { content: ''; position: absolute; inset: 0; opacity: 0.12; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 1px, transparent 0, transparent 50%); background-size: 12px 12px; }
+    /* overlay gelap saat ada foto */
+    .psp-thumb.has-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+      z-index: 1;
+    }
     .psp-medal { font-size: 40px; position: relative; z-index: 1; }
     .psp-rank { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 1px; text-transform: uppercase; position: relative; z-index: 1; text-align: center; }
 
@@ -171,6 +178,7 @@
     .level-nasional { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
     .level-provinsi { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; }
     .level-kota { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+    .level-internasional { background: #FCE7F3; color: #9D174D; border: 1px solid #F9A8D4; }
     .prestasi-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 10px; }
     .prestasi-detail-row { display: flex; gap: 20px; flex-wrap: wrap; }
     .prestasi-detail-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); }
@@ -180,10 +188,28 @@
     .prestasi-siswa span { font-size: 13px; font-weight: 600; color: var(--navy); }
 
     /* PAGINATION */
-    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 44px; }
-    .page-btn { width: 38px; height: 38px; border-radius: var(--r-sm); border: 1.5px solid var(--gray-soft); background: var(--white); font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; }
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 44px; flex-wrap: wrap; }
+    .page-btn { min-width: 38px; height: 38px; padding: 0 10px; border-radius: var(--r-sm); border: 1.5px solid var(--gray-soft); background: var(--white); font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; }
     .page-btn:hover { border-color: var(--gold); color: var(--navy); }
     .page-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* LOADING & EMPTY STATE */
+    .loading-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 64px 0; }
+    .spinner { width: 44px; height: 44px; border: 3px solid var(--gray-soft); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state p { font-size: 14px; color: var(--text-muted); }
+
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 64px 0; text-align: center; }
+    .empty-state svg { width: 56px; height: 56px; color: var(--text-light); }
+    .empty-state h4 { font-size: 16px; font-weight: 700; color: var(--navy); }
+    .empty-state p { font-size: 13.5px; color: var(--text-muted); }
+
+    .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 64px 0; text-align: center; }
+    .error-state svg { width: 48px; height: 48px; color: #EF4444; }
+    .error-state p { font-size: 14px; color: var(--text-muted); max-width: 380px; }
+    .error-retry { padding: 9px 20px; background: var(--navy); color: var(--white); border-radius: var(--r-md); font-size: 13px; font-weight: 600; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+    .error-retry:hover { background: var(--navy-mid); }
 
  /* ── FOOTER ── */
     .footer { background: var(--gold); color: var(--navy); }
@@ -319,186 +345,24 @@
         <input type="text" id="search-input" placeholder="Cari prestasi…">
       </div>
       <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterPrestasi('semua',this)">Semua</button>
-        <button class="filter-tab" onclick="filterPrestasi('nasional',this)">Nasional</button>
-        <button class="filter-tab" onclick="filterPrestasi('provinsi',this)">Provinsi</button>
-        <button class="filter-tab" onclick="filterPrestasi('kota',this)">Kota/Kabupaten</button>
+        <button class="filter-tab active" data-level="semua">Semua</button>
+        <button class="filter-tab" data-level="nasional">Nasional</button>
+        <button class="filter-tab" data-level="provinsi">Provinsi</button>
+        <button class="filter-tab" data-level="kota">Kota/Kabupaten</button>
       </div>
     </div>
 
     <!-- PRESTASI LIST -->
     <div class="prestasi-list" id="prestasi-list">
-
-      <div class="prestasi-row fade-up" data-level="provinsi">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
-          <div class="psp-medal">🥇</div>
-          <div class="psp-rank">Juara 1</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
-          </div>
-          <h3>LKS Bidang Teknik Komputer &amp; Jaringan</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              08 April 2024
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Bandung, Jawa Barat
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">AF</div>
-            <span>Ahmad Fauzi — XII TKJ</span>
-          </div>
-        </div>
+      <!-- Diisi oleh JavaScript dari Supabase -->
+      <div class="loading-state" id="loading-state">
+        <div class="spinner"></div>
+        <p>Memuat data prestasi…</p>
       </div>
-
-      <div class="prestasi-row fade-up" data-level="provinsi">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
-          <div class="psp-medal">🥈</div>
-          <div class="psp-rank">Juara 2</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
-          </div>
-          <h3>Panahan Compound Olympic Round Team</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              06 April 2024
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Purwakarta, Jawa Barat
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">RA</div>
-            <span>Reza Ananda — XII TP</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up" data-level="provinsi">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
-          <div class="psp-medal">🥉</div>
-          <div class="psp-rank">Juara 3</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-provinsi">Provinsi Jawa Barat</span>
-          </div>
-          <h3>Pencak Silat Putra Kelas B</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              06 April 2024
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Karawang, Jawa Barat
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">BS</div>
-            <span>Budi Santoso — X E8</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up" data-level="kota">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#D97706,#b45309)">
-          <div class="psp-medal">🥇</div>
-          <div class="psp-rank">Juara 1</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-kota">Kabupaten Karawang</span>
-          </div>
-          <h3>LKS Bidang Desain Komunikasi Visual</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              20 Maret 2024
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Karawang, Jawa Barat
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">SR</div>
-            <span>Siti Rahayu — XII DKV</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up" data-level="nasional">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#C9A84C,#b5932f)">
-          <div class="psp-medal">🏆</div>
-          <div class="psp-rank">Finalis</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-nasional">Nasional</span>
-          </div>
-          <h3>Kompetisi Robotika Nasional — SMK Kategori Lanjutan</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              November 2023
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Jakarta
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">TM</div>
-            <span>Tim Robotika SMKN 1 Cikampek — XI TOI</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="prestasi-row fade-up" data-level="kota">
-        <div class="psp-thumb" style="background:linear-gradient(135deg,#0F1E38,#243558)">
-          <div class="psp-medal">🥇</div>
-          <div class="psp-rank">Juara 1</div>
-        </div>
-        <div class="prestasi-body">
-          <div class="prestasi-meta">
-            <span class="level-badge level-kota">Kabupaten Karawang</span>
-          </div>
-          <h3>Olimpiade Matematika Tingkat SMK</h3>
-          <div class="prestasi-detail-row">
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
-              September 2023
-            </div>
-            <div class="prestasi-detail-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-              Karawang, Jawa Barat
-            </div>
-          </div>
-          <div class="prestasi-siswa">
-            <div class="siswa-dot">DP</div>
-            <span>Dewi Puspita — XI AKL</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /prestasi-list -->
-
-    <div class="pagination fade-up">
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <button class="page-btn">›</button>
     </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination fade-up" id="pagination-wrap" style="display:none"></div>
 
   </div>
 </main>
@@ -656,100 +520,369 @@
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  function updateJam() {
-    const el = document.getElementById('jam-digital');
-    if (!el) return;
-    el.textContent = [new Date().getHours(),new Date().getMinutes(),new Date().getSeconds()].map(n=>String(n).padStart(2,'0')).join(':');
+<!-- ══════════════════════════════════════════════
+     SUPABASE + LOGIKA DATA DINAMIS
+     GANTI nilai SUPABASE_URL dan SUPABASE_ANON_KEY
+     dengan credential project Supabase Anda.
+══════════════════════════════════════════════ -->
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+  /* ─── KONFIGURASI ─── 
+     Ganti dua baris di bawah ini dengan URL dan anon key 
+     dari project Supabase Anda (Settings → API)          */
+  const SUPABASE_URL      = 'https://XXXX.supabase.co';        // ← ganti
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6...'; // ← ganti
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  /* ─── KONFIGURASI TAMPILAN ─── */
+  const PER_PAGE = 8; // jumlah item per halaman
+
+  /* ─── STATE ─── */
+  let allData     = [];   // semua data dari Supabase
+  let filtered    = [];   // setelah filter level + search
+  let currentPage = 1;
+  let activeLevel = 'semua';
+  let searchQuery = '';
+
+  /* ─── HELPER: mapping tingkat → warna thumbnail fallback ─── */
+  const thumbBg = {
+    nasional   : 'linear-gradient(135deg,#C9A84C,#b5932f)',
+    provinsi   : 'linear-gradient(135deg,#1B2A4A,#2563EB)',
+    kota       : 'linear-gradient(135deg,#D97706,#b45309)',
+    internasional: 'linear-gradient(135deg,#7C3AED,#5b21b6)',
+  };
+
+  /* ─── HELPER: mapping juara → emoji ─── */
+  function getMedal(judul) {
+    const j = (judul || '').toLowerCase();
+    if (j.includes('juara 1') || j.includes('juara i') || j.includes('pertama'))  return '🥇';
+    if (j.includes('juara 2') || j.includes('juara ii') || j.includes('kedua'))   return '🥈';
+    if (j.includes('juara 3') || j.includes('juara iii') || j.includes('ketiga')) return '🥉';
+    if (j.includes('harapan')) return '🎖️';
+    if (j.includes('finalis') || j.includes('finalist'))   return '🏆';
+    if (j.includes('terbaik')) return '⭐';
+    return '🏅';
   }
-  updateJam(); setInterval(updateJam, 1000);
 
-  const header = document.querySelector('.header');
-  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+  /* ─── HELPER: ambil label juara dari judul ─── */
+  function getRankLabel(judul) {
+    const j = (judul || '').toLowerCase();
+    if (j.includes('juara 1') || j.includes('pertama'))    return 'Juara 1';
+    if (j.includes('juara 2') || j.includes('kedua'))      return 'Juara 2';
+    if (j.includes('juara 3') || j.includes('ketiga'))     return 'Juara 3';
+    if (j.includes('harapan 1'))  return 'Harapan 1';
+    if (j.includes('harapan 2'))  return 'Harapan 2';
+    if (j.includes('harapan'))    return 'Harapan';
+    if (j.includes('finalis'))    return 'Finalis';
+    if (j.includes('terbaik'))    return 'Terbaik';
+    return 'Prestasi';
+  }
 
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
-  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
-    btn.addEventListener('click', () => { document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'); });
-  });
+  /* ─── HELPER: format tahun dari field 'tahun' (integer) ─── */
+  function formatTahun(tahun) {
+    return tahun ? String(tahun) : '—';
+  }
 
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  /* ─── HELPER: inisial dari deskripsi (nama siswa jika ada) ─── */
+  function getInitials(str) {
+    if (!str) return '?';
+    return str.trim().split(/\s+/).slice(0,2).map(w => w[0]).join('').toUpperCase();
+  }
 
-  // Counter
-  const counterObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const target = parseInt(el.getAttribute('data-target')||'0');
-        const suffix = el.getAttribute('data-suffix')||'';
-        let current = 0;
-        const inc = target / (1600/16);
-        const timer = setInterval(() => {
-          current += inc;
-          if (current >= target) { current = target; clearInterval(timer); }
-          el.textContent = Math.floor(current) + suffix;
-        }, 16);
-        counterObs.unobserve(el);
+  /* ─── HELPER: level badge class ─── */
+  function levelBadgeClass(tingkat) {
+    const t = (tingkat || '').toLowerCase();
+    if (t.includes('nasional'))      return 'level-nasional';
+    if (t.includes('provinsi'))      return 'level-provinsi';
+    if (t.includes('internasional')) return 'level-internasional';
+    return 'level-kota';
+  }
+
+  /* ─── HELPER: label tingkat untuk ditampilkan ─── */
+  function levelLabel(tingkat) {
+    const t = (tingkat || '').toLowerCase();
+    if (t.includes('nasional'))       return 'Nasional';
+    if (t.includes('provinsi'))       return 'Provinsi Jawa Barat';
+    if (t.includes('internasional'))  return 'Internasional';
+    if (t.includes('kota'))           return 'Kota/Kabupaten';
+    return tingkat || 'Kab. Karawang';
+  }
+
+  /* ─── RENDER SATU KARTU PRESTASI ─── */
+  function renderRow(item) {
+    const medal       = getMedal(item.judul);
+    const rank        = getRankLabel(item.judul);
+    const tingkat     = (item.tingkat || '').toLowerCase();
+    const bgFallback  = thumbBg[tingkat] || thumbBg['kota'];
+    const hasPhoto    = !!item.foto_url;
+
+    // baris deskripsi / nama siswa diambil dari field deskripsi
+    const deskripsi   = item.deskripsi || '';
+    const inisial     = getInitials(deskripsi);
+
+    // foto: gunakan URL dari Supabase Storage jika ada
+    const fotoHTML = hasPhoto
+      ? `<img src="${escapeHTML(item.foto_url)}" alt="${escapeHTML(item.judul)}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.remove('has-photo')">`
+      : '';
+
+    return `
+    <div class="prestasi-row fade-up" data-level="${escapeHTML(tingkat)}">
+      <div class="psp-thumb ${hasPhoto ? 'has-photo' : ''}" style="background:${bgFallback}">
+        ${fotoHTML}
+        <div class="psp-medal">${medal}</div>
+        <div class="psp-rank">${escapeHTML(rank)}</div>
+      </div>
+      <div class="prestasi-body">
+        <div class="prestasi-meta">
+          <span class="level-badge ${levelBadgeClass(item.tingkat)}">${escapeHTML(levelLabel(item.tingkat))}</span>
+        </div>
+        <h3>${escapeHTML(item.judul)}</h3>
+        <div class="prestasi-detail-row">
+          <div class="prestasi-detail-item">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+            ${escapeHTML(formatTahun(item.tahun))}
+          </div>
+          ${deskripsi ? `
+          <div class="prestasi-detail-item">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg>
+            ${escapeHTML(deskripsi)}
+          </div>` : ''}
+        </div>
+        ${deskripsi ? `
+        <div class="prestasi-siswa">
+          <div class="siswa-dot">${escapeHTML(inisial)}</div>
+          <span>${escapeHTML(deskripsi)}</span>
+        </div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  /* ─── ESCAPE HTML ─── */
+  function escapeHTML(str) {
+    return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ─── RENDER LIST + PAGINATION ─── */
+  function renderList() {
+    const list    = document.getElementById('prestasi-list');
+    const pagWrap = document.getElementById('pagination-wrap');
+
+    if (filtered.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          <h4>Belum ada prestasi</h4>
+          <p>Tidak ada data yang cocok dengan filter yang dipilih.</p>
+        </div>`;
+      pagWrap.style.display = 'none';
+      return;
+    }
+
+    const totalPages = Math.ceil(filtered.length / PER_PAGE);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const start   = (currentPage - 1) * PER_PAGE;
+    const pageItems = filtered.slice(start, start + PER_PAGE);
+
+    list.innerHTML = pageItems.map(renderRow).join('');
+
+    // aktifkan animasi fade-up
+    requestAnimationFrame(() => {
+      list.querySelectorAll('.fade-up').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 50);
+      });
+    });
+
+    // render pagination
+    if (totalPages <= 1) {
+      pagWrap.style.display = 'none';
+      return;
+    }
+    pagWrap.style.display = 'flex';
+
+    let pag = '';
+    pag += `<button class="page-btn" id="pag-prev" ${currentPage===1?'disabled':''}>‹</button>`;
+
+    // tampilkan max 7 tombol halaman
+    let start_p = Math.max(1, currentPage - 3);
+    let end_p   = Math.min(totalPages, start_p + 6);
+    if (end_p - start_p < 6) start_p = Math.max(1, end_p - 6);
+
+    if (start_p > 1) {
+      pag += `<button class="page-btn" data-page="1">1</button>`;
+      if (start_p > 2) pag += `<button class="page-btn" disabled>…</button>`;
+    }
+    for (let i = start_p; i <= end_p; i++) {
+      pag += `<button class="page-btn ${i===currentPage?'active':''}" data-page="${i}">${i}</button>`;
+    }
+    if (end_p < totalPages) {
+      if (end_p < totalPages - 1) pag += `<button class="page-btn" disabled>…</button>`;
+      pag += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+    }
+
+    pag += `<button class="page-btn" id="pag-next" ${currentPage===totalPages?'disabled':''}>›</button>`;
+    pagWrap.innerHTML = pag;
+
+    // event listener tombol halaman
+    pagWrap.querySelectorAll('[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentPage = parseInt(btn.dataset.page);
+        renderList();
+        window.scrollTo({ top: document.querySelector('.page-body').offsetTop - 80, behavior: 'smooth' });
+      });
+    });
+    document.getElementById('pag-prev')?.addEventListener('click', () => {
+      if (currentPage > 1) { currentPage--; renderList(); }
+    });
+    document.getElementById('pag-next')?.addEventListener('click', () => {
+      if (currentPage < totalPages) { currentPage++; renderList(); }
+    });
+  }
+
+  /* ─── FILTER ─── */
+  function applyFilter() {
+    currentPage = 1;
+    filtered = allData.filter(item => {
+      const tingkat = (item.tingkat || '').toLowerCase();
+      const matchLevel =
+        activeLevel === 'semua' ||
+        (activeLevel === 'nasional'  && tingkat.includes('nasional')) ||
+        (activeLevel === 'provinsi'  && tingkat.includes('provinsi')) ||
+        (activeLevel === 'kota'      && (tingkat.includes('kota') || tingkat.includes('kabupaten')));
+
+      const haystack = [item.judul, item.tingkat, item.deskripsi, item.tahun].join(' ').toLowerCase();
+      const matchSearch = !searchQuery || haystack.includes(searchQuery.toLowerCase());
+
+      return matchLevel && matchSearch;
+    });
+    renderList();
+  }
+
+  /* ─── FETCH DATA DARI SUPABASE ─── */
+  async function loadPrestasi() {
+    const list = document.getElementById('prestasi-list');
+
+    try {
+      const { data, error } = await supabase
+        .from('prestasi')
+        .select('id, judul, deskripsi, tingkat, tahun, foto_url, created_at')
+        .order('tahun', { ascending: false })
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      allData  = data || [];
+      filtered = [...allData];
+      renderList();
+
+    } catch (err) {
+      console.error('Supabase error:', err);
+      list.innerHTML = `
+        <div class="error-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <p>Gagal memuat data. Pastikan konfigurasi Supabase sudah benar, atau coba muat ulang halaman.</p>
+          <button class="error-retry" onclick="location.reload()">Muat Ulang</button>
+        </div>`;
+    }
+  }
+
+  /* ─── INIT ─── */
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Supabase load
+    loadPrestasi();
+
+    // jam digital
+    function updateJam() {
+      const el = document.getElementById('jam-digital');
+      if (!el) return;
+      el.textContent = [new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()]
+        .map(n => String(n).padStart(2,'0')).join(':');
+    }
+    updateJam();
+    setInterval(updateJam, 1000);
+
+    // header scroll
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+    // hamburger
+    const hamburger  = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu?.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open');
+      });
+    });
+
+    // IntersectionObserver fade-up
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // back to top
+    const backBtn = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+    backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // filter tabs
+    document.querySelectorAll('.filter-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        activeLevel = btn.dataset.level;
+        applyFilter();
+      });
+    });
+
+    // search
+    document.getElementById('search-input')?.addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
+      applyFilter();
+    });
+
+    // dropdown navbar
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+      let closeTimer;
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimer);
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+        item.classList.add('open');
+      });
+      item.addEventListener('mouseleave', () => {
+        closeTimer = setTimeout(() => item.classList.remove('open'), 150);
+      });
+      const btn = item.querySelector('button.nav-link');
+      if (btn) {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
       }
     });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
-
-  const backBtn = document.querySelector('.back-to-top');
-  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
-  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  document.getElementById('search-input')?.addEventListener('input', () => {
-    const q = document.getElementById('search-input').value.toLowerCase();
-    document.querySelectorAll('.prestasi-row').forEach(row => {
-      row.style.display = (!q || row.textContent.toLowerCase().includes(q)) ? '' : 'none';
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open'));
     });
-  });
-});
 
-function filterPrestasi(level, btn) {
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.prestasi-row').forEach(row => {
-    if (level === 'semua' || row.dataset.level === level) row.style.display = '';
-    else row.style.display = 'none';
-  });
-}
-
-  // ── DROPDOWN NAVBAR ──
-  document.querySelectorAll('.nav-item.has-dropdown').forEach(function(item) {
-    var closeTimer;
-    function openDropdown() {
-      clearTimeout(closeTimer);
-      document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) {
-        if (o !== item) o.classList.remove('open');
-      });
-      item.classList.add('open');
-    }
-    function closeDropdown() {
-      closeTimer = setTimeout(function() { item.classList.remove('open'); }, 150);
-    }
-    item.addEventListener('mouseenter', openDropdown);
-    item.addEventListener('mouseleave', closeDropdown);
-    var btn = item.querySelector('button.nav-link');
-    if (btn) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) { o.classList.remove('open'); });
-        if (!isOpen) item.classList.add('open');
-      });
-    }
-  });
-  document.addEventListener('click', function() {
-    document.querySelectorAll('.nav-item.has-dropdown').forEach(function(i) { i.classList.remove('open'); });
-  });
-
+  }); // end DOMContentLoaded
 </script>
+
 </body>
 </html>
