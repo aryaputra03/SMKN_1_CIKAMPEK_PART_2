@@ -14,7 +14,7 @@
         <ul>
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="berita.html">Berita</a></li>
-            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="prestasi.html" class="active">Prestasi</a></li>
             <li><a href="guru.html">Guru & Staff</a></li>
             <li><a href="lulusan.html">Lulusan Terbaik</a></li>
             <li><a href="banner.html">Banner</a></li>
@@ -45,8 +45,8 @@
                     <label>Tingkat Prestasi:</label><br>
                     <select id="input-tingkat" required style="width: 100%; padding: 5px;">
                         <option value="">-- Pilih Tingkat --</option>
-                        <option value="Kabupaten">Kabupaten</option>
                         <option value="Kota">Kota</option>
+                        <option value="Kabupaten">Kabupaten</option>
                         <option value="Provinsi">Provinsi</option>
                         <option value="Nasional">Nasional</option>
                         <option value="Internasional">Internasional</option>
@@ -143,23 +143,25 @@
                 return;
             }
 
-            tbody.innerHTML = data.map((item, index) => `
-                <tr>
-                    <td>
-                        <b>${item.judul || ''}</b><br>
-                        <small style="color:#666;">${item.deskripsi || ''}</small>
-                    </td>
-                    <td style="text-align:center;">
-                        ${item.foto_url ? `<img src="${item.foto_url}" alt="Foto Prestasi" class="img-thumbnail" onclick="bukaModal('${item.foto_url}')" title="Klik untuk memperbesar">` : '<span style="color:#999; font-style:italic; font-size:12px;">Tidak ada foto</span>'}
-                    </td>
-                    <td style="text-align:center;">${item.tingkat || ''}</td>
-                    <td style="text-align:center;">${item.tahun || ''}</td>
-                    <td style="text-align:center;">
-                        <button onclick="persiapkanEditByIndex(${index})">Edit</button>
-                        <button onclick="hapusPrestasi('${item.id}')">Hapus</button>
-                    </td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = data.map((item, index) => {
+                return `
+                    <tr>
+                        <td>
+                            <b>${item.judul || ''}</b><br>
+                            <small style="color:#666;">${item.deskripsi || ''}</small>
+                        </td>
+                        <td style="text-align:center;">
+                            ${item.foto_url ? `<img src="${item.foto_url}" alt="Foto Prestasi" class="img-thumbnail" onclick="bukaModal('${item.foto_url}')" title="Klik untuk memperbesar">` : '<span style="color:#999; font-style:italic; font-size:12px;">Tidak ada foto</span>'}
+                        </td>
+                        <td style="text-align:center;">${item.tingkat || ''}</td>
+                        <td style="text-align:center;">${item.tahun || ''}</td>
+                        <td style="text-align:center;">
+                            <button onclick="persiapkanEditByIndex(${index})">Edit</button>
+                            <button onclick="hapusPrestasi('${item.id}')">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         document.getElementById('form-prestasi').addEventListener('submit', async (e) => {
@@ -167,9 +169,10 @@
 
             const id = document.getElementById('prestasi-id').value;
             
+            // PERBAIKAN: Dikembalikan menjadi 'tingkat' sesuai kolom asli database
             const formData = {
                 judul: document.getElementById('input-judul').value,
-                tingkat: document.getElementById('input-tingkat').value,
+                tingkat: document.getElementById('input-tingkat').value, 
                 tahun: parseInt(document.getElementById('input-tahun').value), 
                 foto_url: document.getElementById('input-foto').value || null,
                 deskripsi: document.getElementById('input-deskripsi').value || null
@@ -181,14 +184,14 @@
             if (modeForm === "tambah") {
                 const { error } = await supabase.from('prestasi').insert([formData]);
                 if (error) {
-                    alert("Gagal menambah data prestasi: " + error.message);
+                    alert(`Gagal menambah data prestasi!\n\nPesan: ${error.message}\nDetail: ${error.details || ''}`);
                     btnSimpan.disabled = false;
                     return; 
                 }
             } else {
                 const { error } = await supabase.from('prestasi').update(formData).eq('id', id);
                 if (error) {
-                    alert("Gagal memperbarui data prestasi: " + error.message);
+                    alert(`Gagal memperbarui data prestasi!\n\nPesan: ${error.message}\nDetail: ${error.details || ''}`);
                     btnSimpan.disabled = false;
                     return; 
                 }
@@ -237,12 +240,11 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
-            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam Bytes
+            const maksUkuran = 3 * 1024 * 1024; 
             if (file.size > maksUkuran) {
                 alert("⚠️ Ukuran file terlalu besar! Maksimal ukuran gambar dokumentasi adalah 3 MB.");
-                e.target.value = ""; // Reset input file menjadi kosong
-                return; // Batalkan proses unggah ke storage
+                e.target.value = ""; 
+                return; 
             }
 
             const labelStatus = document.getElementById('status-upload');
@@ -303,12 +305,13 @@
             document.getElementById('input-tahun').value = item.tahun || "";
             document.getElementById('input-deskripsi').value = item.deskripsi || "";
             
-            document.getElementById('input-foto').value = item.foto_url || "";
+            const urlGambar = item.foto_url || "";
+            document.getElementById('input-foto').value = urlGambar;
             document.getElementById('input-file-foto').value = ""; 
             
             const previewImg = document.getElementById('preview-foto');
-            if (item.foto_url && item.foto_url !== "null" && item.foto_url !== "") {
-                previewImg.src = item.foto_url;
+            if (urlGambar && urlGambar !== "null" && urlGambar !== "") {
+                previewImg.src = urlGambar;
                 previewImg.style.display = "block";
             } else {
                 previewImg.style.display = "none";
@@ -327,7 +330,6 @@
             document.getElementById('status-upload').style.display = "none";
         }
 
-        // --- MANAJEMEN MODAL ZOOM GAMBAR ---
         function bukaModal(imgUrl) {
             const modal = document.getElementById("modalFotoPrestasi");
             const modalImg = document.getElementById("imgModalTarget");
@@ -354,9 +356,7 @@
         }
         init();
 
-        // ---------------------------------------------------------
         // LOGIKA SIDEBAR HAMBURGER (MOBILE)
-        // ---------------------------------------------------------
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.querySelector('nav');
         const sidebarOverlay = document.getElementById('sidebarOverlay');

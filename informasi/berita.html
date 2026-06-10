@@ -1,5 +1,3 @@
-<!-- DATA DINAMIS -->
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,26 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-      /* Warna Formal Modern (Menggantikan Navy Lama) */
+    :root {
       --navy: #1E293B; --navy-mid: #334155; --navy-light: #475569;
-      
-      /* Warna Kuning Cerah Presisi Logo */
       --gold: #FFE600; --gold-light: #E6CF00; --gold-pale: rgba(255, 230, 0, 0.1);
-      
-      /* Warna Background Clean & Profesional */
       --white: #FFFFFF; --off-white: #F8FAFC; --gray-soft: #E2E8F0;
       --text: #1E293B; --text-muted: #64748B; --text-light: #94A3B8;
-      
-      /* Bayangan Halus */
       --shadow-sm: 0 2px 8px rgba(30,41,59,0.05);
       --shadow-md: 0 6px 24px rgba(30,41,59,0.08);
       --shadow-lg: 0 16px 48px rgba(30,41,59,0.12);
-      
       --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
       --ease: cubic-bezier(0.4,0,0.2,1);
     }
-    
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
     img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; } ul { list-style: none; }
@@ -70,16 +59,7 @@
     .nav-item.open .caret { transform: rotate(180deg); }
     .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
     .nav-item.open .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
-/* Bridge: tutup celah agar mouse tidak keluar saat geser ke dropdown */
-.nav-item.has-dropdown::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background: transparent;
-}
+    .nav-item.has-dropdown::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px; background: transparent; }
     .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--r-sm); font-size: 13.5px; color: var(--text); transition: background 0.2s, color 0.2s; }
     .dropdown a:hover, .dropdown a.current { background: var(--gold-pale); color: var(--navy); }
     .dropdown a.current { font-weight: 600; }
@@ -151,15 +131,53 @@
     .berita-readmore { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase; transition: opacity 0.2s; }
     .berita-readmore:hover { opacity: 0.75; }
 
+    /* LOADING STATE */
+    .loading-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; gap: 16px; grid-column: 1 / -1; }
+    .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--gray-soft); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state p { font-size: 14px; color: var(--text-muted); }
+
+    /* EMPTY STATE */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; gap: 12px; grid-column: 1 / -1; text-align: center; }
+    .empty-state svg { width: 48px; height: 48px; color: var(--text-light); opacity: 0.5; }
+    .empty-state p { font-size: 15px; color: var(--text-muted); }
+    .empty-state small { font-size: 13px; color: var(--text-light); }
+
+    /* SKELETON LOADER */
+    .skeleton-card { background: var(--white); border-radius: var(--r-lg); border: 1px solid var(--gray-soft); overflow: hidden; }
+    .skeleton-img { height: 180px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    .skeleton-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; }
+    .skeleton-line { height: 12px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; }
+    .skeleton-line.w-80 { width: 80%; }
+    .skeleton-line.w-60 { width: 60%; }
+    .skeleton-line.w-40 { width: 40%; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
     /* PAGINATION */
-    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 44px; }
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 44px; flex-wrap: wrap; }
     .page-btn { width: 38px; height: 38px; border-radius: var(--r-sm); border: 1.5px solid var(--gray-soft); background: var(--white); font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; }
     .page-btn:hover { border-color: var(--gold); color: var(--navy); }
     .page-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
+    /* MODAL BERITA DETAIL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,25,45,0.7); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--white); border-radius: var(--r-xl); max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: modalIn 0.3s var(--ease); }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-hero-img { width: 100%; height: 280px; object-fit: cover; border-radius: var(--r-xl) var(--r-xl) 0 0; display: block; }
+    .modal-hero-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); border-radius: var(--r-xl) var(--r-xl) 0 0; }
+    .modal-content { padding: 28px 32px 32px; }
+    .modal-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+    .modal-kat-badge { background: var(--navy); color: var(--gold); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
+    .modal-date-badge { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 5px; }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 18px; }
+    .modal-body { font-size: 14.5px; color: var(--text); line-height: 1.85; white-space: pre-wrap; }
+    .modal-close-btn { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(255,255,255,0.9); border-radius: 50%; border: 1px solid var(--gray-soft); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--navy); transition: background 0.2s; line-height: 1; }
+    .modal-close-btn:hover { background: var(--gold); }
+    .modal-hero-wrap { position: relative; }
 
-
- /* ── FOOTER ── */
+    /* FOOTER */
     .footer { background: var(--gold); color: var(--navy); }
     .footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
     .footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 64px 0 48px; }
@@ -202,23 +220,32 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) { .berita-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 768px) { .topbar { display: none; } .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .berita-grid { grid-template-columns: 1fr; } .footer-main-grid { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } }
+    @media (max-width: 768px) {
+      .topbar { display: none; }
+      .navbar, .btn-ppdb { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .berita-grid { grid-template-columns: 1fr; }
+      .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-map-contact { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .modal-content { padding: 20px; }
+      .modal-hero-img { height: 200px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-
 <!-- HEADER -->
 <header class="header">
   <div class="container header-main">
-<a href="../index.html" class="logo-area">
-  <img src="../assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
-    style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
-    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-  <div class="logo-placeholder" style="display:none">S</div>
-  <div class="logo-text"><h1>SMKN 1 Cikampek</h1><p>Karawang, Jawa Barat</p></div>
-</a>
+    <a href="../index.html" class="logo-area">
+      <img src="../assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
+        style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-placeholder" style="display:none">S</div>
+      <div class="logo-text"><h1>SMKN 1 Cikampek</h1><p>Karawang, Jawa Barat</p></div>
+    </a>
     <nav class="navbar">
       <div class="nav-item"><a href="../index.html" class="nav-link">Beranda</a></div>
       <div class="nav-item has-dropdown">
@@ -226,9 +253,7 @@
         <div class="dropdown">
           <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
           <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
- <a href="../index.html#jurusan">
-  <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan
-</a>
+          <a href="../index.html#jurusan"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan</a>
           <a href="../profil/struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span>Struktur Organisasi</a>
           <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
         </div>
@@ -239,8 +264,7 @@
           <a href="berita.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
           <a href="prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Prestasi</a>
           <a href="ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
-          <a href="../informasi/lulusanterbaik.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span> Lulusan Terbaik
-          </a>
+          <a href="../informasi/lulusanterbaik.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Lulusan Terbaik</a>
         </div>
       </div>
       <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
@@ -269,7 +293,7 @@
         <a href="ekskul.html">Ekstrakurikuler</a>
       </div>
     </div>
-      <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
+    <div class="mobile-nav-item"><a href="../kurikulum/index.html" class="mobile-nav-link">Kurikulum</a></div>
     <div style="padding:16px 24px;"><a href="../index.html#ppdb" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:var(--r-md);">kontak person</a></div>
   </div>
 </header>
@@ -295,191 +319,81 @@
 <main class="page-body">
   <div class="container">
     <div class="page-grid">
-
-      <!-- MAIN CONTENT -->
       <div>
+        <!-- FILTER BAR -->
         <div class="filter-bar fade-up">
           <div class="search-wrap">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
             <input type="text" id="search-input" placeholder="Cari berita…">
           </div>
-          <div class="filter-tabs">
-            <button class="filter-tab active" onclick="filterBerita('semua',this)">Semua</button>
-            <button class="filter-tab" onclick="filterBerita('kegiatan',this)">Kegiatan</button>
-            <button class="filter-tab" onclick="filterBerita('prestasi',this)">Prestasi</button>
-            <button class="filter-tab" onclick="filterBerita('pengumuman',this)">Pengumuman</button>
+          <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-tab active" data-kat="semua">Semua</button>
+            <button class="filter-tab" data-kat="Pengumuman">Pengumuman</button>
+            <button class="filter-tab" data-kat="Kegiatan Sekolah">Kegiatan</button>
+            <button class="filter-tab" data-kat="Berita Umum">Berita Umum</button>
+            <button class="filter-tab" data-kat="Artikel & Opini">Artikel</button>
+            <button class="filter-tab" data-kat="Info Kelulusan">Kelulusan</button>
           </div>
         </div>
 
+        <!-- BERITA GRID -->
         <div class="berita-grid" id="berita-grid">
-
-          <!-- Featured -->
-          <div class="berita-card fade-up" data-kat="kegiatan">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#0F1E38 0%,#1B2E4A 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Kegiatan</span>
-              <span class="berita-date-tag">11 Mar, 2026</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Berbagi Kasih, Menitipkan Harapan dan Doa di Bulan Suci</a></h3>
-              <p>Dalam balutan semangat berbagi di bulan Ramadan, siswa kelas XII SMKN 1 Cikampek menggelar aksi sosial distribusi sembako kepada warga sekitar yang membutuhkan. Kegiatan ini merupakan bagian dari program Pengabdian Masyarakat tahunan yang rutin dilaksanakan.</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 11 Mar 2026</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="berita-card fade-up" data-kat="kegiatan">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#1a3666 0%,#0F1E38 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Kegiatan</span>
-              <span class="berita-date-tag">10 Nov, 2025</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Di Hari Pahlawan, SMKN 1 Cikampek Lantik Pengurus OSIS Baru</a></h3>
-              <p>10 November 2025 — Pengurus OSIS 2025/2026 resmi dilantik dalam upacara yang khidmat dan penuh makna patriotisme.</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 10 Nov 2025</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="berita-card fade-up" data-kat="kegiatan">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#0a1628 0%,#1B2E4A 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Kegiatan</span>
-              <span class="berita-date-tag">15 Okt, 2025</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Gerakan Bersih-Bersih: Siswa Kelas X Peduli Lingkungan</a></h3>
-              <p>Siswa kelas X menunjukkan kepedulian mereka terhadap lingkungan melalui aksi nyata bersih-bersih area sekolah dan sekitarnya.</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 15 Okt 2025</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="berita-card fade-up" data-kat="prestasi">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#243558 0%,#0F1E38 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Prestasi</span>
-              <span class="berita-date-tag">08 Apr, 2025</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Ahmad Fauzi Raih Juara 1 LKS TKJ Provinsi Jawa Barat</a></h3>
-              <p>Kebanggaan untuk SMKN 1 Cikampek! Ahmad Fauzi, siswa kelas XII TKJ, berhasil meraih Juara 1 dalam ajang LKS tingkat provinsi.</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 08 Apr 2025</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="berita-card fade-up" data-kat="pengumuman">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#1B2E4A 0%,#0a1628 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Pengumuman</span>
-              <span class="berita-date-tag">20 Mei, 2025</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Pengumuman Kelulusan Siswa Kelas XII TA 2024/2025</a></h3>
-              <p>Seluruh siswa kelas XII SMKN 1 Cikampek Tahun Ajaran 2024/2025 dinyatakan lulus 100%. Selamat kepada para lulusan!</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 20 Mei 2025</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="berita-card fade-up" data-kat="kegiatan">
-            <div class="berita-img">
-              <div class="berita-img-bg" style="background:linear-gradient(135deg,#0F1E38 0%,#243558 100%)"></div>
-              <div class="berita-overlay"></div>
-              <span class="berita-kat-tag">Kegiatan</span>
-              <span class="berita-date-tag">14 Mar, 2025</span>
-            </div>
-            <div class="berita-body">
-              <h3><a href="#">Workshop Kewirausahaan: Membangun Jiwa Wirausaha Muda</a></h3>
-              <p>SMKN 1 Cikampek mengadakan workshop kewirausahaan bersama pelaku usaha lokal untuk membekali siswa dengan skill bisnis nyata.</p>
-              <div class="berita-footer">
-                <div class="berita-author">
-                  <div class="berita-author-dot">A</div>
-                  <span>Admin · 14 Mar 2025</span>
-                </div>
-                <a href="#" class="berita-readmore">Baca →</a>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /berita-grid -->
+          <!-- Skeleton loading awal -->
+          <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div><div class="skeleton-line w-40"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div><div class="skeleton-line w-40"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w-80"></div><div class="skeleton-line w-60"></div><div class="skeleton-line w-40"></div></div></div>
+        </div>
 
         <!-- PAGINATION -->
-        <div class="pagination fade-up">
-          <button class="page-btn active">1</button>
-          <button class="page-btn">2</button>
-          <button class="page-btn">3</button>
-          <button class="page-btn">›</button>
-        </div>
+        <div class="pagination fade-up" id="pagination"></div>
       </div>
-
-
-      </div><!-- /end main content -->
-
-    </div><!-- /page-grid -->
+    </div>
   </div>
 </main>
 
+<!-- MODAL DETAIL BERITA -->
+<div class="modal-overlay" id="modal-berita" role="dialog" aria-modal="true" aria-labelledby="modal-judul">
+  <div class="modal-box">
+    <div class="modal-hero-wrap">
+      <img class="modal-hero-img" id="modal-foto" src="" alt="" style="display:none;">
+      <div class="modal-hero-placeholder" id="modal-foto-placeholder" style="display:none;"></div>
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Tutup">&times;</button>
+    </div>
+    <div class="modal-content">
+      <div class="modal-meta">
+        <span class="modal-kat-badge" id="modal-kategori"></span>
+        <span class="modal-date-badge">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M3 8h14M8 4V2M12 4V2"/></svg>
+          <span id="modal-tanggal"></span>
+        </span>
+      </div>
+      <h2 class="modal-title" id="modal-judul"></h2>
+      <div class="modal-body" id="modal-isi"></div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
-<!-- ══ FOOTER ══ -->
 <footer class="footer" id="contact">
   <div class="footer-top">
     <div class="container">
       <div class="footer-main-grid">
-        <!-- Brand -->
         <div class="fade-up">
-<div class="footer-brand-logo">
-  <img src="../assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
-    style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
-  <div>
-    <p class="footer-brand-name">SMKN 1 Cikampek</p>
-    <p class="footer-brand-loc">Karawang, Jawa Barat</p>
-  </div>
-</div>
-          <p class="footer-brand-desc">
- SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional. 
-          </p>
+          <div class="footer-brand-logo">
+            <img src="../assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
+              style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="footer-logo-box" style="display:none">S</div>
+            <div>
+              <p class="footer-brand-name">SMKN 1 Cikampek</p>
+              <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <p class="footer-brand-desc">SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat.</p>
           <div class="footer-social">
-<a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
-</a>
+            <a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
+            </a>
             <a href="https://www.instagram.com/p/DZMqr9zP9nw/?igsh=MWRtaXB2bGl6eDN2MQ==" title="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
             </a>
@@ -488,113 +402,61 @@
             </a>
           </div>
         </div>
-
-        <!-- Navigasi Cepat -->
         <div class="fade-up">
           <h4 class="footer-col-title">Navigasi Cepat</h4>
           <div class="footer-links">
             <a href="../index.html">Beranda</a>
             <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
             <a href="../profil/fasilitas.html">Fasilitas Sekolah</a>
-            <a href="../profil/jurusan.html">Program Keahlian</a>
             <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
             <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
             <a href="../keuangan/bos.html">Dana BOS</a>
             <a href="berita.html">Berita Terbaru</a>
             <a href="prestasi.html">Prestasi</a>
-            <a href="../alumni.html">Profil Alumni</a>
           </div>
         </div>
-
-        <!-- Info Terbaru -->
         <div class="fade-up">
           <h4 class="footer-col-title">Info Terbaru</h4>
-          <div style="display:flex;flex-direction:column;gap:16px">
+          <div id="footer-berita-terbaru" style="display:flex;flex-direction:column;gap:16px">
             <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">PPDB Jalur Afirmasi Disabilitas</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">26 Mei, 2026</p>
-            </div>
-            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">04 Mei, 2026</p>
-            </div>
-            <div>
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">Surat Edaran Kelulusan Siswa Kelas XII</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">18 Apr, 2026</p>
+              <p style="font-size:13px;font-weight:600;color:var(--navy);line-height:1.4">Memuat berita...</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Map + Contact -->
   <div class="container">
     <div class="footer-map-contact">
-      <!-- Map -->
       <div>
         <p class="footer-map-title">Denah Lokasi</p>
         <div class="footer-map-frame">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.026!2d107.461!3d-6.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjQnNTcuNiJTIDEwN8KwMjcnMzkuNiJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
-            allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Lokasi SMKN 1 Cikampek">
-          </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.026!2d107.461!3d-6.416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjQnNTcuNiJTIDEwN8KwMjcnMzkuNiJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi SMKN 1 Cikampek"></iframe>
         </div>
       </div>
-      <!-- Contact -->
       <div>
         <p class="footer-contact-title">Informasi Kontak</p>
         <div class="footer-contact-list">
           <div class="footer-contact-item">
-            <div class="fci-icon">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg>
-            </div>
-            <div>
-              <p class="fci-label">Alamat</p>
-              <p class="fci-value">Jl. Sukamanah Timur, Cikampek Barat</p>
-            </div>
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z"/><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z"/></svg></div>
+            <div><p class="fci-label">Alamat</p><p class="fci-value" id="footer-alamat">Jl. Sukamanah Timur, Cikampek Barat</p></div>
           </div>
           <div class="footer-contact-item">
-            <div class="fci-icon">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
-            </div>
-            <div>
-              <p class="fci-label">Telepon</p>
-              <p class="fci-value">(0264) 301849</p>
-            </div>
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg></div>
+            <div><p class="fci-label">Telepon / WhatsApp</p><p class="fci-value" id="footer-whatsapp">(0264) 301849</p></div>
           </div>
           <div class="footer-contact-item">
-            <div class="fci-icon">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 6 8-6"/></svg>
-            </div>
-            <div>
-              <p class="fci-label">Email</p>
-              <p class="fci-value">smknckmpk@gmail.com</p>
-            </div>
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 6 8-6"/></svg></div>
+            <div><p class="fci-label">Email</p><p class="fci-value" id="footer-email">smknckmpk@gmail.com</p></div>
           </div>
           <div class="footer-contact-item">
-            <div class="fci-icon">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg>
-            </div>
-            <div>
-              <p class="fci-label">Jam Operasional</p>
-               <p class="fci-value">Senin – Jumat, 07.00 – 14.00 WIB</p>
-            </div>
+            <div class="fci-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></div>
+            <div><p class="fci-label">Jam Operasional</p><p class="fci-value">Senin – Jumat, 07.00 – 14.00 WIB</p></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Footer Bottom -->
   <div class="container">
     <div class="footer-bottom">
       <p>© 2026 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
@@ -611,95 +473,389 @@
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // JAM
-  function updateJam() {
-    const el = document.getElementById('jam-digital');
-    if (!el) return;
-    const now = new Date();
-    el.textContent = [now.getHours(),now.getMinutes(),now.getSeconds()].map(n=>String(n).padStart(2,'0')).join(':');
-  }
-  updateJam(); setInterval(updateJam, 1000);
+<!-- =====================================================================
+     SUPABASE SDK
+===================================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
 
-  // SCROLL
+<!-- =====================================================================
+     SCRIPT UTAMA — DATA DINAMIS BERITA
+===================================================================== -->
+<script>
+/* =================================================================
+   KONFIGURASI PAGINATION
+================================================================= */
+const ITEMS_PER_PAGE = 9; // jumlah berita per halaman
+let semuaBerita     = []; // cache semua data dari Supabase
+let beritaTerfilter = []; // data setelah filter kategori + search
+let halamanAktif    = 1;
+let filterKatAktif  = 'semua';
+let querySearch     = '';
+
+/* =================================================================
+   HELPER: FORMAT TANGGAL → "11 Jun, 2026"
+================================================================= */
+function formatTanggal(tglStr) {
+  if (!tglStr) return '';
+  const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des'];
+  const d = new Date(tglStr);
+  if (isNaN(d)) return tglStr;
+  return `${d.getDate()} ${bulan[d.getMonth()]}, ${d.getFullYear()}`;
+}
+
+/* =================================================================
+   HELPER: TEKS RINGKAS (STRIPPING HTML, MAX 120 KARAKTER)
+================================================================= */
+function ringkasIsi(teks, maks = 120) {
+  if (!teks) return '';
+  const bersih = teks.replace(/<[^>]*>/g, '');
+  return bersih.length > maks ? bersih.slice(0, maks).trimEnd() + '…' : bersih;
+}
+
+/* =================================================================
+   HELPER: WARNA GRADIENT FALLBACK (TANPA FOTO)
+================================================================= */
+const gradients = [
+  'linear-gradient(135deg,#0F1E38 0%,#1B2E4A 100%)',
+  'linear-gradient(135deg,#1a3666 0%,#0F1E38 100%)',
+  'linear-gradient(135deg,#0a1628 0%,#1B2E4A 100%)',
+  'linear-gradient(135deg,#243558 0%,#0F1E38 100%)',
+  'linear-gradient(135deg,#1B2E4A 0%,#0a1628 100%)',
+  'linear-gradient(135deg,#0F1E38 0%,#243558 100%)',
+];
+function getGradient(index) {
+  return gradients[index % gradients.length];
+}
+
+/* =================================================================
+   RENDER CARD BERITA
+================================================================= */
+function buatCardBerita(item, index) {
+  const bgStyle = item.foto_url
+    ? `background-image:url('${item.foto_url}');${getGradient(index)}`
+    : `background:${getGradient(index)}`;
+
+  const cuplikan = ringkasIsi(item.isi);
+  const tglFormat = formatTanggal(item.tanggal);
+  const katLabel  = item.kategori || 'Umum';
+
+  return `
+    <div class="berita-card fade-up" data-kat="${katLabel}" data-id="${item.id}">
+      <div class="berita-img">
+        <div class="berita-img-bg" style="${bgStyle}"></div>
+        <div class="berita-overlay"></div>
+        <span class="berita-kat-tag">${katLabel}</span>
+        <span class="berita-date-tag">${tglFormat}</span>
+      </div>
+      <div class="berita-body">
+        <h3><a href="javascript:void(0)" onclick="bukaDetailBerita('${item.id}')">${item.judul || 'Tanpa Judul'}</a></h3>
+        <p>${cuplikan || 'Klik Baca untuk melihat isi lengkap berita ini.'}</p>
+        <div class="berita-footer">
+          <div class="berita-author">
+            <div class="berita-author-dot">A</div>
+            <span>Admin · ${tglFormat}</span>
+          </div>
+          <a href="javascript:void(0)" class="berita-readmore" onclick="bukaDetailBerita('${item.id}')">Baca →</a>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* =================================================================
+   RENDER GRID + PAGINATION
+================================================================= */
+function renderGrid() {
+  const grid      = document.getElementById('berita-grid');
+  const paginasi  = document.getElementById('pagination');
+  const totalHal  = Math.ceil(beritaTerfilter.length / ITEMS_PER_PAGE);
+  const mulai     = (halamanAktif - 1) * ITEMS_PER_PAGE;
+  const potongan  = beritaTerfilter.slice(mulai, mulai + ITEMS_PER_PAGE);
+
+  // KOSONG
+  if (beritaTerfilter.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg>
+        <p>Belum ada berita yang ditemukan.</p>
+        <small>Coba ubah kata kunci pencarian atau pilih kategori lain.</small>
+      </div>`;
+    paginasi.innerHTML = '';
+    return;
+  }
+
+  // RENDER CARDS
+  grid.innerHTML = potongan.map((item, i) => buatCardBerita(item, mulai + i)).join('');
+
+  // TRIGGER FADE-UP OBSERVER
+  document.querySelectorAll('.berita-card.fade-up').forEach(el => fadeObs.observe(el));
+
+  // RENDER PAGINATION
+  paginasi.innerHTML = '';
+  if (totalHal <= 1) return;
+
+  const tombolPrev = document.createElement('button');
+  tombolPrev.className = 'page-btn';
+  tombolPrev.innerHTML = '‹';
+  tombolPrev.disabled  = halamanAktif === 1;
+  tombolPrev.addEventListener('click', () => { halamanAktif--; renderGrid(); window.scrollTo({top: document.querySelector('.page-body').offsetTop - 80, behavior:'smooth'}); });
+  paginasi.appendChild(tombolPrev);
+
+  // Nomor halaman (dengan ellipsis jika > 7 halaman)
+  let nomorArr = [];
+  if (totalHal <= 7) {
+    nomorArr = Array.from({length: totalHal}, (_, i) => i + 1);
+  } else {
+    nomorArr = [1];
+    if (halamanAktif > 3) nomorArr.push('...');
+    for (let n = Math.max(2, halamanAktif - 1); n <= Math.min(totalHal - 1, halamanAktif + 1); n++) nomorArr.push(n);
+    if (halamanAktif < totalHal - 2) nomorArr.push('...');
+    nomorArr.push(totalHal);
+  }
+
+  nomorArr.forEach(n => {
+    if (n === '...') {
+      const elips = document.createElement('button');
+      elips.className = 'page-btn';
+      elips.textContent = '…';
+      elips.disabled = true;
+      paginasi.appendChild(elips);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (n === halamanAktif ? ' active' : '');
+      btn.textContent = n;
+      btn.addEventListener('click', () => { halamanAktif = n; renderGrid(); window.scrollTo({top: document.querySelector('.page-body').offsetTop - 80, behavior:'smooth'}); });
+      paginasi.appendChild(btn);
+    }
+  });
+
+  const tombolNext = document.createElement('button');
+  tombolNext.className = 'page-btn';
+  tombolNext.innerHTML = '›';
+  tombolNext.disabled  = halamanAktif === totalHal;
+  tombolNext.addEventListener('click', () => { halamanAktif++; renderGrid(); window.scrollTo({top: document.querySelector('.page-body').offsetTop - 80, behavior:'smooth'}); });
+  paginasi.appendChild(tombolNext);
+}
+
+/* =================================================================
+   TERAPKAN FILTER KATEGORI + SEARCH
+================================================================= */
+function terapkanFilter() {
+  halamanAktif = 1;
+  beritaTerfilter = semuaBerita.filter(item => {
+    const cocokKat   = filterKatAktif === 'semua' || (item.kategori || '') === filterKatAktif;
+    const cocokCari  = !querySearch || (item.judul || '').toLowerCase().includes(querySearch) || (item.isi || '').toLowerCase().includes(querySearch);
+    return cocokKat && cocokCari;
+  });
+  renderGrid();
+}
+
+/* =================================================================
+   FETCH DATA DARI SUPABASE
+================================================================= */
+async function muatBerita() {
+  const grid = document.getElementById('berita-grid');
+
+  // Skeleton sudah terpasang di HTML, langsung fetch
+  try {
+    const { data, error } = await supabase
+      .from('berita')
+      .select('id, judul, slug, isi, foto_url, kategori, tanggal, created_at')
+      .order('tanggal', { ascending: false });
+
+    if (error) throw error;
+
+    semuaBerita     = data || [];
+    beritaTerfilter = [...semuaBerita];
+    renderGrid();
+    muatBeritaFooter();
+
+  } catch (err) {
+    console.error('Gagal memuat berita:', err.message);
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 13h.01"/></svg>
+        <p>Gagal memuat berita dari server.</p>
+        <small>Periksa koneksi internet atau konfigurasi Supabase Anda.</small>
+      </div>`;
+  }
+}
+
+/* =================================================================
+   DETAIL BERITA — BUKA MODAL
+================================================================= */
+async function bukaDetailBerita(id) {
+  const modal = document.getElementById('modal-berita');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Cari dari cache dulu
+  let item = semuaBerita.find(b => b.id === id);
+
+  // Jika belum ada (misalnya akses langsung lewat URL), fetch dari Supabase
+  if (!item) {
+    const { data, error } = await supabase.from('berita').select('*').eq('id', id).single();
+    if (!error) item = data;
+  }
+
+  if (!item) return;
+
+  // Update view count di background (tidak blocking)
+  supabase.from('berita').update({ views: (item.views || 0) + 1 }).eq('id', item.id).then(() => {});
+
+  // Isi modal
+  const foto        = document.getElementById('modal-foto');
+  const fotoPlaceholder = document.getElementById('modal-foto-placeholder');
+
+  if (item.foto_url) {
+    foto.src              = item.foto_url;
+    foto.alt              = item.judul || '';
+    foto.style.display    = 'block';
+    fotoPlaceholder.style.display = 'none';
+  } else {
+    foto.style.display    = 'none';
+    fotoPlaceholder.style.display = 'block';
+  }
+
+  document.getElementById('modal-kategori').textContent = item.kategori || 'Umum';
+  document.getElementById('modal-tanggal').textContent  = formatTanggal(item.tanggal);
+  document.getElementById('modal-judul').textContent    = item.judul || '';
+  document.getElementById('modal-isi').textContent      = item.isi   || '';
+}
+
+/* =================================================================
+   TUTUP MODAL
+================================================================= */
+function tutupModal() {
+  document.getElementById('modal-berita').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* =================================================================
+   FOOTER — 3 BERITA TERBARU DINAMIS
+================================================================= */
+function muatBeritaFooter() {
+  const container = document.getElementById('footer-berita-terbaru');
+  if (!container) return;
+
+  const tiga = semuaBerita.slice(0, 3);
+  if (!tiga.length) {
+    container.innerHTML = '<p style="font-size:13px;color:rgba(30,41,59,0.5)">Belum ada berita.</p>';
+    return;
+  }
+
+  container.innerHTML = tiga.map((item, i) => `
+    <div style="${i < tiga.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px' : ''}">
+      <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+        <a href="javascript:void(0)" onclick="bukaDetailBerita('${item.id}')" style="color:inherit;transition:color 0.2s">${item.judul || 'Tanpa Judul'}</a>
+      </p>
+      <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">${formatTanggal(item.tanggal)}</p>
+    </div>`).join('');
+}
+
+/* =================================================================
+   FADE-UP INTERSECTION OBSERVER
+================================================================= */
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+/* =================================================================
+   EVENT LISTENERS — FILTER TABS
+================================================================= */
+document.getElementById('filter-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-tab');
+  if (!btn) return;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  filterKatAktif = btn.dataset.kat || 'semua';
+  terapkanFilter();
+});
+
+/* =================================================================
+   EVENT LISTENERS — SEARCH
+================================================================= */
+let searchTimer;
+document.getElementById('search-input').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    querySearch = e.target.value.trim().toLowerCase();
+    terapkanFilter();
+  }, 300);
+});
+document.getElementById('search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    clearTimeout(searchTimer);
+    querySearch = e.target.value.trim().toLowerCase();
+    terapkanFilter();
+  }
+});
+
+/* =================================================================
+   EVENT LISTENERS — TUTUP MODAL
+================================================================= */
+document.getElementById('modal-close-btn').addEventListener('click', tutupModal);
+document.getElementById('modal-berita').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-berita')) tutupModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupModal(); });
+
+/* =================================================================
+   UI UMUM — HEADER, HAMBURGER, DROPDOWN, BACK TO TOP
+================================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  // Scroll header
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
-  // MOBILE MENU
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
+  // Hamburger mobile
+  const hamburger   = document.querySelector('.hamburger');
+  const mobileMenu  = document.querySelector('.mobile-menu');
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu?.classList.toggle('open');
+  });
   document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const target = document.getElementById(btn.getAttribute('data-toggle'));
-      target?.classList.toggle('open');
+      document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open');
     });
   });
 
-  // FADE UP
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  // Dropdown desktop
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let timer;
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(timer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.add('open');
+    });
+    item.addEventListener('mouseleave', () => {
+      timer = setTimeout(() => item.classList.remove('open'), 150);
+    });
+    item.querySelector('button.nav-link')?.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open'));
+  });
 
-  // BACK TO TOP
+  // Back to top
   const backBtn = document.querySelector('.back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // SEARCH INPUT LIVE
-  document.getElementById('search-input')?.addEventListener('input', doSearch);
-  document.getElementById('search-input')?.addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+  // Fade-up static elements
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+  // MUAT DATA BERITA DARI SUPABASE
+  muatBerita();
 });
-
-function doSearch() {
-  const q = (document.getElementById('search-input')?.value || '').toLowerCase();
-  document.querySelectorAll('.berita-card').forEach(card => {
-    card.style.display = (!q || card.textContent.toLowerCase().includes(q)) ? '' : 'none';
-  });
-}
-
-function filterBerita(kat, btn) {
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.berita-card').forEach(card => {
-    if (kat === 'semua' || card.dataset.kat === kat) card.style.display = '';
-    else card.style.display = 'none';
-  });
-}
-
-  // ── DROPDOWN NAVBAR ──
-  document.querySelectorAll('.nav-item.has-dropdown').forEach(function(item) {
-    var closeTimer;
-    function openDropdown() {
-      clearTimeout(closeTimer);
-      document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) {
-        if (o !== item) o.classList.remove('open');
-      });
-      item.classList.add('open');
-    }
-    function closeDropdown() {
-      closeTimer = setTimeout(function() { item.classList.remove('open'); }, 150);
-    }
-    item.addEventListener('mouseenter', openDropdown);
-    item.addEventListener('mouseleave', closeDropdown);
-    var btn = item.querySelector('button.nav-link');
-    if (btn) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.nav-item.has-dropdown').forEach(function(o) { o.classList.remove('open'); });
-        if (!isOpen) item.classList.add('open');
-      });
-    }
-  });
-  document.addEventListener('click', function() {
-    document.querySelectorAll('.nav-item.has-dropdown').forEach(function(i) { i.classList.remove('open'); });
-  });
-
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../admin/assets/js/supabase-client.js"></script>
 </body>
 </html>
