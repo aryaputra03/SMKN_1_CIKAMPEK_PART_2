@@ -2175,7 +2175,34 @@
       }
 
       .hero {
-        height: 70vh;
+        height: auto;
+        min-height: 100svh;
+        min-height: 100vh;
+        overflow: visible;
+      }
+
+      .hero-content {
+        position: relative;
+        padding: 100px 0 64px;
+        align-items: flex-start;
+      }
+
+      .hero-subtitle {
+        font-size: 14.5px;
+        max-width: 100%;
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-outline {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
       }
     }
 
@@ -3277,26 +3304,26 @@
           <div class="fade-up">
             <h4 class="footer-col-title">Info Terbaru</h4>
             <div style="display:flex;flex-direction:column;gap:16px">
-              <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">26 Mei, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">26 Mei, 2026</p>
               </div>
-              <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">04 Mei, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">04 Mei, 2026</p>
               </div>
               <div>
-                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#C9A84C'"
+                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
                     onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a>
                 </p>
-                <p style="font-size:11.5px;color:rgba(255,255,255,0.35)">18 Apr, 2026</p>
+                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">18 Apr, 2026</p>
               </div>
             </div>
           </div>
