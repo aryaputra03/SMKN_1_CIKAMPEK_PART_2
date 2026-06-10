@@ -134,8 +134,9 @@
     .prestasi-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--gold); }
 
     .psp-thumb {
-      width: 200px;
+      width: 220px;
       aspect-ratio: 4 / 3;
+      height: auto;
       flex-shrink: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       position: relative; overflow: hidden; padding: 20px 16px; gap: 12px;
@@ -223,7 +224,7 @@
       .stat-hl-item { border-right: none; border-bottom: 1px solid var(--gray-soft); }
       .stat-hl-item:nth-child(odd) { border-right: 1px solid var(--gray-soft); }
       .prestasi-row { flex-direction: column; }
-      .psp-thumb { width: 100%; aspect-ratio: 4 / 3; flex-direction: row; padding: 16px 24px; gap: 16px; }
+      .psp-thumb { width: 100%; aspect-ratio: 4 / 3; height: auto; flex-direction: column; padding: 20px 16px; gap: 12px; }
       .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
