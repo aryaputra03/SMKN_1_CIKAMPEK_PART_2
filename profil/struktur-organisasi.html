@@ -112,100 +112,69 @@ ul { list-style: none; }
 .v-line { width: 2px; height: 28px; background: var(--gold); margin: 0 auto; }
 .h-line { height: 2px; background: var(--gold); }
 
+/* ── DYNAMIC STRUKTUR IMAGE ─────────────── */
+#struktur-dinamis-container { text-align: center; }
+#struktur-dinamis-container img {
+  max-width: 100%;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  margin: 0 auto;
+}
+/* Skeleton loader */
+.skeleton-loader {
+  background: linear-gradient(90deg, var(--gray-soft) 25%, #edf2f7 50%, var(--gray-soft) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--r-md);
+  width: 100%;
+  height: 480px;
+  display: block;
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+/* Static fallback chart visibility */
+#org-chart-static { display: none; }
+
 /* ── FOOTER ─────────────────────────────── */
-/* ── FOOTER ──────────────────────────────────────── */
 .footer { background: var(--gold); color: var(--navy); }
 .footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
-
 .footer-main-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 48px; padding: 64px 0 48px;
 }
-
-.footer-brand-logo {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-}
-.footer-logo-box {
-  width: 44px; height: 44px; background: var(--navy);
-  border-radius: 10px; display: flex; align-items: center;
-  justify-content: center; font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0;
-}
+.footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.footer-logo-box { width: 44px; height: 44px; background: var(--navy); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
 .footer-brand-name { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; }
 .footer-brand-loc { font-size: 11px; color: rgba(30,41,59,0.7); letter-spacing: 0.3px; font-weight: 600;}
-.footer-brand-desc {
-  font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; color: rgba(30,41,59,0.85); font-weight: 500;
-}
+.footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; color: rgba(30,41,59,0.85); font-weight: 500; }
 .footer-social { display: flex; gap: 10px; }
-.footer-social a {
-  width: 34px; height: 34px; border-radius: 8px;
-  border: 1px solid rgba(30,41,59,0.25);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--navy); transition: all 0.2s;
-}
+.footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(30,41,59,0.25); display: flex; align-items: center; justify-content: center; color: var(--navy); transition: all 0.2s; }
 .footer-social a:hover { border-color: var(--navy); color: var(--gold); background: var(--navy); }
 .footer-social a svg { width: 14px; height: 14px; }
-
-.footer-col-title {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--navy); margin-bottom: 20px;
-  padding-bottom: 10px; border-bottom: 2px solid var(--navy); display: block;
-}
+.footer-col-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--navy); display: block; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; }
-.footer-links a {
-  font-size: 13.5px; color: rgba(30,41,59,0.8);
-  transition: color 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500;
-}
-.footer-links a::before {
-  content: '';  width: 5px; height: 1px; background: var(--navy); flex-shrink: 0;
-}
+.footer-links a { font-size: 13.5px; color: rgba(30,41,59,0.8); transition: color 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--navy); flex-shrink: 0; }
 .footer-links a:hover { color: var(--navy); font-weight: 700; }
-
-/* Footer Map + Contact */
-.footer-map-contact {
-  padding: 48px 0;
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start;
-}
-.footer-map-title {
-  font-size: 13px; font-weight: 800; color: var(--navy);
-  margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase;
-}
-.footer-map-frame {
-  border-radius: var(--r-md); overflow: hidden;
-  border: 1px solid rgba(30,41,59,0.2); height: 240px;
-}
+.footer-map-contact { padding: 48px 0; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+.footer-map-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
+.footer-map-frame { border-radius: var(--r-md); overflow: hidden; border: 1px solid rgba(30,41,59,0.2); height: 240px; }
 .footer-map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(15%); }
-.footer-contact-title {
-  font-size: 13px; font-weight: 800; color: var(--navy);
-  margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase;
-}
+.footer-contact-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
 .footer-contact-list { display: flex; flex-direction: column; gap: 14px; }
-.footer-contact-item {
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.fci-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  background: rgba(30,41,59,0.06); border: 1px solid rgba(30,41,59,0.15);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
+.footer-contact-item { display: flex; gap: 12px; align-items: flex-start; }
+.fci-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(30,41,59,0.06); border: 1px solid rgba(30,41,59,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .fci-icon svg { width: 15px; height: 15px; color: var(--navy); }
 .fci-label { font-size: 10.5px; color: rgba(30,41,59,0.7); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; font-weight: 700; }
 .fci-value { font-size: 13.5px; color: var(--navy); font-weight: 600; }
-
-/* Footer Bottom */
-.footer-bottom {
-  padding: 20px 0; display: flex;
-  align-items: center; justify-content: space-between; gap: 16px;
-  border-top: 1px solid rgba(30,41,59,0.15);
-}
+.footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid rgba(30,41,59,0.15); }
 .footer-bottom p { font-size: 12.5px; color: rgba(30,41,59,0.8); font-weight: 500; }
 .footer-bottom p strong { color: var(--navy); font-weight: 800; }
 .footer-bottom-links { display: flex; gap: 20px; }
-.footer-bottom-links a {
-  font-size: 11.5px; color: rgba(30,41,59,0.7);
-  letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; font-weight: 700;
-}
+.footer-bottom-links a { font-size: 11.5px; color: rgba(30,41,59,0.7); letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; font-weight: 700; }
 .footer-bottom-links a:hover { color: var(--navy); }
 .back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 42px; height: 42px; border-radius: 50%; background: var(--gold); color: var(--navy); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(201,168,76,0.4); opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s; }
 .back-to-top.show { opacity: 1; transform: translateY(0); }
@@ -233,9 +202,9 @@ ul { list-style: none; }
         <div class="dropdown">
           <a href="visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 3"/></svg></span>Visi &amp; Misi</a>
           <a href="fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6"/></svg></span>Fasilitas</a>
-  <a href="../index.html#jurusan">
-  <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan
-</a>
+          <a href="../index.html#jurusan">
+            <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg></span>Jurusan
+          </a>
           <a href="struktur-organisasi.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="13" y="14" width="6" height="4" rx="1"/><path d="M10 5v4M4 14V11h12v3"/></svg></span>Struktur Organisasi</a>
           <a href="staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg></span>Staff &amp; Guru</a>
         </div>
@@ -246,8 +215,7 @@ ul { list-style: none; }
           <a href="../informasi/berita.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8"/></svg></span>Berita Sekolah</a>
           <a href="../informasi/prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Prestasi</a>
           <a href="../informasi/ekskul.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span>Org &amp; Ekstrakurikuler</a>
-          <a href="../informasi/lulusanterbaik.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span> Lulusan Terbaik
-          </a>
+          <a href="../informasi/lulusanterbaik.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span> Lulusan Terbaik</a>
         </div>
       </div>
       <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
@@ -283,8 +251,7 @@ ul { list-style: none; }
       Profil Sekolah
     </div>
     <h1>Struktur Organisasi</h1>
-    <p>Susunan kepemimpinan dan tata kelola sekolah yang mendukung pelaksanaan pendidikan secara terarah dan profesional.
-</p>
+    <p>Susunan kepemimpinan dan tata kelola sekolah yang mendukung pelaksanaan pendidikan secara terarah dan profesional.</p>
     <div class="breadcrumb-row">
       <a href="../index.html">Home</a><span>›</span>
       <span>Profil Sekolah</span><span>›</span>
@@ -298,7 +265,21 @@ ul { list-style: none; }
   <div class="section-title">Bagan Struktur Organisasi</div>
 
   <div class="card fade-up">
-    <div style="min-width:700px;">
+    <!-- =====================================================
+         AREA DINAMIS: Menampilkan gambar dari Supabase jika ada.
+         Jika belum ada gambar di database, tampilkan bagan HTML statis.
+         ===================================================== -->
+
+    <!-- Skeleton loader: tampil selama data sedang diambil dari Supabase -->
+    <div id="struktur-skeleton" class="skeleton-loader"></div>
+
+    <!-- Container gambar dinamis dari Supabase Storage -->
+    <div id="struktur-dinamis-container" style="display:none;">
+      <img id="struktur-image" src="" alt="Bagan Struktur Organisasi SMKN 1 Cikampek">
+    </div>
+
+    <!-- Bagan HTML statis (fallback jika belum ada gambar di database) -->
+    <div id="org-chart-static" style="min-width:700px;">
 
       <!-- ROW 1: Komite + Kepala Sekolah -->
       <div style="display:flex; justify-content:center; gap:48px; align-items:flex-start;">
@@ -401,6 +382,8 @@ ul { list-style: none; }
       </div>
 
     </div>
+    <!-- END org-chart-static -->
+
   </div>
 </main>
 
@@ -411,21 +394,21 @@ ul { list-style: none; }
       <div class="footer-main-grid">
         <!-- Brand -->
         <div class="fade-up">
-<div class="footer-brand-logo">
-  <img src="../assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
-    style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
-  <div>
-    <p class="footer-brand-name">SMKN 1 Cikampek</p>
-    <p class="footer-brand-loc">Karawang, Jawa Barat</p>
-  </div>
-</div>
+          <div class="footer-brand-logo">
+            <img src="../assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
+              style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
+            <div>
+              <p class="footer-brand-name">SMKN 1 Cikampek</p>
+              <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+            </div>
+          </div>
           <p class="footer-brand-desc">
             SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional. 
           </p>
           <div class="footer-social">
-<a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
-</a>
+            <a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
+            </a>
             <a href="https://www.instagram.com/p/DZMqr9zP9nw/?igsh=MWRtaXB2bGl6eDN2MQ==" title="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
             </a>
@@ -483,7 +466,6 @@ ul { list-style: none; }
   <!-- Map + Contact -->
   <div class="container">
     <div class="footer-map-contact">
-      <!-- Map -->
       <div>
         <p class="footer-map-title">Denah Lokasi</p>
         <div class="footer-map-frame">
@@ -495,7 +477,6 @@ ul { list-style: none; }
           </iframe>
         </div>
       </div>
-      <!-- Contact -->
       <div>
         <p class="footer-contact-title">Informasi Kontak</p>
         <div class="footer-contact-list">
@@ -532,7 +513,7 @@ ul { list-style: none; }
             </div>
             <div>
               <p class="fci-label">Jam Operasional</p>
-               <p class="fci-value">Senin – Jumat, 07.00 – 14.00 WIB</p>
+              <p class="fci-value">Senin – Jumat, 07.00 – 14.00 WIB</p>
             </div>
           </div>
         </div>
@@ -557,11 +538,80 @@ ul { list-style: none; }
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
+<!-- ============================================================
+     SUPABASE CDN
+     ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+// ============================================================
+//  KONFIGURASI SUPABASE
+//  Ganti SUPABASE_URL dan SUPABASE_ANON_KEY dengan milik Anda
+//  (salin dari file assets/js/supabase-client.js)
+// ============================================================
+const SUPABASE_URL  = 'https://XXXX.supabase.co';   // <-- ganti
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1...';   // <-- ganti
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ============================================================
+//  FUNGSI UTAMA: Ambil data struktur organisasi dari Supabase
+//  Tabel  : struktur_organisasi
+//  Kolom  : foto_url  (URL publik gambar di Storage bucket struktur-images)
+// ============================================================
+async function loadStrukturOrganisasi() {
+  const skeleton  = document.getElementById('struktur-skeleton');
+  const container = document.getElementById('struktur-dinamis-container');
+  const imgEl     = document.getElementById('struktur-image');
+  const staticEl  = document.getElementById('org-chart-static');
+
+  try {
+    const { data, error } = await db
+      .from('struktur_organisasi')
+      .select('foto_url')
+      .maybeSingle(); // ambil 1 baris; tidak error bila kosong
+
+    // Sembunyikan skeleton setelah data kembali
+    skeleton.style.display = 'none';
+
+    if (error) throw error;
+
+    if (data && data.foto_url) {
+      // ── Ada gambar di database: tampilkan gambar dinamis ──
+      imgEl.src = data.foto_url;
+      imgEl.alt = 'Bagan Struktur Organisasi SMKN 1 Cikampek';
+
+      // Sembunyikan bagan statis, tampilkan gambar
+      staticEl.style.display  = 'none';
+      container.style.display = 'block';
+    } else {
+      // ── Belum ada gambar: tampilkan bagan HTML statis sebagai fallback ──
+      staticEl.style.display  = 'block';
+      container.style.display = 'none';
+    }
+  } catch (err) {
+    // Jika terjadi error jaringan/Supabase: tetap tampilkan bagan statis
+    console.warn('Gagal memuat struktur dari Supabase, menggunakan bagan statis.', err.message);
+    skeleton.style.display  = 'none';
+    staticEl.style.display  = 'block';
+    container.style.display = 'none';
+  }
+}
+
+// ============================================================
+//  INISIALISASI HALAMAN
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Load data dinamis dari Supabase
+  loadStrukturOrganisasi();
+
+  // 2. Header scroll shadow
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
+  // 3. Desktop dropdown hover + click
   document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
     let timer;
     item.addEventListener('mouseenter', () => {
@@ -580,6 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
 
+  // 4. Mobile hamburger menu
   const hamburger = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
@@ -587,9 +638,13 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
   });
 
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  // 5. Fade-up scroll observer
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
+  // 6. Back-to-top button
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
