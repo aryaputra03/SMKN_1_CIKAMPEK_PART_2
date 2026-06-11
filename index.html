@@ -2583,7 +2583,7 @@
           </div>
         </div>
         <div class="nav-item">
-          <a href="../kurikulum/index.html" class="nav-link">Kurikulum</a>
+          <a href="javascript:void(0);" id="tombol-kurikulum" class="nav-link" target="_blank">Kurikulum</a>
         </div>
         <div class="nav-item">
           <a href="#contact" class="nav-link"></a>
@@ -3147,6 +3147,32 @@
   <script src="../admin/assets/js/supabase-client.js"></script>
 
   <script>
+    async function ambilLinkKurikulum() {
+    try {
+      const { data, error } = await supabase
+        .from('kurikulum_url')
+        .select('url_kurikulum')
+        .eq('id', 1)
+        .single();
+
+      if (error) throw error;
+
+      if (data && data.url_kurikulum) {
+        const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        if (tombolKurikulum) {
+          // Mengisi link asli dari database
+          tombolKurikulum.href = data.url_kurikulum; 
+        }
+      }
+    } catch (err) {
+      console.error("Gagal memuat link kurikulum:", err.message);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
+
+  // Jalankan fungsi ketika seluruh struktur halaman web selesai dimuat
+  document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
     // ════════════════════════════════════════════════════════════
     //  SMKN 1 CIKAMPEK — DYNAMIC DATA LOADER (Supabase)
     //  Membaca data dari: berita, prestasi, guru, lulusan_terbaik,
@@ -3902,6 +3928,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }); // end DOMContentLoaded
   </script>
+  
 </body>
 
 </html>
