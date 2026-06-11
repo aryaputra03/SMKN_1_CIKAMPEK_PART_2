@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1280">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Website resmi SMKN 1 Cikampek — Unggul, Berkarakter, Berdaya Saing. Sekolah Menengah Kejuruan Negeri di Cikampek, Karawang, Jawa Barat.">
   <meta name="keywords" content="SMKN 1 Cikampek, SMK Cikampek, sekolah kejuruan Karawang, PPDB">
@@ -2117,11 +2117,143 @@
     }
 
     /* ── RESPONSIVE ──────────────────────────────────── */
-    
+    @media (max-width: 1024px) {
+      .jurusan-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-    
+      .ekskul-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-    
+      .mid-three-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .mid-sambutan-col {
+        display: none;
+      }
+
+      .alumni-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .prestasi-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .prestasi-photos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        display: none;
+      }
+
+      .navbar,
+      .btn-ppdb {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stat-item:nth-child(odd) {
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .mid-three-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .berita-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .jurusan-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-main-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-map-contact {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 100svh;
+        min-height: 100vh;
+        overflow: visible;
+      }
+
+      .hero-content {
+        position: relative;
+        padding: 100px 0 64px;
+        align-items: flex-start;
+      }
+
+      .hero-subtitle {
+        font-size: 14.5px;
+        max-width: 100%;
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-outline {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .jurusan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .alumni-card {
+        flex-direction: column;
+      }
+
+      .alumni-photo {
+        width: 100%;
+        height: 160px;
+      }
+    }
 
     /* ── EKSKUL ──────────────────────────────────────── */
     .ekskul-grid {
@@ -2187,7 +2319,65 @@
     }
 
     /* ── EKSKUL MOBILE CAROUSEL ──────────────────────── */
-    
+    @media (max-width: 768px) {
+
+      #ekskul .container {
+        overflow: visible;
+      }
+
+      .ekskul-grid {
+        display: flex !important;
+        grid-template-columns: unset !important;
+        gap: 14px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 12px;
+        margin-left: -4px;
+        padding-left: 4px;
+        scrollbar-width: none;
+      }
+
+      .ekskul-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .ekskul-card {
+        flex: 0 0 68vw;
+        max-width: 260px;
+        scroll-snap-align: start;
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ekskul-card p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+      }
+
+      #ekskul .container {
+        position: relative;
+      }
+
+      #ekskul .container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: 100%;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0.85), transparent);
+        pointer-events: none;
+        border-radius: 0 var(--r-lg) var(--r-lg) 0;
+        z-index: 2;
+      }
+    }
 
     /* ===== LAYOUT PRESTASI KIRI-KANAN ===== */
     .prestasi-list-container {
@@ -2220,7 +2410,18 @@
       justify-content: center;
     }
 
-    
+    @media (max-width: 768px) {
+      .prestasi-row {
+        flex-direction: column !important;
+      }
+
+      .prestasi-row .psp-thumb {
+        flex: none !important;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+    }
 
     /* ── VIDEO MODAL ─────────────────────────────────── */
     .video-modal-overlay {
@@ -2260,6 +2461,155 @@
       cursor: pointer;
       line-height: 1;
     }
+  
+    /* ═══════════════════════════════════════════════════════
+       MOBILE RESPONSIVE — GLOBAL PATCH (all pages)
+       Target: 320px – 768px phones, 768px – 1024px tablets
+    ═══════════════════════════════════════════════════════ */
+
+    /* ── Ensure proper touch targets ── */
+    @media (max-width: 768px) {
+      /* Container breathing room */
+      .container { padding: 0 16px; }
+
+      /* Reduce section padding on mobile */
+      .section { padding: 52px 0; }
+      .page-body { padding: 40px 0 64px !important; }
+
+      /* Header fix: ensure hamburger is tappable */
+      .header-main { height: 64px; }
+      .hamburger { display: flex !important; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+      .navbar { display: none !important; }
+      .btn-ppdb { display: none !important; }
+      .mobile-menu { display: block !important; }
+
+      /* Mobile menu max-height fix — allow full expansion */
+      .mobile-menu.open { max-height: 80vh !important; overflow-y: auto !important; }
+
+      /* Mobile nav links — easy touch targets */
+      .mobile-nav-link { padding: 14px 20px; min-height: 44px; }
+      .mobile-dropdown a { padding: 12px 20px 12px 36px; min-height: 44px; }
+
+      /* Page hero tighten up */
+      .page-hero { padding: 44px 0 40px !important; }
+      .page-hero h1 { font-size: clamp(24px, 6vw, 36px) !important; }
+      .page-hero p { font-size: 14px !important; }
+
+      /* Footer responsive */
+      .footer-main-grid { grid-template-columns: 1fr !important; gap: 28px !important; padding: 40px 0 28px !important; }
+      .footer-map-contact { grid-template-columns: 1fr !important; gap: 24px !important; padding: 28px 0 !important; }
+      .footer-bottom { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
+      .footer-bottom-links { justify-content: center; gap: 16px !important; }
+
+      /* Back to top — reposition so it doesn't overlap WA button */
+      .back-to-top { bottom: 80px !important; right: 20px !important; }
+
+      /* WhatsApp float */
+      .wa-float { bottom: 24px !important; right: 20px !important; }
+
+      /* Tables must scroll horizontally */
+      .table-wrap, .daftar-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .data-table, .daftar-table { min-width: 600px; }
+
+      /* NIP column — allow wrapping on very small screens */
+      .data-table td.nip { white-space: normal; word-break: break-all; }
+
+      /* Filter tabs — scrollable row on mobile */
+      .filter-tabs { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; }
+      .filter-tabs::-webkit-scrollbar { display: none; }
+      .filter-tab { flex-shrink: 0; }
+
+      /* Filter bar stacking */
+      .filter-bar { flex-direction: column; align-items: stretch; gap: 10px !important; }
+      .search-wrap { min-width: 100% !important; }
+
+      /* Stats grid — 2 column */
+      .stats-grid { grid-template-columns: 1fr 1fr !important; }
+      .stats-hl-grid { grid-template-columns: 1fr 1fr !important; }
+      .stat-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08) !important; }
+
+      /* Section header/button centre on mobile */
+      .btn-center { margin-top: 28px; }
+    }
+
+    /* ── Very small phones (320–480px) ── */
+    @media (max-width: 480px) {
+      .container { padding: 0 14px; }
+      .page-hero h1 { font-size: clamp(22px, 7vw, 30px) !important; }
+      .page-hero { padding: 36px 0 32px !important; }
+      .section { padding: 40px 0; }
+
+      /* Stats: keep 2-col even at 360 */
+      .stats-grid { grid-template-columns: 1fr 1fr !important; }
+
+      /* Footer bottom links: wrap nicely */
+      .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+      /* Daftar table cells less padding */
+      .daftar-table th, .daftar-table td { padding: 10px 12px; font-size: 12.5px; }
+      .data-table th, .data-table td { padding: 10px 12px; font-size: 13px; }
+    }
+
+
+    /* ── INDEX specific mobile ── */
+    @media (max-width: 768px) {
+      /* Hero */
+      .hero { height: auto !important; min-height: 100svh; min-height: 100vh; }
+      .hero-content { position: relative; padding: 90px 0 56px; align-items: flex-start; }
+      .hero-title { font-size: clamp(30px, 9vw, 52px) !important; }
+      .hero-subtitle { font-size: 14px !important; max-width: 100%; margin-bottom: 24px; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .btn-hero-primary, .btn-hero-outline { width: 100%; max-width: 320px; justify-content: center; }
+      .slider-arrow { width: 36px; height: 36px; }
+      .slider-arrow.prev { left: 12px; }
+      .slider-arrow.next { right: 12px; }
+
+      /* Stats */
+      .stats-bar { padding: 24px 0; }
+      .stat-item { padding: 14px 12px; }
+      .stat-item strong { font-size: 28px; }
+
+      /* Mid three grid */
+      .mid-three-grid { grid-template-columns: 1fr !important; gap: 20px; }
+      .mid-sambutan-col { display: none; }
+
+      /* Berita grid */
+      .berita-grid { grid-template-columns: 1fr !important; }
+
+      /* Guru carousel — auto scroll/swipe */
+      .guru-carousel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .guru-carousel-wrap::-webkit-scrollbar { display: none; }
+      .guru-carousel { transform: none !important; padding-bottom: 6px; }
+      .carousel-nav { display: none; }
+
+      /* Alumni */
+      .alumni-grid { grid-template-columns: 1fr !important; }
+      .alumni-card { flex-direction: column; }
+      .alumni-photo { width: 100%; height: 160px; }
+
+      /* Jurusan */
+      .jurusan-grid { grid-template-columns: 1fr 1fr !important; gap: 14px; }
+
+      /* Ekskul already handled above (carousel) */
+
+      /* Topbar */
+      .topbar { display: none !important; }
+
+      /* Banner ticker */
+      .banner-ticker { display: none; }
+
+      /* Video modal */
+      .video-modal-inner { width: 95vw; }
+
+      /* Lulusan section */
+      .prestasi-layout { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .jurusan-grid { grid-template-columns: 1fr !important; }
+      .hero-title { font-size: clamp(26px, 9vw, 38px) !important; }
+    }
+
   </style>
   <a href="https://wa.me/6281316865033" target="_blank" rel="noopener noreferrer" class="wa-float"
     aria-label="Chat via WhatsApp" title="Hubungi kami via WhatsApp">
@@ -2268,28 +2618,6 @@
         d="M16.002 2.667C8.638 2.667 2.667 8.638 2.667 16c0 2.355.636 4.655 1.842 6.667L2.667 29.333l6.865-1.803A13.255 13.255 0 0016.002 29.333C23.366 29.333 29.333 23.362 29.333 16S23.366 2.667 16.002 2.667zm0 2.4c5.923 0 10.931 5.008 10.931 10.933 0 5.924-5.008 10.933-10.931 10.933a10.878 10.878 0 01-5.526-1.507l-.396-.232-4.073 1.07 1.092-3.972-.257-.41A10.872 10.872 0 015.07 16c0-5.925 5.007-10.933 10.932-10.933zm-3.61 5.6c-.196 0-.515.073-.785.365-.27.293-1.03 1.003-1.03 2.446s1.054 2.836 1.2 3.031c.146.195 2.05 3.264 5.042 4.454.704.277 1.252.443 1.68.568.707.205 1.35.176 1.858.107.567-.077 1.746-.71 1.993-1.397.246-.686.246-1.274.172-1.396-.073-.122-.27-.196-.565-.343-.294-.147-1.744-.858-2.014-.954-.27-.098-.466-.147-.662.147-.196.293-.76.954-.931 1.15-.171.196-.343.22-.637.073-.294-.147-1.242-.458-2.366-1.459-.875-.78-1.466-1.742-1.638-2.036-.171-.293-.018-.452.129-.597.131-.13.294-.343.44-.514.147-.171.196-.294.294-.489.098-.196.049-.367-.025-.514-.073-.147-.662-1.597-.907-2.186-.239-.572-.481-.494-.662-.503l-.564-.01z" />
     </svg>
   </a>
-
-  <style>
-    /* ── DESKTOP MODE FORCED — mobile identical to desktop ── */
-    
-    /* Always show desktop navbar */
-    .navbar { display: flex !important; }
-    .btn-ppdb { display: flex !important; }
-    .topbar { display: block !important; }
-    
-    /* Always hide hamburger and mobile menu */
-    .hamburger { display: none !important; }
-    .mobile-menu { display: none !important; }
-    
-    /* Keep all grids at desktop columns */
-    .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
-    .footer-main-grid { grid-template-columns: 1.4fr 1fr 1fr !important; }
-    .footer-map-contact { grid-template-columns: 1.2fr 1fr !important; }
-    .footer-bottom { flex-direction: row !important; }
-    
-    /* Ensure no overflow-x hiding content */
-    body { overflow-x: auto !important; }
-  </style>
 </head>
 
 <body>
