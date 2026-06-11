@@ -60,6 +60,9 @@
                 
                 <div>
                     <label>Upload Foto Dokumentasi Prestasi (Maks 3 MB):</label><br>
+                    <small style="color: #d97706; display: block; margin-bottom: 8px; font-weight: 600;">
+                        * Disarankan menggunakan gambar dengan rasio 4:3 (contoh: 800x600 px) agar tampilan di website lebih rapi.
+                    </small>
                     <input type="file" id="input-file-foto" accept="image/*" style="width: 100%;">
                     <input type="hidden" id="input-foto">
                     <br>
@@ -169,7 +172,6 @@
 
             const id = document.getElementById('prestasi-id').value;
             
-            // PERBAIKAN: Dikembalikan menjadi 'tingkat' sesuai kolom asli database
             const formData = {
                 judul: document.getElementById('input-judul').value,
                 tingkat: document.getElementById('input-tingkat').value, 
