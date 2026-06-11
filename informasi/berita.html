@@ -112,7 +112,19 @@
 
     /* BERITA GRID */
     .berita-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
-    .berita-card { background: var(--white); border-radius: var(--r-lg); border: 1px solid var(--gray-soft); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.25s, box-shadow 0.25s; }
+    .berita-card { 
+      background: var(--white); 
+      border-radius: var(--r-lg); 
+      border: 1px solid var(--gray-soft); 
+      overflow: hidden; 
+      box-shadow: var(--shadow-sm); 
+      transition: transform 0.25s, box-shadow 0.25s; 
+      
+      /* --- Kode Baru --- */
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
     .berita-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
     .berita-img { height: 180px; overflow: hidden; position: relative; }
     .berita-img-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
@@ -120,12 +132,40 @@
     .berita-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,30,56,0.6) 0%, transparent 60%); }
     .berita-date-tag { position: absolute; bottom: 12px; left: 14px; background: var(--gold); color: var(--navy); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; z-index: 1; }
     .berita-kat-tag { position: absolute; top: 12px; left: 14px; background: rgba(255,255,255,0.15); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 3px 10px; border-radius: 100px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; z-index: 1; }
-    .berita-body { padding: 20px 22px 22px; }
+    .berita-body { 
+      padding: 20px 22px 22px; 
+      
+      /* --- Kode Baru --- */
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
     .berita-body h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 8px; line-height: 1.45; }
     .berita-body h3 a { color: inherit; transition: color 0.2s; }
     .berita-body h3 a:hover { color: var(--gold); }
-    .berita-body p { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-    .berita-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--gray-soft); }
+    .berita-body p { 
+      font-size: 13px; 
+      color: var(--text-muted); 
+      line-height: 1.65; 
+      margin-bottom: 14px; 
+      
+      /* --- Kode Baru untuk Line Clamp --- */
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Maksimal 3 baris, bisa Anda ubah sesuai selera */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .berita-footer { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding-top: 12px; 
+      border-top: 1px solid var(--gray-soft); 
+      
+      /* --- Kode Baru --- */
+      margin-top: auto;
+    }
     .berita-author { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 6px; }
     .berita-author-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
     .berita-readmore { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase; transition: opacity 0.2s; }
