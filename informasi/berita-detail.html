@@ -289,7 +289,7 @@
           </div>
         </div>
         <div class="nav-item">
-          <a href="../kurikulum/index.html" class="nav-link">Kurikulum</a>
+          <a href="#" id="tombol-kurikulum" class="nav-link" target="_blank">Kurikulum</a>
         </div>
         <a href="../index.html#contact" class="btn-ppdb">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
@@ -563,7 +563,31 @@
 <!-- SUPABASE SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../admin/assets/js/supabase-client.js"></script>
+<script>
+  async function ambilLinkKurikulum() {
+    try {
+      const { data, error } = await supabase
+        .from('kurikulum_url')
+        .select('url_kurikulum')
+        .eq('id', 1)
+        .single();
 
+      if (error) throw error;
+
+      if (data && data.url_kurikulum) {
+        const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        if (tombolKurikulum) {
+          // Mengisi link asli dari database
+          tombolKurikulum.href = data.url_kurikulum; 
+        }
+      }
+    } catch (err) {
+      console.error("Gagal memuat link kurikulum:", err.message);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
+</script>
 <script>
 /* ════════════════════════════════════════════════════════
    BERITA DETAIL PAGE — SMKN 1 CIKAMPEK

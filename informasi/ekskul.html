@@ -341,7 +341,9 @@
           </a>
         </div>
       </div>
-        <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
+        <div class="nav-item">
+          <a href="javascript:void(0);" id="tombol-kurikulum" class="nav-link" target="_blank">Kurikulum</a>
+        </div>
     </nav>
 
     <a href="../index.html#ppdb" class="btn-ppdb">
@@ -834,6 +836,34 @@ SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggu
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../admin/assets/js/supabase-client.js"></script>
+<script>
+  async function ambilLinkKurikulum() {
+    try {
+      const { data, error } = await supabase
+        .from('kurikulum_url')
+        .select('url_kurikulum')
+        .eq('id', 1)
+        .single();
+
+      if (error) throw error;
+
+      if (data && data.url_kurikulum) {
+        const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        if (tombolKurikulum) {
+          // Mengisi link asli dari database
+          tombolKurikulum.href = data.url_kurikulum; 
+        }
+      }
+    } catch (err) {
+      console.error("Gagal memuat link kurikulum:", err.message);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 

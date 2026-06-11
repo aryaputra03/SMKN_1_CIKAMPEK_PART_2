@@ -753,7 +753,9 @@ ul { list-style: none; }
           <a href="lulusanterbaik.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z"/></svg></span>Lulusan Terbaik</a>
         </div>
       </div>
-      <div class="nav-item"><a href="../kurikulum/index.html" class="nav-link">Kurikulum</a></div>
+      <div class="nav-item">
+        <a href="javascript:void(0);" id="tombol-kurikulum" class="nav-link" target="_blank">Kurikulum</a>
+      </div>
     </nav>
     <a href="../index.html#ppdb" class="btn-ppdb">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5"/></svg>
@@ -1024,7 +1026,31 @@ ul { list-style: none; }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- 2. Inisialisasi client (SUPABASE_URL & SUPABASE_ANON_KEY didefinisikan di sini) -->
 <script src="../admin/assets/js/supabase-client.js"></script>
+<script>
+  async function ambilLinkKurikulum() {
+    try {
+      const { data, error } = await supabase
+        .from('kurikulum_url')
+        .select('url_kurikulum')
+        .eq('id', 1)
+        .single();
 
+      if (error) throw error;
+
+      if (data && data.url_kurikulum) {
+        const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        if (tombolKurikulum) {
+          // Mengisi link asli dari database
+          tombolKurikulum.href = data.url_kurikulum; 
+        }
+      }
+    } catch (err) {
+      console.error("Gagal memuat link kurikulum:", err.message);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
+</script>
 <script>
 (function () {
   // ─────────────────────────────────────────────
