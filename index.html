@@ -2807,9 +2807,13 @@
           <a href="informasi/ekskul.html">Ekstrakurikuler</a>
         </div>
       </div>
+
+      <!-- PENTING MOBILE ARYA -->
       <div class="mobile-nav-item">
-        <a href="alumni.html" class="mobile-nav-link">Profil Alumni</a>
+        <a href="javascript:void(0);" id="tombol-kurikulum_1" class="mobile-nav-link" target="_blank">Kurikulum</a>
       </div>
+      <!-- PENTING MOBILE ARYA -->
+       
       <div class="mobile-nav-item">
         <a href="#contact" class="mobile-nav-link">Kontak</a>
       </div>
@@ -3328,15 +3332,22 @@
 
       if (data && data.url_kurikulum) {
         const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        const tombolKurikulum_1 = document.getElementById('tombol-kurikulum_1');
         if (tombolKurikulum) {
           // Mengisi link asli dari database
           tombolKurikulum.href = data.url_kurikulum; 
+        }
+        if (tombolKurikulum_1) {
+          // Mengisi link asli dari database
+          tombolKurikulum_1.href = data.url_kurikulum;
         }
       }
     } catch (err) {
       console.error("Gagal memuat link kurikulum:", err.message);
     }
   }
+
+  
 
   document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
 
