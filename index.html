@@ -1187,6 +1187,23 @@
       overflow: hidden;
     }
 
+    /* overlay gelap di atas thumbnail agar play button tetap terbaca */
+    .mid-sambutan-video::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 18, 35, 0.45);
+      border-radius: inherit;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .mid-sambutan-video .play-btn,
+    .mid-sambutan-video .video-duration {
+      position: relative;
+      z-index: 2;
+    }
+
     .play-btn {
       width: 50px;
       height: 50px;
@@ -3295,8 +3312,9 @@ function initSlider() {
   // Bersihkan interval lama jika ada (mencegah double-speed loop)
   if (sliderInterval) clearInterval(sliderInterval);
 
-  const slides = document.querySelectorAll('.hero-section .hero-slide');
-  const dots = document.querySelectorAll('#slider-dots-container .slider-dot');
+  // FIX: gunakan selector yang benar (#hero-section dan .slider-controls)
+  const slides = document.querySelectorAll('#hero-section .hero-slide');
+  const dots   = document.querySelectorAll('.slider-controls .slider-dot');
   
   if (slides.length <= 1) return; // Jika banner hanya 1, tidak perlu animasi berputar
 
@@ -3307,8 +3325,8 @@ function initSlider() {
     slides[currentSlideIndex].classList.remove('active');
     if (dots.length > 0) dots[currentSlideIndex].classList.remove('active');
 
-    // Pindah ke index baru
-    currentSlideIndex = nextIndex;
+    // Pindah ke index baru (wrap-around)
+    currentSlideIndex = (nextIndex + slides.length) % slides.length;
 
     // Tambahkan kelas aktif ke slide & dot baru
     slides[currentSlideIndex].classList.add('active');
@@ -3316,6 +3334,21 @@ function initSlider() {
 
     // Update teks hero secara dinamis mengikuti slide yang aktif
     updateHeroText(slides[currentSlideIndex]);
+  }
+
+  // FIX: bind tombol panah prev / next ke gantiSlide
+  const prevArrow = document.querySelector('.slider-arrow.prev');
+  const nextArrow = document.querySelector('.slider-arrow.next');
+  // Hapus event listener lama agar tidak double-bind
+  if (prevArrow) {
+    const newPrev = prevArrow.cloneNode(true);
+    prevArrow.parentNode.replaceChild(newPrev, prevArrow);
+    newPrev.addEventListener('click', () => { gantiSlide(currentSlideIndex - 1); startAutoPlay(); });
+  }
+  if (nextArrow) {
+    const newNext = nextArrow.cloneNode(true);
+    nextArrow.parentNode.replaceChild(newNext, nextArrow);
+    newNext.addEventListener('click', () => { gantiSlide(currentSlideIndex + 1); startAutoPlay(); });
   }
 
   // Pasang event listener klik pada bulatan navigasi (dots) baru
@@ -3608,9 +3641,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (error || !data || !data.url_video) return;
 
-        // Simpan URL video ke atribut data agar bisa dibuka modal
         const btnPlay = document.getElementById('btn-play-video');
+        // Simpan URL video ke atribut data agar bisa dibuka modal
         btnPlay.dataset.videoUrl = data.url_video;
+
+        // Ambil video ID YouTube untuk ditampilkan sebagai thumbnail
+        const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+        const match = data.url_video.match(ytRegex);
+        if (match && match[1]) {
+          const videoId = match[1];
+          const thumbUrl = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+          btnPlay.style.backgroundImage    = "url('" + thumbUrl + "')";
+          btnPlay.style.backgroundSize     = 'cover';
+          btnPlay.style.backgroundPosition = 'center';
+        }
 
       } catch (err) {
         console.error('Gagal memuat video profil:', err.message);
@@ -3700,25 +3744,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // ── HERO SLIDER ──
-      const slides = document.querySelectorAll('.hero-slide');
-      const dots = document.querySelectorAll('.slider-dot');
-      let currentSlide = 0, slideTimer;
-      function goToSlide(index) {
-        slides[currentSlide]?.classList.remove('active');
-        dots[currentSlide]?.classList.remove('active');
-        currentSlide = (index + slides.length) % slides.length;
-        slides[currentSlide]?.classList.add('active');
-        dots[currentSlide]?.classList.add('active');
-      }
-      function startAutoSlide() { slideTimer = setInterval(() => goToSlide(currentSlide + 1), 5500); }
-      function stopAutoSlide() { clearInterval(slideTimer); }
-      if (slides.length > 0) {
-        startAutoSlide();
-        document.querySelector('.slider-arrow.next')?.addEventListener('click', () => { stopAutoSlide(); goToSlide(currentSlide + 1); startAutoSlide(); });
-        document.querySelector('.slider-arrow.prev')?.addEventListener('click', () => { stopAutoSlide(); goToSlide(currentSlide - 1); startAutoSlide(); });
-        dots.forEach((dot, i) => dot.addEventListener('click', () => { stopAutoSlide(); goToSlide(i); startAutoSlide(); }));
-      }
+      // ── HERO SLIDER (fallback untuk kasus slide default / Supabase kosong) ──
+      // Binding arrow & autoplay diurus sepenuhnya oleh initSlider() yang dipanggil
+      // setelah loadBannerSlider() selesai. Blok ini hanya sebagai inisialisasi awal
+      // jika halaman tidak memiliki data banner sama sekali (1 slide default).
+      (function initDefaultSlider() {
+        const slides = document.querySelectorAll('#hero-section .hero-slide');
+        const dots   = document.querySelectorAll('.slider-controls .slider-dot');
+        if (slides.length <= 1) return; // Tidak perlu animasi jika hanya 1 slide
+        let cur = 0, timer;
+        function go(idx) {
+          slides[cur].classList.remove('active'); dots[cur]?.classList.remove('active');
+          cur = (idx + slides.length) % slides.length;
+          slides[cur].classList.add('active'); dots[cur]?.classList.add('active');
+        }
+        function play()  { timer = setInterval(() => go(cur + 1), 5500); }
+        function pause() { clearInterval(timer); }
+        play();
+        document.querySelector('.slider-arrow.next')?.addEventListener('click', () => { pause(); go(cur + 1); play(); });
+        document.querySelector('.slider-arrow.prev')?.addEventListener('click', () => { pause(); go(cur - 1); play(); });
+        dots.forEach((d, i) => d.addEventListener('click', () => { pause(); go(i); play(); }));
+      })();
 
       // ── FADE-UP (IntersectionObserver — global, dipakai juga oleh dynamic loader) ──
       window.fadeObs = new IntersectionObserver((entries) => {
