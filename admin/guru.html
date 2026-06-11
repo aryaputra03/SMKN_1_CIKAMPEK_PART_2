@@ -136,8 +136,8 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            // --- VALIDASI UKURAN FILE (MAKSIMAL 4 MB) ---
-            const maksUkuran = 3 * 1024 * 1024; // 4 MB dalam Bytes
+            // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
+            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam Bytes
             if (file.size > maksUkuran) {
                 alert("⚠️ Ukuran file terlalu besar! Maksimal ukuran foto guru/staff adalah 3 MB.");
                 e.target.value = ""; // Reset input file menjadi kosong
@@ -204,30 +204,78 @@
             `).join('');
         }
 
+        // =========================================================
+        // 4. PENANGANAN SUBMIT DATA DENGAN VALIDASI UNIK URUTAN
+        // =========================================================
         document.getElementById('form-guru').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            const btnSimpan = document.getElementById('btn-simpan-guru');
             const id = document.getElementById('guru-id').value;
+            const urutanTampil = parseInt(document.getElementById('guru-urutan').value) || 1;
+            const namaGuru = document.getElementById('guru-nama').value.trim();
+
+            // Mengunci tombol agar tidak double-click
+            btnSimpan.disabled = true;
+            btnSimpan.innerText = "Memeriksa urutan...";
+
+            // ─── VALIDASI: CEK KEUNIKAN URUTAN TAMPIL ───
+            let cekQuery = supabase.from('guru').select('id, nama').eq('urutan', urutanTampil);
+            
+            // Pengecualian ID sendiri jika sedang mode edit
+            if (modeGuru === "edit") {
+                cekQuery = cekQuery.neq('id', id);
+            }
+            
+            const { data: dataDuplikat, error: errorCek } = await cekQuery;
+            
+            if (errorCek) {
+                alert("Gagal memeriksa keunikan urutan: " + errorCek.message);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Guru";
+                return;
+            }
+            
+            // Jika ada guru lain yang menggunakan urutan tersebut
+            if (dataDuplikat && dataDuplikat.length > 0) {
+                alert(`⚠️ Urutan ke-${urutanTampil} sudah digunakan oleh "${dataDuplikat[0].nama}".\nSilakan gunakan angka urutan yang berbeda!`);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Guru";
+                return; // Batalkan proses simpan
+            }
+
+            // ─── PROSES SIMPAN KE DATABASE ───
+            btnSimpan.innerText = "Menyimpan data...";
+
             const formData = {
-                nama: document.getElementById('guru-nama').value,
+                nama: namaGuru,
                 nip: document.getElementById('guru-nip').value,
                 jabatan: document.getElementById('guru-jabatan').value,
                 foto_url: document.getElementById('guru-foto').value || null,
-                urutan: parseInt(document.getElementById('guru-urutan').value)
+                urutan: urutanTampil
             };
 
             if (modeGuru === "tambah") {
                 const { error } = await supabase.from('guru').insert([formData]);
-                if (error) alert(error.message);
+                if (error) {
+                    alert("Gagal menambah data: " + error.message);
+                }
             } else {
                 const { error } = await supabase.from('guru').update(formData).eq('id', id);
-                if (error) alert(error.message);
+                if (error) {
+                    alert("Gagal memperbarui data: " + error.message);
+                }
             }
+            
+            // Kembalikan form dan tombol ke asal
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Guru";
             tutupFormGuru();
             loadGuru();
         });
 
         async function hapusGuru(id) {
-            if (!confirm('Hapus data guru ini?')) return;
+            if (!confirm('Yakin ingin menghapus data guru ini?')) return;
             const { error } = await supabase.from('guru').delete().eq('id', id);
             if (!error) loadGuru();
         }
@@ -237,6 +285,7 @@
             document.getElementById('judul-form-guru').innerText = "Tambah Guru Baru";
             document.getElementById('form-guru').reset();
             document.getElementById('guru-id').value = "";
+            document.getElementById('guru-urutan').value = "1";
             
             document.getElementById('guru-foto').value = "";
             document.getElementById('input-file-guru').value = "";
@@ -244,6 +293,10 @@
             document.getElementById('preview-guru').src = "";
             document.getElementById('status-upload-guru').style.display = "none";
             
+            const btnSimpan = document.getElementById('btn-simpan-guru');
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Guru";
+
             document.getElementById('area-form-guru').style.display = "block";
         }
 
@@ -270,6 +323,10 @@
                 preview.src = "";
             }
             document.getElementById('status-upload-guru').style.display = "none";
+
+            const btnSimpan = document.getElementById('btn-simpan-guru');
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Guru";
         }
 
         function tutupFormGuru() {
