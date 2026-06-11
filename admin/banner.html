@@ -17,7 +17,7 @@
             <li><a href="prestasi.html" >Prestasi</a></li>
             <li><a href="guru.html"> Guru & Staff</a></li>
             <li><a href="lulusan.html" >Lulusan Terbaik</a></li>
-            <li><a href="banner.html" >Banner</a></li>
+            <li><a href="banner.html" class="active">Banner</a></li>
             <li><a href="visi-misi.html" >Visi Misi</a></li>
             <li><a href="kurikulum_url.html" >Kurikulum</a></li>
             <li><a href="struktur_organisasi.html" >Struktur Organisasi</a></li>
@@ -28,7 +28,7 @@
 
     <main id="content">
         <h1>Kelola Banner Slider</h1>
-        <p style="color: #666;">Batas maksimum banner adalah 3 buah. Angka urutan tidak boleh sama.</p>
+        <p style="color: #666;">Batas maksimum banner adalah 4 buah. Angka urutan tidak boleh sama.</p>
         <button onclick="bukaFormTambah()">+ Tambah Banner Baru</button>
         <br><br>
 
@@ -60,8 +60,8 @@
                     <input type="text" id="input-link" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>Urutan Tampil (Pilih 1, 2, atau 3):</label><br>
-                    <input type="number" id="input-urutan" value="1" min="1" max="3" required style="width: 80px;">
+                    <label>Urutan Tampil (Pilih 1, 2, 3, atau 4):</label><br>
+                    <input type="number" id="input-urutan" value="1" min="1" max="4" required style="width: 80px;">
                 </div><br>
                 <div>
                     <label>
@@ -264,8 +264,9 @@
         // FUNGSI BANTUAN INTERFAS FORM & MODAL (UI HELPER)
         // ---------------------------------------------------------
         function bukaFormTambah() {
-            if (bannerDataGlobal.length >= 3) {
-                alert("Maksimal hanya diperbolehkan 3 banner! Silakan edit atau hapus banner yang ada terlebih dahulu.");
+            // PERBAIKAN: Ubah pengecekan panjang array maksimal menjadi 4
+            if (bannerDataGlobal.length >= 4) {
+                alert("Maksimal hanya diperbolehkan 4 banner! Silakan edit atau hapus banner yang ada terlebih dahulu.");
                 return; 
             }
 
@@ -278,7 +279,8 @@
             
             let nextUrutan = 1;
             while(bannerDataGlobal.some(b => b.urutan === nextUrutan)) { nextUrutan++; }
-            document.getElementById('input-urutan').value = nextUrutan <= 3 ? nextUrutan : 3;
+            // PERBAIKAN: Batas otomatisasi input urutan dinaikkan jadi 4
+            document.getElementById('input-urutan').value = nextUrutan <= 4 ? nextUrutan : 4;
 
             document.getElementById('area-form').style.display = "block";
         }
