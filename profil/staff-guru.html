@@ -111,19 +111,41 @@ ul { list-style: none; }
 
 /* ── FOTO THUMBNAIL DI TABEL ─────────────── */
 .foto-thumb {
-  width: 44px; height: 44px; border-radius: 50%;
-  object-fit: cover; border: 2px solid var(--gray-soft);
-  display: block; margin: 0 auto;
+  width: 48px; 
+  height: 48px;
+  min-width: 48px; /* Mencegah gambar gepeng tertekan kolom tabel */
+  aspect-ratio: 1 / 1; /* Memaksa rasio 1:1 (Kotak) */
+  border-radius: var(--r-sm); /* Mengubah dari lingkaran (50%) menjadi kotak dengan sudut tumpul */
+  object-fit: cover; 
+  border: 2px solid var(--gray-soft);
+  display: block; 
+  margin: 0 auto;
   cursor: zoom-in;
   transition: border-color 0.2s;
 }
-.foto-thumb:hover { border-color: var(--gold); }
-.foto-placeholder {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: var(--gray-soft); display: flex; align-items: center;
-  justify-content: center; margin: 0 auto;
+
+.foto-thumb:hover { 
+  border-color: var(--gold); 
 }
-.foto-placeholder svg { width: 20px; height: 20px; color: var(--navy-light); }
+
+.foto-placeholder {
+  width: 48px; 
+  height: 48px; 
+  min-width: 48px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-sm); /* Samakan menjadi kotak */
+  background: var(--gray-soft); 
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  margin: 0 auto;
+}
+
+.foto-placeholder svg { 
+  width: 20px; 
+  height: 20px; 
+  color: var(--navy-light); 
+}
 
 /* ── SKELETON LOADING ─────────────────── */
 .skeleton {
