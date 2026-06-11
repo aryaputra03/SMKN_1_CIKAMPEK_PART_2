@@ -336,24 +336,24 @@ table td button:nth-of-type(2):hover {
         background-color: #ffffff !important;
     }
 
-    /* Penataan Sel Kolom Data Kiri-Kanan */
+    /* Penataan Sel Kolom Data Kiri-Kanan (DIUBAH KE BLOCK AGAR AMAN DARI OVERLAP) */
     table td {
         text-align: right !important;
         position: relative !important;
         border-bottom: 1px solid #f1f5f9 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        padding: 12px 10px 12px 40% !important; /* Ruang 40% di kiri untuk label */
+        display: block !important; 
+        padding: 12px 10px 12px 45% !important; /* Ruang 45% di kiri agar aman bagi label panjang */
         min-height: 48px;
         box-sizing: border-box !important;
+        word-break: break-word; /* Mencegah teks panjang menusuk keluar area kanan */
     }
 
     /* Baris Terakhir (Sel Tombol Edit & Hapus) */
     table td:last-child {
         border-bottom: none !important;
-        justify-content: center !important; /* Pusatkan tombol di HP */
         padding-left: 10px !important;
+        display: flex !important; /* Tetap flex khusus tombol aksi agar berjajar menyamping */
+        justify-content: center !important; 
         gap: 8px;
         margin-top: 5px;
     }
@@ -364,7 +364,7 @@ table td button:nth-of-type(2):hover {
         left: 10px;
         top: 50%;
         transform: translateY(-50%);
-        width: 35%;
+        width: 40%; /* Dinaikkan ke 40% agar label "Tahun Lulus" tidak bertabrakan */
         text-align: left;
         font-weight: 600;
         color: #475569;
@@ -380,9 +380,9 @@ table td button:nth-of-type(2):hover {
     table td:nth-child(5)::before { content: "Keterangan:"; }
     table td:nth-child(6)::before { display: none; } /* Kolom aksi tidak diberi judul label */
 
-    /* Atur Ulang Posisi Gambar Thumbnail */
+    /* Atur Ulang Posisi Gambar Thumbnail agar pas merapat ke kanan */
     .img-thumbnail {
-        margin: 0 !important; /* Reset auto margin desktop agar merapat ke kanan */
+        margin: 0 0 0 auto !important; 
     }
 
     /* Lebar Tombol Aksi Lebar Merata (Edit & Hapus) */

@@ -213,24 +213,92 @@
 
         document.getElementById('form-lulusan').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const id = document.getElementById('lulusan-id').value;
             
+            const btnSimpan = document.getElementById('btn-simpan-lulusan');
+            const id = document.getElementById('lulusan-id').value;
+            const namaAlumni = document.getElementById('lulusan-nama').value.trim();
+            const tahunLulus = parseInt(document.getElementById('lulusan-tahun').value) || 0;
+            const urutanTampil = parseInt(document.getElementById('lulusan-urutan').value) || 0;
+            
+            // Kunci tombol untuk mencegah double-click / double-submitting
+            btnSimpan.disabled = true;
+            btnSimpan.innerText = "Memeriksa data...";
+
+            // ─── VALIDASI 1: CEK KEUNIKAN URUTAN TAMPIL ───
+            let cekUrutanQuery = supabase.from('lulusan_terbaik').select('id, nama').eq('urutan', urutanTampil);
+            if (modeLulusan === "edit") {
+                cekUrutanQuery = cekUrutanQuery.neq('id', id);
+            }
+            const { data: duplikatUrutan, error: errorUrutan } = await cekUrutanQuery;
+            
+            if (errorUrutan) {
+                alert("Gagal memeriksa keunikan urutan: " + errorUrutan.message);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Alumni";
+                return;
+            }
+            
+            if (duplikatUrutan && duplikatUrutan.length > 0) {
+                alert(`⚠️ Urutan ke-${urutanTampil} sudah digunakan oleh "${duplikatUrutan[0].nama}".\nSilakan gunakan angka urutan yang lain!`);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Alumni";
+                return; 
+            }
+
+            // ─── VALIDASI 2: CEK KEUNIKAN DATA (NAMA + TAHUN LULUS) ───
+            let cekDataQuery = supabase.from('lulusan_terbaik').select('id').eq('nama', namaAlumni).eq('tahun_lulus', tahunLulus);
+            if (modeLulusan === "edit") {
+                cekDataQuery = cekDataQuery.neq('id', id);
+            }
+            const { data: duplikatData, error: errorData } = await cekDataQuery;
+
+            if (errorData) {
+                alert("Gagal memeriksa kesamaan data alumni: " + errorData.message);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Alumni";
+                return;
+            }
+
+            if (duplikatData && duplikatData.length > 0) {
+                alert(`⚠️ Data alumni bernama "${namaAlumni}" dengan Tahun Lulus ${tahunLulus} sudah terdaftar di database!\nTidak perlu memasukkan data alumni yang sama.`);
+                btnSimpan.disabled = false;
+                btnSimpan.innerText = "Simpan Data Alumni";
+                return;
+            }
+
+            // ─── PROSES SUBMIT DATA KE DATABASE ───
+            btnSimpan.innerText = "Menyimpan ke database...";
             const formData = {
-                nama: document.getElementById('lulusan-nama').value,
-                tahun_lulus: parseInt(document.getElementById('lulusan-tahun').value),
+                nama: namaAlumni,
+                tahun_lulus: tahunLulus,
                 jurusan: document.getElementById('lulusan-jurusan').value,
                 pencapaian: document.getElementById('lulusan-pencapaian').value,
-                urutan: parseInt(document.getElementById('lulusan-urutan').value) || 0,
+                urutan: urutanTampil,
                 foto_url: document.getElementById('lulusan-foto').value || null
             };
 
             if (modeLulusan === "tambah") {
                 const { error } = await supabase.from('lulusan_terbaik').insert([formData]);
-                if (error) alert(error.message);
+                if (error) {
+                    alert("Gagal menambahkan data: " + error.message);
+                    btnSimpan.disabled = false;
+                    btnSimpan.innerText = "Simpan Data Alumni";
+                    return;
+                }
             } else {
                 const { error } = await supabase.from('lulusan_terbaik').update(formData).eq('id', id);
-                if (error) alert(error.message);
+                if (error) {
+                    alert("Gagal memperbarui data: " + error.message);
+                    btnSimpan.disabled = false;
+                    btnSimpan.innerText = "Simpan Data Alumni";
+                    return;
+                }
             }
+            
+            // Mengembalikan state tombol ke kondisi normal setelah sukses terpanggil
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Alumni";
+            
             tutupFormLulusan();
             loadLulusan();
         });
@@ -254,6 +322,10 @@
             document.getElementById('preview-lulusan').src = "";
             document.getElementById('status-upload-lulusan').style.display = "none";
             
+            const btnSimpan = document.getElementById('btn-simpan-lulusan');
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Alumni";
+
             document.getElementById('area-form-lulusan').style.display = "block";
         }
 
@@ -281,6 +353,10 @@
                 preview.src = "";
             }
             document.getElementById('status-upload-lulusan').style.display = "none";
+
+            const btnSimpan = document.getElementById('btn-simpan-lulusan');
+            btnSimpan.disabled = false;
+            btnSimpan.innerText = "Simpan Data Alumni";
         }
 
         function tutupFormLulusan() {
