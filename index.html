@@ -752,6 +752,8 @@
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
+      font-variant-numeric: lining-nums;
+      font-feature-settings: "lnum" 1;
     }
 
     .hero-subtitle {
@@ -2648,20 +2650,20 @@
     </div>
   </header>
 
-  <!-- ══════════════ HERO SLIDER (DINAMIS dari tabel banner) ══════════════ -->
+  <!-- ══════════════ HERO SLIDER ══════════════ -->
   <section class="hero" id="hero-section">
     <!--
-      Slide default: ditampilkan sebelum data Supabase dimuat.
-      Akan digantikan sepenuhnya oleh JS jika ada data dari tabel `banner`.
+      Slide 1: STATIS — selalu tampil, tidak diganti oleh data Supabase.
+      Slide 2-4: DINAMIS dari tabel `banner` (disisipkan oleh JS).
     -->
-    <div class="hero-slide active" id="hero-slide-default">
+    <div class="hero-slide active hero-slide-static" id="hero-slide-default">
       <div class="hero-bg" style="background-image: url('assets/images/FOTOUTAMASMKNEGERI1CIKAMPEK.png');"></div>
       <div class="hero-overlay"></div>
     </div>
 
     <div class="hero-content">
       <div class="hero-inner">
-        <h2 class="hero-title" id="hero-title-text">SMKN 1 Cikampek</h2>
+        <h2 class="hero-title" id="hero-title-text">SELAMAT DATANG<br>SMKN 1 Cikampek</h2>
         <p class="hero-subtitle" id="hero-subtitle-text" style="display:none;"></p>
         <div class="hero-actions">
           <a href="profil/visi-misi.html" class="btn-hero-primary" id="hero-cta-btn">
@@ -3216,52 +3218,47 @@ async function loadBannerSlider() {
       .select('id, judul, subjudul, foto_url, link_url, urutan, aktif')
       .eq('aktif', true)
       .order('urutan', { ascending: true })
-      .limit(4);
+      .limit(3);
 
     if (error) throw error;
-    
-    // Jika data kosong di database, biarkan slide default HTML yang tampil
-    if (!data || data.length === 0) return; 
+
+    // Jika data kosong di database, hanya slide statis (slide 1) yang tampil
+    if (!data || data.length === 0) return;
 
     const heroSection = document.getElementById('hero-section');
-    
+
     // PERBAIKAN 1: Menggunakan document.querySelector untuk class
     const dotsContainer = document.querySelector('.slider-controls');
 
-    // Hapus slide default agar tidak mengacaukan index slider baru
-    const defaultSlide = document.getElementById('hero-slide-default');
-    if (defaultSlide) defaultSlide.remove();
-
-    // Sisipkan slides baru SEBELUM .hero-content
+    // Slide 1 (statis) TIDAK dihapus — slide dinamis disisipkan setelahnya
     const heroContent = heroSection.querySelector('.hero-content');
-    data.forEach((item, idx) => {
+    data.forEach((item) => {
       const slide = document.createElement('div');
-      slide.className = 'hero-slide' + (idx === 0 ? ' active' : '');
-      
+      slide.className = 'hero-slide';
+
       // Simpan data ke dalam properti dataset elemen DOM
       slide.dataset.judul   = item.judul   || 'SMKN 1 Cikampek';
       slide.dataset.subjudul = item.subjudul || '';
       slide.dataset.linkUrl  = item.link_url  || 'profil/visi-misi.html';
-      
+
       const bgStyle = item.foto_url
         ? `background-image:url('${item.foto_url}');`
         : 'background:linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%);';
-        
+
       slide.innerHTML = `
         <div class="hero-bg" style="${bgStyle}background-size:cover;background-position:center;"></div>
         <div class="hero-overlay"></div>`;
-        
+
       heroSection.insertBefore(slide, heroContent);
     });
 
-    // Update teks hero pertama kali dengan data slide ke-0
-    updateHeroText(data[0]);
-
-    // Rebuild navigasi dots berdasarkan jumlah data dari Supabase
+    // Rebuild navigasi dots: 1 dot statis + dot untuk tiap data dinamis
     if (dotsContainer) {
-      dotsContainer.innerHTML = data.map((_, idx) =>
-        `<button class="slider-dot${idx === 0 ? ' active' : ''}" aria-label="Slide ${idx + 1}"></button>`
-      ).join('');
+      let dotsHtml = '<button class="slider-dot active" aria-label="Slide 1"></button>';
+      data.forEach((_, idx) => {
+        dotsHtml += `<button class="slider-dot" aria-label="Slide ${idx + 2}"></button>`;
+      });
+      dotsContainer.innerHTML = dotsHtml;
     }
 
     // Panggil fungsi inisialisasi loop animasi slider baru
@@ -3283,6 +3280,18 @@ function updateHeroText(slideData) {
   const ctaBtn     = document.getElementById('hero-cta-btn');
 
   if (!slideData) return;
+
+  // Slide 1 statis: pertahankan judul "SELAMAT DATANG / SMKN 1 Cikampek"
+  const isStaticSlide = slideData.dataset
+    ? slideData.id === 'hero-slide-default'
+    : false;
+
+  if (isStaticSlide) {
+    if (titleEl) titleEl.innerHTML = 'SELAMAT DATANG<br>SMKN 1 Cikampek';
+    if (subtitleEl) subtitleEl.style.display = 'none';
+    if (ctaBtn) ctaBtn.href = 'profil/visi-misi.html';
+    return;
+  }
 
   // Cek apakah parameter dari Elemen DOM (.dataset) atau dari Object Supabase langsung
   const judul = slideData.dataset ? slideData.dataset.judul : (slideData.judul || 'SMKN 1 Cikampek');
