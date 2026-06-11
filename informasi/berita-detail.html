@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detail Berita — SMKN 1 Cikampek">
+  <title id="page-title">Berita — SMKN 1 Cikampek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1E293B; --navy-mid: #334155; --navy-light: #475569;
+      --gold: #FFE600; --gold-light: #E6CF00; --gold-pale: rgba(255,230,0,0.1);
+      --white: #FFFFFF; --off-white: #F8FAFC; --gray-soft: #E2E8F0;
+      --text: #1E293B; --text-muted: #64748B; --text-light: #94A3B8;
+      --shadow-sm: 0 2px 8px rgba(30,41,59,0.05);
+      --shadow-md: 0 6px 24px rgba(30,41,59,0.08);
+      --shadow-lg: 0 16px 48px rgba(30,41,59,0.12);
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── TOP BAR ─────────────────────────── */
+
+
+    /* ── HEADER ─────────────────────────── */
+    .header { position: sticky; top: 0; z-index: 500; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-soft); transition: box-shadow 0.3s; }
+    .header.scrolled { box-shadow: var(--shadow-md); }
+    .header-main { display: flex; align-items: center; gap: 20px; height: 72px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-placeholder { width: 44px; height: 44px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+    .logo-text h1 { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; white-space: nowrap; }
+    .logo-text p { font-size: 11px; color: var(--text-muted); }
+    .navbar { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+    .nav-item { position: relative; }
+    .nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; color: var(--text); background: none; border: none; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+    .nav-link:hover, .nav-link.active { color: var(--navy); background: var(--gray-soft); }
+    .nav-link.active { font-weight: 600; }
+    .caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
+    .nav-item.open .caret { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; }
+    .nav-item.open .dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
+    .nav-item.has-dropdown::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px; background: transparent; }
+    .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--r-sm); font-size: 13.5px; color: var(--text); transition: background 0.2s, color 0.2s; }
+    .dropdown a:hover, .dropdown a.current { background: var(--gold-pale); color: var(--navy); }
+    .dropdown a.current { font-weight: 600; }
+    .dd-icon { width: 30px; height: 30px; background: var(--gray-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dd-icon svg { width: 15px; height: 15px; color: var(--navy-mid); }
+    .btn-ppdb { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--gold); color: var(--navy); font-size: 13.5px; font-weight: 700; border-radius: var(--r-md); transition: background 0.2s, transform 0.2s; white-space: nowrap; flex-shrink: 0; margin-left: 12px; }
+    .btn-ppdb:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; cursor: pointer; margin-left: auto; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--gray-soft); box-shadow: var(--shadow-lg); padding: 8px 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease); }
+    .mobile-menu.open { max-height: 600px; }
+    .mobile-nav-item { border-bottom: 1px solid var(--gray-soft); }
+    .mobile-nav-link { display: flex; align-items: center; justify-content: space-between; padding: 13px 24px; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; }
+    .mobile-dropdown { display: none; background: var(--off-white); }
+    .mobile-dropdown.open { display: block; }
+    .mobile-dropdown a { display: block; padding: 10px 24px 10px 40px; font-size: 13.5px; color: var(--text-muted); border-bottom: 1px solid var(--gray-soft); }
+    .mobile-dropdown a:hover { color: var(--navy); }
+
+    /* ── PAGE BREADCRUMB ─────────────────── */
+    .page-breadcrumb { background: var(--white); border-bottom: 1px solid var(--gray-soft); padding: 14px 0; }
+    .breadcrumb-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .breadcrumb-row a { font-size: 13px; color: var(--text-muted); transition: color 0.2s; display: flex; align-items: center; gap: 5px; }
+    .breadcrumb-row a:hover { color: var(--navy); }
+    .breadcrumb-row .sep { font-size: 12px; color: var(--text-light); }
+    .breadcrumb-row .current { font-size: 13px; color: var(--navy); font-weight: 600; }
+
+    /* ── MAIN LAYOUT ─────────────────────── */
+    .article-layout { padding: 48px 0 80px; }
+    .article-grid { display: grid; grid-template-columns: 1fr 340px; gap: 36px; align-items: start; }
+
+    /* ── ARTICLE CARD ────────────────────── */
+    .article-card { background: var(--white); border-radius: var(--r-xl); box-shadow: var(--shadow-md); overflow: hidden; }
+    .article-hero { width: 100%; max-height: 480px; overflow: hidden; position: relative; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); }
+    .article-hero img { width: 100%; height: 480px; object-fit: cover; display: block; transition: opacity 0.5s; }
+    .article-hero-placeholder { width: 100%; height: 300px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); display: flex; align-items: center; justify-content: center; }
+    .article-hero-placeholder svg { width: 64px; height: 64px; color: rgba(255,255,255,0.2); }
+    .article-body { padding: 36px 40px 44px; }
+
+    /* Meta baris atas */
+    .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-kat { background: var(--navy); color: var(--gold); font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; }
+    .article-date { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .article-date svg { flex-shrink: 0; }
+    .article-views { font-size: 13px; color: var(--text-light); display: flex; align-items: center; gap: 5px; }
+
+    /* Judul */
+    .article-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; color: var(--navy); line-height: 1.25; margin-bottom: 20px; }
+
+    /* Divider */
+    .article-divider { height: 3px; width: 56px; background: var(--gold); border-radius: 2px; margin-bottom: 28px; }
+
+    /* Penulis */
+    .article-author { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--gray-soft); border-bottom: 1px solid var(--gray-soft); margin-bottom: 32px; }
+    .article-author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; font-family: 'Cormorant Garamond', serif; }
+    .article-author-info strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--navy); }
+    .article-author-info span { font-size: 12px; color: var(--text-muted); }
+
+    /* Isi konten */
+    .article-content { font-size: 15.5px; color: var(--text); line-height: 1.9; word-break: break-word; overflow-wrap: break-word; }
+    .article-content p { margin-bottom: 18px; }
+    .article-content p:last-child { margin-bottom: 0; }
+    .article-content strong { color: var(--navy); font-weight: 700; }
+    .article-content em { color: var(--text-muted); font-style: italic; }
+    .article-content h2, .article-content h3 { font-family: 'Cormorant Garamond', serif; color: var(--navy); margin: 28px 0 14px; }
+    .article-content h2 { font-size: 24px; }
+    .article-content h3 { font-size: 20px; }
+    .article-content ul, .article-content ol { padding-left: 22px; margin-bottom: 18px; }
+    .article-content li { margin-bottom: 6px; }
+    .article-content a { color: var(--navy); border-bottom: 1px solid var(--gold); transition: color 0.2s; }
+    .article-content a:hover { color: var(--gold-light); }
+    .article-content blockquote { border-left: 4px solid var(--gold); padding: 14px 20px; background: var(--gold-pale); border-radius: 0 var(--r-sm) var(--r-sm) 0; margin: 24px 0; font-style: italic; color: var(--text-muted); }
+
+    /* Share bar */
+    .article-share { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--gray-soft); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .article-share span { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-right: 4px; }
+    .share-btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: var(--r-md); font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1.5px solid transparent; font-family: 'DM Sans', sans-serif; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-wa { background: #25D366; color: #fff; }
+    .share-wa:hover { background: #1ebe5a; }
+    .share-fb { background: #1877F2; color: #fff; }
+    .share-fb:hover { background: #0e6de0; }
+    .share-copy { background: var(--white); color: var(--navy); border-color: var(--gray-soft); }
+    .share-copy:hover { border-color: var(--gold); background: var(--gold-pale); }
+
+    /* Back link */
+    .article-back { margin-top: 32px; }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--off-white); color: var(--navy); font-size: 13.5px; font-weight: 600; border-radius: var(--r-md); border: 1.5px solid var(--gray-soft); transition: all 0.2s; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+    .btn-back:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ── SIDEBAR ─────────────────────────── */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: var(--white); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--gray-soft); }
+    .sidebar-card-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-soft); }
+    .sidebar-card-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .sidebar-card-header h3::before { content: ''; display: block; width: 4px; height: 16px; background: var(--gold); border-radius: 2px; flex-shrink: 0; }
+    .sidebar-card-body { padding: 16px 20px; }
+
+    /* Related news */
+    .related-item { display: flex; gap: 14px; align-items: flex-start; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--gray-soft); transition: all 0.2s; cursor: pointer; }
+    .related-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .related-item:hover .related-title { color: var(--gold-light); }
+    .related-thumb { width: 64px; height: 64px; border-radius: var(--r-sm); flex-shrink: 0; overflow: hidden; background: linear-gradient(135deg, var(--navy), var(--navy-mid)); }
+    .related-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .related-info { flex: 1; min-width: 0; }
+    .related-kat { font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .related-title { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; transition: color 0.2s; }
+    .related-date { font-size: 11.5px; color: var(--text-light); }
+
+    /* Kategori list */
+    .kat-list { display: flex; flex-direction: column; gap: 6px; }
+    .kat-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; color: var(--text); cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+    .kat-item:hover { background: var(--gold-pale); border-color: rgba(255,230,0,0.3); color: var(--navy); }
+    .kat-item .kat-badge { background: var(--gray-soft); color: var(--text-muted); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+
+    /* ── LOADING & ERROR ─────────────────── */
+    .loading-full { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 20px; }
+    .loading-spinner { width: 44px; height: 44px; border: 3px solid var(--gray-soft); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 14px; color: var(--text-muted); }
+    .error-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; text-align: center; padding: 40px; }
+    .error-state svg { width: 56px; height: 56px; color: var(--text-light); opacity: 0.5; }
+    .error-state h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--navy); }
+    .error-state p { font-size: 14px; color: var(--text-muted); max-width: 400px; }
+
+    /* ── SKELETON ────────────────────────── */
+    .skeleton-block { border-radius: 8px; background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-hero { height: 360px; }
+    .skeleton-title { height: 44px; width: 70%; margin-bottom: 14px; }
+    .skeleton-subtitle { height: 20px; width: 40%; margin-bottom: 32px; }
+    .skeleton-text { height: 15px; margin-bottom: 10px; }
+    .skeleton-text.w-90 { width: 90%; }
+    .skeleton-text.w-75 { width: 75%; }
+    .skeleton-text.w-85 { width: 85%; }
+
+    /* ── FOOTER ─────────────────────────── */
+    .footer { background: var(--gold); color: var(--navy); }
+    .footer-top { border-bottom: 1px solid rgba(30,41,59,0.1); }
+    .footer-main-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding: 64px 0 48px; }
+    .footer-logo-box { width: 44px; height: 44px; background: var(--navy); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-brand-name { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .footer-brand-loc { font-size: 11px; color: rgba(30,41,59,0.7); letter-spacing: 0.3px; font-weight: 600; }
+    .footer-brand-desc { font-size: 13.5px; line-height: 1.8; margin-bottom: 22px; max-width: 340px; color: rgba(30,41,59,0.85); font-weight: 500; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 8px; border: 1px solid rgba(30,41,59,0.25); display: flex; align-items: center; justify-content: center; color: var(--navy); transition: all 0.2s; }
+    .footer-social a:hover { border-color: var(--navy); color: var(--gold); background: var(--navy); }
+    .footer-social a svg { width: 14px; height: 14px; }
+    .footer-col-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--navy); display: block; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13.5px; color: rgba(30,41,59,0.8); transition: color 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+    .footer-links a::before { content: ''; width: 5px; height: 1px; background: var(--navy); flex-shrink: 0; }
+    .footer-links a:hover { color: var(--navy); font-weight: 700; }
+    .footer-bottom { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid rgba(30,41,59,0.15); }
+    .footer-bottom p { font-size: 12.5px; color: rgba(30,41,59,0.8); font-weight: 500; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 12.5px; color: rgba(30,41,59,0.7); transition: color 0.2s; font-weight: 500; }
+    .footer-bottom-links a:hover { color: var(--navy); }
+
+    /* ── BACK TO TOP ─────────────────────── */
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: var(--white); border: none; cursor: pointer; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 100; }
+    .back-to-top.show { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .back-to-top:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── WHATSAPP FLOAT ──────────────────── */
+    .wa-float { position: fixed; bottom: 80px; right: 28px; z-index: 9999; width: 54px; height: 54px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15); text-decoration: none; transition: transform 0.25s, box-shadow 0.25s; animation: wa-pulse 2.5s ease-in-out infinite; }
+    .wa-float:hover { transform: scale(1.10) translateY(-3px); animation: none; }
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+    @keyframes wa-pulse { 0%,100% { box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.35); } 50% { box-shadow: 0 4px 16px rgba(37,211,102,0.45), 0 0 0 10px rgba(37,211,102,0); } }
+
+    /* ── RESPONSIVE ──────────────────────── */
+    @media (max-width: 960px) {
+      .article-grid { grid-template-columns: 1fr; }
+      .sidebar { order: -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    }
+    @media (max-width: 640px) {
+      .sidebar { grid-template-columns: 1fr; }
+      .article-body { padding: 24px 20px 32px; }
+      .article-title { font-size: 22px; }
+      .article-content { font-size: 14.5px; }
+      .navbar { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .article-layout { padding: 28px 0 60px; }
+    }
+    @media (max-width: 768px) {
+      .navbar { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+      .footer-main-grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+
+
+<!-- HEADER -->
+<header class="header" id="main-header">
+  <div class="container">
+    <div class="header-main">
+      <a href="../index.html" class="logo-area">
+        <img src="../assets/images/logo/logosekolah.png" alt="Logo SMKN 1 Cikampek"
+          style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">S</div>
+        <div class="logo-text">
+          <h1>SMKN 1 Cikampek</h1>
+          <p>Karawang, Jawa Barat</p>
+        </div>
+      </a>
+      <nav class="navbar">
+        <div class="nav-item">
+          <a href="../index.html" class="nav-link">Beranda</a>
+        </div>
+        <div class="nav-item has-dropdown">
+          <button class="nav-link">Profil Sekolah
+            <svg class="caret" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="../profil/visi-misi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 7v3l2 2"/></svg></span>Visi &amp; Misi</a>
+            <a href="../profil/fasilitas.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="14" height="10" rx="1"/><path d="M7 7V5a3 3 0 016 0v2"/></svg></span>Fasilitas</a>
+            <a href="../profil/struktur-organisasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2" width="6" height="4" rx="1"/><rect x="2" y="14" width="6" height="4" rx="1"/><rect x="12" y="14" width="6" height="4" rx="1"/><path d="M5 14V11h10v3M10 6v5"/></svg></span>Struktur Organisasi</a>
+            <a href="../profil/staff-guru.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg></span>Staff &amp; Guru</a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <button class="nav-link active">Informasi
+            <svg class="caret" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="berita.html" class="current"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg></span>Berita Terbaru</a>
+            <a href="prestasi.html"><span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.4 5 5.6.7-4 3.8 1 5.5L10 14.3l-5 2.7 1-5.5L2 7.7l5.6-.7z"/></svg></span>Prestasi</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="../kurikulum/index.html" class="nav-link">Kurikulum</a>
+        </div>
+        <a href="../index.html#contact" class="btn-ppdb">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
+          Kontak Person
+        </a>
+      </nav>
+      <!-- HAMBURGER -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" id="mobile-menu">
+      <div class="mobile-nav-item">
+        <a href="../index.html" class="mobile-nav-link">Beranda</a>
+      </div>
+      <div class="mobile-nav-item">
+        <div class="mobile-nav-link" data-toggle="mob-profil">Profil Sekolah <span class="mob-caret">▾</span></div>
+        <div class="mobile-dropdown" id="mob-profil">
+          <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+          <a href="../profil/fasilitas.html">Fasilitas</a>
+          <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
+          <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+        </div>
+      </div>
+      <div class="mobile-nav-item">
+        <div class="mobile-nav-link" data-toggle="mob-info">Informasi <span class="mob-caret">▾</span></div>
+        <div class="mobile-dropdown" id="mob-info">
+          <a href="berita.html">Berita Terbaru</a>
+          <a href="prestasi.html">Prestasi</a>
+        </div>
+      </div>
+      <div class="mobile-nav-item">
+        <a href="../kurikulum/index.html" class="mobile-nav-link">Kurikulum</a>
+      </div>
+      <div class="mobile-nav-item" style="border-bottom:none;padding:12px 24px;">
+        <a href="../index.html#contact" class="btn-ppdb" style="width:100%;justify-content:center;">Kontak Person</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="page-breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-row">
+      <a href="../index.html">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L10 3l7 6.5V18a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
+        Beranda
+      </a>
+      <span class="sep">›</span>
+      <a href="berita.html">Berita</a>
+      <span class="sep">›</span>
+      <span class="current" id="breadcrumb-title">Detail Berita</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="article-layout">
+  <div class="container">
+
+    <!-- LOADING STATE -->
+    <div id="loading-state" class="loading-full">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Memuat berita…</p>
+    </div>
+
+    <!-- ERROR STATE (hidden by default) -->
+    <div id="error-state" class="error-state" style="display:none;">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 13h.01"/>
+      </svg>
+      <h2>Berita Tidak Ditemukan</h2>
+      <p id="error-message">Berita yang Anda cari tidak tersedia atau telah dihapus.</p>
+      <a href="berita.html" class="btn-back" style="margin-top:8px">← Kembali ke Daftar Berita</a>
+    </div>
+
+    <!-- ARTICLE LAYOUT (hidden until loaded) -->
+    <div id="article-layout" class="article-grid" style="display:none;">
+
+      <!-- ARTIKEL UTAMA -->
+      <article class="article-card" id="article-main">
+        <!-- Hero image -->
+        <div class="article-hero" id="article-hero">
+          <div class="article-hero-placeholder" id="hero-placeholder">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="4" width="16" height="12" rx="1"/><circle cx="7" cy="9" r="1.5"/><path d="M2 14l4-4 3 3 3-3 4 4"/></svg>
+          </div>
+          <img id="hero-img" src="" alt="" style="display:none;" onload="this.style.opacity=1" onerror="this.style.display='none';document.getElementById('hero-placeholder').style.display='flex'">
+        </div>
+
+        <div class="article-body">
+          <!-- Meta -->
+          <div class="article-meta">
+            <span class="article-kat" id="article-kat">Umum</span>
+            <span class="article-date">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M3 8h14M8 4V2M12 4V2"/></svg>
+              <span id="article-date">—</span>
+            </span>
+          </div>
+
+          <!-- Judul -->
+          <h1 class="article-title" id="article-title">Memuat judul…</h1>
+          <div class="article-divider"></div>
+
+          <!-- Penulis -->
+          <div class="article-author">
+            <div class="article-author-avatar">A</div>
+            <div class="article-author-info">
+              <strong>Admin SMKN 1 Cikampek</strong>
+              <span>Redaksi Sekolah · <span id="article-date-author">—</span></span>
+            </div>
+          </div>
+
+          <!-- Isi -->
+          <div class="article-content" id="article-content">
+            <!-- Konten diisi oleh JS -->
+          </div>
+
+          <!-- Share -->
+          <div class="article-share">
+            <span>Bagikan:</span>
+            <button class="share-btn share-wa" id="share-wa">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </button>
+            <button class="share-btn share-fb" id="share-fb">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </button>
+            <button class="share-btn share-copy" id="share-copy">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 7H7v6h6V7zM7 4H4v12h12v-3M7 4V2h9v9h-3"/></svg>
+              Salin Tautan
+            </button>
+          </div>
+
+          <!-- Kembali -->
+          <div class="article-back">
+            <a href="berita.html" class="btn-back">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 10H5M9 6l-4 4 4 4"/></svg>
+              Kembali ke Semua Berita
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="article-sidebar">
+
+        <!-- Berita Terkait -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <h3>Berita Terkait</h3>
+          </div>
+          <div class="sidebar-card-body" id="related-list">
+            <div style="text-align:center;padding:20px 0;">
+              <div class="loading-spinner" style="width:28px;height:28px;margin:0 auto 10px;"></div>
+              <p style="font-size:13px;color:var(--text-light)">Memuat…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kategori -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <h3>Kategori</h3>
+          </div>
+          <div class="sidebar-card-body">
+            <div class="kat-list">
+              <div class="kat-item" onclick="window.location.href='berita.html'">
+                <span>Semua Berita</span>
+              </div>
+              <div class="kat-item" onclick="window.location.href='berita.html?kat=Pengumuman'">
+                <span>Pengumuman</span>
+                <span class="kat-badge" id="kat-count-pengumuman">—</span>
+              </div>
+              <div class="kat-item" onclick="window.location.href='berita.html?kat=Kegiatan Sekolah'">
+                <span>Kegiatan Sekolah</span>
+                <span class="kat-badge" id="kat-count-kegiatan">—</span>
+              </div>
+              <div class="kat-item" onclick="window.location.href='berita.html?kat=Berita Umum'">
+                <span>Berita Umum</span>
+                <span class="kat-badge" id="kat-count-umum">—</span>
+              </div>
+              <div class="kat-item" onclick="window.location.href='berita.html?kat=Artikel & Opini'">
+                <span>Artikel &amp; Opini</span>
+                <span class="kat-badge" id="kat-count-artikel">—</span>
+              </div>
+              <div class="kat-item" onclick="window.location.href='berita.html?kat=Info Kelulusan'">
+                <span>Info Kelulusan</span>
+                <span class="kat-badge" id="kat-count-kelulusan">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div>
+          <div class="footer-brand-logo">
+            <img src="../assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
+              style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="footer-logo-box" style="display:none">S</div>
+            <div>
+              <p class="footer-brand-name">SMKN 1 Cikampek</p>
+              <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+            </div>
+          </div>
+          <p class="footer-brand-desc">SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat.</p>
+          <div class="footer-social">
+            <a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
+            </a>
+            <a href="https://www.instagram.com/smkn1cikampek" title="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a href="https://youtu.be/Opljuy6-T5Y" title="YouTube" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Navigasi Cepat</h4>
+          <div class="footer-links">
+            <a href="../index.html">Beranda</a>
+            <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+            <a href="../profil/fasilitas.html">Fasilitas Sekolah</a>
+            <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
+            <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
+            <a href="berita.html">Berita Terbaru</a>
+            <a href="prestasi.html">Prestasi</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Info Terbaru</h4>
+          <div id="footer-berita-terbaru" style="display:flex;flex-direction:column;gap:16px">
+            <p style="font-size:13px;color:rgba(30,41,59,0.5)">Memuat berita…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
+      <div class="footer-bottom-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat Penggunaan</a>
+        <a href="#">Dukungan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/6282197889552" class="wa-float" title="Hubungi via WhatsApp" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
+</button>
+
+<!-- SUPABASE SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   BERITA DETAIL PAGE — SMKN 1 CIKAMPEK
+   Membaca ?id= dari URL dan mengambil data dari Supabase
+════════════════════════════════════════════════════════ */
+
+/* ── HELPER: Format tanggal ─────────────────────────── */
+function formatTanggal(tglStr) {
+  if (!tglStr) return '—';
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const d = new Date(tglStr);
+  if (isNaN(d)) return tglStr;
+  return `${d.getDate()} ${bulan[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function formatTanggalPendek(tglStr) {
+  if (!tglStr) return '—';
+  const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des'];
+  const d = new Date(tglStr);
+  if (isNaN(d)) return tglStr;
+  return `${d.getDate()} ${bulan[d.getMonth()]}, ${d.getFullYear()}`;
+}
+
+/* ── HELPER: Potong teks ────────────────────────────── */
+function potong(teks, maks) {
+  if (!teks) return '';
+  const bersih = teks.replace(/<[^>]*>/g, '');
+  return bersih.length > maks ? bersih.slice(0, maks).trimEnd() + '…' : bersih;
+}
+
+/* ── HELPER: Render isi berita (HTML atau plain text) ── */
+function renderIsi(isi) {
+  if (!isi) return '<p style="color:var(--text-light);font-style:italic;">Konten berita tidak tersedia.</p>';
+  // Cek apakah isi mengandung HTML tag
+  const hasHTML = /<[a-z][\s\S]*>/i.test(isi);
+  if (hasHTML) {
+    return `<div>${isi}</div>`;
+  }
+  // Plain text: pecah per baris kosong menjadi paragraf
+  return isi
+    .split(/\n{2,}/)
+    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+    .join('');
+}
+
+
+/* ── MAIN: LOAD ARTIKEL UTAMA ───────────────────────── */
+async function loadArtikel() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+
+  const elLoading = document.getElementById('loading-state');
+  const elError   = document.getElementById('error-state');
+  const elLayout  = document.getElementById('article-layout');
+
+  if (!id) {
+    elLoading.style.display = 'none';
+    elError.style.display   = 'flex';
+    document.getElementById('error-message').textContent = 'Tidak ada ID berita yang diberikan. Silakan kembali ke daftar berita.';
+    return;
+  }
+
+  try {
+    const { data: item, error } = await supabase
+      .from('berita')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !item) throw new Error(error?.message || 'Berita tidak ditemukan');
+
+    // ── Update meta & judul halaman ──
+    document.title = `${item.judul || 'Berita'} — SMKN 1 Cikampek`;
+    document.getElementById('page-title').textContent = `${item.judul || 'Berita'} — SMKN 1 Cikampek`;
+    document.getElementById('breadcrumb-title').textContent = potong(item.judul || 'Detail Berita', 50);
+
+    // ── Hero image ──
+    const heroImg  = document.getElementById('hero-img');
+    const heroPlc  = document.getElementById('hero-placeholder');
+    if (item.foto_url) {
+      heroImg.src           = item.foto_url;
+      heroImg.alt           = item.judul || '';
+      heroImg.style.display = 'block';
+      heroPlc.style.display = 'none';
+    }
+
+    // ── Meta ──
+    document.getElementById('article-kat').textContent  = item.kategori || 'Umum';
+    document.getElementById('article-date').textContent = formatTanggal(item.tanggal);
+    document.getElementById('article-date-author').textContent = formatTanggal(item.tanggal);
+
+    // ── Judul ──
+    document.getElementById('article-title').textContent = item.judul || 'Tanpa Judul';
+
+    // ── Konten ──
+    document.getElementById('article-content').innerHTML = renderIsi(item.isi);
+
+    // ── Update views (background) ──
+    supabase.from('berita').update({ views: (item.views || 0) + 1 }).eq('id', item.id).then(() => {});
+
+    // ── Share buttons ──
+    const url = encodeURIComponent(window.location.href);
+    const judul = encodeURIComponent(item.judul || 'Berita SMKN 1 Cikampek');
+    document.getElementById('share-wa').onclick = () => window.open(`https://wa.me/?text=${judul}%20${url}`, '_blank');
+    document.getElementById('share-fb').onclick = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    document.getElementById('share-copy').onclick = () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('share-copy');
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 10l3 3 7-7"/></svg> Tersalin!`;
+        btn.style.background = '#d1fae5';
+        btn.style.borderColor = '#6ee7b7';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; }, 2000);
+      });
+    };
+
+    // ── Tampilkan layout ──
+    elLoading.style.display = 'none';
+    elLayout.style.display  = 'grid';
+
+    // ── Muat berita terkait (kategori sama) ──
+    loadBeritaTerkait(item.id, item.kategori);
+    // ── Muat footer ──
+    loadFooterBerita();
+    // ── Muat hitungan kategori ──
+    loadKategoriCount();
+
+  } catch (err) {
+    console.error('Gagal memuat berita:', err.message);
+    elLoading.style.display = 'none';
+    elError.style.display   = 'flex';
+    document.getElementById('error-message').textContent = 'Berita tidak ditemukan atau terjadi kesalahan koneksi. Silakan coba lagi.';
+  }
+}
+
+/* ── BERITA TERKAIT ─────────────────────────────────── */
+async function loadBeritaTerkait(idSaat, kategori) {
+  const container = document.getElementById('related-list');
+  try {
+    let query = supabase
+      .from('berita')
+      .select('id, judul, foto_url, tanggal, kategori')
+      .neq('id', idSaat)
+      .order('tanggal', { ascending: false })
+      .limit(4);
+
+    if (kategori) query = query.eq('kategori', kategori);
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      // Fallback: ambil berita apapun
+      const { data: fallback } = await supabase
+        .from('berita')
+        .select('id, judul, foto_url, tanggal, kategori')
+        .neq('id', idSaat)
+        .order('tanggal', { ascending: false })
+        .limit(4);
+
+      renderTerkait(container, fallback || []);
+    } else {
+      renderTerkait(container, data);
+    }
+  } catch (err) {
+    container.innerHTML = '<p style="font-size:13px;color:var(--text-light);text-align:center;padding:16px 0;">Gagal memuat berita terkait.</p>';
+  }
+}
+
+function renderTerkait(container, data) {
+  if (!data.length) {
+    container.innerHTML = '<p style="font-size:13px;color:var(--text-light);text-align:center;padding:16px 0;">Tidak ada berita terkait.</p>';
+    return;
+  }
+  container.innerHTML = data.map(item => {
+    const thumbHtml = item.foto_url
+      ? `<img src="${item.foto_url}" alt="${item.judul || ''}" loading="lazy">`
+      : '';
+    return `
+      <div class="related-item" onclick="window.location.href='berita-detail.html?id=${item.id}'">
+        <div class="related-thumb">${thumbHtml}</div>
+        <div class="related-info">
+          <p class="related-kat">${item.kategori || 'Umum'}</p>
+          <p class="related-title">${item.judul || 'Tanpa Judul'}</p>
+          <p class="related-date">${formatTanggalPendek(item.tanggal)}</p>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ── FOOTER BERITA TERBARU ──────────────────────────── */
+async function loadFooterBerita() {
+  const container = document.getElementById('footer-berita-terbaru');
+  try {
+    const { data, error } = await supabase
+      .from('berita')
+      .select('id, judul, tanggal')
+      .order('tanggal', { ascending: false })
+      .limit(3);
+    if (error) throw error;
+    if (!data || !data.length) { container.innerHTML = '<p style="font-size:13px;color:rgba(30,41,59,0.5)">Belum ada berita.</p>'; return; }
+    container.innerHTML = data.map((item, i) => `
+      <div style="${i < data.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px' : ''}">
+        <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
+          <a href="berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'" onmouseout="this.style.color='inherit'">${potong(item.judul, 70)}</a>
+        </p>
+        <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">${formatTanggalPendek(item.tanggal)}</p>
+      </div>`).join('');
+  } catch (e) {
+    container.innerHTML = '<p style="font-size:13px;color:rgba(30,41,59,0.5)">Gagal memuat.</p>';
+  }
+}
+
+/* ── KATEGORI COUNT ─────────────────────────────────── */
+async function loadKategoriCount() {
+  try {
+    const { data, error } = await supabase.from('berita').select('kategori');
+    if (error || !data) return;
+    const hitungan = {};
+    data.forEach(b => { const k = b.kategori || 'Umum'; hitungan[k] = (hitungan[k] || 0) + 1; });
+    const map = {
+      'Pengumuman':       'kat-count-pengumuman',
+      'Kegiatan Sekolah': 'kat-count-kegiatan',
+      'Berita Umum':      'kat-count-umum',
+      'Artikel & Opini':  'kat-count-artikel',
+      'Info Kelulusan':   'kat-count-kelulusan',
+    };
+    Object.entries(map).forEach(([kat, elId]) => {
+      const el = document.getElementById(elId);
+      if (el) el.textContent = hitungan[kat] || 0;
+    });
+  } catch(e) {}
+}
+
+/* ── UI: Header scroll, hamburger, back-to-top ───────── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Header scroll
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
+
+  // Hamburger
+  const hamburger  = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu?.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = document.getElementById(btn.getAttribute('data-toggle'));
+      t?.classList.toggle('open');
+    });
+  });
+
+  // Dropdown desktop
+  document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+    let timer;
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(timer);
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => { if (o !== item) o.classList.remove('open'); });
+      item.classList.add('open');
+    });
+    item.addEventListener('mouseleave', () => { timer = setTimeout(() => item.classList.remove('open'), 150); });
+    item.querySelector('button.nav-link')?.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item.has-dropdown').forEach(o => o.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
+
+  // Back to top
+  const backBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
+  backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Muat artikel
+  loadArtikel();
+});
+</script>
+</body>
+</html>

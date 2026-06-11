@@ -549,14 +549,14 @@ function buatCardBerita(item, index) {
         <span class="berita-date-tag">${tglFormat}</span>
       </div>
       <div class="berita-body">
-        <h3><a href="javascript:void(0)" onclick="bukaDetailBerita('${item.id}')">${item.judul || 'Tanpa Judul'}</a></h3>
+        <h3><a href="berita-detail.html?id=${item.id}">${item.judul || 'Tanpa Judul'}</a></h3>
         <p>${cuplikan || 'Klik Baca untuk melihat isi lengkap berita ini.'}</p>
         <div class="berita-footer">
           <div class="berita-author">
             <div class="berita-author-dot">A</div>
             <span>Admin · ${tglFormat}</span>
           </div>
-          <a href="javascript:void(0)" class="berita-readmore" onclick="bukaDetailBerita('${item.id}')">Baca →</a>
+          <a href="berita-detail.html?id=${item.id}" class="berita-readmore">Baca →</a>
         </div>
       </div>
     </div>`;
@@ -747,7 +747,7 @@ function muatBeritaFooter() {
   container.innerHTML = tiga.map((item, i) => `
     <div style="${i < tiga.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px' : ''}">
       <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-        <a href="javascript:void(0)" onclick="bukaDetailBerita('${item.id}')" style="color:inherit;transition:color 0.2s">${item.judul || 'Tanpa Judul'}</a>
+        <a href="berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s">${item.judul || 'Tanpa Judul'}</a>
       </p>
       <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">${formatTanggal(item.tanggal)}</p>
     </div>`).join('');
