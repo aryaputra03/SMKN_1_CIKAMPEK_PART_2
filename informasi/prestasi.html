@@ -131,36 +131,54 @@
       border: 1px solid var(--gray-soft); border-radius: var(--r-lg);
       overflow: hidden; box-shadow: var(--shadow-sm);
       transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      align-items: stretch; /* Kunci agar setiap card punya tinggi minimal yang seragam */
     }
     .prestasi-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--gold); }
 
+    /* Kontainer gambar dibersihkan dari ::before, ::after, dan overlay */
     .psp-thumb {
-      width: 220px;
-      aspect-ratio: 4 / 3;
-      height: auto;
+      width: 240px; 
       flex-shrink: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; overflow: hidden; padding: 20px 16px; gap: 12px;
+      position: relative; 
+      overflow: hidden;
+      background: var(--gray-soft); /* Warna dasar jika gambar tidak memuat */
     }
+
     .psp-thumb img {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      z-index: 0;
+      display: block;
+      aspect-ratio: 4 / 3; /* Menjaga rasio presisi 4:3 */
     }
-    .psp-thumb img ~ .psp-medal,
-    .psp-thumb img ~ .psp-rank {
-      z-index: 2;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+
+    .prestasi-body { 
+      flex: 1; padding: 24px 28px; 
+      display: flex; flex-direction: column; 
     }
-    .psp-thumb img ~ * {
-      position: relative;
-      z-index: 2;
+
+    .prestasi-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .level-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+    .level-nasional { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
+    .level-provinsi { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; }
+    .level-kota { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+    .level-internasional { background: #FCE7F3; color: #9D174D; border: 1px solid #F9A8D4; }
+
+    .prestasi-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 10px; }
+    .prestasi-detail-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .prestasi-detail-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); }
+    .prestasi-detail-item svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .prestasi-siswa { 
+      margin-top: auto; /* Ini kunci agar nama siswa selalu rapi di paling bawah meskipun tinggi judul berbeda-beda */
+      padding-top: 14px; 
+      border-top: 1px solid var(--gray-soft); 
+      display: flex; align-items: center; gap: 8px; 
     }
-    .psp-thumb::before { content: ''; position: absolute; inset: 0; opacity: 0.12; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 1px, transparent 0, transparent 50%); background-size: 12px 12px; }
+    .siswa-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+    .prestasi-siswa span { font-size: 13px; font-weight: 600; color: var(--navy); }
+
     /* overlay gelap saat ada foto */
     .psp-thumb.has-photo::after {
       content: '';
