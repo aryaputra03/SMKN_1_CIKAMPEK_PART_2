@@ -407,6 +407,8 @@ ul { list-style: none; }
   gap: 36px;
   align-items: start;
 }
+
+/* ── VIDEO WRAPPER (dinamis) ── */
 .sambutan-video-wrap {
   background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
   border-radius: var(--r-md);
@@ -414,6 +416,16 @@ ul { list-style: none; }
   position: relative;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; overflow: hidden;
+}
+/* Tampilan placeholder sebelum video dimuat */
+.sambutan-video-wrap .video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; height: 100%;
+  position: absolute; inset: 0;
+  transition: opacity 0.3s;
 }
 .sambutan-video-wrap .play-btn {
   width: 60px; height: 60px;
@@ -430,10 +442,23 @@ ul { list-style: none; }
   text-align: center; font-size: 12px; color: rgba(255,255,255,0.55);
   font-weight: 600; letter-spacing: 0.5px;
 }
-.sambutan-video-duration {
-  position: absolute; bottom: 12px; right: 14px;
-  font-size: 11.5px; color: rgba(255,255,255,0.7); font-weight: 600;
+/* iframe embed YouTube */
+.sambutan-video-wrap iframe.video-embed {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none;
+  border-radius: var(--r-md);
+  display: none; /* ditampilkan JS setelah URL dimuat */
 }
+/* Skeleton video */
+.video-skeleton {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, #2d3e55 25%, #3a4f6a 50%, #2d3e55 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--r-md);
+}
+
 .sambutan-text-side {}
 .sambutan-quote {
   font-style: italic;
@@ -560,12 +585,27 @@ ul { list-style: none; }
       </div>
 
       <div class="sambutan-grid">
-        <!-- Kiri: Video -->
-        <div class="sambutan-video-wrap">
-          <div class="play-btn">
-            <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg>
+        <!-- Kiri: Video (dinamis dari tabel video_profil) -->
+        <div class="sambutan-video-wrap" id="sambutan-video-container">
+          <!-- Skeleton saat loading -->
+          <div class="video-skeleton" id="video-skeleton"></div>
+          <!-- Placeholder play button (tampil jika TIDAK ada URL video) -->
+          <div class="video-placeholder" id="video-placeholder" style="display:none;">
+            <div class="play-btn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16"/></svg>
+            </div>
+            <span class="sambutan-video-label">Video Profil Sekolah</span>
           </div>
-          <span class="sambutan-video-duration">4:03</span>
+          <!-- iframe embed YouTube (tampil jika ada URL video) -->
+          <iframe
+            id="video-embed"
+            class="video-embed"
+            src=""
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="Video Profil SMKN 1 Cikampek">
+          </iframe>
         </div>
 
         <!-- Kanan: Teks Sambutan -->
@@ -798,53 +838,112 @@ ul { list-style: none; }
 </button>
 
 <!-- ══════════════════════════════════════════════════════════
-     SUPABASE SDK + CLIENT
-     Pastikan file supabase-client.js berisi:
-       import { createClient } from '...'
-       const SUPABASE_URL = 'https://XXXX.supabase.co'
-       const SUPABASE_ANON_KEY = 'eyJ...'
-       window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-     — ATAU sesuaikan path import di bawah dengan struktur folder Anda.
+     SUPABASE SDK
+     Ganti SUPABASE_URL dan SUPABASE_ANON_KEY di bawah
+     dengan kredensial project Supabase Anda.
 ══════════════════════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../admin/assets/js/supabase-client.js"></script>
-
 <script>
 // ═══════════════════════════════════════════════════════════════
-// VISI MISI — DATA DINAMIS DARI SUPABASE
+// ⚙️  KONFIGURASI SUPABASE — GANTI NILAI DI BAWAH INI
 // ═══════════════════════════════════════════════════════════════
+const SUPABASE_URL      = 'https://XXXX.supabase.co';   // ← ganti dengan URL project Anda
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1...';       // ← ganti dengan anon key Anda
 
-/**
- * renderVisi(visiText)
- * Mengisi card visi dengan teks dari database.
- * Jika kosong/null, tampilkan placeholder.
- */
+const { createClient } = supabase;
+const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ═══════════════════════════════════════════════════════════════
+// HELPER: Konversi URL YouTube biasa → URL embed
+// Sama persis dengan logika di admin/video.html
+// ═══════════════════════════════════════════════════════════════
+function getYouTubeEmbedUrl(url) {
+  if (!url || url.trim() === '') return null;
+  let videoId = null;
+  try {
+    const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+    const match = url.match(regex);
+    if (match && match[1]) videoId = match[1];
+  } catch (e) {
+    console.error('[Video] Format URL tidak valid');
+  }
+  // Tambahkan parameter agar video lebih rapi di dalam halaman
+  return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1` : null;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER: Video Profil (dari tabel video_profil, id = 1)
+// ═══════════════════════════════════════════════════════════════
+function renderVideo(urlVideo) {
+  const skeleton     = document.getElementById('video-skeleton');
+  const placeholder  = document.getElementById('video-placeholder');
+  const embedEl      = document.getElementById('video-embed');
+
+  // Sembunyikan skeleton
+  if (skeleton) skeleton.style.display = 'none';
+
+  const embedUrl = getYouTubeEmbedUrl(urlVideo);
+
+  if (embedUrl) {
+    // Ada URL valid → tampilkan iframe embed
+    embedEl.src = embedUrl;
+    embedEl.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
+  } else {
+    // Tidak ada URL → tampilkan placeholder play button
+    if (placeholder) placeholder.style.display = 'flex';
+    embedEl.style.display = 'none';
+  }
+}
+
+async function loadVideo() {
+  try {
+    const { data, error } = await _supabase
+      .from('video_profil')
+      .select('url_video')
+      .eq('id', 1)
+      .single();
+
+    if (error) {
+      console.error('[Video] Gagal memuat:', error.message);
+      // Sembunyikan skeleton, tampilkan placeholder
+      renderVideo(null);
+      return;
+    }
+
+    renderVideo(data ? data.url_video : null);
+
+  } catch (err) {
+    console.error('[Video] Error tidak terduga:', err);
+    renderVideo(null);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER: Visi (dari tabel visi_misi)
+// ═══════════════════════════════════════════════════════════════
 function renderVisi(visiText) {
   const skeleton = document.getElementById('visi-skeleton');
   const elText   = document.getElementById('visi-text');
   const elTags   = document.getElementById('visi-tagline');
 
-  // Sembunyikan skeleton
   skeleton.style.display = 'none';
 
   if (visiText && visiText.trim() !== '') {
-    // Tampilkan teks visi
-    elText.textContent = '"' + visiText.trim() + '"';
+    elText.textContent = '\u201C' + visiText.trim() + '\u201D';
     elText.style.display = 'block';
 
-    // Auto-extract kata kunci (kata ≥ 5 huruf & kapital pertama) sebagai tag
-    // Atau fallback ke tag default jika tidak ditemukan pola
+    // Auto-extract kata kunci kapital sebagai tag dekoratif
     const matches = visiText.match(/\b[A-Z][a-z]{3,}\b/g);
     const tags    = matches ? [...new Set(matches)].slice(0, 7) : [];
 
     if (tags.length > 0) {
       elTags.innerHTML = tags
-        .map(t => `<span class="visi-tag">${t}</span>`)
+        .map(t => `<span class="visi-tag">${escapeHtml(t)}</span>`)
         .join('');
       elTags.style.display = 'flex';
     }
   } else {
-    // Fallback: teks kosong di database
     elText.textContent = 'Visi sekolah belum diisi.';
     elText.style.fontStyle = 'normal';
     elText.style.color = 'rgba(255,255,255,0.5)';
@@ -854,11 +953,9 @@ function renderVisi(visiText) {
   }
 }
 
-/**
- * renderMisi(misiArray)
- * Mengisi card misi dengan array poin dari database (jsonb).
- * Setiap elemen array menjadi satu <li> bernomor.
- */
+// ═══════════════════════════════════════════════════════════════
+// RENDER: Misi (dari tabel visi_misi, kolom misi: jsonb array)
+// ═══════════════════════════════════════════════════════════════
 function renderMisi(misiArray) {
   const skeleton  = document.getElementById('misi-skeleton');
   const list      = document.getElementById('misi-list');
@@ -867,82 +964,82 @@ function renderMisi(misiArray) {
   skeleton.style.display = 'none';
 
   if (misiArray && misiArray.length > 0) {
-    list.innerHTML = misiArray
-      .filter(item => item && item.trim() !== '')
-      .map((item, idx) => `
-        <li>
-          <div class="misi-num">${idx + 1}</div>
-          <div class="misi-text-wrap">
-            <p>${escapeHtml(item.trim())}</p>
-          </div>
-        </li>
-      `)
-      .join('');
-    list.style.display = 'block';
-  } else {
-    emptyMsg.style.display = 'block';
+    const items = misiArray.filter(item => item && item.trim() !== '');
+    if (items.length > 0) {
+      list.innerHTML = items
+        .map((item, idx) => `
+          <li>
+            <div class="misi-num">${idx + 1}</div>
+            <div class="misi-text-wrap">
+              <p>${escapeHtml(item.trim())}</p>
+            </div>
+          </li>
+        `)
+        .join('');
+      list.style.display = 'block';
+      return;
+    }
   }
+  emptyMsg.style.display = 'block';
 }
 
-/**
- * renderTujuan(tujuanArray)
- * Mengisi card tujuan dengan array poin dari database (jsonb).
- */
+// ═══════════════════════════════════════════════════════════════
+// RENDER: Tujuan (dari tabel visi_misi, kolom tujuan: jsonb array)
+// ═══════════════════════════════════════════════════════════════
 function renderTujuan(tujuanArray) {
   const skeleton  = document.getElementById('tujuan-skeleton');
   const list      = document.getElementById('tujuan-list');
   const emptyMsg  = document.getElementById('tujuan-empty');
-  const section   = document.getElementById('section-tujuan');
 
   skeleton.style.display = 'none';
 
   if (tujuanArray && tujuanArray.length > 0) {
-    list.innerHTML = tujuanArray
-      .filter(item => item && item.trim() !== '')
-      .map((item, idx) => `
-        <li>
-          <div class="tujuan-num">${idx + 1}</div>
-          <div class="tujuan-text-wrap">
-            <p>${escapeHtml(item.trim())}</p>
-          </div>
-        </li>
-      `)
-      .join('');
-    list.style.display = 'block';
-  } else {
-    // Jika tujuan kosong, sembunyikan seluruh card tujuan agar rapi
-    emptyMsg.style.display = 'block';
+    const items = tujuanArray.filter(item => item && item.trim() !== '');
+    if (items.length > 0) {
+      list.innerHTML = items
+        .map((item, idx) => `
+          <li>
+            <div class="tujuan-num">${idx + 1}</div>
+            <div class="tujuan-text-wrap">
+              <p>${escapeHtml(item.trim())}</p>
+            </div>
+          </li>
+        `)
+        .join('');
+      list.style.display = 'block';
+      return;
+    }
   }
+  emptyMsg.style.display = 'block';
 }
 
-/**
- * escapeHtml(str)
- * Mencegah XSS — karakter HTML di-escape sebelum dimasukkan ke DOM.
- */
+// ═══════════════════════════════════════════════════════════════
+// HELPER: escapeHtml — cegah XSS
+// ═══════════════════════════════════════════════════════════════
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-/**
- * loadVisiMisi()
- * Fungsi utama: ambil data dari tabel visi_misi di Supabase,
- * lalu render ke masing-masing section.
- */
+// ═══════════════════════════════════════════════════════════════
+// LOAD: Visi, Misi, Tujuan dari Supabase
+// ═══════════════════════════════════════════════════════════════
 async function loadVisiMisi() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await _supabase
       .from('visi_misi')
       .select('visi, misi, tujuan')
       .single();
 
     if (error) {
       console.error('[Visi Misi] Gagal memuat data:', error.message);
-      // Sembunyikan semua skeleton, tampilkan pesan error
+      // Sembunyikan semua skeleton dengan pesan error
       ['visi-skeleton', 'misi-skeleton', 'tujuan-skeleton'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.innerHTML = '<p style="font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;">Gagal memuat data.</p>';
+        if (el) {
+          el.innerHTML = '<p style="font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;padding:8px 0;">Gagal memuat data. Silakan refresh halaman.</p>';
+        }
       });
       return;
     }
@@ -952,7 +1049,6 @@ async function loadVisiMisi() {
       renderMisi(data.misi);
       renderTujuan(data.tujuan);
     } else {
-      // Tidak ada row sama sekali
       renderVisi(null);
       renderMisi(null);
       renderTujuan(null);
@@ -964,19 +1060,18 @@ async function loadVisiMisi() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// UI INTERAKTIF (HEADER, MOBILE MENU, ANIMASI SCROLL)
-// — Tidak ada perubahan dari kode asli —
+// UI INTERAKTIF: Header, Mobile Menu, Scroll Animation
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Panggil loader data Supabase
-  loadVisiMisi();
+  // ── Panggil semua loader data secara paralel ──
+  Promise.all([loadVisiMisi(), loadVideo()]);
 
-  // Header scroll shadow
+  // ── Header scroll shadow ──
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
-  // Dropdown desktop
+  // ── Dropdown desktop ──
   document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
     let timer;
     item.addEventListener('mouseenter', () => {
@@ -995,21 +1090,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
 
-  // Mobile menu hamburger
-  const hamburger   = document.getElementById('hamburger-btn');
-  const mobileMenu  = document.getElementById('mobile-menu');
+  // ── Mobile menu hamburger ──
+  const hamburger  = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
   document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
     btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
   });
 
-  // Fade-up scroll animation
+  // ── Fade-up scroll animation ──
   const obs = new IntersectionObserver(entries => entries.forEach(e => {
     if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
   }), { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-  // Back to top button
+  // ── Back to top button ──
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
