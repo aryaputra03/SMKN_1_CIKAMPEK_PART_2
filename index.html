@@ -406,8 +406,6 @@
       transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0.22s;
     }
 
-    /* Bridge pseudo-element: menutup celah 8px antara nav-item dan dropdown
-   agar mouse tidak "keluar" saat berpindah dari tombol ke dropdown */
     .nav-item.has-dropdown::after {
       content: '';
       position: absolute;
@@ -686,10 +684,9 @@
       background-position: center;
     }
 
-.hero-overlay {
+    .hero-overlay {
       position: absolute;
       inset: 0;
-      /* Gradien gelap di kiri (untuk teks) dan memudar ke transparan di kanan (agar foto gedung terlihat jelas) */
       background: linear-gradient(90deg, rgba(10, 18, 35, 0.95) 0%, rgba(10, 18, 35, 0.5) 55%, rgba(10, 18, 35, 0) 100%);
     }
 
@@ -746,21 +743,21 @@
       }
     }
 
-.hero-title {
+    .hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(42px, 6vw, 80px);
       font-weight: 700;
-      color: #ffffff !important; /* Putih agar terlihat jelas di atas foto hero */
-      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6); /* Efek bayangan hitam lembut */
+      color: #ffffff !important;
+      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6);
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
     }
 
-.hero-subtitle {
+    .hero-subtitle {
       font-size: 16px;
-      color: #ffffff; /* Diubah menjadi putih solid (tidak transparan) */
-      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8); /* Efek bayangan hitam agak tebal */
+      color: #ffffff;
+      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.8);
       max-width: 480px;
       margin-bottom: 36px;
       line-height: 1.7;
@@ -1041,6 +1038,13 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .mpb-alumni-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .mpb-alumni-avatar svg {
@@ -1500,8 +1504,8 @@
       box-shadow: var(--shadow-md);
     }
 
-.jurusan-icon {
-      width: 72px; /* Diperbesar dari 56px agar gambar lebih jelas */
+    .jurusan-icon {
+      width: 72px;
       height: 72px;
       margin: 0 auto 16px;
       border-radius: var(--r-md);
@@ -1681,6 +1685,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+    }
+
+    .guru-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .guru-avatar-initials {
@@ -2160,7 +2171,6 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      /* ekskul-grid handled by dedicated mobile carousel block below */
       .footer-main-grid {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -2212,7 +2222,6 @@
         grid-template-columns: 1fr;
       }
 
-      /* ekskul-grid is a horizontal carousel on mobile — no grid override needed */
       .stats-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -2293,13 +2302,11 @@
     /* ── EKSKUL MOBILE CAROUSEL ──────────────────────── */
     @media (max-width: 768px) {
 
-      /* Hapus overflow container bawaan section */
       #ekskul .container {
         overflow: visible;
       }
 
       .ekskul-grid {
-        /* Ganti grid menjadi horizontal scroll carousel */
         display: flex !important;
         grid-template-columns: unset !important;
         gap: 14px;
@@ -2307,10 +2314,8 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 12px;
-        /* Tarik sedikit ke kiri agar card pertama rata dengan tepi */
         margin-left: -4px;
         padding-left: 4px;
-        /* Sembunyikan scrollbar tapi tetap bisa di-scroll */
         scrollbar-width: none;
       }
 
@@ -2319,7 +2324,6 @@
       }
 
       .ekskul-card {
-        /* Lebar tetap agar terlihat ada card berikutnya */
         flex: 0 0 68vw;
         max-width: 260px;
         scroll-snap-align: start;
@@ -2329,7 +2333,6 @@
         align-items: center;
       }
 
-      /* Truncate deskripsi — tampilkan 2 baris saja */
       .ekskul-card p {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -2339,7 +2342,6 @@
         margin-bottom: 10px;
       }
 
-      /* Indikator scroll visual di sisi kanan */
       #ekskul .container {
         position: relative;
       }
@@ -2401,8 +2403,47 @@
         aspect-ratio: 4 / 3;
       }
     }
+
+    /* ── VIDEO MODAL ─────────────────────────────────── */
+    .video-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9998;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal-overlay.open {
+      display: flex;
+    }
+    .video-modal-inner {
+      position: relative;
+      width: 90vw;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .video-modal-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
   </style>
-  <a href=https://wa.me/6281316865033 " target=" _blank" rel="noopener noreferrer" class="wa-float"
+  <a href="https://wa.me/6281316865033" target="_blank" rel="noopener noreferrer" class="wa-float"
     aria-label="Chat via WhatsApp" title="Hubungi kami via WhatsApp">
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -2414,29 +2455,36 @@
 <body>
 
   <!-- PRELOADER -->
-<div id="preloader">
+  <div id="preloader">
     <div class="preloader-logo" style="background: transparent;">
       <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek" style="width: 100%; height: 100%; object-fit: contain;">
     </div>
     <p class="preloader-text">Memuat halaman…</p>
   </div>
 
-  <!-- ══════════════ TOP BAR ══════════════ -->
+  <!-- VIDEO MODAL -->
+  <div class="video-modal-overlay" id="videoModal">
+    <div class="video-modal-inner">
+      <button class="video-modal-close" id="closeVideoModal">✕</button>
+      <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
   <!-- ══════════════ HEADER ══════════════ -->
   <header class="header">
     <div class="container header-main">
 
       <!-- LOGO -->
-<a href="index.html" class="logo-area">
-  <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
-    style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
-    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-  <div class="logo-placeholder" style="display:none">S</div>
-  <div class="logo-text">
-    <h1>SMKN 1 Cikampek</h1>
-    <p>Karawang, Jawa Barat</p>
-  </div>
-</a>
+      <a href="index.html" class="logo-area">
+        <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
+          style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-placeholder" style="display:none">S</div>
+        <div class="logo-text">
+          <h1>SMKN 1 Cikampek</h1>
+          <p>Karawang, Jawa Barat</p>
+        </div>
+      </a>
 
       <!-- NAVBAR DESKTOP -->
       <nav class="navbar">
@@ -2583,14 +2631,12 @@
     </div>
   </header>
 
-  <!-- ══════════════ BANNER TICKER ══════════════ -->
   <!-- ══════════════ HERO SLIDER ══════════════ -->
-<section class="hero">
-  <div class="hero-slide active">
-    <div class="hero-bg" style="background-image: url('assets/images/FOTOUTAMASMKNEGERI1CIKAMPEK.png');"></div>
-    <div class="hero-overlay"></div>
-  </div>
-  ...
+  <section class="hero">
+    <div class="hero-slide active">
+      <div class="hero-bg" style="background-image: url('assets/images/FOTOUTAMASMKNEGERI1CIKAMPEK.png');"></div>
+      <div class="hero-overlay"></div>
+    </div>
     <div class="hero-slide">
       <div class="hero-bg" style="background: linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%)"></div>
       <div class="hero-overlay"></div>
@@ -2602,9 +2648,8 @@
 
     <div class="hero-content">
       <div class="hero-inner">
-
         <h2 class="hero-title">SMKN 1 Cikampek</h2>
-        <p class="hero-subtitle">SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional. </p>
+        <p class="hero-subtitle">SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional.</p>
         <div class="hero-actions">
           <a href="https://wa.me/6281316865033" class="btn-hero-primary">
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -2628,13 +2673,12 @@
     </div>
   </section>
 
-  <!-- ══════════════ STATS BAR ══════════════ -->
-  <!-- ══════════════ 3-KOLOM: Profil + Pengumuman + Sambutan ══════════════ -->
+  <!-- ══════════════ 3-KOLOM: Lulusan + Pengumuman + Sambutan ══════════════ -->
   <section class="section">
     <div class="container">
       <div class="mid-three-grid">
 
-        <!-- Kiri: Alumni unggulan banner -->
+        <!-- Kiri: Lulusan Terbaik (DINAMIS dari tabel lulusan_terbaik) -->
         <div class="mid-profil-col fade-up">
           <div class="mid-profil-banner">
             <p class="mpb-subtitle"
@@ -2642,30 +2686,12 @@
               Kebanggaan Sekolah</p>
             <h3>Lulusan Terbaik</h3>
             <div class="mpb-tagline">Tahun Ini</div>
-
-            <!-- Container list alumni — diisi JavaScript -->
-            <div class="mpb-alumni-list" id="mpbAlumniList">
-              <!-- Skeleton loading -->
-              <div class="mpb-alumni-skeleton">
-                <div class="mpb-sk-avatar"></div>
-                <div class="mpb-sk-body">
-                  <div class="mpb-sk-line mpb-sk-w70"></div>
-                  <div class="mpb-sk-line mpb-sk-w50"></div>
-                </div>
-              </div>
-              <div class="mpb-alumni-skeleton">
-                <div class="mpb-sk-avatar"></div>
-                <div class="mpb-sk-body">
-                  <div class="mpb-sk-line mpb-sk-w70"></div>
-                  <div class="mpb-sk-line mpb-sk-w50"></div>
-                </div>
-              </div>
-              <div class="mpb-alumni-skeleton">
-                <div class="mpb-sk-avatar"></div>
-                <div class="mpb-sk-body">
-                  <div class="mpb-sk-line mpb-sk-w70"></div>
-                  <div class="mpb-sk-line mpb-sk-w50"></div>
-                </div>
+            <!-- DATA DINAMIS: diisi oleh JS -->
+            <div class="mpb-alumni-list" id="mpb-lulusan-list">
+              <!-- skeleton loading -->
+              <div class="mpb-alumni-item" style="opacity:0.4">
+                <div class="mpb-alumni-avatar"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg></div>
+                <div><strong style="color:rgba(255,255,255,0.3)">Memuat data...</strong></div>
               </div>
             </div>
 
@@ -2681,61 +2707,19 @@
         </div>
 
 
-        <!-- Tengah: Pengumuman -->
+        <!-- Tengah: Pengumuman (DINAMIS dari tabel berita kategori Pengumuman) -->
         <div class="mid-pengumuman-col fade-up">
           <div class="mid-pengumuman-box">
             <div class="mid-pengumuman-header">
               <h3>Pengumuman</h3>
               <a href="informasi/berita.html"
-                style="font-size:11.5px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Semua
-                →</a>
+                style="font-size:11.5px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Semua →</a>
             </div>
-            <div class="mid-pengumuman-list">
-              <div class="mid-pengumuman-item">
-                <div class="mid-pengum-icon">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M4 4h12v12H4zM7 8h6M7 11h4" />
-                  </svg>
-                </div>
-                <div class="mid-pengum-text">
-                  <a href="#">PPDB Jalur Afirmasi Disabilitas</a>
-                  <span>26 Mei, 2024</span>
-                </div>
-              </div>
-              <div class="mid-pengumuman-item">
-                <div class="mid-pengum-icon">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5" />
-                  </svg>
-                </div>
-                <div class="mid-pengum-text">
-                  <a href="#">Pengumuman Kelulusan Siswa Kelas XII TA 2024/2025</a>
-                  <span>20 Mei, 2024</span>
-                </div>
-              </div>
-              <div class="mid-pengumuman-item">
-                <div class="mid-pengum-icon">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path
-                      d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h0a2 2 0 002-2M9 5a2 2 0 012-2h0a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <div class="mid-pengum-text">
-                  <a href="#">Asesmen Sumatif Tengah Semester Ganjil 2025</a>
-                  <span>10 Mei, 2024</span>
-                </div>
-              </div>
-              <div class="mid-pengumuman-item">
-                <div class="mid-pengum-icon">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="3" y="3" width="14" height="14" rx="2" />
-                    <path d="M10 7v3M10 13h.01" />
-                  </svg>
-                </div>
-                <div class="mid-pengum-text">
-                  <a href="#">Pembagian Ruang Seleksi Mata Pelajaran Pilihan Coding</a>
-                  <span>05 Mei, 2024</span>
-                </div>
+            <!-- DATA DINAMIS: diisi oleh JS -->
+            <div class="mid-pengumuman-list" id="mid-pengumuman-list">
+              <div class="mid-pengumuman-item" style="opacity:0.4">
+                <div class="mid-pengum-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg></div>
+                <div class="mid-pengum-text"><a href="#">Memuat pengumuman...</a><span>—</span></div>
               </div>
             </div>
             <div class="mid-pengumuman-footer">
@@ -2744,16 +2728,17 @@
           </div>
         </div>
 
-        <!-- Kanan: Sambutan -->
+        <!-- Kanan: Sambutan + Video (DINAMIS dari tabel video_profil) -->
         <div class="mid-sambutan-col fade-up">
           <h3 class="mid-sambutan-title">Sambutan Kepala Sekolah</h3>
-          <div class="mid-sambutan-video">
+          <!-- Thumbnail klik untuk buka modal video -->
+          <div class="mid-sambutan-video" id="btn-play-video">
             <div class="play-btn">
               <svg viewBox="0 0 20 20" fill="currentColor">
                 <polygon points="6,4 16,10 6,16" />
               </svg>
             </div>
-            <span class="video-duration">4:03</span>
+            <span class="video-duration">Putar Video</span>
           </div>
           <p class="mid-sambutan-text"
             style="font-style:italic;font-size:13px;color:var(--text-muted);margin-bottom:10px">
@@ -2770,7 +2755,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ BERITA TERBARU ══════════════ -->
+  <!-- ══════════════ BERITA TERBARU (DINAMIS) ══════════════ -->
   <section class="section section-alt" id="berita">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2779,64 +2764,14 @@
         <div class="divider-gold"></div>
       </div>
 
-      <div class="berita-grid">
+      <!-- DATA DINAMIS: diisi oleh JS -->
+      <div class="berita-grid" id="berita-grid">
+        <!-- Skeleton cards -->
         <div class="berita-card fade-up">
-          <div class="berita-img" style="background:linear-gradient(135deg,#0F1E38,#1B2E4A)">
-            <div class="berita-date-tag">11 Mar, 2026</div>
-          </div>
+          <div class="berita-img" style="background:linear-gradient(135deg,#E2E8F0,#CBD5E1)"></div>
           <div class="berita-body">
-            <h3><a href="#">Berbagi Kasih, Menitipkan Harapan dan Doa di Bulan Suci</a></h3>
-            <p>Dalam balutan semangat berbagi di bulan Ramadan, siswa kelas XII SMKN 1 Cikampek menggelar aksi sosial…
-            </p>
-            <div class="berita-footer">
-              <a href="#" class="berita-readmore">Baca →</a>
-              <span class="berita-author">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="10" cy="6" r="3" />
-                  <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-                </svg>
-                Admin
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="berita-card fade-up">
-          <div class="berita-img" style="background:linear-gradient(135deg,#1a3666,#0F1E38)">
-            <div class="berita-date-tag">10 Nov, 2025</div>
-          </div>
-          <div class="berita-body">
-            <h3><a href="#">Di Hari Pahlawan, SMKN 1 Cikampek Lantik Pengurus OSIS Baru</a></h3>
-            <p>10 November 2025 — Pengurus OSIS 2025/2026 resmi dilantik dalam upacara yang khidmat dan penuh makna…</p>
-            <div class="berita-footer">
-              <a href="#" class="berita-readmore">Baca →</a>
-              <span class="berita-author">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="10" cy="6" r="3" />
-                  <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-                </svg>
-                Admin
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="berita-card fade-up">
-          <div class="berita-img" style="background:linear-gradient(135deg,#0a1628,#1B2E4A)">
-            <div class="berita-date-tag">15 Okt, 2025</div>
-          </div>
-          <div class="berita-body">
-            <h3><a href="#">Siswa SMKN 1 Cikampek Peduli Lingkungan: Gerakan Bersih-Bersih</a></h3>
-            <p>Siswa kelas X menunjukkan kepedulian mereka terhadap lingkungan melalui aksi nyata bersih-bersih area
-              sekolah…</p>
-            <div class="berita-footer">
-              <a href="#" class="berita-readmore">Baca →</a>
-              <span class="berita-author">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="10" cy="6" r="3" />
-                  <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-                </svg>
-                Admin
-              </span>
-            </div>
+            <h3 style="color:#CBD5E1">Memuat berita...</h3>
+            <p style="color:#E2E8F0">Sedang mengambil data dari server.</p>
           </div>
         </div>
       </div>
@@ -2846,8 +2781,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ PRESTASI TERBARU ══════════════ -->
-  </section>
+  <!-- ══════════════ PRESTASI TERBARU (DINAMIS) ══════════════ -->
   <section class="section" id="prestasi">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2856,119 +2790,9 @@
         <div class="divider-gold"></div>
       </div>
 
-      <div class="prestasi-list-container">
-
-        <div class="prestasi-row fade-up">
-          <div class="psp-thumb" style="background:linear-gradient(135deg,#1B2A4A,#2563EB)">
-            <div class="psp-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <circle cx="12" cy="8" r="6" />
-                <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
-              </svg>
-            </div>
-          </div>
-          <div class="prestasi-card">
-            <h4>JUARA 1 LKS TKJ PROVINSI JAWA BARAT</h4>
-            <div class="psc-meta">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="4" width="14" height="14" rx="1" />
-                  <path d="M3 8h14M7 2v4M13 2v4" />
-                </svg> 08 Apr, 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                </svg> Prestasi</span>
-            </div>
-            <div class="psc-scale">Skala Provinsi</div>
-            <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="10" cy="6" r="3" />
-                <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-              </svg> Ahmad Fauzi XII TKJ</div>
-          </div>
-        </div>
-
-        <div class="prestasi-row fade-up">
-          <div class="psp-thumb" style="background:linear-gradient(135deg,#16A34A,#15803d)">
-            <div class="psp-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9" />
-              </svg>
-            </div>
-          </div>
-          <div class="prestasi-card">
-            <h4>JUARA 2 PANAHAN COMPOUND OLYMPIC ROUND TEAM</h4>
-            <div class="psc-meta">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="4" width="14" height="14" rx="1" />
-                  <path d="M3 8h14M7 2v4M13 2v4" />
-                </svg> 06 Apr, 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                </svg> Prestasi</span>
-            </div>
-            <div class="psc-scale">Skala Provinsi</div>
-            <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="10" cy="6" r="3" />
-                <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-              </svg> Reza Ananda XII TP</div>
-          </div>
-        </div>
-
-        <div class="prestasi-row fade-up">
-          <div class="psp-thumb" style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">
-            <div class="psp-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path
-                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-            </div>
-          </div>
-          <div class="prestasi-card">
-            <h4>JUARA 3 PENCAK SILAT PUTRA</h4>
-            <div class="psc-meta">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="4" width="14" height="14" rx="1" />
-                  <path d="M3 8h14M7 2v4M13 2v4" />
-                </svg> 06 Apr, 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                </svg> Prestasi</span>
-            </div>
-            <div class="psc-scale">Skala Provinsi</div>
-            <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="10" cy="6" r="3" />
-                <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-              </svg> Budi Santoso X E8</div>
-          </div>
-        </div>
-
-        <div class="prestasi-row fade-up">
-          <div class="psp-thumb" style="background:linear-gradient(135deg,#374151,#1f2937)">
-            <div class="psp-thumb-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v4l3 3" />
-              </svg>
-            </div>
-          </div>
-          <div class="prestasi-card">
-            <h4>JUARA 1 LKS DESAIN KOMUNIKASI VISUAL</h4>
-            <div class="psc-meta">
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="4" width="14" height="14" rx="1" />
-                  <path d="M3 8h14M7 2v4M13 2v4" />
-                </svg> 06 Apr, 2024</span>
-              <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                </svg> Prestasi</span>
-            </div>
-            <div class="psc-scale">Skala Kota</div>
-            <div class="psc-siswa"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="10" cy="6" r="3" />
-                <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7" />
-              </svg> Siti Rahayu XII DKV</div>
-          </div>
-        </div>
-
+      <!-- DATA DINAMIS: diisi oleh JS -->
+      <div class="prestasi-list-container" id="prestasi-list-container">
+        <div style="text-align:center;color:var(--text-light);padding:40px 0;opacity:0.5">Memuat data prestasi...</div>
       </div>
 
       <div class="btn-center">
@@ -2977,7 +2801,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ JURUSAN ══════════════ -->
+  <!-- ══════════════ JURUSAN (STATIS — tidak ada tabel DB) ══════════════ -->
   <section class="section section-alt" id="jurusan">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2988,7 +2812,7 @@
           profesional dan berdaya saing tinggi.</p>
       </div>
       <div class="jurusan-grid">
- <div class="jurusan-card fade-up">
+        <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/agribisnistanamanpangandan holtikultura.png" alt="ATPH" style="width: 100%; height: 100%; object-fit: contain;">
           </div>
@@ -2996,7 +2820,6 @@
           <p>Membekali siswa keahlian budidaya tanaman dan kewirausahaan pertanian.</p>
           <span class="jurusan-badge" style="background:#F0FDF4;color:#16A34A">ATPH</span>
         </div>
-
         <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/elektronikaindustri.PNG" alt="TEI" style="width: 100%; height: 100%; object-fit: contain;">
@@ -3005,7 +2828,6 @@
           <p>Perancangan dan perawatan perangkat elektronika industri dan konsumer.</p>
           <span class="jurusan-badge" style="background:#EFF6FF;color:#2563EB">TEI</span>
         </div>
-
         <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/kimiaanalisis.PNG" alt="KA" style="width: 100%; height: 100%; object-fit: contain;">
@@ -3014,7 +2836,6 @@
           <p>Mencetak analis kimia yang kompeten di laboratorium industri dan penelitian.</p>
           <span class="jurusan-badge" style="background:#FDF4FF;color:#9333EA">KA</span>
         </div>
-
         <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/otomasiindustri.PNG" alt="TOI" style="width: 100%; height: 100%; object-fit: contain;">
@@ -3023,7 +2844,6 @@
           <p>Instalasi, pemrograman, dan perawatan sistem otomasi kontrol industri.</p>
           <span class="jurusan-badge" style="background:#FFF1F2;color:#E11D48">TOI</span>
         </div>
-
         <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/teknikkendaraanringan.PNG" alt="TKR" style="width: 100%; height: 100%; object-fit: contain;">
@@ -3032,7 +2852,6 @@
           <p>Perawatan dan perbaikan mesin, sasis, serta kelistrikan kendaraan bermotor.</p>
           <span class="jurusan-badge" style="background:#FFF7ED;color:#EA580C">TKR</span>
         </div>
-
         <div class="jurusan-card fade-up">
           <div class="jurusan-icon" style="background: transparent;">
             <img src="assets/images/jurusan/teknikpemesinan.PNG" alt="TP" style="width: 100%; height: 100%; object-fit: contain;">
@@ -3045,7 +2864,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ ORGANISASI & EKSKUL ══════════════ -->
+  <!-- ══════════════ ORGANISASI & EKSKUL (STATIS) ══════════════ -->
   <section class="section" id="ekskul">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -3057,77 +2876,70 @@
       </div>
 
       <div class="ekskul-grid">
-<div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#EFF6FF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#EFF6FF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>
+          </div>
+          <h3>Pramuka</h3>
+          <p>Organisasi kepanduan yang membentuk mentalitas tangguh, kemandirian, dan kepedulian sosial melalui kegiatan edukatif.</p>
+          <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">Wajib</span>
         </div>
-        <h3>Pramuka</h3>
-        <p>Organisasi kepanduan yang membentuk mentalitas tangguh, kemandirian, dan kepedulian sosial melalui kegiatan edukatif.</p>
-        <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">Wajib</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#FFF7ED">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#FFF7ED">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+          </div>
+          <h3>Paskibra</h3>
+          <p>Wadah pembinaan karakter yang mencetak generasi muda disiplin, berjiwa kepemimpinan kuat, dan nasionalisme tinggi.</p>
+          <span class="ekskul-badge" style="background:#FFF7ED;color:#EA580C">Pilihan</span>
         </div>
-        <h3>Paskibra</h3>
-        <p>Wadah pembinaan karakter yang mencetak generasi muda disiplin, berjiwa kepemimpinan kuat, dan nasionalisme tinggi.</p>
-        <span class="ekskul-badge" style="background:#FFF7ED;color:#EA580C">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#FFF1F2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/><path d="M12 7v6"/><path d="M9 10h6"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#FFF1F2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/><path d="M12 7v6"/><path d="M9 10h6"/></svg>
+          </div>
+          <h3>PMR</h3>
+          <p>Ruang kemanusiaan yang melatih kepekaan sosial dan keterampilan pertolongan pertama pada kecelakaan (P3K).</p>
+          <span class="ekskul-badge" style="background:#FFF1F2;color:#E11D48">Pilihan</span>
         </div>
-        <h3>PMR</h3>
-        <p>Ruang kemanusiaan yang melatih kepekaan sosial dan keterampilan pertolongan pertama pada kecelakaan (P3K).</p>
-        <span class="ekskul-badge" style="background:#FFF1F2;color:#E11D48">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#FDF4FF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#FDF4FF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3>Jurnalistik</h3>
+          <p>Wadah kreativitas siswa dalam mengasah kemampuan literasi, meliput berita, dan mengelola informasi sekolah secara tajam.</p>
+          <span class="ekskul-badge" style="background:#FDF4FF;color:#9333EA">Pilihan</span>
         </div>
-        <h3>Jurnalistik</h3>
-        <p>Wadah kreativitas siswa dalam mengasah kemampuan literasi, meliput berita, dan mengelola informasi sekolah secara tajam.</p>
-        <span class="ekskul-badge" style="background:#FDF4FF;color:#9333EA">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#F0FDF4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3C9 6 9 9 12 12s3 6 0 9"/><path d="M3 12h18"/><path d="M4.5 7.5C7 8.5 9 9 12 9s5-.5 7.5-1.5"/><path d="M4.5 16.5C7 15.5 9 15 12 15s5 .5 7.5 1.5"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#F0FDF4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3C9 6 9 9 12 12s3 6 0 9"/><path d="M3 12h18"/><path d="M4.5 7.5C7 8.5 9 9 12 9s5-.5 7.5-1.5"/><path d="M4.5 16.5C7 15.5 9 15 12 15s5 .5 7.5 1.5"/></svg>
+          </div>
+          <h3>Futsal</h3>
+          <p>Komunitas olahraga populer yang memadukan kecepatan berpikir, akurasi operan, dan kerja sama tim secara kompetitif.</p>
+          <span class="ekskul-badge" style="background:#F0FDF4;color:#16A34A">Pilihan</span>
         </div>
-        <h3>Futsal</h3>
-        <p>Komunitas olahraga populer yang memadukan kecepatan berpikir, akurasi operan, dan kerja sama tim secara kompetitif.</p>
-        <span class="ekskul-badge" style="background:#F0FDF4;color:#16A34A">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#FFFBEB">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#FFFBEB">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+          </div>
+          <h3>Bola Basket</h3>
+          <p>Sarana pengembangan bakat yang dinamis untuk membangun stamina, kelincahan fisik, taktik, dan kerja sama tim yang solid.</p>
+          <span class="ekskul-badge" style="background:#FFFBEB;color:#D97706">Pilihan</span>
         </div>
-        <h3>Bola Basket</h3>
-        <p>Sarana pengembangan bakat yang dinamis untuk membangun stamina, kelincahan fisik, taktik, dan kerja sama tim yang solid.</p>
-        <span class="ekskul-badge" style="background:#FFFBEB;color:#D97706">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#FFF1F2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#FFF1F2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <h3>Seni Tari</h3>
+          <p>Media kreativitas estetis yang bertujuan melestarikan warisan gerakan tari tradisional sekaligus mengeksplorasi seni gerak modern.</p>
+          <span class="ekskul-badge" style="background:#FFF1F2;color:#E11D48">Pilihan</span>
         </div>
-        <h3>Seni Tari</h3>
-        <p>Media kreativitas estetis yang bertujuan melestarikan warisan gerakan tari tradisional sekaligus mengeksplorasi seni gerak modern.</p>
-        <span class="ekskul-badge" style="background:#FFF1F2;color:#E11D48">Pilihan</span>
-      </div>
-
-      <div class="ekskul-card fade-up">
-        <div class="ekskul-icon" style="background:#EFF6FF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <div class="ekskul-card fade-up">
+          <div class="ekskul-icon" style="background:#EFF6FF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Seni Musik</h3>
+          <p>Ruang ekspresi bagi para pencinta melodi untuk mengasah bakat vokal maupun instrumen dalam berbagai genre musik harmonis.</p>
+          <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">Pilihan</span>
         </div>
-        <h3>Seni Musik</h3>
-        <p>Ruang ekspresi bagi para pencinta melodi untuk mengasah bakat vokal maupun instrumen dalam berbagai genre musik harmonis.</p>
-        <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">Pilihan</span>
-      </div>
       </div>
 
       <div class="btn-center">
@@ -3135,6 +2947,8 @@
       </div>
     </div>
   </section>
+
+  <!-- ══════════════ GURU & TENAGA KEPENDIDIKAN (DINAMIS) ══════════════ -->
   <section class="section" id="guru">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -3143,87 +2957,12 @@
         <div class="divider-gold"></div>
       </div>
       <div class="guru-carousel-wrap fade-up">
-        <div class="guru-carousel">
-          <!-- Guru Cards — avatar: initials di atas, no emoji -->
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">BS</div>
-            </div>
-            <div class="guru-body">
-              <h4>Drs. Budi Santoso, M.Pd</h4>
-              <p>Kepala Sekolah</p>
-              <span class="guru-mapel">Manajemen</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">SW</div>
-            </div>
-            <div class="guru-body">
-              <h4>Sri Wahyuni, S.Pd, M.Pd</h4>
-              <p>Waka Kurikulum</p>
-              <span class="guru-mapel">Matematika</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">AR</div>
-            </div>
-            <div class="guru-body">
-              <h4>Ahmad Rizki, S.T, M.T</h4>
-              <p>Ketua Jurusan TKJ</p>
-              <span class="guru-mapel">Jaringan</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">DK</div>
-            </div>
-            <div class="guru-body">
-              <h4>Dewi Kusuma, S.Pd</h4>
-              <p>Waka Kesiswaan</p>
-              <span class="guru-mapel">Bahasa Inggris</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">RP</div>
-            </div>
-            <div class="guru-body">
-              <h4>Reza Pratama, S.Kom</h4>
-              <p>Guru TKJ</p>
-              <span class="guru-mapel">Informatika</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">SI</div>
-            </div>
-            <div class="guru-body">
-              <h4>Sari Indah, S.T, M.T</h4>
-              <p>Ketua Jurusan TP</p>
-              <span class="guru-mapel">Pemesinan</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">HG</div>
-            </div>
-            <div class="guru-body">
-              <h4>Hendra Gunawan, S.Pd</h4>
-              <p>Guru Olahraga</p>
-              <span class="guru-mapel">PJOK</span>
-            </div>
-          </div>
-          <div class="guru-card">
-            <div class="guru-avatar-wrap">
-              <div class="guru-avatar-initials">RS</div>
-            </div>
-            <div class="guru-body">
-              <h4>Rina Safitri, S.Ds</h4>
-              <p>Ketua Jurusan DKV</p>
-              <span class="guru-mapel">Desain Grafis</span>
-            </div>
+        <!-- DATA DINAMIS: diisi oleh JS -->
+        <div class="guru-carousel" id="guru-carousel">
+          <!-- Skeleton -->
+          <div class="guru-card" style="opacity:0.4">
+            <div class="guru-avatar-wrap"><div class="guru-avatar-initials" style="background:#E2E8F0;color:#CBD5E1">--</div></div>
+            <div class="guru-body"><h4 style="color:#E2E8F0">Memuat...</h4><p style="color:#E2E8F0">—</p></div>
           </div>
         </div>
       </div>
@@ -3245,21 +2984,21 @@
         <div class="footer-main-grid">
           <!-- Brand -->
           <div class="fade-up">
- <div class="footer-brand-logo">
-  <img src="assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
-    style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
-  <div>
-    <p class="footer-brand-name">SMKN 1 Cikampek</p>
-    <p class="footer-brand-loc">Karawang, Jawa Barat</p>
-  </div>
-</div>
+            <div class="footer-brand-logo">
+              <img src="assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
+                style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
+              <div>
+                <p class="footer-brand-name">SMKN 1 Cikampek</p>
+                <p class="footer-brand-loc">Karawang, Jawa Barat</p>
+              </div>
+            </div>
             <p class="footer-brand-desc">
-    SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional. 
+              SMK Negeri 1 Cikampek adalah salah satu lembaga pendidikan kejuruan negeri unggulan yang terletak di Jalan Sukamanah Timur, Cikampek Barat, Kabupaten Karawang, Jawa Barat. Berdiri secara resmi melalui SK Penegerian pada 17 November 2000, sekolah ini berkomitmen penuh mencetak lulusan yang kompeten, terampil, dan siap diserap oleh dunia kerja maupun sektor industri nasional.
             </p>
             <div class="footer-social">
- <a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
-</a>
+              <a href="https://www.tiktok.com/@smkn1cikampek_" title="TikTok" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
+              </a>
               <a href="https://www.instagram.com/p/DZMqr9zP9nw/?igsh=MWRtaXB2bGl6eDN2MQ==" title="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -3269,8 +3008,7 @@
               </a>
               <a href="https://youtu.be/Opljuy6-T5Y?si=uFEfDkzsFDXEaLqb" title="YouTube">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path
-                    d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                  <path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
                   <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
                 </svg>
               </a>
@@ -3294,30 +3032,13 @@
             </div>
           </div>
 
-          <!-- Info Sekolah -->
+          <!-- Info Terbaru (DINAMIS dari tabel berita) -->
           <div class="fade-up">
             <h4 class="footer-col-title">Info Terbaru</h4>
-            <div style="display:flex;flex-direction:column;gap:16px">
-              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
-                    onmouseout="this.style.color='inherit'">PPDB Jalur Afirmasi Disabilitas</a>
-                </p>
-                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">26 Mei, 2026</p>
-              </div>
-              <div style="border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
-                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
-                    onmouseout="this.style.color='inherit'">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
-                </p>
-                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">04 Mei, 2026</p>
-              </div>
-              <div>
-                <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                  <a href="#" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'"
-                    onmouseout="this.style.color='inherit'">Surat Edaran Kelulusan Siswa Kelas XII</a>
-                </p>
-                <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">18 Apr, 2026</p>
+            <!-- DATA DINAMIS: diisi oleh JS -->
+            <div id="footer-info-terbaru" style="display:flex;flex-direction:column;gap:16px">
+              <div style="opacity:0.3;border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy)">Memuat...</p>
               </div>
             </div>
           </div>
@@ -3328,7 +3049,6 @@
     <!-- Map + Contact -->
     <div class="container">
       <div class="footer-map-contact">
-        <!-- Map -->
         <div>
           <p class="footer-map-title">Denah Lokasi</p>
           <div class="footer-map-frame">
@@ -3339,7 +3059,6 @@
             </iframe>
           </div>
         </div>
-        <!-- Contact -->
         <div>
           <p class="footer-contact-title">Informasi Kontak</p>
           <div class="footer-contact-list">
@@ -3358,8 +3077,7 @@
             <div class="footer-contact-item">
               <div class="fci-icon">
                 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path
-                    d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z" />
+                  <path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z" />
                 </svg>
               </div>
               <div>
@@ -3416,24 +3134,373 @@
     </svg>
   </button>
 
-  <script>
-    // ════════════════════════════════════════════
-    //  SMKN 1 CIKAMPEK — main.js (inline)
-    // ════════════════════════════════════════════
-    document.addEventListener('DOMContentLoaded', () => {
+  <!-- ══════════════ SUPABASE CLIENT ══════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../admin/assets/js/supabase-client.js"></script>
 
-      // ── JAM DIGITAL ──
-      function updateJam() {
-        const el = document.getElementById('jam-digital');
-        if (!el) return;
-        const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        el.textContent = `${h}:${m}:${s}`;
+  <script>
+    // ════════════════════════════════════════════════════════════
+    //  SMKN 1 CIKAMPEK — DYNAMIC DATA LOADER (Supabase)
+    //  Membaca data dari: berita, prestasi, guru, lulusan_terbaik,
+    //  video_profil
+    //  Tidak mengubah tampilan/style sama sekali.
+    // ════════════════════════════════════════════════════════════
+
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Format tanggal ke bahasa Indonesia
+    // ────────────────────────────────────────────────────────────
+    function formatTanggalID(tanggalStr) {
+      if (!tanggalStr) return '—';
+      const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+      const d = new Date(tanggalStr);
+      if (isNaN(d)) return tanggalStr;
+      return `${d.getDate()} ${bulan[d.getMonth()]}, ${d.getFullYear()}`;
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Potong teks panjang
+    // ────────────────────────────────────────────────────────────
+    function truncate(str, max) {
+      if (!str) return '';
+      return str.length > max ? str.substring(0, max) + '…' : str;
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Warna gradient untuk prestasi berdasarkan tingkat
+    // ────────────────────────────────────────────────────────────
+    const prestasiGradients = [
+      'linear-gradient(135deg,#1B2A4A,#2563EB)',
+      'linear-gradient(135deg,#16A34A,#15803d)',
+      'linear-gradient(135deg,#7C3AED,#5b21b6)',
+      'linear-gradient(135deg,#374151,#1f2937)',
+      'linear-gradient(135deg,#DC2626,#991b1b)',
+      'linear-gradient(135deg,#0369A1,#075985)',
+    ];
+
+    const prestasiIcons = [
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>`,
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`,
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+    ];
+
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Ambil initials dari nama
+    // ────────────────────────────────────────────────────────────
+    function getInitials(nama) {
+      if (!nama) return '--';
+      const parts = nama.replace(/[.,].*$/, '').trim().split(' ');
+      if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 1. LOAD BERITA (tabel: berita, ambil 3 terbaru)
+    // ────────────────────────────────────────────────────────────
+    async function loadBerita() {
+      try {
+        const { data, error } = await supabase
+          .from('berita')
+          .select('id, judul, slug, isi, foto_url, tanggal, kategori')
+          .order('tanggal', { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+        if (!data || data.length === 0) return;
+
+        const grid = document.getElementById('berita-grid');
+        grid.innerHTML = data.map(item => {
+          const bgImg = item.foto_url
+            ? `background-image:url('${item.foto_url}');`
+            : 'background:linear-gradient(135deg,#0F1E38,#1B2E4A);';
+          const ringkasan = truncate(item.isi ? item.isi.replace(/<[^>]*>/g, '') : '', 100);
+          return `
+            <div class="berita-card fade-up">
+              <div class="berita-img">
+                <div class="berita-img-bg" style="${bgImg}background-size:cover;background-position:center;"></div>
+                <div class="berita-date-tag">${formatTanggalID(item.tanggal)}</div>
+              </div>
+              <div class="berita-body">
+                <h3><a href="informasi/berita-detail.html?id=${item.id}">${item.judul || 'Tanpa Judul'}</a></h3>
+                <p>${ringkasan || 'Klik untuk membaca selengkapnya.'}</p>
+                <div class="berita-footer">
+                  <a href="informasi/berita-detail.html?id=${item.id}" class="berita-readmore">Baca →</a>
+                  <span class="berita-author">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="10" cy="6" r="3"/>
+                      <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
+                    </svg>
+                    Admin
+                  </span>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+
+        // Trigger fade-up untuk kartu baru
+        requestAnimationFrame(() => {
+          grid.querySelectorAll('.fade-up').forEach(el => {
+            fadeObs.observe(el);
+          });
+        });
+
+      } catch (err) {
+        console.error('Gagal memuat berita:', err.message);
       }
-      updateJam();
-      setInterval(updateJam, 1000);
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman, ambil 4)
+    // ────────────────────────────────────────────────────────────
+    async function loadPengumuman() {
+      try {
+        const { data, error } = await supabase
+          .from('berita')
+          .select('id, judul, tanggal, kategori')
+          .eq('kategori', 'Pengumuman')
+          .order('tanggal', { ascending: false })
+          .limit(4);
+
+        if (error) throw error;
+
+        const list = document.getElementById('mid-pengumuman-list');
+
+        if (!data || data.length === 0) {
+          list.innerHTML = `
+            <div class="mid-pengumuman-item">
+              <div class="mid-pengum-icon">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg>
+              </div>
+              <div class="mid-pengum-text">
+                <a href="informasi/berita.html">Belum ada pengumuman terbaru</a>
+                <span>—</span>
+              </div>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = data.map(item => `
+          <div class="mid-pengumuman-item">
+            <div class="mid-pengum-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg>
+            </div>
+            <div class="mid-pengum-text">
+              <a href="informasi/berita-detail.html?id=${item.id}">${truncate(item.judul, 60)}</a>
+              <span>${formatTanggalID(item.tanggal)}</span>
+            </div>
+          </div>`).join('');
+
+      } catch (err) {
+        console.error('Gagal memuat pengumuman:', err.message);
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 3. LOAD PRESTASI (tabel: prestasi, ambil 4 terbaru)
+    // ────────────────────────────────────────────────────────────
+    async function loadPrestasi() {
+      try {
+        const { data, error } = await supabase
+          .from('prestasi')
+          .select('id, judul, deskripsi, tingkat, tahun, foto_url')
+          .order('tahun', { ascending: false })
+          .limit(4);
+
+        if (error) throw error;
+
+        const container = document.getElementById('prestasi-list-container');
+
+        if (!data || data.length === 0) {
+          container.innerHTML = `<div style="text-align:center;color:var(--text-light);padding:40px 0">Belum ada data prestasi.</div>`;
+          return;
+        }
+
+        container.innerHTML = data.map((item, idx) => {
+          const gradientBg = item.foto_url
+            ? `background-image:url('${item.foto_url}');background-size:cover;background-position:center;`
+            : `background:${prestasiGradients[idx % prestasiGradients.length]};`;
+          const iconHtml = item.foto_url ? '' : `<div class="psp-thumb-icon">${prestasiIcons[idx % prestasiIcons.length]}</div>`;
+
+          return `
+            <div class="prestasi-row fade-up">
+              <div class="psp-thumb" style="${gradientBg}">
+                ${iconHtml}
+              </div>
+              <div class="prestasi-card">
+                <h4>${item.judul || 'Prestasi'}</h4>
+                <div class="psc-meta">
+                  <span>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/>
+                    </svg>
+                    ${item.tahun || '—'}
+                  </span>
+                  <span>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+                    </svg>
+                    Prestasi
+                  </span>
+                </div>
+                <div class="psc-scale">Skala ${item.tingkat || 'Umum'}</div>
+                <div class="psc-siswa">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
+                  </svg>
+                  ${truncate(item.deskripsi || '', 80)}
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+
+        requestAnimationFrame(() => {
+          container.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+        });
+
+      } catch (err) {
+        console.error('Gagal memuat prestasi:', err.message);
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 4. LOAD LULUSAN TERBAIK (tabel: lulusan_terbaik, ambil 3)
+    // ────────────────────────────────────────────────────────────
+    async function loadLulusan() {
+      try {
+        const { data, error } = await supabase
+          .from('lulusan_terbaik')
+          .select('id, nama, tahun_lulus, jurusan, pencapaian, foto_url')
+          .order('urutan', { ascending: true })
+          .order('tahun_lulus', { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+
+        const list = document.getElementById('mpb-lulusan-list');
+
+        if (!data || data.length === 0) {
+          list.innerHTML = `
+            <div class="mpb-alumni-item">
+              <div class="mpb-alumni-avatar">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+              </div>
+              <div><strong>Belum ada data</strong><span>—</span></div>
+            </div>`;
+          return;
+        }
+
+        list.innerHTML = data.map(item => {
+          const avatarHtml = item.foto_url
+            ? `<div class="mpb-alumni-avatar"><img src="${item.foto_url}" alt="${item.nama}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>`
+            : `<div class="mpb-alumni-avatar"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg></div>`;
+          return `
+            <div class="mpb-alumni-item">
+              ${avatarHtml}
+              <div>
+                <strong>${item.nama} (${item.jurusan || ''})</strong>
+                <span>${truncate(item.pencapaian || '', 50)}</span>
+              </div>
+            </div>`;
+        }).join('');
+
+      } catch (err) {
+        console.error('Gagal memuat lulusan:', err.message);
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 5. LOAD GURU (tabel: guru, ambil semua urut berdasarkan urutan)
+    // ────────────────────────────────────────────────────────────
+    async function loadGuru() {
+      try {
+        const { data, error } = await supabase
+          .from('guru')
+          .select('id, nama, jabatan, nip, foto_url, urutan')
+          .order('urutan', { ascending: true });
+
+        if (error) throw error;
+        if (!data || data.length === 0) return;
+
+        const carousel = document.getElementById('guru-carousel');
+        carousel.innerHTML = data.map(item => {
+          const avatarHtml = item.foto_url
+            ? `<img src="${item.foto_url}" alt="${item.nama}" style="width:100%;height:100%;object-fit:cover;">`
+            : `<div class="guru-avatar-initials">${getInitials(item.nama)}</div>`;
+          return `
+            <div class="guru-card">
+              <div class="guru-avatar-wrap">${avatarHtml}</div>
+              <div class="guru-body">
+                <h4>${item.nama || '—'}</h4>
+                <p>${item.jabatan || '—'}</p>
+                <span class="guru-mapel">${item.nip || ''}</span>
+              </div>
+            </div>`;
+        }).join('');
+
+        // Reset posisi carousel setelah data dimuat
+        carouselPos = 0;
+
+      } catch (err) {
+        console.error('Gagal memuat guru:', err.message);
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 6. LOAD VIDEO PROFIL (tabel: video_profil, id = 1)
+    // ────────────────────────────────────────────────────────────
+    async function loadVideoProfil() {
+      try {
+        const { data, error } = await supabase
+          .from('video_profil')
+          .select('url_video')
+          .eq('id', 1)
+          .single();
+
+        if (error || !data || !data.url_video) return;
+
+        // Simpan URL video ke atribut data agar bisa dibuka modal
+        const btnPlay = document.getElementById('btn-play-video');
+        btnPlay.dataset.videoUrl = data.url_video;
+
+      } catch (err) {
+        console.error('Gagal memuat video profil:', err.message);
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 7. LOAD FOOTER INFO TERBARU (tabel: berita, 3 terbaru)
+    // ────────────────────────────────────────────────────────────
+    async function loadFooterInfo() {
+      try {
+        const { data, error } = await supabase
+          .from('berita')
+          .select('id, judul, tanggal')
+          .order('tanggal', { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+        if (!data || data.length === 0) return;
+
+        const container = document.getElementById('footer-info-terbaru');
+        container.innerHTML = data.map((item, idx) => `
+          <div style="${idx < data.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px;' : ''}">
+            <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4;">
+              <a href="informasi/berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'" onmouseout="this.style.color='inherit'">${truncate(item.judul, 70)}</a>
+            </p>
+            <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">${formatTanggalID(item.tanggal)}</p>
+          </div>`).join('');
+
+      } catch (err) {
+        console.error('Gagal memuat footer info:', err.message);
+      }
+    }
+
+    // ════════════════════════════════════════════════════════════
+    //  MAIN.JS — Semua logika UI interaktif (TIDAK DIUBAH)
+    // ════════════════════════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
 
       // ── HEADER SCROLL ──
       const header = document.querySelector('.header');
@@ -3441,7 +3508,7 @@
         header?.classList.toggle('scrolled', window.scrollY > 60);
       });
 
-      // ── DROPDOWN NAVBAR (hover + delay agar tidak hilang saat geser ke dropdown) ──
+      // ── DROPDOWN NAVBAR ──
       document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
         let closeTimer;
         function openDropdown() {
@@ -3505,69 +3572,90 @@
         dots.forEach((dot, i) => dot.addEventListener('click', () => { stopAutoSlide(); goToSlide(i); startAutoSlide(); }));
       }
 
-      // ── COUNTER ──
-      function animateCounter(el, target, suffix) {
-        let current = 0;
-        const inc = target / (1800 / 16);
-        const timer = setInterval(() => {
-          current += inc;
-          if (current >= target) { current = target; clearInterval(timer); }
-          el.textContent = Math.floor(current).toLocaleString('id-ID') + suffix;
-        }, 16);
-      }
-      const counterObs = new IntersectionObserver((entries) => {
+      // ── FADE-UP (IntersectionObserver — global, dipakai juga oleh dynamic loader) ──
+      window.fadeObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const el = entry.target;
-            animateCounter(el, parseInt(el.dataset.target || '0'), el.dataset.suffix || '');
-            counterObs.unobserve(el);
+            entry.target.classList.add('visible');
+            window.fadeObs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.4 });
-      document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
-
-      // ── FADE-UP ──
-      const fadeObs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) { entry.target.classList.add('visible'); fadeObs.unobserve(entry.target); }
-        });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+      document.querySelectorAll('.fade-up').forEach(el => window.fadeObs.observe(el));
 
       // ── GURU CAROUSEL ──
-      const guruCarousel = document.querySelector('.guru-carousel');
+      const guruCarouselEl = document.getElementById('guru-carousel');
       const prevBtn = document.querySelector('.carousel-btn.prev');
       const nextBtn = document.querySelector('.carousel-btn.next');
-      if (guruCarousel) {
-        let carouselPos = 0;
-        const cardWidth = 200;
-        const visibleCards = 5;
-        function getMaxPos() {
-          const cards = guruCarousel.querySelectorAll('.guru-card');
-          return Math.max(0, (cards.length - visibleCards) * (cardWidth + 18));
-        }
-        nextBtn?.addEventListener('click', () => {
-          carouselPos = Math.min(carouselPos + (cardWidth + 18), getMaxPos());
-          guruCarousel.style.transform = `translateX(-${carouselPos}px)`;
-        });
-        prevBtn?.addEventListener('click', () => {
-          carouselPos = Math.max(0, carouselPos - (cardWidth + 18));
-          guruCarousel.style.transform = `translateX(-${carouselPos}px)`;
-        });
+      window.carouselPos = 0;
+      const cardWidth = 200;
+      const visibleCards = 5;
+
+      function getMaxPos() {
+        const cards = guruCarouselEl?.querySelectorAll('.guru-card') || [];
+        return Math.max(0, (cards.length - visibleCards) * (cardWidth + 18));
+      }
+
+      nextBtn?.addEventListener('click', () => {
+        window.carouselPos = Math.min(window.carouselPos + (cardWidth + 18), getMaxPos());
+        if (guruCarouselEl) guruCarouselEl.style.transform = `translateX(-${window.carouselPos}px)`;
+      });
+      prevBtn?.addEventListener('click', () => {
+        window.carouselPos = Math.max(0, window.carouselPos - (cardWidth + 18));
+        if (guruCarouselEl) guruCarouselEl.style.transform = `translateX(-${window.carouselPos}px)`;
+      });
+
+      if (guruCarouselEl) {
         let touchStartX = 0;
-        guruCarousel.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-        guruCarousel.addEventListener('touchend', e => {
+        guruCarouselEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        guruCarouselEl.addEventListener('touchend', e => {
           const delta = touchStartX - e.changedTouches[0].screenX;
           if (Math.abs(delta) > 40) {
-            carouselPos = delta > 0 ? Math.min(carouselPos + (cardWidth + 18), getMaxPos()) : Math.max(0, carouselPos - (cardWidth + 18));
-            guruCarousel.style.transform = `translateX(-${carouselPos}px)`;
+            window.carouselPos = delta > 0
+              ? Math.min(window.carouselPos + (cardWidth + 18), getMaxPos())
+              : Math.max(0, window.carouselPos - (cardWidth + 18));
+            guruCarouselEl.style.transform = `translateX(-${window.carouselPos}px)`;
           }
         }, { passive: true });
       }
 
-      // ── TICKER DUPLIKAT ──
-      const ticker = document.getElementById('ticker');
-      if (ticker) ticker.innerHTML += ticker.innerHTML;
+      // ── VIDEO MODAL ──
+      const videoModal = document.getElementById('videoModal');
+      const videoIframe = document.getElementById('videoIframe');
+      const closeVideoModal = document.getElementById('closeVideoModal');
+      const btnPlayVideo = document.getElementById('btn-play-video');
+
+      function getYouTubeEmbedUrl(url) {
+        if (!url) return null;
+        const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+        const match = url.match(regex);
+        return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : null;
+      }
+
+      btnPlayVideo?.addEventListener('click', () => {
+        const url = btnPlayVideo.dataset.videoUrl;
+        if (!url) {
+          alert('Video profil belum dikonfigurasi. Silakan atur melalui panel admin.');
+          return;
+        }
+        const embedUrl = getYouTubeEmbedUrl(url);
+        if (embedUrl) {
+          videoIframe.src = embedUrl;
+          videoModal.classList.add('open');
+        } else {
+          window.open(url, '_blank');
+        }
+      });
+
+      function closeModal() {
+        videoModal.classList.remove('open');
+        videoIframe.src = '';
+      }
+
+      closeVideoModal?.addEventListener('click', closeModal);
+      videoModal?.addEventListener('click', (e) => {
+        if (e.target === videoModal) closeModal();
+      });
 
       // ── BACK TO TOP ──
       const backBtn = document.querySelector('.back-to-top');
@@ -3598,7 +3686,18 @@
         }
       });
 
-    });
+      // ════════════════════════════════════════════════════════
+      //  INISIALISASI: Load semua data dinamis dari Supabase
+      // ════════════════════════════════════════════════════════
+      loadBerita();
+      loadPengumuman();
+      loadPrestasi();
+      loadLulusan();
+      loadGuru();
+      loadVideoProfil();
+      loadFooterInfo();
+
+    }); // end DOMContentLoaded
   </script>
 </body>
 
