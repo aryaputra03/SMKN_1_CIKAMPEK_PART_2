@@ -1020,24 +1020,24 @@ ul { list-style: none; }
 </button>
 
 <!-- ══════════════ SUPABASE CLIENT ══════════════ -->
-<!--
-  PETUNJUK KONFIGURASI:
-  1. Ganti SUPABASE_URL dengan URL project Supabase kamu (dari Project Settings > API)
-  2. Ganti SUPABASE_ANON_KEY dengan anon public key kamu (dari Project Settings > API)
-  3. Simpan perubahan ini, lalu data alumni akan otomatis tampil dari database
--->
-<script type="module">
-  // ─────────────────────────────────────────────
-  // ⚙️  KONFIGURASI SUPABASE — ubah dua baris ini
-  // ─────────────────────────────────────────────
-  const SUPABASE_URL  = 'https://ijewvbuoiisunydbtogl.supabase.co'; // ← ganti
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqZXd2YnVvaWlzdW55ZGJ0b2dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjEzODQsImV4cCI6MjA5NjQ5NzM4NH0.FGYtpQXsTftK-V385r7vgnxuJxrm9xXVo7BGfx2c91o'; // ← ganti
+<!-- 1. Load library Supabase dari CDN (UMD build — kompatibel dengan script biasa) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- 2. Inisialisasi client (SUPABASE_URL & SUPABASE_ANON_KEY didefinisikan di sini) -->
+<script src="../admin/assets/js/supabase-client.js"></script>
 
+<script>
+(function () {
   // ─────────────────────────────────────────────
-  // Import Supabase client dari CDN
+  // Ambil instance supabase yang sudah dibuat
+  // di supabase-client.js (variabel global: supabase)
   // ─────────────────────────────────────────────
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // supabase-client.js wajib mengekspos variabel global bernama `supabase`
+  // Contoh isi supabase-client.js:
+  //   const { createClient } = window.supabase;          // dari CDN UMD
+  //   window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  //
+  // Jika nama variabelnya berbeda (misal: `db`), sesuaikan baris di bawah.
+  const supabaseClient = window.supabaseClient || window.supabase;
 
   // ─────────────────────────────────────────────
   // Helper: build public URL dari foto_url di storage
@@ -1050,7 +1050,7 @@ ul { list-style: none; }
     // Jika sudah berupa URL lengkap (http/https), langsung pakai
     if (fotoPath.startsWith('http')) return fotoPath;
     // Ambil public URL dari storage bucket guru-images
-    const { data } = supabase.storage.from('guru-images').getPublicUrl(fotoPath);
+    const { data } = supabaseClient.storage.from('guru-images').getPublicUrl(fotoPath);
     return data?.publicUrl || null;
   }
 
@@ -1160,7 +1160,7 @@ ul { list-style: none; }
     try {
       // Query ke tabel lulusan_terbaik
       // Diurutkan berdasarkan kolom 'urutan' (asc), lalu tahun_lulus (desc)
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from('lulusan_terbaik')
         .select('id, nama, tahun_lulus, jurusan, pencapaian, foto_url, urutan')
         .order('urutan', { ascending: true })
@@ -1199,6 +1199,7 @@ ul { list-style: none; }
 
   // Jalankan saat halaman siap
   document.addEventListener('DOMContentLoaded', loadAlumni);
+})();
 </script>
 
 <script>

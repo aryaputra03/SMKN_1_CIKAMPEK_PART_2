@@ -539,21 +539,22 @@ ul { list-style: none; }
 </button>
 
 <!-- ============================================================
-     SUPABASE CDN
+     SUPABASE — Library CDN + client dari supabase-client.js
      ============================================================ -->
+<!-- 1. Library Supabase UMD (harus dimuat sebelum supabase-client.js) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- 2. Client instance (SUPABASE_URL & SUPABASE_ANON_KEY ada di sini) -->
+<script src="../admin/assets/js/supabase-client.js"></script>
 
 <script>
 // ============================================================
-//  KONFIGURASI SUPABASE
-//  Ganti SUPABASE_URL dan SUPABASE_ANON_KEY dengan milik Anda
-//  (salin dari file assets/js/supabase-client.js)
+//  Gunakan instance Supabase dari supabase-client.js
+//  supabase-client.js wajib meng-ekspor window.supabaseClient
+//  Contoh isi supabase-client.js:
+//    const { createClient } = window.supabase;
+//    window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // ============================================================
-const SUPABASE_URL  = 'https://ijewvbuoiisunydbtogl.supabase.co';   // <-- ganti
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqZXd2YnVvaWlzdW55ZGJ0b2dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjEzODQsImV4cCI6MjA5NjQ5NzM4NH0.FGYtpQXsTftK-V385r7vgnxuJxrm9xXVo7BGfx2c91o';   // <-- ganti
-
-const { createClient } = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const db = window.supabaseClient || window.supabase;
 
 // ============================================================
 //  FUNGSI UTAMA: Ambil data struktur organisasi dari Supabase
