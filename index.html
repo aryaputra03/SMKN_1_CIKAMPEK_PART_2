@@ -2677,6 +2677,7 @@
       <button class="slider-dot active" aria-label="Slide 1"></button>
       <button class="slider-dot" aria-label="Slide 2"></button>
       <button class="slider-dot" aria-label="Slide 3"></button>
+      <button class="slider-dot" aria-label="Slide 4"></button>
     </div>
   </section>
 
@@ -3216,7 +3217,7 @@ async function loadBannerSlider() {
       .select('id, judul, subjudul, foto_url, link_url, urutan, aktif')
       .eq('aktif', true)
       .order('urutan', { ascending: true })
-      .limit(3);
+      .limit(4);
 
     if (error) throw error;
     
