@@ -78,21 +78,29 @@
     }
 
     :root {
+      /* Warna Formal Modern (Menggantikan Navy Lama) */
       --navy: #1E293B;
       --navy-mid: #334155;
       --navy-light: #475569;
+
+      /* Warna Kuning Cerah Presisi Logo (Tetap menggunakan nama variabel gold agar kode di bawahnya tidak error) */
       --gold: #FFE600;
       --gold-light: #E6CF00;
       --gold-pale: rgba(255, 230, 0, 0.1);
+
+      /* Warna Background Clean & Profesional */
       --white: #FFFFFF;
       --off-white: #F8FAFC;
       --gray-soft: #E2E8F0;
       --text: #000000;
       --text-muted: #333333;
       --text-light: #555555;
+
+      /* Bayangan Halus */
       --shadow-sm: 0 2px 8px rgba(30, 41, 59, 0.05);
       --shadow-md: 0 6px 24px rgba(30, 41, 59, 0.08);
       --shadow-lg: 0 16px 48px rgba(30, 41, 59, 0.12);
+
       --r-sm: 6px;
       --r-md: 10px;
       --r-lg: 16px;
@@ -744,7 +752,6 @@
       line-height: 1.1;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
-      font-variant-numeric: lining-nums;
     }
 
     .hero-subtitle {
@@ -1377,6 +1384,7 @@
       opacity: 0.15;
     }
 
+    /* Rank label on prestasi card */
     .prestasi-cards {
       display: flex;
       flex-direction: column;
@@ -1447,6 +1455,7 @@
       height: 12px;
     }
 
+    /* Colored prestasi thumbnails */
     .psp-thumb {
       aspect-ratio: 4 / 3;
       border-radius: var(--r-md);
@@ -1534,7 +1543,7 @@
       border-radius: 100px;
     }
 
-    /* ── ALUMNI ───────────────────────────────────────── */
+    /* ── PROFIL ALUMNI ───────────────────────────────── */
     .alumni-section {
       background: var(--navy);
     }
@@ -1930,6 +1939,7 @@
       font-weight: 700;
     }
 
+    /* Footer Map + Contact */
     .footer-map-contact {
       padding: 48px 0;
       display: grid;
@@ -2015,6 +2025,7 @@
       font-weight: 600;
     }
 
+    /* Footer Bottom */
     .footer-bottom {
       padding: 20px 0;
       display: flex;
@@ -2288,7 +2299,9 @@
       border-radius: 100px;
     }
 
+    /* ── EKSKUL MOBILE CAROUSEL ──────────────────────── */
     @media (max-width: 768px) {
+
       #ekskul .container {
         overflow: visible;
       }
@@ -2460,6 +2473,8 @@
   <!-- ══════════════ HEADER ══════════════ -->
   <header class="header">
     <div class="container header-main">
+
+      <!-- LOGO -->
       <a href="index.html" class="logo-area">
         <img src="assets/images/logo/logosekolah.PNG" alt="Logo SMKN 1 Cikampek"
           style="width:44px;height:44px;border-radius:10px;object-fit:cover;"
@@ -2471,6 +2486,7 @@
         </div>
       </a>
 
+      <!-- NAVBAR DESKTOP -->
       <nav class="navbar">
         <div class="nav-item">
           <a href="index.html" class="nav-link active">Beranda</a>
@@ -2484,19 +2500,34 @@
           </button>
           <div class="dropdown">
             <a href="profil/visi-misi.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7" /><path d="M10 6v4l3 3" /></svg></span> Visi &amp; Misi
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="7" />
+                  <path d="M10 6v4l3 3" />
+                </svg></span> Visi &amp; Misi
             </a>
             <a href="profil/fasilitas.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6" /></svg></span> Fasilitas
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 17V8l7-5 7 5v9M9 17v-6h2v6" />
+                </svg></span> Fasilitas
             </a>
             <a href="#jurusan">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5" /></svg></span> Jurusan
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 3L2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5" />
+                </svg></span> Jurusan
             </a>
             <a href="profil/struktur-organisasi.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="1" width="6" height="4" rx="1" /><rect x="1" y="14" width="6" height="4" rx="1" /><rect x="13" y="14" width="6" height="4" rx="1" /><path d="M10 5v4M4 14V11h12v3" /></svg></span> Struktur Organisasi
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="7" y="1" width="6" height="4" rx="1" />
+                  <rect x="1" y="14" width="6" height="4" rx="1" />
+                  <rect x="13" y="14" width="6" height="4" rx="1" />
+                  <path d="M10 5v4M4 14V11h12v3" />
+                </svg></span> Struktur Organisasi
             </a>
             <a href="profil/staff-guru.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3" /><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6" /></svg></span> Staff &amp; Guru
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="8" cy="6" r="3" />
+                  <path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6" />
+                </svg></span> Staff &amp; Guru
             </a>
           </div>
         </div>
@@ -2509,16 +2540,26 @@
           </button>
           <div class="dropdown">
             <a href="informasi/berita.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM4 8h12M8 8v8" /></svg></span> Berita Sekolah
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 4h12v12H4zM4 8h12M8 8v8" />
+                </svg></span> Berita Sekolah
             </a>
             <a href="informasi/prestasi.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z" /></svg></span> Prestasi
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10 2l2.09 6.26H18l-4.95 3.6L14.93 18 10 14.27 5.07 18l1.88-6.14L2 8.26h5.91z" />
+                </svg></span> Prestasi
             </a>
             <a href="informasi/ekskul.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7" /><path d="M10 6v4l3 2" /></svg></span> Org &amp; Ekstrakurikuler
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="7" />
+                  <path d="M10 6v4l3 2" />
+                </svg></span> Org &amp; Ekstrakurikuler
             </a>
             <a href="informasi/lulusanterbaik.html">
-              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7" /><path d="M10 6v4l3 2" /></svg></span> Lulusan Terbaik
+              <span class="dd-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="7" />
+                  <path d="M10 6v4l3 2" />
+                </svg></span> Lulusan Terbaik
             </a>
           </div>
         </div>
@@ -2537,6 +2578,7 @@
         Kontak Person
       </a>
 
+      <!-- HAMBURGER -->
       <button class="hamburger" aria-label="Buka Menu">
         <span></span><span></span><span></span>
       </button>
@@ -2550,7 +2592,10 @@
       <div class="mobile-nav-item">
         <div class="mobile-nav-link" data-toggle="mob-profil">
           Profil Sekolah
-          <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" /></svg>
+          <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none"
+            stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16">
+            <path d="M4 6l4 4 4-4" />
+          </svg>
         </div>
         <div class="mobile-dropdown" id="mob-profil">
           <a href="profil/visi-misi.html">Visi &amp; Misi</a>
@@ -2563,7 +2608,10 @@
       <div class="mobile-nav-item">
         <div class="mobile-nav-link" data-toggle="mob-informasi">
           Informasi
-          <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" /></svg>
+          <svg class="mob-caret" style="width:15px;height:15px;transition:transform 0.25s" fill="none"
+            stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16">
+            <path d="M4 6l4 4 4-4" />
+          </svg>
         </div>
         <div class="mobile-dropdown" id="mob-informasi">
           <a href="informasi/berita.html">Berita</a>
@@ -2608,8 +2656,10 @@
 
     <button class="slider-arrow prev" aria-label="Sebelumnya">&#8592;</button>
     <button class="slider-arrow next" aria-label="Berikutnya">&#8594;</button>
-    <div class="slider-controls" id="slider-dots-container">
+    <div class="slider-controls">
       <button class="slider-dot active" aria-label="Slide 1"></button>
+      <button class="slider-dot" aria-label="Slide 2"></button>
+      <button class="slider-dot" aria-label="Slide 3"></button>
     </div>
   </section>
 
@@ -2618,34 +2668,44 @@
     <div class="container">
       <div class="mid-three-grid">
 
-        <!-- Kiri: Lulusan Terbaik -->
+        <!-- Kiri: Lulusan Terbaik (DINAMIS dari tabel lulusan_terbaik) -->
         <div class="mid-profil-col fade-up">
           <div class="mid-profil-banner">
-            <p class="mpb-subtitle" style="font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px">Kebanggaan Sekolah</p>
+            <p class="mpb-subtitle"
+              style="font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px">
+              Kebanggaan Sekolah</p>
             <h3>Lulusan Terbaik</h3>
             <div class="mpb-tagline">Tahun Ini</div>
+            <!-- DATA DINAMIS: diisi oleh JS -->
             <div class="mpb-alumni-list" id="mpb-lulusan-list">
+              <!-- skeleton loading -->
               <div class="mpb-alumni-item" style="opacity:0.4">
                 <div class="mpb-alumni-avatar"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg></div>
                 <div><strong style="color:rgba(255,255,255,0.3)">Memuat data...</strong></div>
               </div>
             </div>
+
             <a href="informasi/lulusanterbaik.html"
               style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:9px 18px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;border-radius:8px;transition:background 0.2s;"
               onmouseover="this.style.background='#E6CF00'" onmouseout="this.style.background='#FFE600'">
               Lihat Semua Lulusan Terbaik
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
             </a>
           </div>
         </div>
 
-        <!-- Tengah: Pengumuman/Berita -->
+
+        <!-- Tengah: Pengumuman (DINAMIS dari tabel berita kategori Pengumuman) -->
         <div class="mid-pengumuman-col fade-up">
           <div class="mid-pengumuman-box">
             <div class="mid-pengumuman-header">
               <h3>Berita</h3>
-              <a href="informasi/berita.html" style="font-size:11.5px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Semua →</a>
+              <a href="informasi/berita.html"
+                style="font-size:11.5px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Semua →</a>
             </div>
+            <!-- DATA DINAMIS: diisi oleh JS -->
             <div class="mid-pengumuman-list" id="mid-pengumuman-list">
               <div class="mid-pengumuman-item" style="opacity:0.4">
                 <div class="mid-pengum-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg></div>
@@ -2658,16 +2718,20 @@
           </div>
         </div>
 
-        <!-- Kanan: Sambutan + Video -->
+        <!-- Kanan: Sambutan + Video (DINAMIS dari tabel video_profil) -->
         <div class="mid-sambutan-col fade-up">
           <h3 class="mid-sambutan-title">Sambutan Kepala Sekolah</h3>
+          <!-- Thumbnail klik untuk buka modal video -->
           <div class="mid-sambutan-video" id="btn-play-video">
             <div class="play-btn">
-              <svg viewBox="0 0 20 20" fill="currentColor"><polygon points="6,4 16,10 6,16" /></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <polygon points="6,4 16,10 6,16" />
+              </svg>
             </div>
             <span class="video-duration">Putar Video</span>
           </div>
-          <p class="mid-sambutan-text" style="font-style:italic;font-size:13px;color:var(--text-muted);margin-bottom:10px">
+          <p class="mid-sambutan-text"
+            style="font-style:italic;font-size:13px;color:var(--text-muted);margin-bottom:10px">
             Bismillahirrohmanirahim. Assalamu'alaikum Wr. Wb.
           </p>
           <p class="mid-sambutan-text">
@@ -2681,7 +2745,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ BERITA TERBARU ══════════════ -->
+  <!-- ══════════════ BERITA TERBARU (DINAMIS) ══════════════ -->
   <section class="section section-alt" id="berita">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2689,7 +2753,10 @@
         <h2 class="section-title-h2">Berita Terbaru</h2>
         <div class="divider-gold"></div>
       </div>
+
+      <!-- DATA DINAMIS: diisi oleh JS -->
       <div class="berita-grid" id="berita-grid">
+        <!-- Skeleton cards -->
         <div class="berita-card fade-up">
           <div class="berita-img" style="background:linear-gradient(135deg,#E2E8F0,#CBD5E1)"></div>
           <div class="berita-body">
@@ -2704,7 +2771,7 @@
     </div>
   </section>
 
-  <!-- ══════════════ PRESTASI TERBARU ══════════════ -->
+  <!-- ══════════════ PRESTASI TERBARU (DINAMIS) ══════════════ -->
   <section class="section" id="prestasi">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2712,23 +2779,27 @@
         <h2 class="section-title-h2">Prestasi Terbaru</h2>
         <div class="divider-gold"></div>
       </div>
+
+      <!-- DATA DINAMIS: diisi oleh JS -->
       <div class="prestasi-list-container" id="prestasi-list-container">
         <div style="text-align:center;color:var(--text-light);padding:40px 0;opacity:0.5">Memuat data prestasi...</div>
       </div>
+
       <div class="btn-center">
         <a href="informasi/prestasi.html" class="btn-outline-navy">Tampilkan Semua Prestasi</a>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════ JURUSAN (STATIS) ══════════════ -->
+  <!-- ══════════════ JURUSAN (STATIS — tidak ada tabel DB) ══════════════ -->
   <section class="section section-alt" id="jurusan">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
         <span class="section-label-tag">Program Keahlian</span>
         <h2 class="section-title-h2">Jurusan &amp; Kompetensi</h2>
         <div class="divider-gold"></div>
-        <p class="section-sub" style="margin-top:14px">Enam program keahlian unggulan yang mempersiapkan lulusan profesional dan berdaya saing tinggi.</p>
+        <p class="section-sub" style="margin-top:14px">Enam program keahlian unggulan yang mempersiapkan lulusan
+          profesional dan berdaya saing tinggi.</p>
       </div>
       <div class="jurusan-grid">
         <div class="jurusan-card fade-up">
@@ -2790,8 +2861,10 @@
         <span class="section-label-tag">Pengembangan Diri</span>
         <h2 class="section-title-h2">Organisasi & Ekstrakurikuler</h2>
         <div class="divider-gold"></div>
-        <p class="section-sub" style="margin-top:14px">Wadah bagi siswa untuk mengembangkan minat, bakat, karakter, dan jiwa kepemimpinan di luar jam pelajaran akademik.</p>
+        <p class="section-sub" style="margin-top:14px">Wadah bagi siswa untuk mengembangkan minat, bakat, karakter, dan
+          jiwa kepemimpinan di luar jam pelajaran akademik.</p>
       </div>
+
       <div class="ekskul-grid">
         <div class="ekskul-card fade-up">
           <div class="ekskul-icon" style="background:#EFF6FF">
@@ -2858,13 +2931,14 @@
           <span class="ekskul-badge" style="background:#EFF6FF;color:#2563EB">Pilihan</span>
         </div>
       </div>
+
       <div class="btn-center">
         <a href="informasi/ekskul.html" class="btn-outline-navy">Lihat Semua Ekstrakurikuler</a>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════ GURU & TENAGA KEPENDIDIKAN ══════════════ -->
+  <!-- ══════════════ GURU & TENAGA KEPENDIDIKAN (DINAMIS) ══════════════ -->
   <section class="section" id="guru">
     <div class="container">
       <div class="section-head-center fade-up" style="margin-bottom:52px">
@@ -2873,7 +2947,9 @@
         <div class="divider-gold"></div>
       </div>
       <div class="guru-carousel-wrap fade-up">
+        <!-- DATA DINAMIS: diisi oleh JS -->
         <div class="guru-carousel" id="guru-carousel">
+          <!-- Skeleton -->
           <div class="guru-card" style="opacity:0.4">
             <div class="guru-avatar-wrap"><div class="guru-avatar-initials" style="background:#E2E8F0;color:#CBD5E1">--</div></div>
             <div class="guru-body"><h4 style="color:#E2E8F0">Memuat...</h4><p style="color:#E2E8F0">—</p></div>
@@ -2896,6 +2972,7 @@
     <div class="footer-top">
       <div class="container">
         <div class="footer-main-grid">
+          <!-- Brand -->
           <div class="fade-up">
             <div class="footer-brand-logo">
               <img src="assets/images/logo/logosekolahfooter.png" alt="Logo SMKN 1 Cikampek"
@@ -2913,13 +2990,22 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/><path d="M15 8a4 4 0 1 0 0-4"/><path d="M15 4v12a5 5 0 0 1-5 5"/></svg>
               </a>
               <a href="https://www.instagram.com/p/DZMqr9zP9nw/?igsh=MWRtaXB2bGl6eDN2MQ==" title="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" /></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                </svg>
               </a>
               <a href="https://youtu.be/Opljuy6-T5Y?si=uFEfDkzsFDXEaLqb" title="YouTube">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" /></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M22.54 6.42A2.78 2.78 0 0020.6 4.5C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.5C5.12 20 12 20 12 20s6.88 0 8.6-.5a2.78 2.78 0 001.94-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+                </svg>
               </a>
             </div>
           </div>
+
+          <!-- Navigasi Cepat -->
           <div class="fade-up">
             <h4 class="footer-col-title">Navigasi Cepat</h4>
             <div class="footer-links">
@@ -2934,8 +3020,11 @@
               <a href="alumni.html">Profil Alumni</a>
             </div>
           </div>
+
+          <!-- Info Terbaru (DINAMIS dari tabel berita) -->
           <div class="fade-up">
             <h4 class="footer-col-title">Info Terbaru</h4>
+            <!-- DATA DINAMIS: diisi oleh JS -->
             <div id="footer-info-terbaru" style="display:flex;flex-direction:column;gap:16px">
               <div style="opacity:0.3;border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
                 <p style="font-size:13px;font-weight:600;color:var(--navy)">Memuat...</p>
@@ -2946,6 +3035,7 @@
       </div>
     </div>
 
+    <!-- Map + Contact -->
     <div class="container">
       <div class="footer-map-contact">
         <div>
@@ -2963,7 +3053,10 @@
           <div class="footer-contact-list">
             <div class="footer-contact-item">
               <div class="fci-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z" /><path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z" /></svg>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10 11.5A2.5 2.5 0 1010 6.5a2.5 2.5 0 000 5z" />
+                  <path d="M10 2C6.69 2 4 4.69 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.31-2.69-6-6-6z" />
+                </svg>
               </div>
               <div>
                 <p class="fci-label">Alamat</p>
@@ -2972,7 +3065,9 @@
             </div>
             <div class="footer-contact-item">
               <div class="fci-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z" /></svg>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z" />
+                </svg>
               </div>
               <div>
                 <p class="fci-label">Telepon</p>
@@ -2981,7 +3076,10 @@
             </div>
             <div class="footer-contact-item">
               <div class="fci-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z" /><path d="M2 4l8 6 8-6" /></svg>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z" />
+                  <path d="M2 4l8 6 8-6" />
+                </svg>
               </div>
               <div>
                 <p class="fci-label">Email</p>
@@ -2990,7 +3088,10 @@
             </div>
             <div class="footer-contact-item">
               <div class="fci-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7" /><path d="M10 6v4l3 3" /></svg>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="7" />
+                  <path d="M10 6v4l3 3" />
+                </svg>
               </div>
               <div>
                 <p class="fci-label">Jam Operasional</p>
@@ -3002,6 +3103,7 @@
       </div>
     </div>
 
+    <!-- Footer Bottom -->
     <div class="container">
       <div class="footer-bottom">
         <p>© 2026 Hak Cipta Dilindungi. Seluruh Konten Milik <strong>SMKN 1 Cikampek</strong></p>
@@ -3021,23 +3123,21 @@
     </svg>
   </button>
 
-  <!-- ══════════════ SUPABASE + SEMUA SCRIPT ══════════════ -->
+  <!-- ══════════════ SUPABASE CLIENT ══════════════ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../admin/assets/js/supabase-client.js"></script>
+
   <script>
     // ════════════════════════════════════════════════════════════
-    //  ⚙️  KONFIGURASI SUPABASE
-    //  Ganti nilai SUPABASE_URL dan SUPABASE_ANON_KEY di bawah ini
-    //  dengan kredensial proyek Supabase Anda sendiri.
+    //  SMKN 1 CIKAMPEK — DYNAMIC DATA LOADER (Supabase)
+    //  Membaca data dari: berita, prestasi, guru, lulusan_terbaik,
+    //  video_profil
+    //  Tidak mengubah tampilan/style sama sekali.
     // ════════════════════════════════════════════════════════════
-    const SUPABASE_URL  = 'GANTI_DENGAN_SUPABASE_URL_ANDA';
-    const SUPABASE_ANON_KEY = 'GANTI_DENGAN_SUPABASE_ANON_KEY_ANDA';
 
-    const { createClient } = supabase;
-    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // ════════════════════════════════════════════════════════════
-    //  HELPER FUNCTIONS
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Format tanggal ke bahasa Indonesia
+    // ────────────────────────────────────────────────────────────
     function formatTanggalID(tanggalStr) {
       if (!tanggalStr) return '—';
       const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
@@ -3046,18 +3146,17 @@
       return `${d.getDate()} ${bulan[d.getMonth()]}, ${d.getFullYear()}`;
     }
 
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Potong teks panjang
+    // ────────────────────────────────────────────────────────────
     function truncate(str, max) {
       if (!str) return '';
       return str.length > max ? str.substring(0, max) + '…' : str;
     }
 
-    function getInitials(nama) {
-      if (!nama) return '--';
-      const parts = nama.replace(/[.,].*$/, '').trim().split(' ');
-      if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
-      return (parts[0][0] + parts[1][0]).toUpperCase();
-    }
-
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Warna gradient untuk prestasi berdasarkan tingkat
+    // ────────────────────────────────────────────────────────────
     const prestasiGradients = [
       'linear-gradient(135deg,#1B2A4A,#2563EB)',
       'linear-gradient(135deg,#16A34A,#15803d)',
@@ -3076,89 +3175,181 @@
       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>`,
     ];
 
-    // ════════════════════════════════════════════════════════════
-    //  1. HERO BANNER SLIDER — DINAMIS dari tabel `banner`
-    //  Kolom tabel: id, judul, subjudul, foto_url, link_url, urutan, aktif
-    // ════════════════════════════════════════════════════════════
-    async function loadBannerSlider() {
-      try {
-        const { data, error } = await _supabase
-          .from('banner')
-          .select('id, judul, subjudul, foto_url, link_url, urutan, aktif')
-          .eq('aktif', true)
-          .order('urutan', { ascending: true })
-          .limit(3);
-
-        if (error) throw error;
-        if (!data || data.length === 0) return; // Tetap tampilkan slide default
-
-        const heroSection = document.getElementById('hero-section');
-        const dotsContainer = document.getElementById('slider-dots-container');
-
-        // Hapus slide default
-        const defaultSlide = document.getElementById('hero-slide-default');
-        if (defaultSlide) defaultSlide.remove();
-
-        // Sisipkan slides baru SEBELUM hero-content
-        const heroContent = heroSection.querySelector('.hero-content');
-        data.forEach((item, idx) => {
-          const slide = document.createElement('div');
-          slide.className = 'hero-slide' + (idx === 0 ? ' active' : '');
-          slide.dataset.judul   = item.judul   || 'SMKN 1 Cikampek';
-          slide.dataset.subjudul = item.subjudul || '';
-          slide.dataset.linkUrl  = item.link_url  || 'profil/visi-misi.html';
-          const bgStyle = item.foto_url
-            ? `background-image:url('${item.foto_url}');`
-            : 'background:linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%);';
-          slide.innerHTML = `
-            <div class="hero-bg" style="${bgStyle}background-size:cover;background-position:center;"></div>
-            <div class="hero-overlay"></div>`;
-          heroSection.insertBefore(slide, heroContent);
-        });
-
-        // Update teks hero dengan data slide ke-0
-        updateHeroText(data[0]);
-
-        // Rebuild dots
-        dotsContainer.innerHTML = data.map((_, idx) =>
-          `<button class="slider-dot${idx === 0 ? ' active' : ''}" aria-label="Slide ${idx + 1}"></button>`
-        ).join('');
-
-        // Reinisialisasi slider dengan data baru
-        initSlider(data);
-
-      } catch (err) {
-        console.error('Gagal memuat banner slider:', err.message);
-      }
+    // ────────────────────────────────────────────────────────────
+    // HELPER: Ambil initials dari nama
+    // ────────────────────────────────────────────────────────────
+    function getInitials(nama) {
+      if (!nama) return '--';
+      const parts = nama.replace(/[.,].*$/, '').trim().split(' ');
+      if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+      return (parts[0][0] + parts[1][0]).toUpperCase();
     }
 
-    function updateHeroText(slideData) {
-      const titleEl    = document.getElementById('hero-title-text');
-      const subtitleEl = document.getElementById('hero-subtitle-text');
-      const ctaBtn     = document.getElementById('hero-cta-btn');
+    // Variabel global untuk mengontrol interval agar tidak bertabrakan
+let sliderInterval;
+let currentSlideIndex = 0;
 
-      if (titleEl)    titleEl.textContent = slideData.dataset ? slideData.dataset.judul : (slideData.judul || 'SMKN 1 Cikampek');
-      const sub = slideData.dataset ? slideData.dataset.subjudul : (slideData.subjudul || '');
-      if (subtitleEl) {
-        if (sub) {
-          subtitleEl.textContent = sub;
-          subtitleEl.style.display = 'block';
-        } else {
-          subtitleEl.style.display = 'none';
-        }
-      }
-      if (ctaBtn) {
-        const link = slideData.dataset ? slideData.dataset.linkUrl : (slideData.link_url || 'profil/visi-misi.html');
-        ctaBtn.href = link || 'profil/visi-misi.html';
-      }
+// ════════════════════════════════════════════════════════════
+//  1. HERO BANNER SLIDER — DINAMIS dari tabel `banner`
+// ════════════════════════════════════════════════════════════
+async function loadBannerSlider() {
+  try {
+    const { data, error } = await supabase
+      .from('banner')
+      .select('id, judul, subjudul, foto_url, link_url, urutan, aktif')
+      .eq('aktif', true)
+      .order('urutan', { ascending: true })
+      .limit(3);
+
+    if (error) throw error;
+    
+    // Jika data kosong di database, biarkan slide default HTML yang tampil
+    if (!data || data.length === 0) return; 
+
+    const heroSection = document.getElementById('hero-section');
+    
+    // PERBAIKAN 1: Menggunakan document.querySelector untuk class
+    const dotsContainer = document.querySelector('.slider-controls');
+
+    // Hapus slide default agar tidak mengacaukan index slider baru
+    const defaultSlide = document.getElementById('hero-slide-default');
+    if (defaultSlide) defaultSlide.remove();
+
+    // Sisipkan slides baru SEBELUM .hero-content
+    const heroContent = heroSection.querySelector('.hero-content');
+    data.forEach((item, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'hero-slide' + (idx === 0 ? ' active' : '');
+      
+      // Simpan data ke dalam properti dataset elemen DOM
+      slide.dataset.judul   = item.judul   || 'SMKN 1 Cikampek';
+      slide.dataset.subjudul = item.subjudul || '';
+      slide.dataset.linkUrl  = item.link_url  || 'profil/visi-misi.html';
+      
+      const bgStyle = item.foto_url
+        ? `background-image:url('${item.foto_url}');`
+        : 'background:linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%);';
+        
+      slide.innerHTML = `
+        <div class="hero-bg" style="${bgStyle}background-size:cover;background-position:center;"></div>
+        <div class="hero-overlay"></div>`;
+        
+      heroSection.insertBefore(slide, heroContent);
+    });
+
+    // Update teks hero pertama kali dengan data slide ke-0
+    updateHeroText(data[0]);
+
+    // Rebuild navigasi dots berdasarkan jumlah data dari Supabase
+    if (dotsContainer) {
+      dotsContainer.innerHTML = data.map((_, idx) =>
+        `<button class="slider-dot${idx === 0 ? ' active' : ''}" aria-label="Slide ${idx + 1}"></button>`
+      ).join('');
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  2. BERITA TERBARU — tabel `berita`, ambil 3 terbaru
-    // ════════════════════════════════════════════════════════════
+    // Panggil fungsi inisialisasi loop animasi slider baru
+    initSlider();
+
+  } catch (err) {
+    console.error('Gagal memuat banner slider:', err.message);
+  }
+}
+
+
+
+// ════════════════════════════════════════════════════════════
+//  2. FUNGSI UPDATE TEKS HERO (JUDUL, SUBJUDUL, & CTA LINK)
+// ════════════════════════════════════════════════════════════
+function updateHeroText(slideData) {
+  const titleEl    = document.getElementById('hero-title-text');
+  const subtitleEl = document.getElementById('hero-subtitle-text');
+  const ctaBtn     = document.getElementById('hero-cta-btn');
+
+  if (!slideData) return;
+
+  // Cek apakah parameter dari Elemen DOM (.dataset) atau dari Object Supabase langsung
+  const judul = slideData.dataset ? slideData.dataset.judul : (slideData.judul || 'SMKN 1 Cikampek');
+  const sub   = slideData.dataset ? slideData.dataset.subjudul : (slideData.subjudul || '');
+  const link  = slideData.dataset ? slideData.dataset.linkUrl : (slideData.link_url || 'profil/visi-misi.html');
+
+  if (titleEl) titleEl.textContent = judul;
+  
+  if (subtitleEl) {
+    if (sub) {
+      subtitleEl.textContent = sub;
+      subtitleEl.style.display = 'block';
+    } else {
+      subtitleEl.style.display = 'none';
+    }
+  }
+  
+  if (ctaBtn) {
+    ctaBtn.href = link || 'profil/visi-misi.html';
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  3. FUNGSI ANIMASI SLIDER & NAVIGASI DOTS (RE-INITIALIZE)
+// ════════════════════════════════════════════════════════════
+function initSlider() {
+  // Bersihkan interval lama jika ada (mencegah double-speed loop)
+  if (sliderInterval) clearInterval(sliderInterval);
+
+  const slides = document.querySelectorAll('.hero-section .hero-slide');
+  const dots = document.querySelectorAll('#slider-dots-container .slider-dot');
+  
+  if (slides.length <= 1) return; // Jika banner hanya 1, tidak perlu animasi berputar
+
+  currentSlideIndex = 0;
+
+  function gantiSlide(nextIndex) {
+    // Hapus kelas aktif dari slide & dot saat ini
+    slides[currentSlideIndex].classList.remove('active');
+    if (dots.length > 0) dots[currentSlideIndex].classList.remove('active');
+
+    // Pindah ke index baru
+    currentSlideIndex = nextIndex;
+
+    // Tambahkan kelas aktif ke slide & dot baru
+    slides[currentSlideIndex].classList.add('active');
+    if (dots.length > 0) dots[currentSlideIndex].classList.add('active');
+
+    // Update teks hero secara dinamis mengikuti slide yang aktif
+    updateHeroText(slides[currentSlideIndex]);
+  }
+
+  // Pasang event listener klik pada bulatan navigasi (dots) baru
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      gantiSlide(idx);
+      startAutoPlay(); // Reset timer agar interval diulang dari 0 setelah diklik manual
+    });
+  });
+
+  // Fungsi untuk memulai pemutaran otomatis (Autoplay)
+  function startAutoPlay() {
+    if (sliderInterval) clearInterval(sliderInterval);
+    sliderInterval = setInterval(() => {
+      let next = (currentSlideIndex + 1) % slides.length;
+      gantiSlide(next);
+    }, 6000); // Durasi tampil per banner (6000ms = 6 detik)
+  }
+
+  // Jalankan autoplay pertama kali
+  startAutoPlay();
+}
+
+// Panggil fungsi utama saat dokumen siap
+document.addEventListener('DOMContentLoaded', () => {
+  loadBannerSlider();
+});
+
+    // ────────────────────────────────────────────────────────────
+    // 1. LOAD BERITA (tabel: berita, ambil 3 terbaru)
+    // ────────────────────────────────────────────────────────────
     async function loadBerita() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('berita')
           .select('id, judul, slug, isi, foto_url, tanggal, kategori')
           .order('tanggal', { ascending: false })
@@ -3186,7 +3377,8 @@
                   <a href="informasi/berita-detail.html?id=${item.id}" class="berita-readmore">Baca →</a>
                   <span class="berita-author">
                     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
+                      <circle cx="10" cy="6" r="3"/>
+                      <path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
                     </svg>
                     Admin
                   </span>
@@ -3195,8 +3387,11 @@
             </div>`;
         }).join('');
 
+        // Trigger fade-up untuk kartu baru
         requestAnimationFrame(() => {
-          grid.querySelectorAll('.fade-up').forEach(el => window.fadeObs && window.fadeObs.observe(el));
+          grid.querySelectorAll('.fade-up').forEach(el => {
+            fadeObs.observe(el);
+          });
         });
 
       } catch (err) {
@@ -3204,12 +3399,12 @@
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  3. PENGUMUMAN — tabel `berita`, kategori = 'Pengumuman'
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman, ambil 4)
+    // ────────────────────────────────────────────────────────────
     async function loadPengumuman() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal, kategori')
           .eq('kategori', 'Pengumuman')
@@ -3250,12 +3445,12 @@
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  4. PRESTASI — tabel `prestasi`, ambil 4 terbaru
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 3. LOAD PRESTASI (tabel: prestasi, ambil 4 terbaru)
+    // ────────────────────────────────────────────────────────────
     async function loadPrestasi() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('prestasi')
           .select('id, judul, deskripsi, tingkat, tahun, foto_url')
           .order('tahun', { ascending: false })
@@ -3278,22 +3473,30 @@
 
           return `
             <div class="prestasi-row fade-up">
-              <div class="psp-thumb" style="${gradientBg}">${iconHtml}</div>
+              <div class="psp-thumb" style="${gradientBg}">
+                ${iconHtml}
+              </div>
               <div class="prestasi-card">
                 <h4>${item.judul || 'Prestasi'}</h4>
                 <div class="psc-meta">
                   <span>
-                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/>
+                    </svg>
                     ${item.tahun || '—'}
                   </span>
                   <span>
-                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M5 5h10a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+                    </svg>
                     Prestasi
                   </span>
                 </div>
                 <div class="psc-scale">Skala ${item.tingkat || 'Umum'}</div>
                 <div class="psc-siswa">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/></svg>
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="10" cy="6" r="3"/><path d="M3 18c0-3.87 3.13-7 7-7s7 3.13 7 7"/>
+                  </svg>
                   ${truncate(item.deskripsi || '', 80)}
                 </div>
               </div>
@@ -3301,7 +3504,7 @@
         }).join('');
 
         requestAnimationFrame(() => {
-          container.querySelectorAll('.fade-up').forEach(el => window.fadeObs && window.fadeObs.observe(el));
+          container.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
         });
 
       } catch (err) {
@@ -3309,12 +3512,12 @@
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  5. LULUSAN TERBAIK — tabel `lulusan_terbaik`
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 4. LOAD LULUSAN TERBAIK (tabel: lulusan_terbaik, ambil 3)
+    // ────────────────────────────────────────────────────────────
     async function loadLulusan() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('lulusan_terbaik')
           .select('id, nama, tahun_lulus, jurusan, pencapaian, foto_url')
           .order('urutan', { ascending: true })
@@ -3355,12 +3558,12 @@
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  6. GURU & STAFF — tabel `guru`
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 5. LOAD GURU (tabel: guru, ambil semua urut berdasarkan urutan)
+    // ────────────────────────────────────────────────────────────
     async function loadGuru() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('guru')
           .select('id, nama, jabatan, nip, foto_url, urutan')
           .order('urutan', { ascending: true });
@@ -3384,19 +3587,20 @@
             </div>`;
         }).join('');
 
-        window.carouselPos = 0;
+        // Reset posisi carousel setelah data dimuat
+        carouselPos = 0;
 
       } catch (err) {
         console.error('Gagal memuat guru:', err.message);
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  7. VIDEO PROFIL — tabel `video_profil`, id = 1
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 6. LOAD VIDEO PROFIL (tabel: video_profil, id = 1)
+    // ────────────────────────────────────────────────────────────
     async function loadVideoProfil() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('video_profil')
           .select('url_video')
           .eq('id', 1)
@@ -3404,20 +3608,21 @@
 
         if (error || !data || !data.url_video) return;
 
+        // Simpan URL video ke atribut data agar bisa dibuka modal
         const btnPlay = document.getElementById('btn-play-video');
-        if (btnPlay) btnPlay.dataset.videoUrl = data.url_video;
+        btnPlay.dataset.videoUrl = data.url_video;
 
       } catch (err) {
         console.error('Gagal memuat video profil:', err.message);
       }
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  8. FOOTER INFO TERBARU — tabel `berita`, 3 terbaru
-    // ════════════════════════════════════════════════════════════
+    // ────────────────────────────────────────────────────────────
+    // 7. LOAD FOOTER INFO TERBARU (tabel: berita, 3 terbaru)
+    // ────────────────────────────────────────────────────────────
     async function loadFooterInfo() {
       try {
-        const { data, error } = await _supabase
+        const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal')
           .order('tanggal', { ascending: false })
@@ -3430,8 +3635,7 @@
         container.innerHTML = data.map((item, idx) => `
           <div style="${idx < data.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px;' : ''}">
             <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4;">
-              <a href="informasi/berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s"
-                onmouseover="this.style.color='#0F1E38'" onmouseout="this.style.color='inherit'">${truncate(item.judul, 70)}</a>
+              <a href="informasi/berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s" onmouseover="this.style.color='#0F1E38'" onmouseout="this.style.color='inherit'">${truncate(item.judul, 70)}</a>
             </p>
             <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">${formatTanggalID(item.tanggal)}</p>
           </div>`).join('');
@@ -3442,61 +3646,7 @@
     }
 
     // ════════════════════════════════════════════════════════════
-    //  SLIDER ENGINE — Dipanggil setelah loadBannerSlider selesai
-    //  (atau langsung dari DOMContentLoaded untuk slide default)
-    // ════════════════════════════════════════════════════════════
-    let _currentSlide = 0;
-    let _slideTimer   = null;
-    let _slideData    = [];   // simpan data DB untuk update teks
-
-    function initSlider(bannerData) {
-      _slideData = bannerData || [];
-      const heroSection = document.getElementById('hero-section');
-      const slides = heroSection.querySelectorAll('.hero-slide');
-      const dotsContainer = document.getElementById('slider-dots-container');
-      _currentSlide = 0;
-
-      function goToSlide(index) {
-        const allSlides = heroSection.querySelectorAll('.hero-slide');
-        const allDots   = dotsContainer.querySelectorAll('.slider-dot');
-        allSlides[_currentSlide]?.classList.remove('active');
-        allDots[_currentSlide]?.classList.remove('active');
-        _currentSlide = (index + allSlides.length) % allSlides.length;
-        allSlides[_currentSlide]?.classList.add('active');
-        allDots[_currentSlide]?.classList.add('active');
-
-        // Update teks hero sesuai slide aktif
-        if (_slideData.length > 0 && _slideData[_currentSlide]) {
-          updateHeroText(_slideData[_currentSlide]);
-        } else {
-          // Baca dari data-attribute slide (saat sudah di-DOM)
-          const activeSlide = allSlides[_currentSlide];
-          if (activeSlide && activeSlide.dataset.judul) {
-            updateHeroText(activeSlide);
-          }
-        }
-      }
-
-      function startAuto() { _slideTimer = setInterval(() => goToSlide(_currentSlide + 1), 5500); }
-      function stopAuto()  { clearInterval(_slideTimer); }
-
-      if (slides.length > 0) {
-        startAuto();
-
-        heroSection.querySelector('.slider-arrow.next')?.addEventListener('click', () => {
-          stopAuto(); goToSlide(_currentSlide + 1); startAuto();
-        });
-        heroSection.querySelector('.slider-arrow.prev')?.addEventListener('click', () => {
-          stopAuto(); goToSlide(_currentSlide - 1); startAuto();
-        });
-        dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
-          dot.addEventListener('click', () => { stopAuto(); goToSlide(i); startAuto(); });
-        });
-      }
-    }
-
-    // ════════════════════════════════════════════════════════════
-    //  DOM CONTENT LOADED — UI interaktif + inisialisasi data
+    //  MAIN.JS — Semua logika UI interaktif (TIDAK DIUBAH)
     // ════════════════════════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -3534,8 +3684,8 @@
       });
 
       // ── MOBILE MENU ──
-      const hamburger    = document.querySelector('.hamburger');
-      const mobileMenu   = document.querySelector('.mobile-menu');
+      const hamburger = document.querySelector('.hamburger');
+      const mobileMenu = document.querySelector('.mobile-menu');
       hamburger?.addEventListener('click', () => {
         hamburger.classList.toggle('open');
         mobileMenu?.classList.toggle('open');
@@ -3543,17 +3693,34 @@
       document.querySelectorAll('.mobile-nav-link[data-toggle]').forEach(btn => {
         btn.addEventListener('click', () => {
           const targetId = btn.getAttribute('data-toggle');
-          const target   = document.getElementById(targetId);
+          const target = document.getElementById(targetId);
           target?.classList.toggle('open');
           const caret = btn.querySelector('.mob-caret');
           if (caret) caret.style.transform = target?.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
         });
       });
 
-      // ── SLIDE DEFAULT (sebelum data DB dimuat) ──
-      initSlider([]);
+      // ── HERO SLIDER ──
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      let currentSlide = 0, slideTimer;
+      function goToSlide(index) {
+        slides[currentSlide]?.classList.remove('active');
+        dots[currentSlide]?.classList.remove('active');
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide]?.classList.add('active');
+        dots[currentSlide]?.classList.add('active');
+      }
+      function startAutoSlide() { slideTimer = setInterval(() => goToSlide(currentSlide + 1), 5500); }
+      function stopAutoSlide() { clearInterval(slideTimer); }
+      if (slides.length > 0) {
+        startAutoSlide();
+        document.querySelector('.slider-arrow.next')?.addEventListener('click', () => { stopAutoSlide(); goToSlide(currentSlide + 1); startAutoSlide(); });
+        document.querySelector('.slider-arrow.prev')?.addEventListener('click', () => { stopAutoSlide(); goToSlide(currentSlide - 1); startAutoSlide(); });
+        dots.forEach((dot, i) => dot.addEventListener('click', () => { stopAutoSlide(); goToSlide(i); startAutoSlide(); }));
+      }
 
-      // ── FADE-UP (IntersectionObserver) ──
+      // ── FADE-UP (IntersectionObserver — global, dipakai juga oleh dynamic loader) ──
       window.fadeObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -3566,16 +3733,17 @@
 
       // ── GURU CAROUSEL ──
       const guruCarouselEl = document.getElementById('guru-carousel');
-      const prevBtn        = document.querySelector('.carousel-btn.prev');
-      const nextBtn        = document.querySelector('.carousel-btn.next');
-      window.carouselPos   = 0;
-      const cardWidth      = 200;
-      const visibleCards   = 5;
+      const prevBtn = document.querySelector('.carousel-btn.prev');
+      const nextBtn = document.querySelector('.carousel-btn.next');
+      window.carouselPos = 0;
+      const cardWidth = 200;
+      const visibleCards = 5;
 
       function getMaxPos() {
         const cards = guruCarouselEl?.querySelectorAll('.guru-card') || [];
         return Math.max(0, (cards.length - visibleCards) * (cardWidth + 18));
       }
+
       nextBtn?.addEventListener('click', () => {
         window.carouselPos = Math.min(window.carouselPos + (cardWidth + 18), getMaxPos());
         if (guruCarouselEl) guruCarouselEl.style.transform = `translateX(-${window.carouselPos}px)`;
@@ -3584,10 +3752,11 @@
         window.carouselPos = Math.max(0, window.carouselPos - (cardWidth + 18));
         if (guruCarouselEl) guruCarouselEl.style.transform = `translateX(-${window.carouselPos}px)`;
       });
+
       if (guruCarouselEl) {
         let touchStartX = 0;
         guruCarouselEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-        guruCarouselEl.addEventListener('touchend',   e => {
+        guruCarouselEl.addEventListener('touchend', e => {
           const delta = touchStartX - e.changedTouches[0].screenX;
           if (Math.abs(delta) > 40) {
             window.carouselPos = delta > 0
@@ -3599,10 +3768,10 @@
       }
 
       // ── VIDEO MODAL ──
-      const videoModal    = document.getElementById('videoModal');
-      const videoIframe   = document.getElementById('videoIframe');
-      const closeVideoBtn = document.getElementById('closeVideoModal');
-      const btnPlayVideo  = document.getElementById('btn-play-video');
+      const videoModal = document.getElementById('videoModal');
+      const videoIframe = document.getElementById('videoIframe');
+      const closeVideoModal = document.getElementById('closeVideoModal');
+      const btnPlayVideo = document.getElementById('btn-play-video');
 
       function getYouTubeEmbedUrl(url) {
         if (!url) return null;
@@ -3630,8 +3799,11 @@
         videoModal.classList.remove('open');
         videoIframe.src = '';
       }
-      closeVideoBtn?.addEventListener('click', closeModal);
-      videoModal?.addEventListener('click', (e) => { if (e.target === videoModal) closeModal(); });
+
+      closeVideoModal?.addEventListener('click', closeModal);
+      videoModal?.addEventListener('click', (e) => {
+        if (e.target === videoModal) closeModal();
+      });
 
       // ── BACK TO TOP ──
       const backBtn = document.querySelector('.back-to-top');
@@ -3662,14 +3834,9 @@
         }
       });
 
-      // ══════════════════════════════════════════════════════════
+      // ════════════════════════════════════════════════════════
       //  INISIALISASI: Load semua data dinamis dari Supabase
-      //  Urutan: banner dulu agar hero ter-render dengan benar
-      // ══════════════════════════════════════════════════════════
-      loadBannerSlider().then(() => {
-        // Setelah banner selesai, reinit slider dengan data baru
-        // (sudah dilakukan di dalam loadBannerSlider via initSlider(data))
-      });
+      // ════════════════════════════════════════════════════════
       loadBerita();
       loadPengumuman();
       loadPrestasi();
@@ -3681,4 +3848,5 @@
     }); // end DOMContentLoaded
   </script>
 </body>
+
 </html>

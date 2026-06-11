@@ -843,19 +843,11 @@ ul { list-style: none; }
      dengan kredensial project Supabase Anda.
 ══════════════════════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../admin/assets/js/supabase-client.js"></script>
+
 <script>
 // ═══════════════════════════════════════════════════════════════
-// ⚙️  KONFIGURASI SUPABASE — GANTI NILAI DI BAWAH INI
-// ═══════════════════════════════════════════════════════════════
-const SUPABASE_URL      = 'https://XXXX.supabase.co';   // ← ganti dengan URL project Anda
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1...';       // ← ganti dengan anon key Anda
-
-const { createClient } = supabase;
-const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// ═══════════════════════════════════════════════════════════════
 // HELPER: Konversi URL YouTube biasa → URL embed
-// Sama persis dengan logika di admin/video.html
 // ═══════════════════════════════════════════════════════════════
 function getYouTubeEmbedUrl(url) {
   if (!url || url.trim() === '') return null;
@@ -867,7 +859,6 @@ function getYouTubeEmbedUrl(url) {
   } catch (e) {
     console.error('[Video] Format URL tidak valid');
   }
-  // Tambahkan parameter agar video lebih rapi di dalam halaman
   return videoId ? `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1` : null;
 }
 
@@ -879,18 +870,15 @@ function renderVideo(urlVideo) {
   const placeholder  = document.getElementById('video-placeholder');
   const embedEl      = document.getElementById('video-embed');
 
-  // Sembunyikan skeleton
   if (skeleton) skeleton.style.display = 'none';
 
   const embedUrl = getYouTubeEmbedUrl(urlVideo);
 
   if (embedUrl) {
-    // Ada URL valid → tampilkan iframe embed
     embedEl.src = embedUrl;
     embedEl.style.display = 'block';
     if (placeholder) placeholder.style.display = 'none';
   } else {
-    // Tidak ada URL → tampilkan placeholder play button
     if (placeholder) placeholder.style.display = 'flex';
     embedEl.style.display = 'none';
   }
@@ -898,7 +886,8 @@ function renderVideo(urlVideo) {
 
 async function loadVideo() {
   try {
-    const { data, error } = await _supabase
+    // Menggunakan variabel 'supabase' global dari supabase-client.js
+    const { data, error } = await supabase
       .from('video_profil')
       .select('url_video')
       .eq('id', 1)
@@ -906,7 +895,6 @@ async function loadVideo() {
 
     if (error) {
       console.error('[Video] Gagal memuat:', error.message);
-      // Sembunyikan skeleton, tampilkan placeholder
       renderVideo(null);
       return;
     }
@@ -933,7 +921,6 @@ function renderVisi(visiText) {
     elText.textContent = '\u201C' + visiText.trim() + '\u201D';
     elText.style.display = 'block';
 
-    // Auto-extract kata kunci kapital sebagai tag dekoratif
     const matches = visiText.match(/\b[A-Z][a-z]{3,}\b/g);
     const tags    = matches ? [...new Set(matches)].slice(0, 7) : [];
 
@@ -954,7 +941,7 @@ function renderVisi(visiText) {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RENDER: Misi (dari tabel visi_misi, kolom misi: jsonb array)
+// RENDER: Misi & Tujuan (dari tabel visi_misi, kolom jsonb array)
 // ═══════════════════════════════════════════════════════════════
 function renderMisi(misiArray) {
   const skeleton  = document.getElementById('misi-skeleton');
@@ -983,9 +970,6 @@ function renderMisi(misiArray) {
   emptyMsg.style.display = 'block';
 }
 
-// ═══════════════════════════════════════════════════════════════
-// RENDER: Tujuan (dari tabel visi_misi, kolom tujuan: jsonb array)
-// ═══════════════════════════════════════════════════════════════
 function renderTujuan(tujuanArray) {
   const skeleton  = document.getElementById('tujuan-skeleton');
   const list      = document.getElementById('tujuan-list');
@@ -1027,14 +1011,14 @@ function escapeHtml(str) {
 // ═══════════════════════════════════════════════════════════════
 async function loadVisiMisi() {
   try {
-    const { data, error } = await _supabase
+    // Menggunakan variabel 'supabase' global dari supabase-client.js
+    const { data, error } = await supabase
       .from('visi_misi')
       .select('visi, misi, tujuan')
       .single();
 
     if (error) {
       console.error('[Visi Misi] Gagal memuat data:', error.message);
-      // Sembunyikan semua skeleton dengan pesan error
       ['visi-skeleton', 'misi-skeleton', 'tujuan-skeleton'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -1064,14 +1048,11 @@ async function loadVisiMisi() {
 // ═══════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Panggil semua loader data secara paralel ──
   Promise.all([loadVisiMisi(), loadVideo()]);
 
-  // ── Header scroll shadow ──
   const header = document.querySelector('.header');
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
-  // ── Dropdown desktop ──
   document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
     let timer;
     item.addEventListener('mouseenter', () => {
@@ -1090,7 +1071,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.addEventListener('click', () => document.querySelectorAll('.nav-item.has-dropdown').forEach(i => i.classList.remove('open')));
 
-  // ── Mobile menu hamburger ──
   const hamburger  = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu?.classList.toggle('open'); });
@@ -1098,13 +1078,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => document.getElementById(btn.getAttribute('data-toggle'))?.classList.toggle('open'));
   });
 
-  // ── Fade-up scroll animation ──
   const obs = new IntersectionObserver(entries => entries.forEach(e => {
     if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
   }), { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-  // ── Back to top button ──
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => backBtn?.classList.toggle('show', window.scrollY > 300));
   backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
