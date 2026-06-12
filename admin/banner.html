@@ -12,23 +12,23 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <nav>
         <ul>
-            <li><a href="dashboard.html" >Dashboard</a></li>
-            <li><a href="berita.html" >Berita</a></li>
-            <li><a href="prestasi.html" >Prestasi</a></li>
-            <li><a href="guru.html"> Guru & Staff</a></li>
-            <li><a href="lulusan.html" >Lulusan Terbaik</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="berita.html">Berita</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="guru.html">Guru & Staff</a></li>
+            <li><a href="lulusan.html">Lulusan Terbaik</a></li>
             <li><a href="banner.html" class="active">Banner</a></li>
-            <li><a href="visi-misi.html" >Visi Misi</a></li>
-            <li><a href="kurikulum_url.html" >Kurikulum</a></li>
-            <li><a href="struktur_organisasi.html" >Struktur Organisasi</a></li>
-            <li><a href="video.html"  >Video Profil</a></li>
+            <li><a href="visi-misi.html">Visi Misi</a></li>
+            <li><a href="kurikulum_url.html">Kurikulum</a></li>
+            <li><a href="struktur_organisasi.html">Struktur Organisasi</a></li>
+            <li><a href="video.html">Video Profil</a></li>
             <li><button onclick="logout()">Logout</button></li>
         </ul>
     </nav>
 
     <main id="content">
         <h1>Kelola Banner Slider</h1>
-        <p style="color: #666;">Batas maksimum banner adalah 4 buah. Angka urutan tidak boleh sama.</p>
+        <p style="color: #666;">Batas maksimum banner adalah 3 buah. Angka urutan tidak boleh sama.</p>
         <button onclick="bukaFormTambah()">+ Tambah Banner Baru</button>
         <br><br>
 
@@ -48,20 +48,17 @@
                 <div>
                     <label>Foto Banner (Maks 3 MB) - <span style="color:red;">*Wajib</span>:</label><br>
                     <input type="file" id="input-file-foto" accept="image/*" style="margin-bottom: 5px;"><br>
-                    <small style="color: #666;">Atau gunakan URL Foto secara langsung:</small><br>
-                    <input type="text" id="input-foto" required style="width: 100%; margin-top: 5px;">
+                    
+                    <input type="hidden" id="input-foto">
+                    
                     <div id="area-preview" style="margin-top: 10px; display: none;">
                         <small style="color: #666; display: block; margin-bottom: 5px;">Pratinjau Foto Form:</small>
                         <img id="preview-foto" src="" style="max-width: 100%; max-height: 150px; border: 1px solid #ddd; padding: 3px; border-radius: 4px;">
                     </div>
                 </div><br>
                 <div>
-                    <label>Link Tujuan URL (Redirect / Opsional):</label><br>
-                    <input type="text" id="input-link" style="width: 100%;">
-                </div><br>
-                <div>
-                    <label>Urutan Tampil (Pilih 1, 2, 3, atau 4):</label><br>
-                    <input type="number" id="input-urutan" value="1" min="1" max="4" required style="width: 80px;">
+                    <label>Urutan Tampil (Pilih 1, 2, atau 3):</label><br>
+                    <input type="number" id="input-urutan" value="1" min="1" max="3" required style="width: 80px;">
                 </div><br>
                 <div>
                     <label>
@@ -163,6 +160,13 @@
 
             const id = document.getElementById('banner-id').value;
             const inputUrutan = parseInt(document.getElementById('input-urutan').value);
+            const fotoUrl = document.getElementById('input-foto').value;
+
+            // --- VALIDASI MANUAL FOTO WAJIB ---
+            if (!fotoUrl) {
+                alert("⚠️ Silakan pilih dan unggah foto terlebih dahulu!");
+                return;
+            }
             
             const isDuplicate = bannerDataGlobal.some(b => b.urutan === inputUrutan && b.id !== id);
             
@@ -171,12 +175,10 @@
                 return; 
             }
 
-            // REVISI: Jika input judul/subjudul kosong, kirim sebagai null agar database tetap bersih
             const formData = {
                 judul: document.getElementById('input-judul').value.trim() || null,
                 subjudul: document.getElementById('input-subjudul').value.trim() || null,
-                foto_url: document.getElementById('input-foto').value,
-                link_url: document.getElementById('input-link').value.trim() || null,
+                foto_url: fotoUrl,
                 urutan: inputUrutan,
                 aktif: document.getElementById('input-aktif').checked
             };
@@ -236,11 +238,11 @@
             if (!file) return;
 
             // --- VALIDASI UKURAN FILE (MAKSIMAL 3 MB) ---
-            const maksUkuran = 3 * 1024 * 1024; // 3 MB dalam satuan Bytes
+            const maksUkuran = 3 * 1024 * 1024; 
             if (file.size > maksUkuran) {
                 alert("⚠️ Ukuran gambar terlalu besar! Maksimal ukuran file banner adalah 3 MB.");
-                e.target.value = ""; // Mengosongkan kembali input file
-                return; // Batalkan proses unggah
+                e.target.value = ""; 
+                return; 
             }
 
             const btnSubmit = document.querySelector("#form-banner button[type='submit']");
@@ -265,8 +267,8 @@
         // FUNGSI BANTUAN INTERFAS FORM & MODAL (UI HELPER)
         // ---------------------------------------------------------
         function bukaFormTambah() {
-            if (bannerDataGlobal.length >= 4) {
-                alert("Maksimal hanya diperbolehkan 4 banner! Silakan edit atau hapus banner yang ada terlebih dahulu.");
+            if (bannerDataGlobal.length >= 3) {
+                alert("Maksimal hanya diperbolehkan 3 banner! Silakan edit atau hapus banner yang ada terlebih dahulu.");
                 return; 
             }
 
@@ -274,12 +276,13 @@
             document.getElementById('judul-form').innerText = "Tambah Banner Baru";
             document.getElementById('form-banner').reset();
             document.getElementById('banner-id').value = "";
+            document.getElementById('input-file-foto').value = "";
             document.getElementById('area-preview').style.display = "none";
             document.getElementById('preview-foto').src = "";
             
             let nextUrutan = 1;
             while(bannerDataGlobal.some(b => b.urutan === nextUrutan)) { nextUrutan++; }
-            document.getElementById('input-urutan').value = nextUrutan <= 4 ? nextUrutan : 4;
+            document.getElementById('input-urutan').value = nextUrutan <= 3 ? nextUrutan : 3;
 
             document.getElementById('area-form').style.display = "block";
         }
@@ -293,12 +296,11 @@
             document.getElementById('area-form').style.display = "block";
             
             document.getElementById('banner-id').value = item.id;
+            document.getElementById('input-file-foto').value = "";
             
-            // REVISI: Handle jika judul bernilai null dari database
             document.getElementById('input-judul').value = item.judul || '';
             document.getElementById('input-subjudul').value = item.subjudul || '';
             document.getElementById('input-foto').value = item.foto_url;
-            document.getElementById('input-link').value = item.link_url || '';
             document.getElementById('input-urutan').value = item.urutan;
             document.getElementById('input-aktif').checked = item.aktif;
 
@@ -314,6 +316,7 @@
         function tutupForm() {
             document.getElementById('area-form').style.display = "none";
             document.getElementById('form-banner').reset();
+            document.getElementById('input-file-foto').value = "";
             document.getElementById('area-preview').style.display = "none";
             document.getElementById('preview-foto').src = "";
         }
@@ -350,7 +353,6 @@
         function toggleSidebar() {
             navMenu.classList.toggle('active');
             sidebarOverlay.classList.toggle('active');
-            
             menuToggle.classList.toggle('geser-kanan');
             
             if (navMenu.classList.contains('active')) {

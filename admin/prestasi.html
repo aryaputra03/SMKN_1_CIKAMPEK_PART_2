@@ -72,7 +72,8 @@
                 
                 <div>
                     <label>Deskripsi (Sertakan juga nama Pemenang di sini):</label><br>
-                    <textarea id="input-deskripsi" rows="6" style="width: 100%; font-family: Arial, sans-serif;"></textarea>
+                    <textarea id="input-deskripsi" rows="4" maxlength="200" style="width: 100%; font-family: Arial, sans-serif;" placeholder="Tuliskan deskripsi singkat maksimal 100 karakter..."></textarea>
+                    <small id="char-count" style="display: block; text-align: right; color: #666; font-size: 12px; margin-top: 4px;">0/100 karakter</small>
                 </div><br>
                 
                 <button type="submit" id="btn-simpan">Simpan Data Prestasi</button>
@@ -120,6 +121,27 @@
             await supabase.auth.signOut();
             window.location.href = 'index.html';
         }
+
+        // =========================================================
+        // 1.B LOGIKA PENGHITUNG KARAKTER DESKRIPSI (CHAR COUNTER)
+        // =========================================================
+        const inputDeskripsi = document.getElementById('input-deskripsi');
+        const charCountDisplay = document.getElementById('char-count');
+        const MAX_CHAR = 100;
+
+        inputDeskripsi.addEventListener('input', function() {
+            const currentLen = this.value.length;
+            charCountDisplay.textContent = `${currentLen}/${MAX_CHAR} karakter`;
+            
+            // Merubah warna jadi merah jika menyentuh batas maksimal
+            if (currentLen >= MAX_CHAR) {
+                charCountDisplay.style.color = "red";
+                charCountDisplay.style.fontWeight = "bold";
+            } else {
+                charCountDisplay.style.color = "#666";
+                charCountDisplay.style.fontWeight = "normal";
+            }
+        });
 
         // =========================================================
         // 2. LOGIKA CRUD SPESIFIK TABEL PRESTASI 
@@ -283,6 +305,11 @@
             document.getElementById('judul-form').innerText = "Tambah Prestasi Baru";
             document.getElementById('form-prestasi').reset();
             
+            // Mereset character counter
+            charCountDisplay.textContent = "0/100 karakter";
+            charCountDisplay.style.color = "#666";
+            charCountDisplay.style.fontWeight = "normal";
+            
             document.getElementById('prestasi-id').value = "";
             document.getElementById('input-foto').value = "";
             document.getElementById('input-file-foto').value = "";
@@ -305,7 +332,19 @@
             document.getElementById('input-judul').value = item.judul || "";
             document.getElementById('input-tingkat').value = item.tingkat || "";
             document.getElementById('input-tahun').value = item.tahun || "";
-            document.getElementById('input-deskripsi').value = item.deskripsi || "";
+            
+            const deskripsiValue = item.deskripsi || "";
+            document.getElementById('input-deskripsi').value = deskripsiValue;
+            
+            // Set up hitungan awal pada karakter counter saat mode edit
+            charCountDisplay.textContent = `${deskripsiValue.length}/100 karakter`;
+            if(deskripsiValue.length >= 100) {
+                charCountDisplay.style.color = "red";
+                charCountDisplay.style.fontWeight = "bold";
+            } else {
+                charCountDisplay.style.color = "#666";
+                charCountDisplay.style.fontWeight = "normal";
+            }
             
             const urlGambar = item.foto_url || "";
             document.getElementById('input-foto').value = urlGambar;
