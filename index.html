@@ -744,17 +744,28 @@
       }
     }
 
-    .hero-title {
+.hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 6vw, 80px);
+      font-size: clamp(32px, 5vw, 54px); /* Ukuran baris ketiga (SMKN 1 CIKAMPEK) */
       font-weight: 700;
       color: #ffffff !important;
       text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6);
-      line-height: 1.1;
+      line-height: 1.2;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
       font-variant-numeric: lining-nums;
       font-feature-settings: "lnum" 1;
+    }
+
+    .hero-welcome {
+      display: block; /* Memaksa teks teks di dalamnya membuat baris baru */
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(16px, 2.5vw, 20px); /* Ukuran yang sama untuk SELAMAT DATANG dan DI */
+      font-weight: 600;
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+      color: rgba(255, 255, 255, 0.95);
+      text-transform: uppercase;
     }
 
 .hero-subtitle {
@@ -2973,7 +2984,11 @@
 
     <div class="hero-content">
       <div class="hero-inner">
-        <h2 class="hero-title" id="hero-title-text">SELAMAT DATANG<br>SMKN 1 Cikampek</h2>
+        <h2 class="hero-title" id="hero-title-text">
+          <span class="hero-welcome">SELAMAT DATANG</span>
+          <span class="hero-welcome">DI</span>
+          SMKN 1 CIKAMPEK
+        </h2>
         <p class="hero-subtitle" id="hero-subtitle-text" style="display:none;"></p>
         <div class="hero-actions">
           <a href="profil/visi-misi.html" class="btn-hero-primary" id="hero-cta-btn">
