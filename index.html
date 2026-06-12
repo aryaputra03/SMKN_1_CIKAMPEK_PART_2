@@ -2553,17 +2553,62 @@
 
 
     /* ── INDEX specific mobile ── */
-    @media (max-width: 768px) {
-      /* Hero */
-      .hero { height: auto !important; min-height: 100svh; min-height: 100vh; }
-      .hero-content { position: relative; padding: 90px 0 56px; align-items: flex-start; }
-      .hero-title { font-size: clamp(30px, 9vw, 52px) !important; }
-      .hero-subtitle { font-size: 14px !important; max-width: 100%; margin-bottom: 24px; }
-      .hero-actions { flex-direction: column; gap: 10px; }
-      .btn-hero-primary, .btn-hero-outline { width: 100%; max-width: 320px; justify-content: center; }
-      .slider-arrow { width: 36px; height: 36px; }
-      .slider-arrow.prev { left: 12px; }
-      .slider-arrow.next { right: 12px; }
+@media (max-width: 768px) {
+  /* ===== PERBAIKAN HERO SECTION MOBILE ===== */
+  .hero {
+    height: 100svh !important; /* Memastikan tinggi pas 1 layar HP */
+    min-height: 500px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-content {
+    position: absolute !important; /* Tetap absolute agar teks mengambang di atas gambar */
+    inset: 0 !important;
+    padding: 0 40px !important; /* Memberi jarak aman agar teks tidak menabrak panah slider */
+    justify-content: center !important; /* Posisikan ke tengah secara vertikal */
+    align-items: center !important;
+    text-align: center !important; /* Teks rata tengah */
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 42px) !important;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px !important;
+    max-width: 100%;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .hero-actions {
+    flex-direction: column; /* Tombol berbaris ke bawah di HP */
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-outline {
+    width: 100%;
+    max-width: 260px; /* Membatasi lebar tombol agar tidak terlalu melar */
+    justify-content: center;
+  }
+
+  /* Panah Slider Mobile */
+  .slider-arrow { width: 36px; height: 36px; }
+  .slider-arrow.prev { left: 12px; }
+  .slider-arrow.next { right: 12px; }
+}
 
       /* Stats */
       .stats-bar { padding: 24px 0; }
