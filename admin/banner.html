@@ -38,15 +38,15 @@
                 <input type="hidden" id="banner-id">
                 
                 <div>
-                    <label>Judul Banner:</label><br>
-                    <input type="text" id="input-judul" required style="width: 100%;">
+                    <label>Judul Banner (Opsional):</label><br>
+                    <input type="text" id="input-judul" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>Subjudul Banner:</label><br>
+                    <label>Subjudul Banner (Opsional):</label><br>
                     <input type="text" id="input-subjudul" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>Foto Banner (Maks 3 MB):</label><br>
+                    <label>Foto Banner (Maks 3 MB) - <span style="color:red;">*Wajib</span>:</label><br>
                     <input type="file" id="input-file-foto" accept="image/*" style="margin-bottom: 5px;"><br>
                     <small style="color: #666;">Atau gunakan URL Foto secara langsung:</small><br>
                     <input type="text" id="input-foto" required style="width: 100%; margin-top: 5px;">
@@ -56,12 +56,12 @@
                     </div>
                 </div><br>
                 <div>
-                    <label>Link Tujuan URL (Redirect):</label><br>
+                    <label>Link Tujuan URL (Redirect / Opsional):</label><br>
                     <input type="text" id="input-link" style="width: 100%;">
                 </div><br>
                 <div>
-                    <label>Urutan Tampil (Pilih 1, 2, atau 3):</label><br>
-                    <input type="number" id="input-urutan" value="1" min="1" max="3" required style="width: 80px;">
+                    <label>Urutan Tampil (Pilih 1, 2, 3, atau 4):</label><br>
+                    <input type="number" id="input-urutan" value="1" min="1" max="4" required style="width: 80px;">
                 </div><br>
                 <div>
                     <label>
@@ -147,7 +147,7 @@
                     <td style="text-align:center;">
                         ${item.foto_url ? `<img src="${item.foto_url}" alt="Foto Banner" class="img-thumbnail" onclick="bukaModal('${item.foto_url}')" title="Klik untuk memperbesar">` : '<span style="color:#999; font-style:italic;">Tidak ada gambar</span>'}
                     </td>
-                    <td><b>${item.judul}</b></td>
+                    <td><b>${item.judul || '<span style="color:#999; font-weight:normal; font-style:italic;">(Tanpa Judul)</span>'}</b></td>
                     <td>${item.subjudul || '-'}</td>
                     <td>${item.aktif ? '<span style="color:green; font-weight:bold;">Aktif</span>' : '<span style="color:red;">Non-Aktif</span>'}</td>
                     <td>
@@ -171,11 +171,12 @@
                 return; 
             }
 
+            // REVISI: Jika input judul/subjudul kosong, kirim sebagai null agar database tetap bersih
             const formData = {
-                judul: document.getElementById('input-judul').value,
-                subjudul: document.getElementById('input-subjudul').value || null,
+                judul: document.getElementById('input-judul').value.trim() || null,
+                subjudul: document.getElementById('input-subjudul').value.trim() || null,
                 foto_url: document.getElementById('input-foto').value,
-                link_url: document.getElementById('input-link').value || null,
+                link_url: document.getElementById('input-link').value.trim() || null,
                 urutan: inputUrutan,
                 aktif: document.getElementById('input-aktif').checked
             };
@@ -264,7 +265,6 @@
         // FUNGSI BANTUAN INTERFAS FORM & MODAL (UI HELPER)
         // ---------------------------------------------------------
         function bukaFormTambah() {
-            // PERBAIKAN: Ubah pengecekan panjang array maksimal menjadi 4
             if (bannerDataGlobal.length >= 4) {
                 alert("Maksimal hanya diperbolehkan 4 banner! Silakan edit atau hapus banner yang ada terlebih dahulu.");
                 return; 
@@ -279,7 +279,6 @@
             
             let nextUrutan = 1;
             while(bannerDataGlobal.some(b => b.urutan === nextUrutan)) { nextUrutan++; }
-            // PERBAIKAN: Batas otomatisasi input urutan dinaikkan jadi 4
             document.getElementById('input-urutan').value = nextUrutan <= 4 ? nextUrutan : 4;
 
             document.getElementById('area-form').style.display = "block";
@@ -294,7 +293,9 @@
             document.getElementById('area-form').style.display = "block";
             
             document.getElementById('banner-id').value = item.id;
-            document.getElementById('input-judul').value = item.judul;
+            
+            // REVISI: Handle jika judul bernilai null dari database
+            document.getElementById('input-judul').value = item.judul || '';
             document.getElementById('input-subjudul').value = item.subjudul || '';
             document.getElementById('input-foto').value = item.foto_url;
             document.getElementById('input-link').value = item.link_url || '';
