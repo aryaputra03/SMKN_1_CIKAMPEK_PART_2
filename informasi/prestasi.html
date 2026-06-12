@@ -229,8 +229,7 @@
     .error-retry { padding: 9px 20px; background: var(--navy); color: var(--white); border-radius: var(--r-md); font-size: 13px; font-weight: 600; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
     .error-retry:hover { background: var(--navy-mid); }
 
- /* ── FOOTER ── */
-    /* ── FOOTER ──────────────────────────────────────── */
+ /* ── FOOTER ──────────────────────────────────────── */
     .footer {
       background: var(--gold);
       color: var(--navy);
@@ -412,13 +411,40 @@
       gap: 12px;
       align-items: flex-start;
     }
-    .footer-map-contact {
-      padding: 48px 0;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 48px;
-      align-items: start;
+
+    .fci-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(30, 41, 59, 0.06);
+      border: 1px solid rgba(30, 41, 59, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
+
+    .fci-icon svg {
+      width: 15px;
+      height: 15px;
+      color: var(--navy);
+    }
+
+    .fci-label {
+      font-size: 10.5px;
+      color: rgba(30, 41, 59, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+
+    .fci-value {
+      font-size: 13.5px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
     /* Footer Bottom */
     .footer-bottom {
       padding: 20px 0;
@@ -457,11 +483,6 @@
     .footer-bottom-links a:hover {
       color: var(--navy);
     }
-
-    .fci-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(30,41,59,0.06); border: 1px solid rgba(30,41,59,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .fci-icon svg { width: 15px; height: 15px; color: var(--navy); }
-    .fci-label { font-size: 10.5px; color: rgba(30,41,59,0.7); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; font-weight: 700; }
-    .fci-value { font-size: 13.5px; color: var(--navy); font-weight: 600; }
 
     @media (max-width: 768px) {
       /* Container breathing room */
