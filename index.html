@@ -658,12 +658,13 @@
     }
 
     /* ── HERO SLIDER ────────────────────────────────── */
-    .hero {
-      position: relative;
-      height: 88vh;
-      min-height: 520px;
-      overflow: hidden;
-    }
+.hero {
+  position: relative;
+  aspect-ratio: 16 / 9; /* Memaksa kotak mengikuti rasio 16:9 */
+  height: auto; /* Menghapus aturan 88vh */
+  min-height: auto; 
+  overflow: hidden;
+}
 
     .hero-slide {
       position: absolute;
