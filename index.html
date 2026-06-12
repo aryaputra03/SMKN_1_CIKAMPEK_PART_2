@@ -3552,9 +3552,9 @@ async function loadBannerSlider() {
       slide.className = 'hero-slide';
 
       // Simpan data ke dalam properti dataset elemen DOM
-      slide.dataset.judul   = item.judul   || 'SMKN 1 Cikampek';
+      slide.dataset.judul   = item.judul   || '';
       slide.dataset.subjudul = item.subjudul || '';
-      slide.dataset.linkUrl  = item.link_url  || 'profil/visi-misi.html';
+      slide.dataset.linkUrl  = item.link_url  || '';
 
       const bgStyle = item.foto_url
         ? `background-image:url('${item.foto_url}');`
@@ -3609,11 +3609,18 @@ if (isStaticSlide) {
   }
 
   // Cek apakah parameter dari Elemen DOM (.dataset) atau dari Object Supabase langsung
-  const judul = slideData.dataset ? slideData.dataset.judul : (slideData.judul || 'SMKN 1 Cikampek');
+  const judul = slideData.dataset ? slideData.dataset.judul : (slideData.judul || '');
   const sub   = slideData.dataset ? slideData.dataset.subjudul : (slideData.subjudul || '');
-  const link  = slideData.dataset ? slideData.dataset.linkUrl : (slideData.link_url || 'profil/visi-misi.html');
+  const link  = slideData.dataset ? slideData.dataset.linkUrl : (slideData.link_url || '');
 
-  if (titleEl) titleEl.textContent = judul;
+  if (titleEl) {
+    if (judul) {
+      titleEl.textContent = judul;
+      titleEl.style.display = '';
+    } else {
+      titleEl.style.display = 'none';
+    }
+  }
   
   if (subtitleEl) {
     if (sub) {
@@ -3625,7 +3632,12 @@ if (isStaticSlide) {
   }
   
   if (ctaBtn) {
-    ctaBtn.href = link || 'profil/visi-misi.html';
+    if (link) {
+      ctaBtn.href = link;
+      ctaBtn.style.display = '';
+    } else {
+      ctaBtn.style.display = 'none';
+    }
   }
 }
 
