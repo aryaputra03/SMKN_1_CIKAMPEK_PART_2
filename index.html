@@ -1289,14 +1289,21 @@
       color: var(--navy);
     }
 
-    /* ── BERITA ──────────────────────────────────────── */
+    /* ── BERITA CAROUSEL ─────────────────────────────── */
+    .berita-carousel-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+
     .berita-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      display: flex;
+      gap: 18px;
+      transition: transform 0.4s var(--ease);
+      will-change: transform;
     }
 
     .berita-card {
+      flex: 0 0 340px;
       background: var(--white);
       border-radius: var(--r-lg);
       border: 1px solid var(--gray-soft);
@@ -1311,7 +1318,7 @@
     }
 
     .berita-img {
-      height: 180px;
+      height: 200px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -1323,6 +1330,11 @@
       inset: 0;
       background-size: cover;
       background-position: center;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .berita-card:hover .berita-img-bg {
+      transform: scale(1.04);
     }
 
     .berita-date-tag {
@@ -1338,15 +1350,32 @@
     }
 
     .berita-body {
-      padding: 20px;
+      padding: 18px 18px 16px;
+    }
+
+    .berita-kat {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--navy-light);
+      background: var(--gray-soft);
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 8px;
     }
 
     .berita-body h3 {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 600;
       color: var(--navy);
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .berita-body h3 a {
@@ -1359,33 +1388,46 @@
     }
 
     .berita-body p {
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--text-muted);
       line-height: 1.65;
       margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .berita-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-top: 1px solid var(--gray-soft);
+      padding-top: 12px;
+      margin-top: 4px;
     }
 
     .berita-readmore {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       font-size: 12px;
       font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: opacity 0.2s;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 5px 12px;
+      border-radius: var(--r-sm);
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .berita-readmore:hover {
-      opacity: 0.75;
+      background: var(--gold-light);
+      transform: translateX(2px);
     }
 
     .berita-author {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-light);
       display: flex;
       align-items: center;
@@ -2219,10 +2261,6 @@
         display: none;
       }
 
-      .berita-grid {
-        grid-template-columns: 1fr;
-      }
-
       .jurusan-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -2654,8 +2692,28 @@
 
 /* Mid three grid — mobile only */
 
-      /* Berita grid */
-      .berita-grid { grid-template-columns: 1fr !important; }
+      /* Berita carousel — mobile swipe */
+      .berita-carousel-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 12px;
+      }
+      .berita-carousel-wrap::-webkit-scrollbar { display: none; }
+      .berita-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 16px;
+        transform: none !important;
+        transition: none !important;
+      }
+      .berita-grid > * {
+        flex: 0 0 80vw !important;
+        max-width: 320px;
+        scroll-snap-align: start;
+      }
+      .berita-carousel-nav { display: none !important; }
 
       /* Guru carousel — auto scroll/swipe */
       .guru-carousel-wrap { 
@@ -3031,17 +3089,25 @@
         <div class="divider-gold"></div>
       </div>
 
-      <!-- DATA DINAMIS: diisi oleh JS -->
-      <div class="berita-grid" id="berita-grid">
-        <!-- Skeleton cards -->
-        <div class="berita-card fade-up">
-          <div class="berita-img" style="background:linear-gradient(135deg,#E2E8F0,#CBD5E1)"></div>
-          <div class="berita-body">
-            <h3 style="color:#CBD5E1">Memuat berita...</h3>
-            <p style="color:#E2E8F0">Sedang mengambil data dari server.</p>
+      <div class="berita-carousel-wrap fade-up">
+        <!-- DATA DINAMIS: diisi oleh JS -->
+        <div class="berita-grid" id="berita-grid">
+          <!-- Skeleton card -->
+          <div class="berita-card" style="opacity:0.4">
+            <div class="berita-img" style="background:linear-gradient(135deg,#E2E8F0,#CBD5E1)"></div>
+            <div class="berita-body">
+              <h3 style="color:#CBD5E1">Memuat berita...</h3>
+              <p style="color:#E2E8F0">Sedang mengambil data dari server.</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="carousel-nav berita-carousel-nav">
+        <button class="carousel-btn berita-prev" aria-label="Sebelumnya">&#8592;</button>
+        <button class="carousel-btn berita-next" aria-label="Berikutnya">&#8594;</button>
+      </div>
+
       <div class="btn-center">
         <a href="informasi/berita.html" class="btn-outline-navy">Tampilkan Semua Berita</a>
       </div>
@@ -3696,7 +3762,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const bgImg = item.foto_url
             ? `background-image:url('${item.foto_url}');`
             : 'background:linear-gradient(135deg,#0F1E38,#1B2E4A);';
-          const ringkasan = truncate(item.isi ? item.isi.replace(/<[^>]*>/g, '') : '', 100);
+          const ringkasan = truncate(item.isi ? item.isi.replace(/<[^>]*>/g, '') : '', 90);
+          const kategori = item.kategori || 'Umum';
           return `
             <div class="berita-card fade-up">
               <div class="berita-img">
@@ -3704,6 +3771,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="berita-date-tag">${formatTanggalID(item.tanggal)}</div>
               </div>
               <div class="berita-body">
+                <span class="berita-kat">${kategori}</span>
                 <h3><a href="informasi/berita-detail.html?id=${item.id}">${item.judul || 'Tanpa Judul'}</a></h3>
                 <p>${ringkasan || 'Klik untuk membaca selengkapnya.'}</p>
                 <div class="berita-footer">
@@ -3726,6 +3794,20 @@ document.addEventListener('DOMContentLoaded', () => {
             fadeObs.observe(el);
           });
         });
+
+        // ── Carousel nav berita ──
+        const wrap = grid.parentElement;
+        let beritaPos = 0;
+        const BERITA_CARD_W = 340 + 18; // flex 0 0 340px + gap 18px
+
+        function moveBerita(dir) {
+          const maxPos = Math.max(0, data.length - 3);
+          beritaPos = Math.min(Math.max(beritaPos + dir, 0), maxPos);
+          grid.style.transform = `translateX(-${beritaPos * BERITA_CARD_W}px)`;
+        }
+
+        document.querySelector('.berita-prev')?.addEventListener('click', () => moveBerita(-1));
+        document.querySelector('.berita-next')?.addEventListener('click', () => moveBerita(1));
 
       } catch (err) {
         console.error('Gagal memuat berita:', err.message);
