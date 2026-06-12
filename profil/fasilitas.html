@@ -43,7 +43,7 @@ ul { list-style: none; }
 .nav-item { position: relative; }
 .nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; color: var(--text); background: none; border: none; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
 .nav-link:hover { color: var(--navy); background: var(--gray-soft); }
-.nav-link.active { color: var(--gold); background: var(--gold-pale); font-weight: 600; }
+.nav-link.active { color: var(--navy); background: var(--gray-soft); font-weight: 600; }
 .caret { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.25s; }
 .nav-item.has-dropdown.open .caret, .nav-item.has-dropdown:hover .caret { transform: rotate(180deg); }
 .dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-soft); border-top: 3px solid var(--gold); min-width: 230px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity 0.22s, transform 0.22s, visibility 0.22s; z-index: 1000; }

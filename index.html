@@ -2578,10 +2578,32 @@
       .berita-grid { grid-template-columns: 1fr !important; }
 
       /* Guru carousel — auto scroll/swipe */
-      .guru-carousel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .guru-carousel-wrap::-webkit-scrollbar { display: none; }
-      .guru-carousel { transform: none !important; padding-bottom: 6px; }
-      .carousel-nav { display: none; }
+      .guru-carousel-wrap { 
+        overflow-x: auto !important; 
+        -webkit-overflow-scrolling: touch; 
+        scrollbar-width: none; 
+        scroll-snap-type: x mandatory; /* Efek magnet saat digeser */
+        padding-bottom: 12px;
+      }
+      .guru-carousel-wrap::-webkit-scrollbar { 
+        display: none; 
+      }
+      .guru-carousel { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; 
+        gap: 16px; 
+        transform: none !important; /* Mematikan posisi transform dari JS */
+        transition: none !important; /* Mematikan konflik animasi JS */
+      }
+      /* Menargetkan card di dalam guru-carousel secara otomatis */
+      .guru-carousel > * {
+        flex: 0 0 75vw !important; /* Mengatur lebar card sekitar 75% layar mobile */
+        max-width: 260px;
+        scroll-snap-align: start; /* Titik henti magnet */
+      }
+      .carousel-nav { 
+        display: none !important; 
+      }
 
       /* Alumni */
       .alumni-grid { grid-template-columns: 1fr !important; }
@@ -2785,9 +2807,13 @@
           <a href="informasi/ekskul.html">Ekstrakurikuler</a>
         </div>
       </div>
+
+      <!-- PENTING MOBILE ARYA -->
       <div class="mobile-nav-item">
-        <a href="alumni.html" class="mobile-nav-link">Profil Alumni</a>
+        <a href="javascript:void(0);" id="tombol-kurikulum_1" class="mobile-nav-link" target="_blank">Kurikulum</a>
       </div>
+      <!-- PENTING MOBILE ARYA -->
+       
       <div class="mobile-nav-item">
         <a href="#contact" class="mobile-nav-link">Kontak</a>
       </div>
@@ -3306,15 +3332,22 @@
 
       if (data && data.url_kurikulum) {
         const tombolKurikulum = document.getElementById('tombol-kurikulum');
+        const tombolKurikulum_1 = document.getElementById('tombol-kurikulum_1');
         if (tombolKurikulum) {
           // Mengisi link asli dari database
           tombolKurikulum.href = data.url_kurikulum; 
+        }
+        if (tombolKurikulum_1) {
+          // Mengisi link asli dari database
+          tombolKurikulum_1.href = data.url_kurikulum;
         }
       }
     } catch (err) {
       console.error("Gagal memuat link kurikulum:", err.message);
     }
   }
+
+  
 
   document.addEventListener('DOMContentLoaded', ambilLinkKurikulum);
 
