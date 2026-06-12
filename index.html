@@ -3589,29 +3589,36 @@ slide.innerHTML = `
 // ════════════════════════════════════════════════════════════
 //  2. FUNGSI UPDATE TEKS HERO (JUDUL, SUBJUDUL, & CTA LINK)
 // ════════════════════════════════════════════════════════════
-function updateHeroText(slideData) {
+function updateHeroText(slideEl) {
   const titleEl    = document.getElementById('hero-title-text');
   const subtitleEl = document.getElementById('hero-subtitle-text');
   const ctaBtn     = document.getElementById('hero-cta-btn');
 
-  if (!slideData) return;
+  if (!slideEl) return;
 
-  // Slide 1 statis: pertahankan judul "SELAMAT DATANG / SMKN 1 Cikampek"
-  const isStaticSlide = slideData.dataset
-    ? slideData.id === 'hero-slide-default'
-    : false;
+  // PERBAIKAN: Cek apakah ini slide statis (id = hero-slide-default ATAU class hero-slide-static)
+  const isStaticSlide = slideEl.id === 'hero-slide-default' ||
+                        slideEl.classList.contains('hero-slide-static');
 
-if (isStaticSlide) {
-    if (titleEl) titleEl.innerHTML = '<span class="hero-welcome">SELAMAT DATANG DI</span>SMK NEGERI 1 CIKAMPEK';
+  if (isStaticSlide) {
+    // Slide 1 statis: kembalikan teks & tombol ke kondisi semula
+    if (titleEl) {
+      titleEl.innerHTML = '<span class="hero-welcome">SELAMAT DATANG DI</span>SMK NEGERI 1 CIKAMPEK';
+      titleEl.style.display = '';
+    }
     if (subtitleEl) subtitleEl.style.display = 'none';
-    if (ctaBtn) ctaBtn.href = 'profil/visi-misi.html';
+    if (ctaBtn) {
+      ctaBtn.textContent = 'Profil Sekolah';
+      ctaBtn.href = 'profil/visi-misi.html';
+      ctaBtn.style.display = '';
+    }
     return;
   }
 
-  // Cek apakah parameter dari Elemen DOM (.dataset) atau dari Object Supabase langsung
-  const judul = slideData.dataset ? slideData.dataset.judul : (slideData.judul || '');
-  const sub   = slideData.dataset ? slideData.dataset.subjudul : (slideData.subjudul || '');
-  const link  = slideData.dataset ? slideData.dataset.linkUrl : (slideData.link_url || '');
+  // Slide dinamis: ambil data dari dataset elemen DOM
+  const judul = slideEl.dataset ? slideEl.dataset.judul : '';
+  const sub   = slideEl.dataset ? slideEl.dataset.subjudul : '';
+  const link  = slideEl.dataset ? slideEl.dataset.linkUrl : '';
 
   if (titleEl) {
     if (judul) {
