@@ -658,13 +658,12 @@
     }
 
     /* ── HERO SLIDER ────────────────────────────────── */
-.hero {
-  position: relative;
-  aspect-ratio: 16 / 9; /* Memaksa kotak mengikuti rasio 16:9 */
-  height: auto; /* Menghapus aturan 88vh */
-  min-height: auto; 
-  overflow: hidden;
-}
+    .hero {
+      position: relative;
+      height: 88vh;
+      min-height: 520px;
+      overflow: hidden;
+    }
 
     .hero-slide {
       position: absolute;
@@ -3452,9 +3451,9 @@ async function loadBannerSlider() {
         ? `background-image:url('${item.foto_url}');`
         : 'background:linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%);';
 
-      slide.innerHTML = `
-        <div class="hero-bg" style="${bgStyle}background-size:cover;background-position:center;"></div>
-        <div class="hero-overlay"></div>`;
+slide.innerHTML = `
+  <div class="hero-bg" style="${bgStyle}background-size:contain;background-position:center;background-repeat:no-repeat;"></div>
+  <div class="hero-overlay"></div>`;
 
       heroSection.insertBefore(slide, heroContent);
     });
