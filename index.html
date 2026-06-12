@@ -744,30 +744,31 @@
       }
     }
 
-.hero-title {
+/* Ini untuk teks SMK NEGERI 1 CIKAMPEK (Dibuat lebih besar) */
+    .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 5vw, 54px); /* Ukuran baris ketiga (SMKN 1 CIKAMPEK) */
+      font-size: clamp(36px, 6vw, 72px); /* <-- Angka ini diperbesar */
       font-weight: 700;
       color: #ffffff !important;
       text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.6);
-      line-height: 1.2;
+      line-height: 1.15;
       letter-spacing: -0.5px;
       margin-bottom: 16px;
       font-variant-numeric: lining-nums;
       font-feature-settings: "lnum" 1;
     }
 
+    /* Ini untuk teks SELAMAT DATANG DI (Dibuat lebih kecil) */
     .hero-welcome {
-      display: block; /* Memaksa teks teks di dalamnya membuat baris baru */
+      display: block;
       font-family: 'DM Sans', sans-serif;
-      font-size: clamp(16px, 2.5vw, 20px); /* Ukuran yang sama untuk SELAMAT DATANG dan DI */
+      font-size: clamp(14px, 2vw, 18px); /* <-- Angka ini diperkecil */
       font-weight: 600;
-      letter-spacing: 4px;
-      margin-bottom: 6px;
-      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 4px; /* Spasi antar huruf dijauhkan sedikit agar tetap elegan walau kecil */
+      margin-bottom: 4px;
+      color: rgba(255, 255, 255, 0.9);
       text-transform: uppercase;
     }
-
 .hero-subtitle {
   font-size: 16px;
   color: #ffffff;
@@ -2984,10 +2985,9 @@
 
     <div class="hero-content">
       <div class="hero-inner">
-        <h2 class="hero-title" id="hero-title-text">
-          <span class="hero-welcome">SELAMAT DATANG</span>
-          <span class="hero-welcome">DI</span>
-          SMKN 1 CIKAMPEK
+<h2 class="hero-title" id="hero-title-text">
+          <span class="hero-welcome">SELAMAT DATANG DI</span>
+          SMK NEGERI 1 CIKAMPEK
         </h2>
         <p class="hero-subtitle" id="hero-subtitle-text" style="display:none;"></p>
         <div class="hero-actions">
@@ -3658,8 +3658,8 @@ function updateHeroText(slideData) {
     ? slideData.id === 'hero-slide-default'
     : false;
 
-  if (isStaticSlide) {
-    if (titleEl) titleEl.innerHTML = 'SELAMAT DATANG<br>SMKN 1 Cikampek';
+if (isStaticSlide) {
+    if (titleEl) titleEl.innerHTML = '<span class="hero-welcome">SELAMAT DATANG DI</span>SMK NEGERI 1 CIKAMPEK';
     if (subtitleEl) subtitleEl.style.display = 'none';
     if (ctaBtn) ctaBtn.href = 'profil/visi-misi.html';
     return;
