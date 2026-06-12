@@ -315,18 +315,18 @@
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M2 3.5A1.5 1.5 0 013.5 2h2.621a1.5 1.5 0 011.414 1l.683 2.05A1.5 1.5 0 017.8 6.707l-.738.738a8.5 8.5 0 004.494 4.494l.738-.738a1.5 1.5 0 011.656-.418l2.05.683A1.5 1.5 0 0118 12.879V15.5A1.5 1.5 0 0116.5 17C8.492 17 3 11.508 3 3.5z"/></svg>
           Kontak Person
         </a>
-    <button class="hamburger" aria-label="Buka Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger-btn" aria-label="Buka Menu"><span></span><span></span><span></span></button>
   </div>
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Beranda</a></div>
     <div class="mobile-nav-item">
       <div class="mobile-nav-link" data-toggle="mob-profil">Profil Sekolah <svg style="width:15px;height:15px" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></svg></div>
       <div class="mobile-dropdown" id="mob-profil">
-          <a href="profil/visi-misi.html">Visi &amp; Misi</a>
-          <a href="profil/fasilitas.html">Fasilitas</a>
-          <a href="#jurusan">Jurusan</a>
-          <a href="profil/struktur-organisasi.html">Struktur Organisasi</a>
-          <a href="profil/staff-guru.html">Staff &amp; Guru</a>
+        <a href="../profil/visi-misi.html">Visi &amp; Misi</a>
+        <a href="../profil/fasilitas.html">Fasilitas</a>
+        <a href="../profil/jurusan.html">Jurusan</a>
+        <a href="../profil/struktur-organisasi.html">Struktur Organisasi</a>
+        <a href="../profil/staff-guru.html">Staff &amp; Guru</a>
       </div>
     </div>
     <div class="mobile-nav-item">
@@ -334,12 +334,14 @@
       <div class="mobile-dropdown open" id="mob-info">
         <a href="berita.html" style="color:var(--gold);font-weight:600">Berita Sekolah</a>
         <a href="prestasi.html">Prestasi</a>
-        <a href="ekskul.html">Ekstrakurikuler</a>
-        <a href="../informasi/lulusanterbaik.html">Lulusan Terbaik</a>
+        <a href="ekskul.html">Org &amp; Ekstrakurikuler</a>
+        <a href="lulusanterbaik.html">Lulusan Terbaik</a>
       </div>
     </div>
-    <div class="mobile-nav-item"><a href="../kurikulum/index.html" class="mobile-nav-link">Kurikulum</a></div>
-    <div style="padding:16px 24px;"><a href="../index.html#ppdb" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:var(--r-md);">kontak person</a></div>
+    <div class="mobile-nav-item">
+      <a href="javascript:void(0);" id="tombol-kurikulum_1" class="mobile-nav-link" target="_blank">Kurikulum</a>
+    </div>
+    <div style="padding:16px 24px;"><a href="../index.html#contact" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;background:var(--gold);color:var(--navy);font-weight:700;font-size:13.5px;border-radius:var(--r-md);">Kontak Person</a></div>
   </div>
 </header>
 
@@ -539,6 +541,11 @@
         if (tombolKurikulum) {
           // Mengisi link asli dari database
           tombolKurikulum.href = data.url_kurikulum; 
+        }
+        const tombolKurikulum_1 = document.getElementById('tombol-kurikulum_1');
+        if (tombolKurikulum_1) {
+          // Mengisi link asli dari database untuk mobile
+          tombolKurikulum_1.href = data.url_kurikulum;
         }
       }
     } catch (err) {
@@ -880,8 +887,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 60));
 
   // Hamburger mobile
-  const hamburger   = document.querySelector('.hamburger');
-  const mobileMenu  = document.querySelector('.mobile-menu');
+  const hamburger   = document.getElementById('hamburger-btn');
+  const mobileMenu  = document.getElementById('mobile-menu');
   hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileMenu?.classList.toggle('open');
