@@ -700,17 +700,7 @@
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="14" rx="1"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
             ${escapeHTML(formatTahun(item.tahun))}
           </div>
-          ${deskripsi ? `
-          <div class="prestasi-detail-item">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 18c0-3.31 2.69-6 6-6h4c3.31 0 6 2.69 6 6"/></svg>
-            ${escapeHTML(deskripsi)}
-          </div>` : ''}
         </div>
-        ${deskripsi ? `
-        <div class="prestasi-siswa">
-          <div class="siswa-dot">${escapeHTML(inisial)}</div>
-          <span>${escapeHTML(deskripsi)}</span>
-        </div>` : ''}
       </div>
     </div>`;
   }
