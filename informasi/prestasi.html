@@ -271,8 +271,16 @@
       .stat-hl-item:nth-child(odd) { border-right: 1px solid var(--gray-soft); }
       .prestasi-row { flex-direction: column; }
       .psp-thumb { width: 100%; aspect-ratio: 4 / 3; height: auto; flex-direction: column; padding: 20px 16px; gap: 12px; }
-      .footer-main-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-main-grid { grid-template-columns: 1fr !important; gap: 28px !important; padding: 40px 0 28px !important; }
+      .footer-map-contact { grid-template-columns: 1fr !important; gap: 24px !important; padding: 28px 0 !important; }
+      .footer-bottom { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
+      .footer-bottom-links { justify-content: center !important; gap: 16px !important; }
+      .footer-brand-desc { max-width: 100% !important; }
+      .footer-map-frame { height: 200px !important; }
+      .footer-social { flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
     }
   </style>
 </head>
@@ -451,26 +459,11 @@
         <!-- Info Terbaru -->
         <div class="fade-up">
           <h4 class="footer-col-title">Info Terbaru</h4>
-          <div style="display:flex;flex-direction:column;gap:16px">
-            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">PPDB Jalur Afirmasi Disabilitas</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">26 Mei, 2026</p>
+          <div id="footer-info-terbaru" style="display:flex;flex-direction:column;gap:16px">
+              <div style="opacity:0.3;border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px">
+                <p style="font-size:13px;font-weight:600;color:var(--navy)">Memuat...</p>
+              </div>
             </div>
-            <div style="border-bottom:1px solid rgba(30,41,59,0.1);padding-bottom:14px">
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">Pengumuman Kelulusan Siswa Kelas XII TA 2025/2026</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">04 Mei, 2026</p>
-            </div>
-            <div>
-              <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4">
-                <a href="#" style="color:inherit;transition:color 0.2s">Surat Edaran Kelulusan Siswa Kelas XII</a>
-              </p>
-              <p style="font-size:11.5px;color:rgba(30,41,59,0.5)">18 Apr, 2026</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -928,6 +921,50 @@
     });
 
   }); // end DOMContentLoaded
+</script>
+
+<script>
+
+  // ────────────────────────────────────────────────────────────
+  // LOAD FOOTER INFO TERBARU (tabel: berita, 3 terbaru)
+  // ────────────────────────────────────────────────────────────
+  async function loadFooterInfo() {
+    try {
+      const { data, error } = await supabase
+        .from('berita')
+        .select('id, judul, tanggal')
+        .order('tanggal', { ascending: false })
+        .limit(3);
+
+      if (error) throw error;
+      if (!data || data.length === 0) return;
+
+      const container = document.getElementById('footer-info-terbaru');
+      if (!container) return;
+
+      function _fmtTgl(str) {
+        if (!str) return '—';
+        const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+        const d = new Date(str);
+        return isNaN(d) ? str : `${d.getDate()} ${bulan[d.getMonth()]}, ${d.getFullYear()}`;
+      }
+      function _trunc(s, n) { return s && s.length > n ? s.substring(0, n) + '…' : (s || ''); }
+
+      container.innerHTML = data.map((item, idx) => `
+        <div style="${idx < data.length - 1 ? 'border-bottom:1px solid rgba(30,41,59,0.15);padding-bottom:14px;' : ''}">
+          <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.4;">
+            <a href="berita-detail.html?id=${item.id}" style="color:inherit;transition:color 0.2s"
+               onmouseover="this.style.color='#0F1E38'" onmouseout="this.style.color='inherit'">${_trunc(item.judul, 70)}</a>
+          </p>
+          <p style="font-size:11.5px;color:rgba(30,41,59,0.55)">${_fmtTgl(item.tanggal)}</p>
+        </div>`).join('');
+
+    } catch (err) {
+      console.error('Gagal memuat footer info:', err.message);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', loadFooterInfo);
+
 </script>
 
 </body>
