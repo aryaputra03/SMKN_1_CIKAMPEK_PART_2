@@ -2532,11 +2532,12 @@
       aspect-ratio: unset;
       border-radius: 0;
       margin: 0;
-      display: block;
-      align-items: unset;
-      justify-content: unset;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
       overflow: hidden;
       position: relative;
+      background: var(--gray-soft);
     }
 
     .prestasi-row .psp-thumb img {
@@ -2545,7 +2546,8 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: unset;
+      min-height: 180px;
     }
 
     .prestasi-row .prestasi-body {
@@ -3988,7 +3990,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = data.map((item, idx) => {
           const thumbContent = item.foto_url
-            ? `<img src="${item.foto_url}" alt="${item.judul || 'Prestasi'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;aspect-ratio:4/3;">`
+            ? `<img src="${item.foto_url}" alt="${item.judul || 'Prestasi'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">`
             : `<div style="width:100%;aspect-ratio:4/3;background:${prestasiGradients[idx % prestasiGradients.length]};display:flex;align-items:center;justify-content:center;"><div class="psp-thumb-icon">${prestasiIcons[idx % prestasiIcons.length]}</div></div>`;
 
           return `
