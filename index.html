@@ -1284,18 +1284,21 @@
     }
 
     .berita-img {
-      height: 200px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: flex-end;
+      flex-shrink: 0;
     }
 
     .berita-img-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center;
+      background-position: center top;
+      background-repeat: no-repeat;
       transition: transform 0.4s var(--ease);
     }
 
@@ -1598,13 +1601,23 @@
 
     /* Colored prestasi thumbnails */
     .psp-thumb {
-      aspect-ratio: 4 / 3;
-      border-radius: var(--r-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 240px;
+      flex-shrink: 0;
       position: relative;
       overflow: hidden;
+      background: var(--gray-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .psp-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .psp-thumb-icon {
@@ -2528,7 +2541,7 @@
     .prestasi-row .psp-thumb {
       flex: 0 0 auto;
       width: 240px;
-      height: auto;
+      min-height: 200px;
       aspect-ratio: unset;
       border-radius: 0;
       margin: 0;
@@ -2541,13 +2554,13 @@
     }
 
     .prestasi-row .psp-thumb img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
       display: block;
-      aspect-ratio: unset;
-      min-height: 180px;
     }
 
     .prestasi-row .prestasi-body {
@@ -2561,14 +2574,18 @@
 
       .prestasi-row .psp-thumb {
         flex: none !important;
-        width: 100%;
-        height: auto;
+        width: 100% !important;
+        min-height: 0 !important;
+        aspect-ratio: 16 / 9 !important;
       }
 
       .prestasi-row .psp-thumb img {
-        aspect-ratio: 4 / 3;
+        position: absolute;
+        inset: 0;
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
       }
     }
 
@@ -4035,7 +4052,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return `
             <div class="berita-card fade-up">
               <div class="berita-img">
-                <div class="berita-img-bg" style="${bgImg}background-size:cover;background-position:center;"></div>
+                <div class="berita-img-bg" style="${bgImg}background-size:cover;background-position:center top;"></div>
                 <div class="berita-date-tag">${formatTanggalID(item.tanggal)}</div>
               </div>
               <div class="berita-body">
@@ -4151,8 +4168,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const hasPhoto = !!(item.foto_url && item.foto_url !== 'null' && item.foto_url.trim() !== '');
 
           const thumbContent = hasPhoto
-            ? `<img src="${item.foto_url}" alt="${item.judul || 'Prestasi'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">`
-            : `<div style="width:100%;height:100%;min-height:180px;background:${prestasiGradients[idx % prestasiGradients.length]};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;">
+            ? `<img src="${item.foto_url}" alt="${item.judul || 'Prestasi'}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">`
+            : `<div style="width:100%;height:100%;min-height:200px;background:${prestasiGradients[idx % prestasiGradients.length]};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;">
                  <div style="width:52px;height:52px;color:rgba(255,255,255,0.75);">${prestasiIcons[idx % prestasiIcons.length]}</div>
                  <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);">${item.tahun || ''}</span>
                </div>`;

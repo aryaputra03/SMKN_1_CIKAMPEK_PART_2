@@ -126,7 +126,13 @@
       height: 100%;
     }
     .berita-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .berita-img { height: 180px; overflow: hidden; position: relative; }
+    .berita-img { 
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden; 
+      position: relative;
+      flex-shrink: 0;
+    }
     .berita-img-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
     .berita-card:hover .berita-img-bg { transform: scale(1.04); }
     .berita-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,30,56,0.6) 0%, transparent 60%); }
@@ -613,8 +619,8 @@ function getGradient(index) {
 ================================================================= */
 function buatCardBerita(item, index) {
   const bgStyle = item.foto_url
-    ? `background-image:url('${item.foto_url}');${getGradient(index)}`
-    : `background:${getGradient(index)}`;
+    ? `background-image:url('${item.foto_url}');background-size:cover;background-position:center top;`
+    : `background:${getGradient(index)};`;
 
   const cuplikan = ringkasIsi(item.isi);
   const tglFormat = formatTanggal(item.tanggal);
