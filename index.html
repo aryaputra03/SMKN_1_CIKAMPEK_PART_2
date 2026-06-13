@@ -2431,25 +2431,37 @@
     .prestasi-row {
       display: flex !important;
       flex-direction: row !important;
-      gap: 24px;
+      gap: 0;
       align-items: stretch;
+      background: var(--white);
+      border: 1px solid var(--gray-soft);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     }
+    .prestasi-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--gold); }
 
     .prestasi-row .psp-thumb {
       flex: 0 0 auto;
-      width: 220px;
-      aspect-ratio: 4 / 3;
+      width: 240px;
       height: auto;
-      border-radius: var(--r-md);
+      aspect-ratio: unset;
+      border-radius: 0;
       margin: 0;
     }
 
     .prestasi-row .prestasi-card {
       flex: 1;
       margin: 0;
+      padding: 22px 28px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background: var(--white);
     }
 
     @media (max-width: 768px) {
@@ -2461,7 +2473,12 @@
         flex: none !important;
         width: 100%;
         height: auto;
+      }
+
+      .prestasi-row .psp-thumb img {
         aspect-ratio: 4 / 3;
+        width: 100%;
+        height: auto;
       }
     }
 
@@ -2595,9 +2612,15 @@
 @media (max-width: 768px) {
   /* ===== PERBAIKAN HERO SECTION MOBILE ===== */
   .hero {
-    height: 100svh !important; /* Memastikan tinggi pas 1 layar HP */
-    min-height: 500px !important;
+    height: 85svh !important; /* Sedikit dikurangi agar foto gedung tidak terlalu terpotong */
+    min-height: 560px !important;
+    max-height: 700px !important;
     overflow: hidden !important;
+  }
+
+  .hero-bg {
+    background-size: cover !important;
+    background-position: center top !important; /* Fokus ke bagian atas/tengah gedung */
   }
 
   .hero-content {
@@ -3011,7 +3034,7 @@
 
         <!-- Kanan: Sambutan + Video (DINAMIS dari tabel video_profil) -->
         <div class="mid-sambutan-col fade-up">
-          <h3 class="mid-sambutan-title">Sambutan Kepala Sekolah</h3>
+          <h3 class="mid-sambutan-title">Profil Sekolah</h3>
           <!-- Thumbnail klik untuk buka modal video -->
           <div class="mid-sambutan-video" id="btn-play-video">
             <div class="play-btn">
@@ -3856,15 +3879,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         container.innerHTML = data.map((item, idx) => {
-          const gradientBg = item.foto_url
-            ? `background-image:url('${item.foto_url}');background-size:cover;background-position:center;`
-            : `background:${prestasiGradients[idx % prestasiGradients.length]};`;
-          const iconHtml = item.foto_url ? '' : `<div class="psp-thumb-icon">${prestasiIcons[idx % prestasiIcons.length]}</div>`;
+          const thumbContent = item.foto_url
+            ? `<img src="${item.foto_url}" alt="${item.judul || 'Prestasi'}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;aspect-ratio:4/3;">`
+            : `<div style="width:100%;aspect-ratio:4/3;background:${prestasiGradients[idx % prestasiGradients.length]};display:flex;align-items:center;justify-content:center;"><div class="psp-thumb-icon">${prestasiIcons[idx % prestasiIcons.length]}</div></div>`;
 
           return `
             <div class="prestasi-row fade-up">
-              <div class="psp-thumb" style="${gradientBg}">
-                ${iconHtml}
+              <div class="psp-thumb">
+                ${thumbContent}
               </div>
               <div class="prestasi-card">
                 <h4>${item.judul || 'Prestasi'}</h4>

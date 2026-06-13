@@ -102,15 +102,29 @@ ul { list-style: none; }
 .fas-card.accent-purple { border-top-color: #7C3AED; }
 .fas-card.accent-green { border-top-color: #16A34A; }
 .fas-card.accent-red { border-top-color: #DC2626; }
-.fas-icon { font-size: 36px; line-height: 1; }
+.fas-icon { font-size: 36px; line-height: 1; display: none; }
 .fas-title { font-size: 16px; font-weight: 700; color: var(--navy); }
 .fas-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; flex: 1; }
-.fas-count {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--navy); color: var(--gold);
-  font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700;
-  padding: 5px 16px; border-radius: var(--r-sm); align-self: flex-start; margin-top: auto;
+.fas-icon-wrap {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--gold-pale); border: 1px solid rgba(255,230,0,0.2);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
+.fas-icon-wrap svg { width: 26px; height: 26px; color: var(--navy); }
+.fas-card.accent-blue .fas-icon-wrap { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.18); }
+.fas-card.accent-blue .fas-icon-wrap svg { color: #2563EB; }
+.fas-card.accent-purple .fas-icon-wrap { background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.18); }
+.fas-card.accent-purple .fas-icon-wrap svg { color: #7C3AED; }
+.fas-card.accent-green .fas-icon-wrap { background: rgba(22,163,74,0.08); border-color: rgba(22,163,74,0.18); }
+.fas-card.accent-green .fas-icon-wrap svg { color: #16A34A; }
+.fas-card.accent-red .fas-icon-wrap { background: rgba(220,38,38,0.08); border-color: rgba(220,38,38,0.18); }
+.fas-card.accent-red .fas-icon-wrap svg { color: #DC2626; }
+.fas-card.accent-teal .fas-icon-wrap { background: rgba(13,148,136,0.08); border-color: rgba(13,148,136,0.18); }
+.fas-card.accent-teal .fas-icon-wrap svg { color: #0D9488; }
+.fas-card.accent-orange .fas-icon-wrap { background: rgba(234,88,12,0.08); border-color: rgba(234,88,12,0.18); }
+.fas-card.accent-orange .fas-icon-wrap svg { color: #EA580C; }
+.fas-card.accent-teal { border-top-color: #0D9488; }
+.fas-card.accent-orange { border-top-color: #EA580C; }
 
 /* ── FOOTER ─────────────────────────────── */
 /* ── FOOTER ──────────────────────────────────────── */
@@ -310,64 +324,160 @@ ul { list-style: none; }
 
 <!-- PAGE BODY -->
 <main class="page-body">
-  <div class="section-title">Fasilitas Unggulan</div>
-  <p class="section-sub">Fasilitas utama yang tersedia di SMKN 1 Cikampek untuk mendukung pembelajaran kejuruan</p>
+  <div class="section-title">Fasilitas Sekolah</div>
+  <p class="section-sub">Sarana dan prasarana yang tersedia di SMKN 1 Cikampek untuk mendukung pembelajaran dan kehidupan sekolah</p>
 
   <div class="fasilitas-grid">
+
+    <!-- 1. Ruang Kelas -->
     <div class="fas-card fade-up">
-      <div class="fas-icon">🏫</div>
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          <path d="M7 8h10M7 11h6"/>
+        </svg>
+      </div>
       <div class="fas-title">Ruang Kelas</div>
-      <div class="fas-desc">Dilengkapi proyektor, AC, dan papan tulis interaktif di setiap kelas untuk kenyamanan belajar siswa.</div>
-      <div class="fas-count">30 Ruang</div>
+      <div class="fas-desc">Ruang pembelajaran yang digunakan untuk mendukung kegiatan belajar mengajar siswa dari berbagai tingkat dan program keahlian secara nyaman, tertib, dan kondusif.</div>
     </div>
+
+    <!-- 2. Bengkel & Ruang Praktik -->
+    <div class="fas-card accent-green fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>
+      <div class="fas-title">Bengkel &amp; Ruang Praktik Kejuruan</div>
+      <div class="fas-desc">Fasilitas praktik kejuruan yang mendukung pembelajaran berbasis keterampilan pada berbagai bidang keahlian sesuai kebutuhan pembelajaran vokasi.</div>
+    </div>
+
+    <!-- 3. Laboratorium Pembelajaran -->
     <div class="fas-card accent-blue fade-up">
-      <div class="fas-icon">💻</div>
-      <div class="fas-title">Lab Komputer & TKJ</div>
-      <div class="fas-desc">Laboratorium komputer modern dengan perangkat terbaru, koneksi internet cepat, dan peralatan jaringan lengkap.</div>
-      <div class="fas-count">4 Lab</div>
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4m-6 0h6"/>
+          <circle cx="12" cy="10" r="1.5"/>
+        </svg>
+      </div>
+      <div class="fas-title">Laboratorium Pembelajaran</div>
+      <div class="fas-desc">Laboratorium yang menunjang kegiatan praktik, eksperimen, dan pembelajaran terapan pada bidang komputer, bahasa, sains, elektro, serta bidang pendukung lainnya.</div>
     </div>
+
+    <!-- 4. Ruang Guru & Tenaga Pendidik -->
     <div class="fas-card accent-purple fade-up">
-      <div class="fas-icon">🔬</div>
-      <div class="fas-title">Lab Sains & Elektronika</div>
-      <div class="fas-desc">Laboratorium Fisika, Kimia, Biologi, dan Elektronika dengan peralatan standar industri untuk praktik kejuruan.</div>
-      <div class="fas-count">3 Lab</div>
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="fas-title">Ruang Guru &amp; Tenaga Pendidik</div>
+      <div class="fas-desc">Ruang kerja yang digunakan oleh guru dan tenaga pendidik untuk mendukung persiapan pembelajaran, koordinasi, dan aktivitas akademik sekolah.</div>
     </div>
-    <div class="fas-card accent-green fade-up">
-      <div class="fas-icon">🏭</div>
-      <div class="fas-title">Bengkel Pemesinan</div>
-      <div class="fas-desc">Bengkel mesin bubut, frais, dan peralatan produksi untuk program Teknik Pemesinan dan Teknik Otomasi Industri.</div>
-      <div class="fas-count">2 Bengkel</div>
-    </div>
+
+    <!-- 5. Ruang Pimpinan & Administrasi -->
     <div class="fas-card fade-up">
-      <div class="fas-icon">📚</div>
-      <div class="fas-title">Perpustakaan</div>
-      <div class="fas-desc">Koleksi buku teknis dan umum yang lengkap dengan suasana nyaman dan ruang baca yang kondusif.</div>
-      <div class="fas-count">1 Gedung</div>
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="12"/><path d="M12 12v3"/>
+        </svg>
+      </div>
+      <div class="fas-title">Ruang Pimpinan &amp; Administrasi</div>
+      <div class="fas-desc">Ruang yang menunjang pelayanan administrasi, pengelolaan sekolah, serta kegiatan kerja kepala sekolah, wakil kepala sekolah, dan tenaga kependidikan.</div>
     </div>
-    <div class="fas-card accent-red fade-up">
-      <div class="fas-icon">🎨</div>
-      <div class="fas-title">Studio DKV</div>
-      <div class="fas-desc">Studio desain grafis dengan workstation dan perangkat lunak desain profesional untuk program Desain Komunikasi Visual.</div>
-      <div class="fas-count">1 Studio</div>
+
+    <!-- 6. Ruang Organisasi & Kegiatan Siswa -->
+    <div class="fas-card accent-orange fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <div class="fas-title">Ruang Organisasi &amp; Kegiatan Siswa</div>
+      <div class="fas-desc">Fasilitas yang mendukung kegiatan organisasi, ekstrakurikuler, kepemimpinan, kreativitas, serta pengembangan karakter dan minat siswa.</div>
     </div>
+
+    <!-- 7. Perpustakaan & Sumber Belajar -->
+    <div class="fas-card fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          <path d="M8 7h8M8 11h5"/>
+        </svg>
+      </div>
+      <div class="fas-title">Perpustakaan &amp; Sumber Belajar</div>
+      <div class="fas-desc">Fasilitas literasi yang mendukung kebutuhan membaca, mencari referensi, memperluas wawasan, dan menunjang proses belajar siswa.</div>
+    </div>
+
+    <!-- 8. GSG Bale Atikan & Aula -->
+    <div class="fas-card accent-teal fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+          <path d="M6 12h.01M18 12h.01"/>
+        </svg>
+      </div>
+      <div class="fas-title">GSG Bale Atikan &amp; Aula Pertemuan</div>
+      <div class="fas-desc">Fasilitas pertemuan dan kegiatan bersama yang digunakan untuk acara sekolah, pembinaan siswa, rapat, pertunjukan, dan berbagai kegiatan resmi lainnya.</div>
+    </div>
+
+    <!-- 9. Masjid & Fasilitas Ibadah -->
     <div class="fas-card accent-blue fade-up">
-      <div class="fas-icon">🕌</div>
-      <div class="fas-title">Masjid Sekolah</div>
-      <div class="fas-desc">Masjid yang luas dan representatif untuk mendukung kegiatan ibadah dan pembinaan karakter keagamaan siswa.</div>
-      <div class="fas-count">1 Masjid</div>
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <div class="fas-title">Masjid &amp; Fasilitas Ibadah</div>
+      <div class="fas-desc">Area ibadah yang dilengkapi fasilitas pendukung untuk menunjang kegiatan keagamaan, pembinaan karakter, dan aktivitas spiritual warga sekolah.</div>
     </div>
-    <div class="fas-card fade-up">
-      <div class="fas-icon">🏟️</div>
-      <div class="fas-title">Aula &amp; Lapangan Olahraga</div>
-      <div class="fas-desc">Aula serbaguna dan lapangan olahraga yang memadai untuk kegiatan sekolah, upacara, dan kegiatan ekstrakurikuler.</div>
-      <div class="fas-count">2 Area</div>
+
+    <!-- 10. Kantin Sekolah -->
+    <div class="fas-card accent-red fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+          <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+      </div>
+      <div class="fas-title">Kantin Sekolah</div>
+      <div class="fas-desc">Fasilitas penyedia makanan dan minuman yang mendukung kebutuhan serta kenyamanan siswa, guru, dan tenaga kependidikan selama berada di lingkungan sekolah.</div>
     </div>
-    <div class="fas-card accent-green fade-up">
-      <div class="fas-icon">🏥</div>
-      <div class="fas-title">UKS &amp; Bimbingan Konseling</div>
-      <div class="fas-desc">Unit Kesehatan Sekolah dan ruang BK yang nyaman untuk mendukung kesehatan fisik dan mental siswa.</div>
-      <div class="fas-count">2 Ruang</div>
+
+    <!-- 11. Fasilitas Umum & Penunjang -->
+    <div class="fas-card accent-teal fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="fas-title">Fasilitas Umum &amp; Penunjang</div>
+      <div class="fas-desc">Beragam fasilitas pendukung yang menunjang kenyamanan, pelayanan, keamanan, dan aktivitas warga sekolah di lingkungan sehari-hari.</div>
     </div>
+
+    <!-- 12. Sanitasi, Gudang & Utilitas -->
+    <div class="fas-card accent-orange fade-up">
+      <div class="fas-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+          <path d="M3 9V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3"/>
+          <line x1="12" y1="4" x2="12" y2="9"/><line x1="9" y1="14" x2="9" y2="17"/><line x1="15" y1="14" x2="15" y2="17"/>
+        </svg>
+      </div>
+      <div class="fas-title">Sanitasi, Gudang &amp; Utilitas</div>
+      <div class="fas-desc">Fasilitas sanitasi, penyimpanan, serta utilitas sekolah yang mendukung kebersihan, keamanan, kelancaran operasional, dan pemeliharaan sarana prasarana.</div>
+    </div>
+
   </div>
 </main>
 
