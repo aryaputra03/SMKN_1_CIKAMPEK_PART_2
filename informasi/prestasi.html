@@ -898,8 +898,8 @@
         (activeLevel === 'provinsi'  && tingkat.includes('provinsi')) ||
         (activeLevel === 'kota'      && (tingkat.includes('kota') || tingkat.includes('kabupaten')));
 
-      const haystack = [item.judul, item.tingkat, item.deskripsi, item.tahun].join(' ').toLowerCase();
-      const matchSearch = !searchQuery || haystack.includes(searchQuery.toLowerCase());
+      const judul = (item.judul || '').toLowerCase();
+      const matchSearch = !searchQuery || judul.includes(searchQuery.toLowerCase());
 
       return matchLevel && matchSearch;
     });
