@@ -287,6 +287,48 @@ ul { list-style: none; }
 .back-to-top.show { opacity: 1; transform: translateY(0); }
 .back-to-top:hover { background: var(--gold-light); transform: translateY(-2px) !important; }
 
+/* ── PAGINATION ────────────────────────── */
+.pagination-wrap { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  gap: 6px; 
+  margin-top: 24px; 
+  flex-wrap: wrap;
+}
+.page-btn { 
+  padding: 6px 12px; 
+  border: 1px solid var(--gray-soft); 
+  background: var(--white); 
+  color: var(--navy); 
+  border-radius: var(--r-sm); 
+  font-size: 13.5px; 
+  font-weight: 500; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+}
+.page-btn:hover:not(:disabled) { 
+  border-color: var(--gold); 
+  color: var(--navy); 
+  background: var(--gold-pale); 
+}
+.page-btn.active { 
+  background: var(--gold); 
+  border-color: var(--gold); 
+  font-weight: 700; 
+}
+.page-btn:disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed; 
+  background: var(--gray-soft); 
+  border-color: var(--gray-soft); 
+}
+.page-dots {
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0 4px;
+}
+
 @media (max-width: 768px) { .navbar, .btn-ppdb { display: none; } .hamburger { display: flex; } .mobile-menu { display: block; } .footer-main-grid { grid-template-columns: 1fr; gap: 32px; } .footer-map-contact { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
 </style>
 </head>
@@ -454,6 +496,7 @@ ul { list-style: none; }
         </tbody>
       </table>
     </div>
+    <div id="pagination-container" class="pagination-wrap"></div>
     <p class="note" id="note-total" style="display:none;"></p>
   </div>
 
@@ -467,6 +510,7 @@ ul { list-style: none; }
     <p class="lightbox-name" id="lightbox-nama"></p>
   </div>
 </div>
+
 
 <!-- FOOTER -->
 <footer class="footer" id="contact">
@@ -639,13 +683,13 @@ ul { list-style: none; }
 </script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// STAFF & GURU — DATA DINAMIS DARI SUPABASE
+// STAFF & GURU — DATA DINAMIS DARI SUPABASE DENGAN PAGINATION
 // ═══════════════════════════════════════════════════════════════
 
-/**
- * escapeHtml(str)
- * Sanitasi teks untuk mencegah XSS sebelum disisipkan ke innerHTML.
- */
+let allGuruData = [];
+let currentPage = 1;
+const ITEMS_PER_PAGE = 20;
+
 function escapeHtml(str) {
   if (!str) return '';
   const d = document.createElement('div');
@@ -653,52 +697,108 @@ function escapeHtml(str) {
   return d.innerHTML;
 }
 
-/**
- * bukaLightbox(url, nama)
- * Membuka overlay lightbox untuk memperbesar foto guru.
- */
 function bukaLightbox(url, nama) {
   document.getElementById('lightbox-img').src = url;
   document.getElementById('lightbox-nama').textContent = nama;
   document.getElementById('lightbox').classList.add('show');
 }
 
-/**
- * tutupLightbox(event)
- * Menutup lightbox saat tombol × diklik atau area luar gambar diklik.
- */
 function tutupLightbox(event) {
-  // Jika dipanggil dari onclick overlay, tutup hanya bila klik di luar gambar
   if (event && event.target !== document.getElementById('lightbox')) return;
   document.getElementById('lightbox').classList.remove('show');
 }
 
-// Tutup lightbox dengan tombol Escape
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('show');
 });
 
-/**
- * renderGuru(data)
- * Mengisi tbody tabel dengan data guru dari Supabase.
- * Kolom: No | Foto | Nama | NIP | Jabatan/Mapel
- */
-function renderGuru(data) {
+// Fungsi mengubah halaman ketika tombol diklik
+window.changePage = function(newPage) {
+  const totalPages = Math.ceil(allGuruData.length / ITEMS_PER_PAGE);
+  if (newPage >= 1 && newPage <= totalPages) {
+    currentPage = newPage;
+    renderGuru(); // Render ulang tabel dengan halaman baru
+    
+    // Gulir perlahan ke atas tabel agar rapi
+    const tableWrap = document.querySelector('.card.fade-up');
+    if (tableWrap) {
+      const hh = document.querySelector('.header')?.offsetHeight || 80;
+      window.scrollTo({ top: tableWrap.offsetTop - hh - 16, behavior: 'smooth' });
+    }
+  }
+};
+
+// Merender tombol halaman (Prev, 1, 2, 3, Next)
+function renderPagination() {
+  const container = document.getElementById('pagination-container');
+  const totalPages = Math.ceil(allGuruData.length / ITEMS_PER_PAGE);
+
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+
+  // Tombol Prev
+  html += `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&laquo; Prev</button>`;
+
+  // Logika untuk menampilkan max 5 tombol angka di tengah agar rapi jika halamannya banyak
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, currentPage + 2);
+
+  // Sesuaikan batas jika berada di ujung awal/akhir halaman
+  if (currentPage <= 2) endPage = Math.min(5, totalPages);
+  if (currentPage >= totalPages - 1) startPage = Math.max(1, totalPages - 4);
+
+  // Jika halaman awal terpotong
+  if (startPage > 1) {
+    html += `<button class="page-btn" onclick="changePage(1)">1</button>`;
+    if (startPage > 2) html += `<span class="page-dots">...</span>`;
+  }
+
+  // Generate tombol nomor halaman
+  for (let i = startPage; i <= endPage; i++) {
+    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+  }
+
+  // Jika halaman akhir terpotong
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) html += `<span class="page-dots">...</span>`;
+    html += `<button class="page-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
+  }
+
+  // Tombol Next
+  html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next &raquo;</button>`;
+
+  container.innerHTML = html;
+}
+
+// Merender isi tabel sesuai halaman aktif
+function renderGuru() {
   const tbody    = document.getElementById('tabel-guru-publik');
   const noteEl   = document.getElementById('note-total');
 
-  if (!data || data.length === 0) {
+  if (!allGuruData || allGuruData.length === 0) {
     tbody.innerHTML = `
       <tr>
         <td colspan="5" style="text-align:center;padding:32px;color:var(--text-muted);font-style:italic;">
           Data guru belum tersedia.
         </td>
       </tr>`;
+    document.getElementById('pagination-container').innerHTML = '';
     return;
   }
 
-  tbody.innerHTML = data.map((item, idx) => {
-    // Kolom foto: tampilkan thumbnail jika ada foto_url, avatar SVG jika tidak
+  // Memotong array data sesuai halaman yang aktif
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const pageData = allGuruData.slice(startIndex, endIndex);
+
+  tbody.innerHTML = pageData.map((item, idx) => {
+    // Nomor urut tabel meneruskan dari halaman sebelumnya
+    const absoluteIdx = startIndex + idx + 1; 
+    
     const fotoKolom = item.foto_url
       ? `<img
            src="${escapeHtml(item.foto_url)}"
@@ -715,14 +815,13 @@ function renderGuru(data) {
            </svg>
          </div>`;
 
-    // Gabungkan jabatan dan mapel jika keduanya ada
     const jabatanMapel = [item.jabatan, item.mapel]
       .filter(v => v && v.trim() !== '' && v.trim() !== '-')
       .join(' / ') || '-';
 
     return `
       <tr>
-        <td style="text-align:center;">${idx + 1}</td>
+        <td style="text-align:center;">${absoluteIdx}</td>
         <td style="text-align:center;">${fotoKolom}</td>
         <td><b>${escapeHtml(item.nama)}</b></td>
         <td class="nip">${escapeHtml(item.nip) || '-'}</td>
@@ -730,16 +829,14 @@ function renderGuru(data) {
       </tr>`;
   }).join('');
 
-  // Tampilkan catatan jumlah total guru
-  noteEl.textContent = `* Menampilkan ${data.length} tenaga pendidik dan kependidikan aktif.`;
+  // Tampilkan informasi data ke berapa yang sedang diakses dan render navigasi halamannya
+  const maxShown = Math.min(endIndex, allGuruData.length);
+  noteEl.textContent = `* Menampilkan data ke ${startIndex + 1} - ${maxShown} dari total ${allGuruData.length} tenaga pendidik.`;
   noteEl.style.display = 'block';
+
+  renderPagination();
 }
 
-/**
- * loadGuru()
- * Fungsi utama: ambil semua data dari tabel `guru` di Supabase,
- * diurutkan berdasarkan kolom `urutan` (ascending).
- */
 async function loadGuru() {
   try {
     const { data, error } = await supabase
@@ -758,7 +855,10 @@ async function loadGuru() {
       return;
     }
 
-    renderGuru(data);
+    // Simpan semua data dari database, lalu render halaman ke-1
+    allGuruData = data;
+    currentPage = 1;
+    renderGuru();
 
   } catch (err) {
     console.error('[Staff & Guru] Error tidak terduga:', err);
