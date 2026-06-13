@@ -3705,8 +3705,8 @@
   </button>
 
   <!-- ══════════════ SUPABASE CLIENT ══════════════ -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../admin/assets/js/supabase-client.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin/assets/js/supabase-client.js"></script>
 
   <script>
     async function ambilLinkKurikulum() {
@@ -4116,16 +4116,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // ────────────────────────────────────────────────────────────
-    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman atau
-    //    Info Kelulusan, ambil 5 terbaru, tampilkan tanggal)
+ // ────────────────────────────────────────────────────────────
+    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman / Kelulusan)
     // ────────────────────────────────────────────────────────────
     async function loadPengumuman() {
       try {
+        // PERBAIKAN: Gunakan .or() dan .ilike() agar pencarian tidak sensitif terhadap huruf besar/kecil
         const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal, kategori, foto_url')
-          .in('kategori', ['Pengumuman', 'Info Kelulusan'])
+          .or('kategori.ilike.%Pengumuman%,kategori.ilike.%Kelulusan%')
           .order('tanggal', { ascending: false })
           .limit(5);
 
@@ -4182,7 +4182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-
     // ────────────────────────────────────────────────────────────
     // 3. LOAD PRESTASI (tabel: prestasi, ambil 4 terbaru)
     // ────────────────────────────────────────────────────────────
