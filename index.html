@@ -4056,9 +4056,17 @@ document.addEventListener('DOMContentLoaded', () => {
           .limit(3);
 
         if (error) throw error;
-        if (!data || data.length === 0) return;
 
         const grid = document.getElementById('berita-grid');
+
+        if (!data || data.length === 0) {
+          grid.innerHTML = `
+            <div style="text-align:center;color:var(--text-light);padding:40px 0;width:100%;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40" style="margin:0 auto 12px;display:block;opacity:0.3;"><path d="M4 4h16v12H4zM8 20h8M12 16v4"/></svg>
+              Belum ada berita yang diterbitkan.
+            </div>`;
+          return;
+        }
         grid.innerHTML = data.map(item => {
           const bgImg = item.foto_url
             ? `background-image:url('${item.foto_url}');`
@@ -4116,26 +4124,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
  // ────────────────────────────────────────────────────────────
-    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman / Kelulusan)
+    // 2. LOAD BERITA TENGAH (tabel: berita, semua kategori, 5 terbaru)
     // ────────────────────────────────────────────────────────────
  // ────────────────────────────────────────────────────────────
-    // 2. LOAD PENGUMUMAN (Cara Paling Aman: Filter via JavaScript)
+    // 2. LOAD PENGUMUMAN (Semua Kategori, 5 Terbaru)
     // ────────────────────────────────────────────────────────────
     async function loadPengumuman() {
       try {
-        // Ambil data tanpa filter kategori dari database agar tidak terjadi error syntax
+        // Ambil semua berita terbaru tanpa filter kategori
         const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal, kategori, foto_url')
-          .order('tanggal', { ascending: false });
+          .order('tanggal', { ascending: false })
+          .limit(5);
 
         if (error) throw error;
-
-        // Filter data menggunakan JavaScript (kebal huruf besar/kecil)
-        const pengumumanData = data.filter(item => {
-          const kat = (item.kategori || '').toLowerCase();
-          return kat.includes('pengumuman') || kat.includes('kelulusan');
-        }).slice(0, 5); // Hanya ambil 5 data terbaru
 
         const list = document.getElementById('mid-pengumuman-list');
 
@@ -4144,13 +4147,16 @@ document.addEventListener('DOMContentLoaded', () => {
           : `<div class="mid-pengum-thumb"><div class="mid-pengum-thumb-placeholder"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg></div></div>`;
 
         const badgeHtml = (kat) => {
-          const isKelulusan = (kat || '').toLowerCase().includes('kelulusan');
-          const bg  = isKelulusan ? '#EFF6FF' : '#FFF7ED';
-          const clr = isKelulusan ? '#2563EB'  : '#EA580C';
-          return `<span style="display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:${bg};color:${clr};margin-bottom:3px;">${kat}</span>`;
+          const k = (kat || '').toLowerCase();
+          let bg = '#F1F5F9', clr = '#475569';
+          if (k.includes('kelulusan'))    { bg = '#EFF6FF'; clr = '#2563EB'; }
+          else if (k.includes('pengumuman')) { bg = '#FFF7ED'; clr = '#EA580C'; }
+          else if (k.includes('kegiatan'))   { bg = '#F0FDF4'; clr = '#16A34A'; }
+          else if (k.includes('artikel'))    { bg = '#FDF4FF'; clr = '#9333EA'; }
+          return `<span style="display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:${bg};color:${clr};margin-bottom:3px;">${kat || 'Umum'}</span>`;
         };
 
-        if (pengumumanData.length === 0) {
+        if (!data || data.length === 0) {
           list.innerHTML = `
             <div class="mid-pengumuman-item">
               <div class="mid-pengum-thumb">
@@ -4159,13 +4165,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
               <div class="mid-pengum-text">
-                <a href="informasi/berita.html" style="color:var(--text-muted);font-style:italic;">Belum ada pengumuman terbaru.</a>
+                <a href="informasi/berita.html" style="color:var(--text-muted);font-style:italic;">Belum ada berita terbaru.</a>
               </div>
             </div>`;
           return;
         }
 
-        list.innerHTML = pengumumanData.map(item => `
+        list.innerHTML = data.map(item => `
           <div class="mid-pengumuman-item">
             ${thumbHtml(item)}
             <div class="mid-pengum-text">
@@ -4179,7 +4185,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>`).join('');
 
       } catch (err) {
-        console.error('Gagal memuat pengumuman:', err.message);
+        console.error('Gagal memuat berita:', err.message);
         const list = document.getElementById('mid-pengumuman-list');
         if (list) {
           list.innerHTML = `<div class="mid-pengumuman-item"><div class="mid-pengum-text"><a href="informasi/berita.html" style="color:var(--text-light);">Gagal memuat data. Coba muat ulang.</a></div></div>`;
