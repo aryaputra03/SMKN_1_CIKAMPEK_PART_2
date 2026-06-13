@@ -2700,154 +2700,150 @@
 
     /* ── INDEX specific mobile ── */
 @media (max-width: 768px) {
-  /* ===== HERO MOBILE — Gaya Banner Full-Width (seperti kaellstore) ===== */
+  /* ═══════════════════════════════════════════════════════════
+     HERO MOBILE — Gaya Banner Full-Width (referensi: kaellstore)
+     Pendekatan: hero section = satu blok dengan tinggi tetap.
+     Semua elemen (bg, overlay, teks) absolute di dalamnya.
+     Teks + tombol tampil DI ATAS gambar, rata tengah.
+  ═══════════════════════════════════════════════════════════ */
 
-  /* Wrapper hero: tidak fixed height, mengikuti konten */
+  /* 1. Ukuran hero: tinggi otomatis dari aspect-ratio, bukan 100vh */
   .hero {
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
-    overflow: visible !important;
-    position: relative;
-    display: block;
+    aspect-ratio: 16 / 9 !important;  /* Proporsi banner landscape */
+    overflow: hidden !important;
+    position: relative !important;
   }
 
-  /* Layout column: slide gambar di atas, dots + teks di bawah */
-  #hero-section {
-    display: flex !important;
-    flex-direction: column !important;
-    position: relative;
-    background: var(--navy);
-  }
-
-  /* Area slide: posisi relatif, aspect ratio banner landscape */
+  /* 2. Setiap slide memenuhi seluruh area hero */
   .hero-slide,
   .hero-slide.active {
-    position: relative !important;
-    inset: unset !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    aspect-ratio: 16 / 7 !important;
-    flex-shrink: 0;
-    overflow: hidden;
+    height: 100% !important;
   }
 
-  /* Gambar: cover, edge-to-edge */
+  /* 3. Gambar: cover penuh, tidak ada bar hitam */
   .hero-bg {
     position: absolute !important;
     inset: 0 !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-color: var(--navy, #0A1223) !important;
   }
 
-  /* Overlay slide statis (slide 1): tetap gelap agar teks kontras */
-  .hero-slide-static .hero-overlay {
-    background: rgba(10, 18, 35, 0.55) !important;
-  }
-
-  /* Overlay slide dinamis (banner admin): hampir transparan, gambar lebih dominan */
-  .hero-slide:not(.hero-slide-static) .hero-overlay {
-    background: rgba(0, 0, 0, 0.08) !important;
-  }
-
+  /* 4. Overlay: gelap sedang agar teks terbaca di semua slide */
   .hero-overlay {
     position: absolute !important;
     inset: 0 !important;
+    background: rgba(10, 18, 35, 0.50) !important;
     z-index: 1 !important;
   }
 
-  /* Teks hero: keluar dari posisi absolut, tampil sebagai blok di bawah gambar */
+  /* 5. Slide dinamis (banner admin): overlay lebih tipis, gambar lebih dominan */
+  .hero-slide:not(.hero-slide-static) .hero-overlay {
+    background: rgba(10, 18, 35, 0.30) !important;
+  }
+
+  /* 6. hero-content: TETAP absolute, rata tengah di dalam hero */
   .hero-content {
-    position: relative !important;
-    inset: unset !important;
-    z-index: 5;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 5 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 24px 24px 8px !important;
-    background: var(--navy) !important;
+    padding: 0 20px !important;
+    background: none !important;
   }
 
-  /* Sembunyikan teks saat slide dinamis aktif (ditangani JS) */
-  .hero-content.hidden-mobile {
-    display: none !important;
-  }
-
+  /* 7. Konten dalam hero-content: kolom, rata tengah */
   .hero-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    text-align: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    gap: 0;
   }
 
+  /* 8. Badge kecil di atas judul */
   .hero-badge {
-    margin-bottom: 14px;
-    font-size: 11px;
+    font-size: 10px !important;
+    padding: 5px 12px !important;
+    margin-bottom: 10px !important;
+    letter-spacing: 0.8px !important;
   }
 
+  /* 9. Judul utama */
   .hero-title {
-    font-size: clamp(22px, 7vw, 34px) !important;
-    text-align: center;
-    margin-bottom: 10px;
+    font-size: clamp(20px, 6.5vw, 30px) !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+    line-height: 1.2 !important;
   }
 
+  /* 10. Sub-judul */
   .hero-subtitle {
-    font-size: 13.5px !important;
-    max-width: 100%;
-    margin-bottom: 20px;
-    text-align: center;
+    font-size: 12.5px !important;
+    max-width: 90% !important;
+    margin: 0 auto 16px !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
   }
 
+  /* 11. Tombol: rata tengah, tidak full-width */
   .hero-actions {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    align-items: center;
-    padding-bottom: 4px;
+    flex-direction: row !important;
+    gap: 10px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
   }
 
   .btn-hero-primary,
   .btn-hero-outline {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
+    width: auto !important;
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+    justify-content: center !important;
   }
 
-  /* Panah slider: disembunyikan di mobile (pakai swipe & dots) */
+  /* 12. Panah slider: sembunyikan di mobile */
   .slider-arrow {
     display: none !important;
   }
 
-  /* Dots: muncul di bawah gambar, sebelum blok teks */
+  /* 13. Dots: tetap di bawah hero (absolute, bawah slide) */
   .slider-controls {
-    position: relative !important;
-    bottom: unset !important;
-    left: unset !important;
-    transform: none !important;
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10 !important;
     display: flex !important;
-    justify-content: center !important;
-    gap: 7px !important;
-    padding: 10px 0 4px !important;
-    background: var(--navy) !important;
-    z-index: 20 !important;
-    order: 0;
+    gap: 6px !important;
+    padding: 0 !important;
+    background: none !important;
   }
 
   .slider-dot {
-    width: 7px !important;
-    height: 7px !important;
+    width: 6px !important;
+    height: 6px !important;
     border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.25) !important;
-    transition: background 0.2s, transform 0.2s !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    border: none !important;
+    transition: all 0.25s !important;
   }
 
   .slider-dot.active {
     background: var(--gold) !important;
-    transform: scale(1.35) !important;
-    width: 20px !important;
-    border-radius: 4px !important;
+    width: 18px !important;
+    border-radius: 3px !important;
+    transform: none !important;
   }
 }
 
@@ -3833,7 +3829,7 @@ async function loadBannerSlider() {
         : 'background:linear-gradient(135deg,#0a1628 0%,#0F1E38 60%,#1a3666 100%);';
 
 slide.innerHTML = `
-  <div class="hero-bg" style="${bgStyle}background-size:contain;background-position:center;background-repeat:no-repeat;"></div>
+  <div class="hero-bg" style="${bgStyle}background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
   <div class="hero-overlay"></div>`;
 
       heroSection.insertBefore(slide, heroContent);
@@ -3868,12 +3864,16 @@ function updateHeroText(slideEl) {
 
   if (!slideEl) return;
 
-  // PERBAIKAN: Cek apakah ini slide statis (id = hero-slide-default ATAU class hero-slide-static)
+  // Cek apakah ini slide statis (slide 1)
   const isStaticSlide = slideEl.id === 'hero-slide-default' ||
                         slideEl.classList.contains('hero-slide-static');
 
+  // Pastikan hero-content selalu visible (tidak pernah disembunyikan)
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) heroContent.classList.remove('hidden-mobile');
+
   if (isStaticSlide) {
-    // Slide 1 statis: kembalikan teks & tombol ke kondisi semula
+    // Slide 1 statis: teks & tombol kembali ke kondisi awal
     if (titleEl) {
       titleEl.innerHTML = '<span class="hero-welcome">SELAMAT DATANG DI</span>SMK NEGERI 1 CIKAMPEK';
       titleEl.style.display = '';
@@ -3887,20 +3887,20 @@ function updateHeroText(slideEl) {
     return;
   }
 
-  // Slide dinamis: ambil data dari dataset elemen DOM
+  // Slide dinamis: tampilkan judul & tombol dari data admin
   const judul = slideEl.dataset ? slideEl.dataset.judul : '';
   const sub   = slideEl.dataset ? slideEl.dataset.subjudul : '';
   const link  = slideEl.dataset ? slideEl.dataset.linkUrl : '';
 
   if (titleEl) {
     if (judul) {
-      titleEl.textContent = judul;
+      titleEl.innerHTML = judul; // judul dari admin tampil di atas gambar
       titleEl.style.display = '';
     } else {
       titleEl.style.display = 'none';
     }
   }
-  
+
   if (subtitleEl) {
     if (sub) {
       subtitleEl.textContent = sub;
@@ -3909,10 +3909,11 @@ function updateHeroText(slideEl) {
       subtitleEl.style.display = 'none';
     }
   }
-  
+
   if (ctaBtn) {
     if (link) {
       ctaBtn.href = link;
+      ctaBtn.textContent = 'Lihat Selengkapnya';
       ctaBtn.style.display = '';
     } else {
       ctaBtn.style.display = 'none';
@@ -3947,17 +3948,8 @@ function initSlider() {
     slides[currentSlideIndex].classList.add('active');
     if (dots.length > 0) dots[currentSlideIndex].classList.add('active');
 
-    // Update teks hero secara dinamis mengikuti slide yang aktif
+    // Update teks hero mengikuti slide yang aktif
     updateHeroText(slides[currentSlideIndex]);
-
-    // Mobile: sembunyikan blok teks saat slide dinamis aktif
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent && window.innerWidth <= 768) {
-      const activeSlide = slides[currentSlideIndex];
-      const isStatic = activeSlide.id === 'hero-slide-default' ||
-                       activeSlide.classList.contains('hero-slide-static');
-      heroContent.classList.toggle('hidden-mobile', !isStatic);
-    }
   }
 
   // FIX: bind tombol panah prev / next ke gantiSlide
@@ -4017,11 +4009,6 @@ function initSlider() {
 // Panggil fungsi utama saat dokumen siap
 document.addEventListener('DOMContentLoaded', () => {
   loadBannerSlider();
-  // Pastikan hero-content visible di slide 1 (statis) saat pertama load
-  if (window.innerWidth <= 768) {
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) heroContent.classList.remove('hidden-mobile');
-  }
 });
 
     // ────────────────────────────────────────────────────────────
