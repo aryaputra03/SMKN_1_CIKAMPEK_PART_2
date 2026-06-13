@@ -2372,6 +2372,31 @@
         max-width: 320px;
         justify-content: center;
       }
+
+      /* ── HERO TEXT & BUTTON — MOBILE SCALING ── */
+      .hero-title {
+        font-size: clamp(26px, 7vw, 40px);
+        letter-spacing: -0.3px;
+        margin-bottom: 12px;
+      }
+
+      .hero-welcome {
+        font-size: clamp(10px, 3vw, 13px);
+        letter-spacing: 3px;
+        margin-bottom: 2px;
+      }
+
+      .hero-badge {
+        font-size: 10px;
+        padding: 5px 12px;
+        margin-bottom: 16px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-outline {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -2390,6 +2415,23 @@
       .alumni-photo {
         width: 100%;
         height: 160px;
+      }
+
+      /* ── HERO TEXT — EXTRA SMALL PHONES ── */
+      .hero-title {
+        font-size: clamp(22px, 8vw, 32px);
+      }
+
+      .hero-welcome {
+        font-size: clamp(9px, 3vw, 11px);
+        letter-spacing: 2.5px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-outline {
+        padding: 9px 16px;
+        font-size: 12.5px;
+        max-width: 280px;
       }
     }
 
@@ -2742,12 +2784,12 @@
      Teks + tombol tampil DI ATAS gambar, rata tengah.
   ═══════════════════════════════════════════════════════════ */
 
-  /* 1. Ukuran hero: tinggi otomatis dari aspect-ratio, bukan 100vh */
+  /* 1. Ukuran hero: tinggi proporsional untuk portrait mobile */
   .hero {
     height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    aspect-ratio: 16 / 9 !important;  /* Proporsi banner landscape */
+    min-height: 52vw !important;   /* Cukup tinggi di portrait (± 55-60% lebar layar) */
+    max-height: 56vw !important;
+    aspect-ratio: unset !important; /* Nonaktifkan 16/9 agar portrait tidak terlalu pendek */
     overflow: hidden !important;
     position: relative !important;
   }
@@ -2813,12 +2855,19 @@
     letter-spacing: 0.8px !important;
   }
 
-  /* 9. Judul utama */
+  /* 9. Judul utama — diperkecil untuk layar HP portrait */
   .hero-title {
-    font-size: clamp(20px, 6.5vw, 30px) !important;
+    font-size: clamp(18px, 5.5vw, 26px) !important;
     text-align: center !important;
-    margin-bottom: 8px !important;
-    line-height: 1.2 !important;
+    margin-bottom: 6px !important;
+    line-height: 1.15 !important;
+  }
+
+  /* 9a. Teks "SELAMAT DATANG DI" — proporsional */
+  .hero-welcome {
+    font-size: clamp(8px, 2.4vw, 11px) !important;
+    letter-spacing: 2.5px !important;
+    margin-bottom: 2px !important;
   }
 
   /* 10. Sub-judul */
@@ -2842,9 +2891,16 @@
   .btn-hero-primary,
   .btn-hero-outline {
     width: auto !important;
-    padding: 10px 20px !important;
-    font-size: 13px !important;
+    padding: 8px 16px !important;
+    font-size: 11.5px !important;
     justify-content: center !important;
+    border-radius: 8px !important;
+  }
+
+  .btn-hero-primary svg,
+  .btn-hero-outline svg {
+    width: 13px !important;
+    height: 13px !important;
   }
 
   /* 12. Panah slider: sembunyikan di mobile */
