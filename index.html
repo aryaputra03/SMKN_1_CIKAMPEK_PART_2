@@ -2700,35 +2700,78 @@
 
     /* ── INDEX specific mobile ── */
 @media (max-width: 768px) {
-  /* ===== PERBAIKAN HERO SECTION MOBILE (foto tidak terpotong) ===== */
+  /* ===== HERO MOBILE — Gaya Banner Full-Width (seperti kaellstore) ===== */
+
+  /* Wrapper hero: tidak fixed height, mengikuti konten */
   .hero {
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
-    aspect-ratio: 4 / 5;
-    overflow: hidden !important;
+    overflow: visible !important;
+    position: relative;
+    display: block;
   }
 
+  /* Layout column: slide gambar di atas, dots + teks di bawah */
+  #hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative;
+    background: var(--navy);
+  }
+
+  /* Area slide: posisi relatif, aspect ratio banner landscape */
   .hero-slide,
   .hero-slide.active {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: unset !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 7 !important;
+    flex-shrink: 0;
+    overflow: hidden;
   }
 
+  /* Gambar: cover, edge-to-edge */
   .hero-bg {
-    background-size: contain !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-color: var(--navy, #0A1223) !important;
   }
 
-  .hero-content {
-    position: absolute !important; /* Tetap absolute agar teks mengambang di atas gambar */
+  /* Overlay slide statis (slide 1): tetap gelap agar teks kontras */
+  .hero-slide-static .hero-overlay {
+    background: rgba(10, 18, 35, 0.55) !important;
+  }
+
+  /* Overlay slide dinamis (banner admin): hampir transparan, gambar lebih dominan */
+  .hero-slide:not(.hero-slide-static) .hero-overlay {
+    background: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .hero-overlay {
+    position: absolute !important;
     inset: 0 !important;
-    padding: 0 40px !important; /* Memberi jarak aman agar teks tidak menabrak panah slider */
-    justify-content: center !important; /* Posisikan ke tengah secara vertikal */
+    z-index: 1 !important;
+  }
+
+  /* Teks hero: keluar dari posisi absolut, tampil sebagai blok di bawah gambar */
+  .hero-content {
+    position: relative !important;
+    inset: unset !important;
+    z-index: 5;
+    display: flex !important;
     align-items: center !important;
-    text-align: center !important; /* Teks rata tengah */
+    justify-content: center !important;
+    padding: 24px 24px 8px !important;
+    background: var(--navy) !important;
+  }
+
+  /* Sembunyikan teks saat slide dinamis aktif (ditangani JS) */
+  .hero-content.hidden-mobile {
+    display: none !important;
   }
 
   .hero-inner {
@@ -2736,39 +2779,76 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    text-align: center;
+  }
+
+  .hero-badge {
+    margin-bottom: 14px;
+    font-size: 11px;
   }
 
   .hero-title {
-    font-size: clamp(28px, 8vw, 42px) !important;
+    font-size: clamp(22px, 7vw, 34px) !important;
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .hero-subtitle {
-    font-size: 14px !important;
+    font-size: 13.5px !important;
     max-width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-align: center;
   }
 
   .hero-actions {
-    flex-direction: column; /* Tombol berbaris ke bawah di HP */
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
     align-items: center;
+    padding-bottom: 4px;
   }
 
   .btn-hero-primary,
   .btn-hero-outline {
     width: 100%;
-    max-width: 260px; /* Membatasi lebar tombol agar tidak terlalu melar */
+    max-width: 280px;
     justify-content: center;
   }
 
-  /* Panah Slider Mobile */
-  .slider-arrow { width: 36px; height: 36px; }
-  .slider-arrow.prev { left: 12px; }
-  .slider-arrow.next { right: 12px; }
+  /* Panah slider: disembunyikan di mobile (pakai swipe & dots) */
+  .slider-arrow {
+    display: none !important;
+  }
+
+  /* Dots: muncul di bawah gambar, sebelum blok teks */
+  .slider-controls {
+    position: relative !important;
+    bottom: unset !important;
+    left: unset !important;
+    transform: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    padding: 10px 0 4px !important;
+    background: var(--navy) !important;
+    z-index: 20 !important;
+    order: 0;
+  }
+
+  .slider-dot {
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .slider-dot.active {
+    background: var(--gold) !important;
+    transform: scale(1.35) !important;
+    width: 20px !important;
+    border-radius: 4px !important;
+  }
 }
 
 /* ===== PERBAIKAN HERO SECTION MOBILE LANDSCAPE (agar foto tidak terpotong) ===== */
@@ -3869,6 +3949,15 @@ function initSlider() {
 
     // Update teks hero secara dinamis mengikuti slide yang aktif
     updateHeroText(slides[currentSlideIndex]);
+
+    // Mobile: sembunyikan blok teks saat slide dinamis aktif
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent && window.innerWidth <= 768) {
+      const activeSlide = slides[currentSlideIndex];
+      const isStatic = activeSlide.id === 'hero-slide-default' ||
+                       activeSlide.classList.contains('hero-slide-static');
+      heroContent.classList.toggle('hidden-mobile', !isStatic);
+    }
   }
 
   // FIX: bind tombol panah prev / next ke gantiSlide
@@ -3903,6 +3992,24 @@ function initSlider() {
     }, 6000); // Durasi tampil per banner (6000ms = 6 detik)
   }
 
+  // Touch swipe support untuk mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const heroEl = document.getElementById('hero-section');
+  if (heroEl) {
+    heroEl.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    heroEl.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const delta = touchStartX - touchEndX;
+      if (Math.abs(delta) > 40) {
+        gantiSlide(delta > 0 ? currentSlideIndex + 1 : currentSlideIndex - 1);
+        startAutoPlay();
+      }
+    }, { passive: true });
+  }
+
   // Jalankan autoplay pertama kali
   startAutoPlay();
 }
@@ -3910,6 +4017,11 @@ function initSlider() {
 // Panggil fungsi utama saat dokumen siap
 document.addEventListener('DOMContentLoaded', () => {
   loadBannerSlider();
+  // Pastikan hero-content visible di slide 1 (statis) saat pertama load
+  if (window.innerWidth <= 768) {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) heroContent.classList.remove('hidden-mobile');
+  }
 });
 
     // ────────────────────────────────────────────────────────────
