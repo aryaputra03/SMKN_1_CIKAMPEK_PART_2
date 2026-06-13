@@ -3705,7 +3705,7 @@
   </button>
 
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/js/supabase-client.js"></script>
+  <script src="admin/assets/js/supabase-client.js"></script>
 
   <script>
     async function ambilLinkKurikulum() {
@@ -4047,42 +4047,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ────────────────────────────────────────────────────────────
     // 1. LOAD BERITA (tabel: berita, ambil 3 terbaru)
     // ────────────────────────────────────────────────────────────
-// ────────────────────────────────────────────────────────────
-    // 1. LOAD BERITA (Versi Tahan Banting & Dinamis)
-    // ────────────────────────────────────────────────────────────
     async function loadBerita() {
-      const grid = document.getElementById('berita-grid');
-      
       try {
-        // PERBAIKAN 1: Gunakan select('*') agar tidak error meski ada kolom yang belum dibuat di database
         const { data, error } = await supabase
           .from('berita')
-          .select('*')
+          .select('id, judul, slug, isi, foto_url, tanggal, kategori')
           .order('tanggal', { ascending: false })
           .limit(3);
 
         if (error) throw error;
+        if (!data || data.length === 0) return;
 
-        // PERBAIKAN 2: Jika data dari Supabase KOSONG, timpa skeleton dengan pesan kosong
-        if (!data || data.length === 0) {
-          grid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: var(--white); border-radius: var(--r-md); border: 1px dashed var(--gray-soft);">
-              <p style="color: var(--text-muted); font-style: italic;">Belum ada berita terbaru saat ini.</p>
-            </div>`;
-          return;
-        }
-
-        // PERBAIKAN 3: Jika data ada, render card berita seperti biasa
+        const grid = document.getElementById('berita-grid');
         grid.innerHTML = data.map(item => {
           const bgImg = item.foto_url
             ? `background-image:url('${item.foto_url}');`
             : 'background:linear-gradient(135deg,#0F1E38,#1B2E4A);';
-          
-          // Aman jika item.isi kosong atau null
-          const isiText = item.isi ? item.isi.replace(/<[^>]*>/g, '') : '';
-          const ringkasan = truncate(isiText, 90);
+          const ringkasan = truncate(item.isi ? item.isi.replace(/<[^>]*>/g, '') : '', 90);
           const kategori = item.kategori || 'Umum';
-          
           return `
             <div class="berita-card fade-up">
               <div class="berita-img">
@@ -4107,40 +4089,53 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`;
         }).join('');
 
-        // Jalankan ulang animasi fade-up untuk berita yang baru dimuat
+        // Trigger fade-up untuk kartu baru
         requestAnimationFrame(() => {
-          if(window.fadeObs) {
-            grid.querySelectorAll('.fade-up').forEach(el => window.fadeObs.observe(el));
-          }
+          grid.querySelectorAll('.fade-up').forEach(el => {
+            fadeObs.observe(el);
+          });
         });
+
+        // ── Carousel nav berita ──
+        const wrap = grid.parentElement;
+        let beritaPos = 0;
+        const BERITA_CARD_W = 340 + 18; // flex 0 0 340px + gap 18px
+
+        function moveBerita(dir) {
+          const maxPos = Math.max(0, data.length - 3);
+          beritaPos = Math.min(Math.max(beritaPos + dir, 0), maxPos);
+          grid.style.transform = `translateX(-${beritaPos * BERITA_CARD_W}px)`;
+        }
+
+        document.querySelector('.berita-prev')?.addEventListener('click', () => moveBerita(-1));
+        document.querySelector('.berita-next')?.addEventListener('click', () => moveBerita(1));
 
       } catch (err) {
         console.error('Gagal memuat berita:', err.message);
-        
-        // PERBAIKAN 4: Jika terjadi error koneksi database, hapus skeleton dan beri tahu errornya
-        if (grid) {
-          grid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: #FEF2F2; border-radius: var(--r-md); border: 1px solid #FCA5A5;">
-              <p style="color: #991B1B; font-weight: 600;">Gagal memuat berita.</p>
-              <p style="color: #B91C1C; font-size: 13px;">Silakan cek koneksi atau konfigurasi database Supabase Anda.</p>
-            </div>`;
-        }
       }
     }
 
  // ────────────────────────────────────────────────────────────
-    // 2. LOAD BERITA TERBARU di widget mid-panel (semua kategori, 5 terbaru)
+    // 2. LOAD PENGUMUMAN (tabel: berita, kategori = Pengumuman / Kelulusan)
+    // ────────────────────────────────────────────────────────────
+ // ────────────────────────────────────────────────────────────
+    // 2. LOAD PENGUMUMAN (Cara Paling Aman: Filter via JavaScript)
     // ────────────────────────────────────────────────────────────
     async function loadPengumuman() {
       try {
-        // Ambil 5 berita terbaru dari semua kategori (tidak difilter)
+        // Ambil data tanpa filter kategori dari database agar tidak terjadi error syntax
         const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal, kategori, foto_url')
-          .order('tanggal', { ascending: false })
-          .limit(5);
+          .order('tanggal', { ascending: false });
 
         if (error) throw error;
+
+        // Filter data menggunakan JavaScript (kebal huruf besar/kecil)
+        const pengumumanData = data.filter(item => {
+          const kat = (item.kategori || '').toLowerCase();
+          return kat.includes('pengumuman') || kat.includes('kelulusan');
+        }).slice(0, 5); // Hanya ambil 5 data terbaru
 
         const list = document.getElementById('mid-pengumuman-list');
 
@@ -4148,21 +4143,14 @@ document.addEventListener('DOMContentLoaded', () => {
           ? `<div class="mid-pengum-thumb"><img src="${item.foto_url}" alt="${truncate(item.judul, 30)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>`
           : `<div class="mid-pengum-thumb"><div class="mid-pengum-thumb-placeholder"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h12v12H4zM7 8h6M7 11h4"/></svg></div></div>`;
 
-        const badgeColorMap = {
-          'pengumuman':       { bg: '#FFF7ED', clr: '#EA580C' },
-          'info kelulusan':   { bg: '#EFF6FF', clr: '#2563EB' },
-          'kegiatan sekolah': { bg: '#F0FDF4', clr: '#16A34A' },
-          'artikel & opini':  { bg: '#FDF4FF', clr: '#9333EA' },
-          'berita umum':      { bg: '#F8FAFC', clr: '#475569' },
-        };
-
         const badgeHtml = (kat) => {
-          const key = (kat || '').toLowerCase();
-          const color = badgeColorMap[key] || { bg: '#F1F5F9', clr: '#334155' };
-          return `<span style="display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:${color.bg};color:${color.clr};margin-bottom:3px;">${kat || 'Umum'}</span>`;
+          const isKelulusan = (kat || '').toLowerCase().includes('kelulusan');
+          const bg  = isKelulusan ? '#EFF6FF' : '#FFF7ED';
+          const clr = isKelulusan ? '#2563EB'  : '#EA580C';
+          return `<span style="display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:${bg};color:${clr};margin-bottom:3px;">${kat}</span>`;
         };
 
-        if (!data || data.length === 0) {
+        if (pengumumanData.length === 0) {
           list.innerHTML = `
             <div class="mid-pengumuman-item">
               <div class="mid-pengum-thumb">
@@ -4171,13 +4159,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
               <div class="mid-pengum-text">
-                <a href="informasi/berita.html" style="color:var(--text-muted);font-style:italic;">Belum ada berita terbaru.</a>
+                <a href="informasi/berita.html" style="color:var(--text-muted);font-style:italic;">Belum ada pengumuman terbaru.</a>
               </div>
             </div>`;
           return;
         }
 
-        list.innerHTML = data.map(item => `
+        list.innerHTML = pengumumanData.map(item => `
           <div class="mid-pengumuman-item">
             ${thumbHtml(item)}
             <div class="mid-pengum-text">
@@ -4191,7 +4179,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>`).join('');
 
       } catch (err) {
-        console.error('Gagal memuat berita widget:', err.message);
+        console.error('Gagal memuat pengumuman:', err.message);
         const list = document.getElementById('mid-pengumuman-list');
         if (list) {
           list.innerHTML = `<div class="mid-pengumuman-item"><div class="mid-pengum-text"><a href="informasi/berita.html" style="color:var(--text-light);">Gagal memuat data. Coba muat ulang.</a></div></div>`;
