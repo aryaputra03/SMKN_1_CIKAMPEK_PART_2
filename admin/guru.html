@@ -63,7 +63,7 @@
 
                 <div>
                     <label>Urutan Tampil (Angka):</label><br>
-                    <input type="number" id="guru-urutan" value="1" required style="width: 80px;">
+                    <input type="number" id="guru-urutan" value="1" min="1" required style="width: 80px;" oninput="this.value = Math.abs(this.value)">
                 </div><br>
                 <button type="submit" id="btn-simpan-guru">Simpan Data Guru</button>
                 <button type="button" onclick="tutupFormGuru()">Batal</button>
