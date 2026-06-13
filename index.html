@@ -4121,10 +4121,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadPengumuman() {
       try {
         // PERBAIKAN: Gunakan .or() dan .ilike() agar pencarian tidak sensitif terhadap huruf besar/kecil
-        const { data, error } = await supabase
+const { data, error } = await supabase
           .from('berita')
           .select('id, judul, tanggal, kategori, foto_url')
-          .or('kategori.ilike.%Pengumuman%,kategori.ilike.%Kelulusan%')
+          .or('kategori.ilike.*Pengumuman*,kategori.ilike.*Kelulusan*')
           .order('tanggal', { ascending: false })
           .limit(5);
 

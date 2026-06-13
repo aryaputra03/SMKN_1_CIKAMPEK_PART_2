@@ -729,7 +729,8 @@ function renderGrid() {
 function terapkanFilter() {
   halamanAktif = 1;
   beritaTerfilter = semuaBerita.filter(item => {
-    const cocokKat   = filterKatAktif === 'semua' || (item.kategori || '') === filterKatAktif;
+    // PERBAIKAN: Gunakan toLowerCase() agar pencarian kategori tidak sensitif besar/kecil huruf
+    const cocokKat   = filterKatAktif === 'semua' || (item.kategori || '').toLowerCase() === filterKatAktif.toLowerCase();
     const cocokCari  = !querySearch || (item.judul || '').toLowerCase().includes(querySearch) || (item.isi || '').toLowerCase().includes(querySearch);
     return cocokKat && cocokCari;
   });
@@ -744,9 +745,9 @@ async function muatBerita() {
 
   // Skeleton sudah terpasang di HTML, langsung fetch
   try {
-    const { data, error } = await supabase
+const { data, error } = await supabase
       .from('berita')
-      .select('id, judul, slug, isi, foto_url, kategori, tanggal, created_at')
+      .select('id, judul, slug, isi, foto_url, kategori, tanggal')
       .order('tanggal', { ascending: false });
 
     if (error) throw error;
