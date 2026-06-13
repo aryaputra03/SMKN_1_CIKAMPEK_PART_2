@@ -2700,17 +2700,26 @@
 
     /* ── INDEX specific mobile ── */
 @media (max-width: 768px) {
-  /* ===== PERBAIKAN HERO SECTION MOBILE ===== */
+  /* ===== PERBAIKAN HERO SECTION MOBILE (foto tidak terpotong) ===== */
   .hero {
-    height: 85svh !important; /* Sedikit dikurangi agar foto gedung tidak terlalu terpotong */
-    min-height: 560px !important;
-    max-height: 700px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 4 / 5;
     overflow: hidden !important;
   }
 
+  .hero-slide,
+  .hero-slide.active {
+    position: absolute !important;
+    inset: 0 !important;
+  }
+
   .hero-bg {
-    background-size: cover !important;
-    background-position: center top !important; /* Fokus ke bagian atas/tengah gedung */
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-color: var(--navy, #0A1223) !important;
   }
 
   .hero-content {
