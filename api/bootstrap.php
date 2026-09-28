@@ -73,6 +73,32 @@ function tableColumns(PDO $pdo, string $table): array
     return array_column($rows, 'Field');
 }
 
+// Beberapa tabel hasil migrasi dari Supabase memakai id UUID manual
+// (bukan AUTO_INCREMENT). Fungsi ini mendeteksi itu supaya data.php
+// bisa membuatkan UUID sendiri saat insert tidak menyertakan id.
+function primaryKeyNeedsManualId(PDO $pdo, string $table): bool
+{
+    $rows = $pdo->query("SHOW COLUMNS FROM `{$table}`")->fetchAll();
+    foreach ($rows as $row) {
+        if ($row['Field'] === 'id') {
+            return stripos((string) $row['Extra'], 'auto_increment') === false;
+        }
+    }
+    return false;
+}
+
+function uuidV4(): string
+{
+    $data = random_bytes(16);
+    $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
+    $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
+    $hex = bin2hex($data);
+    return implode('-', [
+        substr($hex, 0, 8), substr($hex, 8, 4), substr($hex, 12, 4),
+        substr($hex, 16, 4), substr($hex, 20, 12),
+    ]);
+}
+
 function safeColumns(PDO $pdo, string $table, string $requested): string
 {
     $allowed = tableColumns($pdo, $table);

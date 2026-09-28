@@ -41,8 +41,12 @@ try {
     if ($action === 'insert') {
         $rows = $body['values'] ?? [];
         if (!is_array($rows) || !$rows) jsonResponse(['error' => 'Data baru wajib diisi.'], 400);
+        $needsManualId = in_array('id', $allowed, true) && primaryKeyNeedsManualId($pdo, $table);
         foreach ($rows as $row) {
             if (!is_array($row) || array_diff(array_keys($row), $allowed)) jsonResponse(['error' => 'Kolom data tidak diizinkan.'], 400);
+            if ($needsManualId && empty($row['id'])) {
+                $row['id'] = uuidV4();
+            }
             $columns = array_keys($row);
             $sql = 'INSERT INTO `' . $table . '` (' . implode(',', array_map(static fn($c) => "`{$c}`", $columns)) . ') VALUES (' . implode(',', array_map(static fn($c) => ':' . $c, $columns)) . ')';
             $statement = $pdo->prepare($sql);
