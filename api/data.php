@@ -9,7 +9,7 @@ try {
     $table = tableName((string) ($body['table'] ?? ''));
     $action = (string) ($body['action'] ?? 'select');
     $isWrite = in_array($action, ['insert', 'update', 'delete'], true);
-    if ($isWrite) requireAdmin();
+    if ($isWrite) { requireAdmin(); requireCsrf(); }
     if (!$isWrite && !in_array($table, PUBLIC_TABLES, true)) requireAdmin();
 
     $params = [];

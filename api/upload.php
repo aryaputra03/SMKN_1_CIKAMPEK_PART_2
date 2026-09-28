@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 requireAdmin();
+requireCsrf();
 
 const UPLOAD_BUCKETS = ['banner-images', 'berita-images', 'guru-images', 'prestasi-images', 'lulusan-images', 'struktur-images', 'kurikulum-files'];
 const UPLOAD_MAX_BYTES = 10485760;

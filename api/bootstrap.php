@@ -12,6 +12,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
         'path' => '/',
     ]);
     session_start();
+    csrfToken();
 }
 
 const API_TABLES = [
@@ -42,6 +43,22 @@ function requestBody(): array
 function requireAdmin(): void
 {
     if (empty($_SESSION['admin_id'])) jsonResponse(['error' => 'Sesi admin diperlukan.'], 401);
+}
+
+function csrfToken(): string
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function requireCsrf(): void
+{
+    $token = (string) ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
+    if ($token === '' || !hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
+        jsonResponse(['error' => 'Token keamanan tidak valid, silakan muat ulang halaman.'], 403);
+    }
 }
 
 function tableName(string $table): string

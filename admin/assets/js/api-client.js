@@ -1,11 +1,16 @@
 /* Client MySQL/PHP. Semua komunikasi data menggunakan fetch() ke /api. */
 (() => {
+  let csrfToken = null;
+
   const request = async (url, options = {}) => {
-    const response = await fetch(url, { credentials: 'same-origin', ...options });
+    const headers = { ...(options.headers || {}) };
+    if (csrfToken && options.method && options.method !== 'GET') headers['X-CSRF-Token'] = csrfToken;
+    const response = await fetch(url, { credentials: 'same-origin', ...options, headers });
     let payload;
     try { payload = await response.json(); } catch { payload = { error: 'Respons server tidak valid.' }; }
     if (!response.ok && !payload.error) payload.error = `HTTP ${response.status}`;
     if (typeof payload.error === 'string') payload.error = { message: payload.error };
+    if (payload.data && payload.data.csrfToken) csrfToken = payload.data.csrfToken;
     return payload;
   };
 
@@ -56,7 +61,7 @@
     auth: {
       async getSession() { return request('/api/session.php'); },
       async signInWithPassword({ email, password }) { return request('/api/login.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) }); },
-      async signOut() { return request('/api/logout.php', { method: 'POST' }); },
+      async signOut() { csrfToken = null; return request('/api/logout.php', { method: 'POST' }); },
     },
   };
   window.supabaseClient = window.supabase;

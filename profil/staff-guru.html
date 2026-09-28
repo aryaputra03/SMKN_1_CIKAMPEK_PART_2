@@ -650,9 +650,8 @@ ul { list-style: none; }
 </button>
 
 <!-- ══════════════════════════════════════════════════════════
-     SUPABASE SDK + CLIENT
-     Pastikan supabase-client.js mengekspos:
-       window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+     Client API MySQL/PHP. api-client.js mengekspos window.supabase
+     sebagai shim yang meneruskan pemanggilan ke /api/*.php.
 ══════════════════════════════════════════════════════════ -->
 <script src="../admin/assets/js/api-client.js"></script>
 <script>

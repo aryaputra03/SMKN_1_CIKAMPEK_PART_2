@@ -537,10 +537,9 @@ ul { list-style: none; }
 </button>
 
 <!-- ============================================================
-     SUPABASE — Library CDN + client dari supabase-client.js
+     Client API MySQL/PHP (api-client.js) — meneruskan pemanggilan
+     ke /api/*.php, tidak lagi memakai Supabase.
      ============================================================ -->
-<!-- 1. Library Supabase UMD (harus dimuat sebelum supabase-client.js) -->
-<!-- 2. Client instance (SUPABASE_URL & SUPABASE_ANON_KEY ada di sini) -->
 <script src="../admin/assets/js/api-client.js"></script>
 <script>
   async function ambilLinkKurikulum() {
@@ -569,18 +568,15 @@ ul { list-style: none; }
 </script>
 <script>
 // ============================================================
-//  Gunakan instance Supabase dari supabase-client.js
-//  supabase-client.js wajib meng-ekspor window.supabaseClient
-//  Contoh isi supabase-client.js:
-//    const { createClient } = window.supabase;
-//    window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+//  Gunakan instance client dari api-client.js (window.supabase /
+//  window.supabaseClient), yang di baliknya memanggil /api/*.php.
 // ============================================================
 const db = window.supabaseClient || window.supabase;
 
 // ============================================================
-//  FUNGSI UTAMA: Ambil data struktur organisasi dari Supabase
+//  FUNGSI UTAMA: Ambil data struktur organisasi dari API
 //  Tabel  : struktur_organisasi
-//  Kolom  : foto_url  (URL publik gambar di Storage bucket struktur-images)
+//  Kolom  : foto_url  (path unggahan di folder uploads/struktur-images)
 // ============================================================
 async function loadStrukturOrganisasi() {
   const skeleton  = document.getElementById('struktur-skeleton');
@@ -614,7 +610,7 @@ async function loadStrukturOrganisasi() {
     }
   } catch (err) {
     // Jika terjadi error jaringan/Supabase: tetap tampilkan bagan statis
-    console.warn('Gagal memuat struktur dari Supabase, menggunakan bagan statis.', err.message);
+    console.warn('Gagal memuat struktur dari API, menggunakan bagan statis.', err.message);
     skeleton.style.display  = 'none';
     staticEl.style.display  = 'block';
     container.style.display = 'none';

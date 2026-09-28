@@ -970,9 +970,9 @@ ul { list-style: none; }
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M10 16V4M4 10l6-6 6 6"/></svg>
 </button>
 
-<!-- ══════════════ SUPABASE CLIENT ══════════════ -->
-<!-- 1. Load library Supabase dari CDN (UMD build — kompatibel dengan script biasa) -->
-<!-- 2. Inisialisasi client (SUPABASE_URL & SUPABASE_ANON_KEY didefinisikan di sini) -->
+<!-- ══════════════ CLIENT API MySQL/PHP ══════════════ -->
+<!-- api-client.js mengekspos window.supabase sebagai shim yang -->
+<!-- meneruskan pemanggilan ke /api/*.php. -->
 <script src="../admin/assets/js/api-client.js"></script>
 <script>
   async function ambilLinkKurikulum() {
@@ -1007,15 +1007,9 @@ ul { list-style: none; }
 <script>
 (function () {
   // ─────────────────────────────────────────────
-  // Ambil instance supabase yang sudah dibuat
-  // di supabase-client.js (variabel global: supabase)
+  // Ambil instance client dari api-client.js (variabel global: supabase),
+  // yang di baliknya memanggil /api/*.php.
   // ─────────────────────────────────────────────
-  // supabase-client.js wajib mengekspos variabel global bernama `supabase`
-  // Contoh isi supabase-client.js:
-  //   const { createClient } = window.supabase;          // dari CDN UMD
-  //   window.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  //
-  // Jika nama variabelnya berbeda (misal: `db`), sesuaikan baris di bawah.
   const supabaseClient = window.supabaseClient || window.supabase;
 
   // ─────────────────────────────────────────────

@@ -24,3 +24,17 @@ kolom `users.password_hash`. Jangan simpan password teks biasa.
 Tabel `berita` harus menyediakan kolom `id`, `judul`, `slug`, `isi`,
 `foto_url`, `kategori`, dan `tanggal`. Tabel `kurikulum_url` memakai
 kolom `id` dan `url_kurikulum`.
+
+## Keamanan
+
+- Folder `uploads/` punya `.htaccess` yang memblokir eksekusi PHP/script
+  di dalamnya. Pastikan file ini ikut ter-upload ke hosting (jangan
+  dihapus saat deploy manual via FTP).
+- Login admin dibatasi maksimal 5 percobaan gagal per 15 menit (per
+  kombinasi IP + email), dicatat di tabel `login_attempts` dari
+  `schema.sql`.
+- Semua aksi tulis (`insert`/`update`/`delete` di `data.php`, serta
+  `upload.php`) mewajibkan header `X-CSRF-Token` yang cocok dengan token
+  di sesi admin. `admin/assets/js/api-client.js` sudah menangani ini
+  otomatis — token diambil dari respons `session.php`/`login.php` dan
+  disertakan pada setiap request tulis.
