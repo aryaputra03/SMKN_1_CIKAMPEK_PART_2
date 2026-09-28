@@ -1,0 +1,11 @@
+<?php
+declare(strict_types=1);
+
+// Salin file ini menjadi config.local.php, lalu isi kredensial MySQL cPanel.
+// config.local.php sengaja diabaikan Git agar password tidak ikut terunggah.
+return [
+    'host' => 'localhost',
+    'name' => 'nama_database',
+    'user' => 'user_database',
+    'pass' => 'password_database',
+];
