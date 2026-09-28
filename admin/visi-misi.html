@@ -88,10 +88,8 @@
 
             if (data) {
                 document.getElementById('input-visi').value = data.visi || '';
-                
-                // Jika array kosong atau null, tampilkan string kosong di textarea
-                document.getElementById('input-misi').value = data.misi ? data.misi.join('\n') : '';
-                document.getElementById('input-tujuan').value = data.tujuan ? data.tujuan.join('\n') : '';
+                document.getElementById('input-misi').value = data.misi || '';
+                document.getElementById('input-tujuan').value = data.tujuan || '';
             }
         }
 
@@ -104,13 +102,13 @@
             // MODIFIKASI: Menggunakan .trim() agar spasi tidak sengaja terhitung sebagai teks
             const visi = document.getElementById('input-visi').value.trim();
             
-            // MODIFIKASI: Jika kosong, berikan array kosong [], jika ada teks baru diproses split
-            // Jika kosong, sistem mengirim NULL ke database
+            // Baris kosong dibuang, sisanya digabung lagi jadi teks per baris.
+            // Jika kosong, sistem mengirim NULL ke database.
             const inputMisi = document.getElementById('input-misi').value.trim();
-            const misi = inputMisi ? inputMisi.split('\n').map(s => s.trim()).filter(s => s !== '') : null;
-                
+            const misi = inputMisi ? inputMisi.split('\n').map(s => s.trim()).filter(s => s !== '').join('\n') : null;
+
             const inputTujuan = document.getElementById('input-tujuan').value.trim();
-            const tujuan = inputTujuan ? inputTujuan.split('\n').map(s => s.trim()).filter(s => s !== '') : null;
+            const tujuan = inputTujuan ? inputTujuan.split('\n').map(s => s.trim()).filter(s => s !== '').join('\n') : null;
 
             try {
                 // Ambil ID dari record yang ada saat ini

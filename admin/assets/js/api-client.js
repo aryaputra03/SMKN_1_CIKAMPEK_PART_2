@@ -1,6 +1,7 @@
 /* Client MySQL/PHP. Semua komunikasi data menggunakan fetch() ke /api. */
 (() => {
   let csrfToken = null;
+  const lastPublicUrlByBucket = {};
 
   const request = async (url, options = {}) => {
     const headers = { ...(options.headers || {}) };
@@ -14,11 +15,19 @@
     return payload;
   };
 
+  const isoDatetimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z?$/;
+  const toMysqlValue = (value) => (typeof value === 'string' && isoDatetimePattern.test(value)) ? value.slice(0, 19).replace('T', ' ') : value;
+  const toMysqlRow = (row) => {
+    const out = {};
+    for (const key in row) out[key] = toMysqlValue(row[key]);
+    return out;
+  };
+
   class Query {
     constructor(table) { this.body = { table, action: 'select', filters: [] }; }
     select(columns = '*', options = {}) { this.body.action = 'select'; this.body.columns = columns; this.body.count = options.count === 'exact'; return this; }
-    insert(values) { this.body.action = 'insert'; this.body.values = values; return this; }
-    update(values) { this.body.action = 'update'; this.body.values = values; return this; }
+    insert(values) { this.body.action = 'insert'; this.body.values = Array.isArray(values) ? values.map(toMysqlRow) : toMysqlRow(values); return this; }
+    update(values) { this.body.action = 'update'; this.body.values = toMysqlRow(values); return this; }
     delete() { this.body.action = 'delete'; return this; }
     eq(column, value) { this.body.filters.push({ column, operator: 'eq', value }); return this; }
     neq(column, value) { this.body.filters.push({ column, operator: 'neq', value }); return this; }
@@ -31,18 +40,19 @@
 
   const storage = {
     from(bucket) {
-      let lastPublicUrl = null;
       return {
         async upload(_name, file) {
           const form = new FormData();
           form.append('bucket', bucket);
           form.append('file', file);
           const result = await request('/api/upload.php', { method: 'POST', body: form });
-          lastPublicUrl = result.data?.publicUrl || null;
+          if (result.data?.publicUrl) lastPublicUrlByBucket[bucket] = result.data.publicUrl;
           return result;
         },
         getPublicUrl(path) {
-          return { data: { publicUrl: lastPublicUrl || `/uploads/${encodeURIComponent(bucket)}/${encodeURIComponent(path)}` } };
+          const sudahLengkap = typeof path === 'string' && (path.startsWith('http') || path.startsWith('/'));
+          const publicUrl = lastPublicUrlByBucket[bucket] || (sudahLengkap ? path : `/uploads/${encodeURIComponent(bucket)}/${encodeURIComponent(path)}`);
+          return { data: { publicUrl } };
         },
         async remove(paths) {
           const form = new FormData();

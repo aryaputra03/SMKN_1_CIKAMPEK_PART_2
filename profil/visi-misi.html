@@ -1059,8 +1059,8 @@ async function loadVisiMisi() {
 
     if (data) {
       renderVisi(data.visi);
-      renderMisi(data.misi);
-      renderTujuan(data.tujuan);
+      renderMisi(data.misi ? data.misi.split('\n') : null);
+      renderTujuan(data.tujuan ? data.tujuan.split('\n') : null);
     } else {
       renderVisi(null);
       renderMisi(null);
